@@ -1,5 +1,6 @@
 Dan Pfeiffer
 Alex Baumann
+Omar Chughtai
 
 # git and sourcetree
 1. install git (comes with git-bash, or `$ brew install git` with homebrew on mac)
