@@ -1,0 +1,106 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "CTA_BUS",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "135 bus",
+              "synonyms": [
+                "135"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CTA_LINES",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "red line",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "blue line",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "orange line",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "green line",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "pink line",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "purple line",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "yellow line",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "CtaIntent",
+        "samples": [
+          "what's the status of the {train}",
+          "what's the status of the {bus}"
+        ],
+        "slots": [
+          {
+            "name": "train",
+            "type": "CTA_LINES"
+          },
+          {
+            "name": "bus",
+            "type": "CTA_BUS"
+          }
+        ]
+      }
+    ],
+    "invocationName": "chicago now"
+  }
+}
