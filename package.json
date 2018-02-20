@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/chicagonow/intent-service#readme",
   "dependencies": {
-    "alexa-sdk": "^1.0.25"
+    "alexa-sdk": "^1.0.25",
+    "make-runnable": "^1.3.6",
+    "request": "^2.83.0"
   }
 }
