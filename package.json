@@ -1,0 +1,22 @@
+{
+  "name": "chicago-now",
+  "version": "1.0.0",
+  "description": "ChicagoNow Alexa Skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "handler"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chicagonow/intent-service.git"
+  },
+  "author": "ChicagoNow Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chicagonow/intent-service/issues"
+  },
+  "homepage": "https://github.com/chicagonow/intent-service#readme",
+  "dependencies": {
+    "alexa-sdk": "^1.0.25"
+  }
+}
