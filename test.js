@@ -1,3 +1,5 @@
 const index = require('./index');
 
-index.requestTest();
+//index.requestTest();
+
+index.eventTest();
