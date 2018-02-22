@@ -6,7 +6,7 @@ const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 const handlers = {
     'CtaIntent': function () {
             request('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=541afb8f3df94db2a7afffc486ea4fbf&mapid=40530&rt=Brn',  (error, response, body) => {
-                this.emit(':tell', 'Hello peepzzzzzz');
+                this.emit(':tell', 'hola peepz');
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                 console.log('body:', body); // Print the HTML for the Google homepage.
@@ -38,6 +38,15 @@ exports.handler = function (event, context) {
 exports.requestTest = function (event, context) {
     console.log("hello");
     request('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=541afb8f3df94db2a7afffc486ea4fbf&mapid=40530&rt=Brn', function (error, response, body) {
+        console.log('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('body:', body); // Print the HTML for the Google homepage.
+    });
+}
+
+exports.eventsRequestTest = function (event, context) {
+    console.log("inside events request test");
+    request('https://www.eventbriteapi.com/v3/users/me/?token=WQK24DTHA6AW57VZPOKB', function (error, response, body) {
         console.log('error:', error); // Print the error if one occurred
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('body:', body); // Print the HTML for the Google homepage.
