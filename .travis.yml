@@ -1,3 +1,8 @@
+language: node_js
+node_js: 
+  - "6.10"
+install:
+  - npm install
 deploy:
   provider: lambda
   function_name: helloAlexaPlease
