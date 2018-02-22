@@ -89,3 +89,5 @@ git checkout master
 git pull
 ```
 
+# command for running node tests
+node -p "require('./index.js').requestTest()"
