@@ -1,15 +1,9 @@
 language: node_js
-node_js: 
-  - "6.10"
-install:
-  - npm install
-deploy:
-  provider: lambda
-  function_name: helloAlexaPlease
-  region: us-east-1
-  role: arn:aws:iam::564918604829:role/lambda-deploy
-  runtime: nodejs6.10
-  handler_name: handler
-  access_key_id: AKIAJ2WYPIVMD2H6Y5VQ
-  secret_access_key:
-    secure: OekwGd/YSZzcWn0ht6Uz8BjXAiSsHkDjrofj/0jlFtuZq+vFbsdD/nppVWUexlXi4sZzTjdQTzEwNfNLzHpEqL8Qk1Uva2e38+/5rbQ70iSCJXrTul1cUD2GDazzIISeRNJ8bI1RT3NXCJULXlnVI9JoTvsyHryyM/puU+gAhX+RXwGJsTgwWIcPgw735RbXs/GI0xHjBsscz0c27h4Zrg0WFWYJYyW1eDjXflg6OTYkKFhnUAwAG4bixBRohN8z6qnqxQ6LJytcBDEjQD7V0RSmsT8WszYz+ywclN01K/HCJrXYjXNHcvmuXkXYVLpksTwcVx/F4JhRmEmN835H3Jf6T3OOwKRQTwFSb8ZrYXuhlpZ5DIpMaQS8sINdgwSCbyhxgH85rZt9JLPMiHldS1LhhM5dBT5x+1ciP5OMe3KiAKfdWsDpTb0hupwP2YoaiPF08aUFIUdv4L3krHVFuQyxa4KNoa+DDp1AI0sU5/q3rBcc32vIN2mqlDemCNbIjDSe0OXRB3Bgqhp7K2a8pa/DVUuvUYTGYbTSoic1QyDztJ/LVbSX9m9Cb5cPiaX81qXEgeiw49YXP2wPIzR83IMYmsNXRGlosAGgLwjY8esSqIH+YZl6xVph79BAtf3E9cnIS/TpO06e7Inc6LJMZJJZ2mIFwGyy2DCxWesufkU=
+node_js:
+- node
+cache:
+  directories:
+    - node_modules
+script: 
+    - npm install -g serverless
+    - sls deploy
