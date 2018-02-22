@@ -1,9 +1,9 @@
 deploy:
   provider: lambda
-  function_name: lambda-test
+  function_name: helloAlexaPlease
   region: us-east-1
-  role: arn:aws:iam::0123456789012:role/lambda_basic_execution
-  runtime: nodejs4.3
+  role: arn:aws:iam::564918604829:role/lambda-deploy
+  runtime: nodejs6.10
   handler_name: handler
   access_key_id: AKIAJ2WYPIVMD2H6Y5VQ
   secret_access_key:
