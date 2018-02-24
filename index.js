@@ -1,19 +1,33 @@
 const Alexa = require('alexa-sdk');
 const request = require('request');
+const buildUrl = require('build-url');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
+const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
+const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
+const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
     'CtaIntent': function () {
-            request('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=541afb8f3df94db2a7afffc486ea4fbf&mapid=40530&rt=Brn',  (error, response, body) => {
-                this.emit(':tell', 'Hello peepsalex');
+
+        let url = buildUrl(CTA_API_DOMAIN, {
+            path: CTA_API_PATH,
+            queryParams: {
+                key: CTA_API_KEY,
+                mapid: "40530",
+                rt: "Brn"
+            }
+        });
+
+
+        request(url,  (error, response, body) => {
             // example of how to read variables from the alexa intent
             let train = this.event.request.intent.slots.train.value;
             this.emit(':tell', 'You ask for ' + train);
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
                 console.log('body:', body); // Print the HTML for the Google homepage.
-            });
+        });
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
@@ -40,7 +54,17 @@ exports.handler = function (event, context) {
 
 exports.requestTest = function (event, context) {
     console.log("hello");
-    request('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=541afb8f3df94db2a7afffc486ea4fbf&mapid=40530&rt=Brn', function (error, response, body) {
+
+    let url = buildUrl(CTA_API_DOMAIN, {
+        path: CTA_API_PATH,
+        queryParams: {
+            key: CTA_API_KEY,
+            mapid: "40530",
+            rt: "Brn"
+        }
+    });
+
+    request(url, function (error, response, body) {
         console.log('error:', error); // Print the error if one occurred
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('body:', body); // Print the HTML for the Google homepage.
