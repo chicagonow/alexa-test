@@ -6,20 +6,39 @@ Omar Chughtai
 Ameet Sarkar
 
 
+# deploy new lambda function to AWS from command line
+https://serverless.com/framework/docs/getting-started/
+
+Install `Serverless`
+```
+npm install -g serverless
+# Login to the serverless platform (optional)
+serverless login
+```
+If you'd like a new function to test, change one or all of these fields in the `serverless.yml`
+* `service` (change the value)
+* `stage` (change the value)
+* `main` (change the key)
+
+Deploy your new function:
+`serverless deploy`
+
+# run node tests
+`node -p "require('./index.js').requestTest()"`
+
 # git and sourcetree
 1. install git (comes with git-bash, or `$ brew install git` with homebrew on mac)
 2. would highly recommend a git client like [Sourcetree](https://confluence.atlassian.com/get-started-with-sourcetree/install-and-set-up-sourcetree-847359043.html)
 * I don't think we'll have merge conflicts, but the earlier we master this the better
 
-# clone
-create a `chicagonow` directory, and clone `test-repository` inside
+# clone repo
 ```sh 
 mkdir chicagonow
 cd chicagonow
 git clone git@github.com:chicagonow/test-repository.git
 ```
 
-# branch
+# create branch
 create a branch
 ```sh
 git checkout -b john-branch
@@ -27,7 +46,7 @@ git checkout -b john-branch
 
 NOTE: using `-b` with `checkout` will create the branch first
 
-# change, check, add, commit
+# change, check, add, commit changes
 make a change to the README.md and check that your change exists
 ```
 git status
@@ -61,7 +80,7 @@ nothing to commit, working tree clean
 02/12/18|9:41:27 ➜  test-repository git:(john-test-branch)  $
 ```
 
-# push branch
+# push your branch with changes
 the first time pushing a branch, you will need to create an "upstream" between your local and remote repos
 ```
 git push -u origin john-test-branch
@@ -79,15 +98,11 @@ git push
 
 # squash and merge
 
-# delete branch
+# delete your branch
 this branch has served its purpose. don't use this branch again (maybe for a revert...).
 
-# pull updates
-checkout master and pull the updates
+# checkout master and pull updates
 ```
 git checkout master
 git pull
 ```
-
-# command for running node tests
-node -p "require('./index.js').requestTest()"
