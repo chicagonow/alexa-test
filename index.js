@@ -69,6 +69,19 @@ exports.requestTest = function (event, context) {
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('body:', body); // Print the HTML for the Google homepage.
     });
-}
+};
+
+
+exports.dumbAddTest = () => {
+  let x = 1;
+  let y = 2;
+
+  let result=x+y;
+  if (result !== 3) {
+      throw "Simple addition doesn't work, 1 + 2 was: " + result;
+  } else {
+      console.log("dumb test passed");
+  }
+};
 
 require('make-runnable');
