@@ -3,3 +3,4 @@ package-lock.json
 .idea
 .serverless
 *.zip
+.DS_Store
