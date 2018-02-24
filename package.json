@@ -4,7 +4,7 @@
   "description": "ChicagoNow Alexa Skill",
   "main": "index.js",
   "scripts": {
-    "test": "handler"
+    "test": "node -p 'require(\"./index.js\").dumbAddTest()'"
   },
   "repository": {
     "type": "git",

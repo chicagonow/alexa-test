@@ -72,7 +72,7 @@ exports.requestTest = function (event, context) {
 };
 
 
-exports.dumbAddTest = () => {
+exports.dumbAdditionTest = () => {
   let x = 1;
   let y = 2;
 
