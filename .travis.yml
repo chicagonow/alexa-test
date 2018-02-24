@@ -1,10 +1,17 @@
 language: node_js
 node_js:
     - 6.10
+branches:
+  only:
+  - master
+  - dev
+  - alex-ci-cd
+
 cache:
   directories:
     - node_modules
 script: 
-    - echo "testing script in travis yaml"
+    - npm install
     - npm install -g serverless
+    - echo "ADD COMMAND TO RUN TEST HERE"
     - sls deploy
