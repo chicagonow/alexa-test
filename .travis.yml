@@ -14,6 +14,5 @@ script:
     - npm install &
     - npm install -g serverless &
     - wait
-    - echo "ADD COMMAND TO RUN TEST HERE"
-    - node -e "require('./test.js')"
+    - echo "Test should have already ran from $ npm test"
     - sls deploy
