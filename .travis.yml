@@ -13,6 +13,6 @@ cache:
 script: 
     - npm install &
     - npm install -g serverless &
-    -
+    - wait
     - echo "ADD COMMAND TO RUN TEST HERE"
     - sls deploy
