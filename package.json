@@ -4,7 +4,7 @@
   "description": "ChicagoNow Alexa Skill",
   "main": "index.js",
   "scripts": {
-    "test": "handler"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/chicagonow/intent-service#readme",
   "dependencies": {
-    "alexa-sdk": "^1.0.25",
-    "make-runnable": "^1.3.6",
-    "request": "^2.83.0"
+    "alexa-sdk": "^1.0.x",
+    "build-url": "^1.0.x",
+    "make-runnable": "^1.3.x",
+    "request": "^2.83.x",
+    "serverless": "^1.26.x"
   }
 }
