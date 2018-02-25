@@ -1,15 +1,14 @@
 const Alexa = require('alexa-sdk');
 const request = require('request');
+const buildUrl = require('build-url');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 
-//static lat and long used
-var latitude = '41.878440'; 
-var longitude = '-87.625622';
-//within 1 mile of location.
-var within = '1mi';
 //used sample token,replace later. 
-var token = 'IO6EB7MM6TSCIL2TIOHC';
+const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
+
+const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
+const EVENTBRITE_API_PATH = '/v3/events/search/'; 
 
 const handlers = {
     'CtaIntent': function () {
@@ -21,19 +20,34 @@ const handlers = {
             });
     },
 	'EventIntent' : function(){
-		request('https://www.eventbriteapi.com/v3/events/search/?location.within=' + within + '&location.latitude=' + latitude + '&location.longitude='  + longitude + '&token=' + token,(error, response, body) =>
-	{		
-		var data = JSON.parse(body);
-		var events = data.events;			
+				
+			const qp = {};
+				qp[encodeURIComponent('token')] = AUTH_TOKEN;
+			qp[encodeURIComponent('location.within')] = '1mi';
+			qp[encodeURIComponent('location.latitude')] = '41.878440';
+			qp[encodeURIComponent('location.longitude')] = '-87.625622';
+			
+        let url = buildUrl(EVENTBRITE_API_DOMAIN, {
+            path: EVENTBRITE_API_PATH,
+            queryParams: qp
+        });
 		
-		//gets number of events
-		var length = events.length;
-		var msg = length + " events found nearby. ";
-		var firstEvent = events[0];
-		this.emit(':tell', msg + 'First event found,' + firstEvent.name.text + firstEvent.description.text);
-		console.log('error:',error);
-		console.log('statusCode:', response && response.statusCode);			
-	});
+		request(url,(error, response, body) =>
+		{		
+			var data = JSON.parse(body);
+			var events = data.events;			
+			
+			//gets number of events
+			var length = events.length;
+			var msg = length + " events found nearby. ";
+			var firstEvent = events[0];
+			var eventName = firstEvent.name.text;
+			var eventDescription = firstEvent.description.text;
+			msg += 'First event found is ' + eventName;
+			this.emit(':tell', msg);
+			console.log('error:',error);
+			console.log('statusCode:', response && response.statusCode);			
+		});
 	},
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
@@ -69,8 +83,8 @@ exports.requestTest = function (event, context) {
 	
 exports.eventTest = function (event, context){
 	
-	console.log("Yo");
-	request('https://www.eventbriteapi.com/v3/events/search/?location.within=' + within + '&location.latitude=' + latitude + '&location.longitude='  + longitude + '&token=' + token,(error, response, body) =>
+	console.log("Yo");	
+	request('https://www.eventbriteapi.com/v3/events/search/?location.within=1mi&location.latitude=41.878440&location.longitude=-87.625622&token=' + AUTH_TOKEN,(error, response, body) =>
 	{		
 		console.log('error:',error);
 		console.log('statusCode:', response && response.statusCode);	
