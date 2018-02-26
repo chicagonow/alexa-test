@@ -14,7 +14,11 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: us-east-1
+<<<<<<< HEAD
   stage: ruben-handler-test
+=======
+  stage: dev
+>>>>>>> 7c6920064d11900b27f3bfba91f5719ecb3f662c
 functions:
   main: # this key makes a function like {service}-{stage}-{key-name}. ex: "chicago-now-dev-main"
     handler: index.handler
