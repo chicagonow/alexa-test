@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+    - 6.10
+branches:
+  only:
+  - master
+  - dev
+  - alex-ci-cd
+
+cache:
+  directories:
+    - node_modules
+script:
+    - npm test
+    - serverless deploy
