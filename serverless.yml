@@ -18,6 +18,8 @@ provider:
 functions:
   main: # this key makes a function like {service}-{stage}-{key-name}. ex: "chicago-now-dev-main"
     handler: index.handler
+    events:
+      - alexaSkill: amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
