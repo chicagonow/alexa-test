@@ -34,8 +34,6 @@ exports.searchEvents = (callback) => {
 			var eventName = firstEvent.name.text;
 			var eventDescription = firstEvent.description.text;
 			msg += 'First event found is ' + eventName;
-			this.emit(':tell', msg);
-			console.log('error:',error);
-			console.log('statusCode:', response && response.statusCode);			
+			
 		});
 }
