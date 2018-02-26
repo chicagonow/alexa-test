@@ -1,6 +1,7 @@
 const Alexa = require('alexa-sdk');
 const request = require('request');
 const buildUrl = require('build-url');
+const EventHelper = require('./EventHelper');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
@@ -29,6 +30,16 @@ const handlers = {
                 console.log('body:', body); // Print the HTML for the Google homepage.
         });
     },
+	'EventIntent' : function(){
+		
+		let result = EventHelper.searchEvents((	result,error,response)=>{				
+			this.emit(':tell', result);			
+			console.log('error:',error);
+			console.log('statusCode:', response && response.statusCode);
+		 });
+		
+
+	},
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
         const reprompt = this.t('HELP_MESSAGE');
@@ -69,6 +80,11 @@ exports.requestTest = function (event, context) {
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         console.log('body:', body); // Print the HTML for the Google homepage.
     });
+};
+
+exports.eventTest = function (event, context){
+	handlers.EventIntent();	
+	
 };
 
 
