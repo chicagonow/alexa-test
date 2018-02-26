@@ -22,17 +22,15 @@ exports.searchEvents = (callback) => {
             queryParams: qp
         });
 		
-		var msg = '';
+		
 		request(url,(error, response, body) =>
 		{		
-			
-			var data = JSON.parse(body);
-			//console.log(data);
+			var msg = '';
+			var data = JSON.parse(body);			
 			var events = data.events;			
 			
 			//gets number of events
 			var length = events.length;
-			//var msg = length + " events found nearby. ";
 			
 			var firstEvent = events[0];
 			var eventName = firstEvent.name.text;
