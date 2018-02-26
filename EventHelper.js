@@ -3,10 +3,8 @@ const request = require('request');
 const buildUrl = require('build-url');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
-
 //used sample token,replace later. 
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
-
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_API_PATH = '/v3/events/search/'; 
 

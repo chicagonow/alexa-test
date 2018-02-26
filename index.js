@@ -8,12 +8,6 @@ const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
 const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
-//used sample token,replace later.
-const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
-
-const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
-const EVENTBRITE_API_PATH = '/v3/events/search/';
-
 const handlers = {
     'CtaIntent': function () {
 
@@ -38,7 +32,7 @@ const handlers = {
     },
 	'EventIntent' : function(){
 		
-		let result = EventHelper.searchEvents((result,error,response)=>{				
+		let result = EventHelper.searchEvents((	result,error,response)=>{				
 			this.emit(':tell', result);			
 			console.log('error:',error);
 			console.log('statusCode:', response && response.statusCode);
@@ -64,7 +58,7 @@ const handlers = {
 
 exports.handler = function (event, context) {
     const alexa = Alexa.handler(event, context);
-    alexa.APP_ID = APP_ID;
+    alexa.APP_ID = process.env.skill_id;
     alexa.registerHandlers(handlers);
     alexa.execute();
 };

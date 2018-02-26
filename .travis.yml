@@ -5,7 +5,6 @@ branches:
   only:
   - master
   - dev
-  - add-alexa
 
 cache:
   directories:
