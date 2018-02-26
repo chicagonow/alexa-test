@@ -37,11 +37,13 @@ const handlers = {
         });
     },
 	'EventIntent' : function(){
-		EventHelper.searchEvents(()=>{
-			this.emit(':tell', 'hello events');
+		
+		let result = EventHelper.searchEvents((result,error,response)=>{				
+			this.emit(':tell', result);			
 			console.log('error:',error);
 			console.log('statusCode:', response && response.statusCode);
-		});
+		 });
+		
 
 	},
     'AMAZON.HelpIntent': function () {
@@ -87,36 +89,8 @@ exports.requestTest = function (event, context) {
 };
 
 exports.eventTest = function (event, context){
-
-	console.log("Yo");
-	request('https://www.eventbriteapi.com/v3/events/search/?location.within=1mi&location.latitude=41.878440&location.longitude=-87.625622&token=' + AUTH_TOKEN,(error, response, body) =>
-	{
-		console.log('error:',error);
-		console.log('statusCode:', response && response.statusCode);
-		//parse response into json object
-		var data = JSON.parse(body);
-
-		//gets properties for json object
-		// var propNames = Object.getOwnPropertyNames(data)
-		// propNames.forEach(function(prop){
-			// console.log(prop);
-		// });
-
-		//gets all events returned, store in events variable
-		var events = data.events;
-
-		//gets number of events
-		var length = events.length;
-		console.log(length + " events found nearby.");
-		console.log("Showing all events found.\n");
-
-		//loop through each event, print name of event.
-		events.forEach(function(event)
-		{
-			console.log(event.name.text);
-		});
-
-	});
+	handlers.EventIntent();	
+	
 };
 
 
