@@ -12,12 +12,13 @@ exports.searchTransit = (parameters, callback) => {
         queryParams: {
             key: CTA_API_KEY,
             mapid: parameters.mapid,
-            rt: parameters.rt
+            rt: parameters.rt,
+            outputType: "JSON"
         }
     });
 
-    request(url,  (error, response, body) => {
-        let alexaResponse = TransitResponseBuilder.buildAlexaResponse();
+    request(url,  (error, response, body) => {        
+        let alexaResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
         callback(alexaResponse);        
     });
 };
