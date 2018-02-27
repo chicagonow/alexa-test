@@ -10,13 +10,12 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
-    'CtaIntent': function () {
+    'CtaIntent': function () {        
         // TODO: Build proper parameters object
         let parameters = {
             mapid: "40530",
-            rt: "Brn",
-            outputType: "JSON"
-        };
+            rt: "Brn"
+        };        
         TransitHandler.searchTransit(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
         });        
