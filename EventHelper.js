@@ -10,7 +10,7 @@ const EVENTBRITE_API_PATH = '/v3/events/search/';
 
 exports.searchEvents = (callback) => {
 			const qp = {};
-				qp[encodeURIComponent('token')] = AUTH_TOKEN;
+			qp[encodeURIComponent('token')] = AUTH_TOKEN;
 			qp[encodeURIComponent('location.within')] = '1mi';
 			qp[encodeURIComponent('location.latitude')] = '41.878440';
 			qp[encodeURIComponent('location.longitude')] = '-87.625622';
@@ -36,7 +36,4 @@ exports.searchEvents = (callback) => {
 			msg += 'First event found is ' + eventName;				
 			callback(msg,error,response);
 		});
-		
-		
-		
-}
+};
