@@ -17,7 +17,7 @@ provider:
   stage: ruben-handler-test
 functions:
   main: # this key makes a function like {service}-{stage}-{key-name}. ex: "chicago-now-dev-main"
-    handler: index.handler
+    handler: index.handler  
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
