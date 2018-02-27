@@ -45,7 +45,7 @@ exports.searchEvents = (callback) => {
 		callback && callback(msg,error,response);
 
 	});
-}
+};
 
 exports.listEvents = (events) => {
 	console.log("Here are 10 events going on in Chicago")
@@ -54,6 +54,6 @@ exports.listEvents = (events) => {
 		var eventName = firstEvent.name.text;
 		console.log(eventName)
 	}
-}
+};
 
 require('make-runnable');
