@@ -42,7 +42,7 @@ exports.searchEvents = (callback) => {
 
 
 		console.log(msg);
-		callback(msg,error,response);
+		callback && callback(msg,error,response);
 
 	});
 }
