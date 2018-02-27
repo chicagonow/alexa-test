@@ -17,7 +17,7 @@ exports.searchTransit = (parameters, callback) => {
     });
 
     request(url,  (error, response, body) => {
-        let alexaResponse = TransitResponseBuilder.buildAlexaResponse();
+        let alexaResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
         callback(alexaResponse);        
     });
 };
