@@ -14,7 +14,8 @@ const handlers = {
         // TODO: Build proper parameters object
         let parameters = {
             mapid: "40530",
-            rt: "Brn"
+            rt: "Brn",
+            outputType: "JSON"
         };
         TransitHandler.searchTransit(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
