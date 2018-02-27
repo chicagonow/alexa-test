@@ -8,6 +8,8 @@ const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_API_PATH = '/v3/events/search/';
 
+const NUMBER_OF_EVENTS = 3;
+
 exports.searchEvents = (callback) => {
 	const qp = {};
 	qp[encodeURIComponent('token')] = AUTH_TOKEN;
@@ -22,7 +24,8 @@ exports.searchEvents = (callback) => {
 
 	console.log("hello")
 	request(url, (error, response, body) => {
-		var msg = "Here are 10 events going on in Chicago ";
+		var msg = "Here are " + NUMBER_OF_EVENTS + " events going on in Chicago ";
+
 		var data = JSON.parse(body);
 		var events = data.events;
 
@@ -34,7 +37,7 @@ exports.searchEvents = (callback) => {
 		var eventArray = [];
 		//var eventDescription = firstEvent.description.text;
 		events.map((event, index) => {
-			if (index <= 9) {
+			if (index < NUMBER_OF_EVENTS) {
 				eventArray.push(event.name.text);
 			}
 		});
@@ -48,8 +51,9 @@ exports.searchEvents = (callback) => {
 };
 
 exports.listEvents = (events) => {
-	console.log("Here are 10 events going on in Chicago")
-	for (i = 0; i < 10; i++) {
+
+    console.log("Here are " + NUMBER_OF_EVENTS + " events going on in Chicago");
+	for (i = 0; i < NUMBER_OF_EVENTS; i++) {
 		var firstEvent = events[i];
 		var eventName = firstEvent.name.text;
 		console.log(eventName)
