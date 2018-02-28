@@ -1,5 +1,5 @@
 const index = require('./index');
-const EventHelper = require('./EventHelper');
+const EventHelper = require('./handlers/events/EventsHandler');
 
 let dumbAdditionTest = () => {
     let x = 1;
