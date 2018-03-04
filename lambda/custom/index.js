@@ -15,11 +15,9 @@ const handlers = {
             rt: "Brn"
         };
 
-        this.emit(':tell', "hihihihihi");
-
-        // TransitHandler.searchTransit(parameters, (alexaResponse) => {
-        //     this.emit(':tell', alexaResponse);
-        // });
+        TransitHandler.searchTransit(parameters, (alexaResponse) => {
+            this.emit(':tell', alexaResponse);
+        });
     },
 	'EventIntent': function() {		
 		EventsHandler.searchEvents((alexaResponse,error,response) => {				
