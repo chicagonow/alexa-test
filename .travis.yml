@@ -5,10 +5,20 @@ branches:
   only:
   - master
   - dev
+  - alexa-cli-new
 
 cache:
   directories:
     - node_modules
+
+before_install:
+  - chmod +x aws_credential_travis.sh
+  - ./aws_credential_travis.sh
+  - npm install -g aws-sdk
+  - npm install -g ask-cli --python=python2.7
+  - mkdir -p ~/.ask
+  - openssl aes-256-cbc -K $encrypted_92427a202226_key -iv $encrypted_92427a202226_iv -in alex_cli_config -out ~/.ask/cli_config -d
+  - cat ~/.ask/cli_config
 script:
-    - npm test
-    - serverless deploy
+#    - npm test
+    - npm install -g ask-cli --python=python2.7

@@ -1,0 +1,136 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "chicago now",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "CtaIntent",
+          "slots": [
+            {
+              "name": "bus",
+              "type": "CTA_BUS"
+            },
+            {
+              "name": "station",
+              "type": "CTA_STATIONS"
+            }
+          ],
+          "samples": [
+            "what's the status of the {station}"
+          ]
+        },
+        {
+          "name": "EventIntent",
+          "samples": [
+            "what events are going on near me"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "135 bus",
+                "synonyms": [
+                  "135"
+                ]
+              }
+            }
+          ],
+          "name": "CTA_BUS"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "red line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "blue line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "orange line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "green line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "pink line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "purple line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "yellow line",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "test line",
+                "synonyms": []
+              }
+            }
+          ],
+          "name": "CTA_LINES"
+        },
+        {
+          "values": [
+            {
+              "id": "40530",
+              "name": {
+                "value": "Diversey",
+                "synonyms": [
+                  "diversey station"
+                ]
+              }
+            }
+          ],
+          "name": "CTA_STATIONS"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "chicago",
+                "synonyms": []
+              }
+            }
+          ],
+          "name": "EVENTS"
+        }
+      ]
+    }
+  }
+}
