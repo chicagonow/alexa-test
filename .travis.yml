@@ -19,9 +19,7 @@ before_install:
   - npm install -g ask-cli --python=python2.7
   - mkdir -p ~/.ask
   - openssl aes-256-cbc -K $encrypted_92427a202226_key -iv $encrypted_92427a202226_iv -in cli_config.enc -out ~/.ask/cli_config -d
-#script:
-##  - sh -c "cd ./lambda/custom/ && npm install && npm test"
-after_success:
+script:
   - ask deploy -p default -t skill
   - ask deploy -p default -t model
   - ask deploy -p default -t lambda
