@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   #lambda uses 6, but we need node 9 to use aws-cli and ask-cli, which deploy the alexa skill/intents, and the lambda
-  - 6
+  - 9
 branches:
   only:
   - master
@@ -12,15 +12,15 @@ cache:
   directories:
     - node_modules
 
-script:
+install:
+  - npm install -g aws-sdk
   - chmod +x aws_credential_travis.sh
   - ./aws_credential_travis.sh
-  - npm install -g aws-sdk
   - npm install -g ask-cli --python=python2.7
   - mkdir -p ~/.ask
   - openssl aes-256-cbc -K $encrypted_92427a202226_key -iv $encrypted_92427a202226_iv -in cli_config.enc -out ~/.ask/cli_config -d
-
-after_script:
+  - sh -c "cd ./lambda/custom/ && npm install && npm test"
+after_success:
   - ask deploy -p default -t skill
   - ask deploy -p default -t model
   - ask deploy -p default -t lambda
