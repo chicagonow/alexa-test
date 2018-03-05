@@ -22,4 +22,4 @@ before_install:
 script:
   - sh -c "cd ./lambda/custom/ && npm install && npm test"
 after_success:
-  - echo 'Y' | ask deploy --no-wait
+  - echo 'Y' | ask deploy
