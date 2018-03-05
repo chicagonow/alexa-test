@@ -6,13 +6,59 @@ Omar Chughtai
 Ameet Sarkar
 
 
+# run ask-cli to test alexa locally
+NOTE: use a bash terminal (cygwin, gitbash, …)
+
+[developer.amazon.com/ask-cli docs](https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html)
+
+TODO - how to make new skills and functions on the fly
+
+#### 0. remove existing ask and aws config
+```
+rm -rf ~/.aws
+rm -rf ~/.ask
+```
+
+#### 1. install nvm (node version manager)
+* Follow instructions in your bash shell to install https://github.com/creationix/nvm/blob/master/README.md
+
+#### 2. install and use node 9
+```
+nvm install 9
+nvm use 9
+```
+
+####3. install aws-sdk (globally)
+`npm install -g aws-sdk`
+
+####4. install ask-cli (globally with pinned python version)
+`npm install -g ask-cli --python=python2.7`
+
+####5. initialize aws-sdk
+`aws configure`
+
+* follow the prompts : use the accesskey and secret key from #random channel
+* enter `us-east-1` for region(?)
+* enter `json` for type(?)
+
+####6. initialize ask-cli
+`ask init`
+* choose default, you will be taken to aws login
+* login to aws
+
+####7. 
+* at this point, you could clone our alexa skill, but our repo already has the correct folder structure to do so
+
+####8. simulate and test your alexa skill against a deployed lambda
+`ask simulate -t "ask chicago now what's the status of the diversey brown line" -l en-US`
+
 # deploy new lambda function to AWS from command line
 https://serverless.com/framework/docs/getting-started/
 
 Install `Serverless`
 ```
 npm install -g serverless
-# Login to the serverless platform (optional)
+# Login to the serverless platform
 serverless login
 ```
 If you'd like a new function to test, change one or all of these fields in the `serverless.yml`

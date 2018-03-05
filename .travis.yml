@@ -18,7 +18,7 @@ install:
   - ./aws_credential_travis.sh
   - npm install -g ask-cli --python=python2.7
   - mkdir -p ~/.ask
-  # expire time key-value pair needs to be removed from cli_config before it's encrypted and used by travis
+  # v---- expire time key-value pair needs to be removed from cli_config before it's encrypted and used by travis ---------------v
   - openssl aes-256-cbc -K $encrypted_92427a202226_key -iv $encrypted_92427a202226_iv -in cli_config.enc -out ~/.ask/cli_config -d
 script:
   - sh -c "cd ./lambda/custom/ && npm install"
@@ -27,6 +27,3 @@ after_success:
   - ask deploy -p default -t skill --no-wait
   - ask deploy -p default -t model --no-wait
   - ask deploy -p default -t lambda --no-wait
-  - branches:
-      only:
-        - master
