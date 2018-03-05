@@ -24,9 +24,9 @@ script:
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm test"
 after_success:
-  branches:
-    only:
-      - master
   - ask deploy -p default -t skill --no-wait
   - ask deploy -p default -t model --no-wait
   - ask deploy -p default -t lambda --no-wait
+  - branches:
+      only:
+        - master
