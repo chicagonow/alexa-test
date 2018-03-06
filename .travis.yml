@@ -7,6 +7,7 @@ branches:
   - master
   - dev
   - alexa-cli-new
+  - nick-ask-cli
 
 cache:
   directories:
