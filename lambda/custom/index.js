@@ -1,6 +1,7 @@
 const Alexa = require('alexa-sdk');
 const TransitHandler = require('./handlers/transit/TransitHandler');
 const EventsHandler = require('./handlers/events/EventsHandler');
+const ParameterHelper = require('./helpers/ParameterHelper');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
@@ -8,13 +9,22 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
-    'CtaIntent': function () {        
+    'CtaIntent': function () { 
         // TODO: Build proper parameters object
         let parameters = {
             mapid: "40530",
             rt: "Brn"
         };
-
+       
+        TransitHandler.searchTransit(parameters, (alexaResponse) => {
+            this.emit(':tell', alexaResponse);
+        });
+    },
+    'CtaLocationIntent': function () {
+        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+        parameters["mapid"] = "40530";
+        parameters["rt"] = "Brn";
+       
         TransitHandler.searchTransit(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
         });
