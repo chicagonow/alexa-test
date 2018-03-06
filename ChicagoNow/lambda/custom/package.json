@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node test.js all",
     "package": "npm run build && npm run package:pack",
-    "package:pack": "rm -f artifact.zip && cd dist/ && zip -r ../artifact.zip *",
+    "package:pack": "rm -f artifact.zip && cd dist/ && zip -r ../artifact.zip *"
   },
   "repository": {
     "type": "git",

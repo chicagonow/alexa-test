@@ -14,5 +14,5 @@ sed -e s/ASK_ACCESS_TOKEN/${ASK_ACCESS_TOKEN}/g -e \
     s/ASK_REFRESH_TOKEN/${ASK_REFRESH_TOKEN}/g conf/ask_cli.json > ~/.ask/cli_config
 
 # Create the Lambda upload file and deploy it
-npm run package
-ask lambda upload -f ChicagoNow -s artifact.zip
+# npm run package
+# ask lambda upload -f ChicagoNow -s artifact.zip
