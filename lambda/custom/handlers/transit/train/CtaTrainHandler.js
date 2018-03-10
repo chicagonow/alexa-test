@@ -1,6 +1,6 @@
 const request = require('request');
 const buildUrl = require('build-url');
-const TransitResponseBuilder = require('./TransitResponseBuilder');
+const TransitResponseBuilder = require('../TransitResponseBuilder');
 const TrainRepository = require('../../../repositories/transit/CtaTrainRepository');
 const LocationHandler = require('../../location/LocationHandler');
 
@@ -27,6 +27,11 @@ exports.searchTrainNearMe = (parameters, callback) => {
     });    
 };
 
+/**
+ * Calls the CTA Train API
+ * @param {object} parameters 
+ * @param {function} callback 
+ */
 let callCta = (parameters, callback) => {
     let url = buildUrl(CTA_API_DOMAIN, {
         path: CTA_API_PATH,
