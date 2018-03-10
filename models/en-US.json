@@ -16,23 +16,47 @@
           "samples": []
         },
         {
-          "name": "CtaIntent",
+          "name": "CtaBusIntent",
           "slots": [
             {
               "name": "bus",
               "type": "CTA_BUS"
             },
             {
-              "name": "station",
-              "type": "CTA_STATIONS"
+              "name": "busStation",
+              "type": "CTA_BUS_STATION"
             }
           ],
           "samples": [
-            "what's the status of the {station}"
+            "what's the status of the {busStation}"
           ]
         },
-        {
-          "name": "EventIntent",
+		{
+		  "name": "CtaTrainIntent",
+          "slots": [
+            {
+              "name": "train",
+              "type": "CTA_TRAIN"
+            },
+            {
+              "name": "trainStation",
+              "type": "CTA_TRAIN_STATION"
+            }
+          ],
+          "samples": [
+            "what's the status of the {trainStation}"
+          ]
+        },
+		{
+          "name": "CtaLocationIntent",
+          
+          "samples": [
+            "what's the status of the nearest train station",
+			"what's the status of the nearest bus station"
+          ]
+        },
+		{
+          "name": "EventLocationIntent",
           "samples": [
             "what events are going on near me"
           ]
