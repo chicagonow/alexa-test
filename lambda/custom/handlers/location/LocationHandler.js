@@ -1,5 +1,6 @@
 const request = require('request');
 const API_LOCATION_QUERY = "/v1/devices/{deviceID}/settings/address";
+const geocoder = require('./geocoder');
 
 // Default Location if the API isn't able to get the device's location
 const DEFAULT_LOCATION = {
@@ -31,6 +32,8 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
     // Call the Amazon API to get the device's location
     request(options, (error, response, body) => {
         let location = response.statusCode === 200 ? JSON.parse(body) : DEFAULT_LOCATION;
-        callback && callback(location);
+  // callback && callback(location);
+        let locationString = location.addressLine1 + ',' + location.city + ',' + location.stateOrRegion;
+        geocoder.getLatLong(locationString, callback);
     });
 };
