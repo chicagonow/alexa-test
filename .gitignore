@@ -1,6 +1,4 @@
 **/node_modules
-**/cli_config
-!**/cli_config.enc
 **/.idea
 **/*.iml
 .serverless

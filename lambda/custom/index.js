@@ -15,16 +15,7 @@ const handlers = {
             mapid: "40530",
             rt: "Brn"
         };
-       
-        TransitHandler.searchTransit(parameters, (alexaResponse) => {
-            this.emit(':tell', alexaResponse);
-        });
-    },
-    'CtaLocationIntent': function () {
-        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-        parameters["mapid"] = "40530";
-        parameters["rt"] = "Brn";
-       
+
         TransitHandler.searchTransit(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
         });

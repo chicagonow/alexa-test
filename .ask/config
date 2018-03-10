@@ -8,7 +8,11 @@
           "apis": {
             "custom": {
               "endpoint": {
+<<<<<<< HEAD
                 "uri": "arn:aws:lambda:us-east-1:564918604829:function:chicago-now-dev-main"
+=======
+                "uri": "chicago-now-dev-main"
+>>>>>>> 63440edde6dc8f0fd31aa6f26d2586d952c6cf52
               }
             }
           }
