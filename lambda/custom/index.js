@@ -21,26 +21,12 @@ const handlers = {
     },
     'CtaBusIntent': function () {
         // TODO: Build proper parameters object
-        //let parameters = {
-        //    mapid: "40530",
-        //    rt: "Brn"
-        //};
 
-        //TransitHandler.searchTransit(parameters, (alexaResponse) => {
-        //    this.emit(':tell', alexaResponse);
-        //});
         this.emit(':tell', "implement bus intent");
     },
     'CtaLocationIntent': function () {
         // TODO: Build proper parameters object
-        //let parameters = {
-        //    mapid: "40530",
-        //    rt: "Brn"
-        //};
 
-        //TransitHandler.searchTransit(parameters, (alexaResponse) => {
-        //    this.emit(':tell', alexaResponse);
-        //});
         this.emit(':tell', "implement cta location intent");
     },
 	'EventLocationIntent': function() {		

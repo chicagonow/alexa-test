@@ -23,12 +23,13 @@
               "type": "CTA_BUS"
             },
             {
-              "name": "busStation",
-              "type": "CTA_BUS_STATION"
+              "name": "busStop",
+              "type": "CTA_BUS_STOP"
             }
           ],
           "samples": [
-            "what's the status of the {busStation}"
+            "what's the status of the {bus}",
+            "what's the status of the {busStop}"
           ]
         },
 		{
@@ -44,6 +45,7 @@
             }
           ],
           "samples": [
+            "what's the status of the {train}",
             "what's the status of the {trainStation}"
           ]
         },
@@ -79,16 +81,16 @@
         {
           "values": [
             {
-              "id": "40530",
+              "id": "-1",
               "name": {
-                "value": "Diversey",
+                "value": "Test Stop",
                 "synonyms": [
-                  "diversey station"
+                  "test bust stop"
                 ]
               }
             }
           ],
-          "name": "CTA_BUS_STATION"
+          "name": "CTA_BUS_STOP"
         },
         {
           "values": [
