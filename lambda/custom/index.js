@@ -25,10 +25,16 @@ const handlers = {
 
         this.emit(':tell', "implement bus intent");
     },
-    'CtaLocationIntent': function () {
-        // TODO: Build proper parameters object
-
-        this.emit(':tell', "implement cta location intent");
+    'CtaLocationIntent': function () {     
+        let transitSlot = this.event.request.intent.slots.transitMode.value;
+        if (transitSlot === "train") {
+            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+            TransitHandler.searchTrainNearMe(parameters, (alexaResponse) => {
+                this.emit(':tell', alexaResponse);
+            }); 
+        } else {
+            this.emit(':tell', "implement bus location intent");
+        }       
     },
 	'EventLocationIntent': function() {		
 		EventsHandler.searchEvents((alexaResponse,error,response) => {				
