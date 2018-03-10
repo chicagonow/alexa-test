@@ -1,6 +1,7 @@
 const Alexa = require('alexa-sdk');
 const TransitHandler = require('./handlers/transit/TransitHandler');
 const EventsHandler = require('./handlers/events/EventsHandler');
+const ParameterHelper = require('./helpers/ParameterHelper');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
@@ -35,8 +36,7 @@ const handlers = {
 			console.log('error:',error);
 			console.log('statusCode:', response && response.statusCode);
 		 });		
-    },
-   
+	},
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
         const reprompt = this.t('HELP_MESSAGE');

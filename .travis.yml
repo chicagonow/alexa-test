@@ -6,6 +6,7 @@ branches:
   only:
   - master
   - dev
+  - alexa-cli-new
 
 cache:
   directories:
