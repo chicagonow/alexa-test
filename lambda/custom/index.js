@@ -13,10 +13,11 @@ const handlers = {
         let parameters = {
             mapid: "40530",
             rt: "Brn"
-        };        
+        };
+
         TransitHandler.searchTransit(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
-        });        
+        });
     },
 	'EventIntent': function() {		
 		EventsHandler.searchEvents((alexaResponse,error,response) => {				
