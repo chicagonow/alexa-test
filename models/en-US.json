@@ -127,7 +127,7 @@
               }
             }
           ],
-          "name": "CTA_LINES"
+          "name": "CTA_TRAIN"
         },
         {
           "values": [
@@ -141,7 +141,7 @@
               }
             }
           ],
-          "name": "CTA_STATIONS"
+          "name": "CTA_BUS"
         },
         {
           "values": [
