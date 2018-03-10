@@ -51,10 +51,14 @@
         },
 		{
           "name": "CtaLocationIntent",
-          
+          "slots": [
+            {
+              "name": "transitMode",
+              "type": "TRANSIT_MODE"
+            }
+          ],
           "samples": [
-            "what's the status of the nearest train station",
-			"what's the status of the nearest bus station"
+            "what's the status of the nearest {transitMode} station"
           ]
         },
 		{
@@ -158,6 +162,27 @@
             }
           ],
           "name": "CTA_TRAIN_STATION"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "bus",
+                "synonyms": [
+                  "bus"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "train",
+                "synonyms": [
+                  "train"
+                ]
+              }
+            }
+          ],
+          "name": "TRANSIT_MODE"
         },
         {
           "values": [
