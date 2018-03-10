@@ -79,6 +79,20 @@
         {
           "values": [
             {
+              "id": "40530",
+              "name": {
+                "value": "Diversey",
+                "synonyms": [
+                  "diversey station"
+                ]
+              }
+            }
+          ],
+          "name": "CTA_BUS_STATION"
+        },
+        {
+          "values": [
+            {
               "name": {
                 "value": "red line",
                 "synonyms": []
@@ -141,7 +155,7 @@
               }
             }
           ],
-          "name": "CTA_BUS"
+          "name": "CTA_TRAIN_STATION"
         },
         {
           "values": [
