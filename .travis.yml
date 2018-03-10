@@ -6,8 +6,6 @@ branches:
   only:
   - master
   - dev
-  - alexa-cli-new
-  - nick-ask-cli
 
 cache:
   directories:
@@ -22,6 +20,6 @@ script:
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm test"
 after_success:
-  - ask deploy -p default -t skill --no-wait
-  - ask deploy -p default -t lambda --no-wait
-  - ask deploy -p default -t model --no-wait
+  - ask deploy -p default -t skill #--no-wait
+  - ask deploy -p default -t lambda #--no-wait
+  - ask deploy -p default -t model #--no-wait
