@@ -31,8 +31,7 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
 
     // Call the Amazon API to get the device's location
     request(options, (error, response, body) => {
-        let location = response.statusCode === 200 ? JSON.parse(body) : DEFAULT_LOCATION;
-  // callback && callback(location);
+        let location = response.statusCode === 200 ? JSON.parse(body) : DEFAULT_LOCATION;  
         let locationString = location.addressLine1 + ',' + location.city + ',' + location.stateOrRegion;
         geocoder.getLatLong(locationString, callback);
     });
