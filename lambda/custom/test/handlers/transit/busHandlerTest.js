@@ -1,0 +1,11 @@
+const busHandler = require("../../../handlers/transit/BusHandler");
+
+exports.testBusHandler = () => {
+    var parameters = {rt: 22,
+                      stpid: 1806}
+    var response = busHandler.getBusesForRouteAndStop(parameters, (response) => {
+        console.log(response);
+    });
+}
+
+require('make-runnable');

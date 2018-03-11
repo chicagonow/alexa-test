@@ -1,4 +1,4 @@
-const busHandler = require("../../../custom/handlers/transit/BusHandler");
+const busHandler = require("../../handlers/transit/BusHandler");
 
 exports.testBusHandler = () => {
     var parameters = {rt: 22,

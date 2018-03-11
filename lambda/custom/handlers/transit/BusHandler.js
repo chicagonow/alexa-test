@@ -14,9 +14,11 @@ exports.getBusesForRouteAndStop = (parameters, callback) => {
             key: CTABUS_API_KEY,
             Rt: parameters.rt,
             stpid: parameters.stpid,
-            outputType: "JSON"
+            format: "json"
         }
+        
     });
+    console.log(url);
 
     request(url,  (error, response, body) => {      
         console.log("entered request method");
