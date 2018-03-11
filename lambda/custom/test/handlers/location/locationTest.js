@@ -1,4 +1,4 @@
-const LocationHandler = require('../../../custom/handlers/location/LocationHandler');
+const LocationHandler = require('../../../handlers/location/LocationHandler');
 const alexaJson = require('../../example-alexa-json.json');
 
 let latLongTest = () => {

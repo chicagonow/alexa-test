@@ -1,6 +1,6 @@
-const TrainHandler = require('../../../../custom/handlers/transit/train/CtaTrainHandler');
+const TrainHandler = require('../../../../handlers/transit/train/CtaTrainHandler');
 const alexaJson = require('../../../example-alexa-json.json');
-const ParameterHelper = require('../../../../custom/helpers/ParameterHelper');
+const ParameterHelper = require('../../../../helpers/ParameterHelper');
 
 let searchTrainNearMeTest = () => {
     let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
