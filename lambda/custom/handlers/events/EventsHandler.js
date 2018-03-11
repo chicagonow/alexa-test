@@ -18,7 +18,7 @@ exports.searchEvents = (callback) => {
 		path: EVENTBRITE_API_PATH,
 		queryParams: qp
 	});
-
+	
 	request(url, (error, response, body) => {		
         let alexaResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
 		callback && callback(alexaResponse, error, response);		

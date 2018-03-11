@@ -1,4 +1,4 @@
-const TrainRepository = require('../../../custom/repositories/transit/CtaTrainRepository');
+const TrainRepository = require('../../../repositories/transit/CtaTrainRepository');
 
 let getAllTest = () => {
     TrainRepository.getAll((trainInfo) => {
