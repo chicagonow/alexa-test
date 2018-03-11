@@ -9,7 +9,7 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
-    'CtaIntent': function () { 
+    'CtaTrainIntent': function () {        
         // TODO: Build proper parameters object
         let parameters = {
             mapid: "40530",
@@ -20,7 +20,23 @@ const handlers = {
             this.emit(':tell', alexaResponse);
         });
     },
-	'EventIntent': function() {		
+    'CtaBusIntent': function () {
+        // TODO: Build proper parameters object
+
+        this.emit(':tell', "implement bus intent");
+    },
+    'CtaLocationIntent': function () {     
+        let transitSlot = this.event.request.intent.slots.transitMode.value;
+        if (transitSlot === "train") {
+            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+            TransitHandler.searchTrainNearMe(parameters, (alexaResponse) => {
+                this.emit(':tell', alexaResponse);
+            }); 
+        } else {
+            this.emit(':tell', "implement bus location intent");
+        }       
+    },
+	'EventLocationIntent': function() {		
 		EventsHandler.searchEvents((alexaResponse,error,response) => {				
 			this.emit(':tell', alexaResponse);			
 			console.log('error:',error);

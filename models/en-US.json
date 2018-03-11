@@ -16,23 +16,53 @@
           "samples": []
         },
         {
-          "name": "CtaIntent",
+          "name": "CtaBusIntent",
           "slots": [
             {
               "name": "bus",
               "type": "CTA_BUS"
             },
             {
-              "name": "station",
-              "type": "CTA_STATIONS"
+              "name": "busStop",
+              "type": "CTA_BUS_STOP"
             }
           ],
           "samples": [
-            "what's the status of the {station}"
+            "what's the status of the {bus}",
+            "what's the status of the {busStop}"
           ]
         },
-        {
-          "name": "EventIntent",
+		{
+		  "name": "CtaTrainIntent",
+          "slots": [
+            {
+              "name": "train",
+              "type": "CTA_TRAIN"
+            },
+            {
+              "name": "trainStation",
+              "type": "CTA_TRAIN_STATION"
+            }
+          ],
+          "samples": [
+            "what's the status of the {train}",
+            "what's the status of the {trainStation}"
+          ]
+        },
+		{
+          "name": "CtaLocationIntent",
+          "slots": [
+            {
+              "name": "transitMode",
+              "type": "TRANSIT_MODE"
+            }
+          ],
+          "samples": [
+            "what's the status of the nearest {transitMode} station"
+          ]
+        },
+		{
+          "name": "EventLocationIntent",
           "samples": [
             "what events are going on near me"
           ]
@@ -51,6 +81,20 @@
             }
           ],
           "name": "CTA_BUS"
+        },
+        {
+          "values": [
+            {
+              "id": "-1",
+              "name": {
+                "value": "Test Stop",
+                "synonyms": [
+                  "test bust stop"
+                ]
+              }
+            }
+          ],
+          "name": "CTA_BUS_STOP"
         },
         {
           "values": [
@@ -103,7 +147,7 @@
               }
             }
           ],
-          "name": "CTA_LINES"
+          "name": "CTA_TRAIN"
         },
         {
           "values": [
@@ -117,7 +161,28 @@
               }
             }
           ],
-          "name": "CTA_STATIONS"
+          "name": "CTA_TRAIN_STATION"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "bus",
+                "synonyms": [
+                  "bus"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "train",
+                "synonyms": [
+                  "train"
+                ]
+              }
+            }
+          ],
+          "name": "TRANSIT_MODE"
         },
         {
           "values": [
