@@ -1,13 +1,15 @@
-const utcToString = require('../../../helpers/UTCTimeToEnglish').ctaBusDateToString;
+const utcToString = require('../../../helpers/UTCTimeToEnglish');
 
 exports.buildAlexaResponse = (jsonObject) => {
-    var msg = ""
-    var route = jsonObject["bustime-response"].prd[0].rt;
-    var destination = jsonObject["bustime-response"].prd[0].des;
-    var direction = jsonObject["bustime-response"].prd[0].rtdir;
-    var UTC = jsonObject["bustime-response"].prd[0].prdtm;
-    var arrivalTime = utcToString(UTC);
-    msg = msg + "The " + direction + " " + route + " towards " + destination
-             + " will arrive at " + arrivalTime; 
+    let msg = "";
+
+    let predictionResponse = jsonObject["bustime-response"].prd[0];
+    let route = predictionResponse.rt;
+    let destination = predictionResponse.des;
+    let routeDirection = predictionResponse.rtdir;
+    let predictedTime = predictionResponse.prdtm;
+    let arrivalTime = utcToString.ctaBusDateToString(predictedTime);
+
+    msg += "The " + routeDirection + " " + route + " bus towards " + destination + " will arrive at " + arrivalTime;
     return msg;
 };

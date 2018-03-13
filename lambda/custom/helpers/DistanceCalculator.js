@@ -1,7 +1,7 @@
 /* calculate distance between two objects using lat/long
 uses the "Haversine" formula
 */
-const Unit = {
+exports.Unit = {
     M: "M",
     K: "K",
     N: "N"

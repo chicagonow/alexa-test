@@ -12,6 +12,10 @@ const responseTrains = require('./response.trains');
 const busHandler = require('../handlers/transit/bus/BusHandler');
 const responseBuses = require('./response.buses');
 
+
+const WESTERN_BUS_ROUTE = "49";
+const WESTERN_BUS_STOP_ID = "8269";
+
 describe('Get Events Handler', function() {
     beforeEach(function() {
         //require(getEventsResponse);
@@ -52,29 +56,24 @@ describe('Get Events Response', function() {
 describe('Get Bus Handler', function() {
     beforeEach(function() {
         // require(busHandler);
-        // nock('http://ctabustracker.com')
-        //     .get('/bustime/api/v2/getpredictions')
-        //     .query(true)
-        //     .reply(200, responses.buses);
-
-
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query(true)
+            .reply(200, responseBuses);
     });
 
     it('returns bus near me response', function(done) {
         this.timeout(3000);
+
         let parameters = {
-            rt: "49",
-            stpid: "8269"
+            rt: WESTERN_BUS_ROUTE,
+            stpid: WESTERN_BUS_STOP_ID
         };
 
         busHandler.getBusesForRouteAndStop(parameters, (alexaResponse) => {
-
-            expect(alexaResponse).to.equal("zzzzz");
-
+            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
             done();
         });
-
-
     });
 });
 

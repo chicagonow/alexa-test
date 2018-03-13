@@ -2,6 +2,7 @@ const request = require('request');
 const buildUrl = require('build-url');
 const LocationHandler = require('../../handlers/location/LocationHandler');
 const distanceCalc = require('../../helpers/DistanceCalculator');
+const distanceUnit = require('../../helpers/DistanceCalculator').Unit;
 const util = require('util');
 
 const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
@@ -29,14 +30,18 @@ exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {
 
 /* take JSON response from API, return nearest stopID*/
 closestStopId = (latitude, longitude, ctaJSONResponse) => {
-    var length = Object.keys(ctaJSONResponse["bustime-response"].stops).length;
-    var closestStopID = ctaJSONResponse["bustime-response"].stops[0].stpid;
-    var closestDistance = distanceCalc.getDistance(latitude, longitude, ctaJSONResponse["bustime-response"].stops[0].lat, ctaJSONResponse["bustime-response"].stops[0].lon);
-    for (let i = 0; i < length; i++){
-        var lat = ctaJSONResponse["bustime-response"].stops[i].lat;
-        var long = ctaJSONResponse["bustime-response"].stops[i].lon;
-        var thisDistance = distanceCalc.getDistance(latitude,longitude,lat,long,'M');
-        var thisStopId = ctaJSONResponse["bustime-response"].stops[i].stpid
+    const bustimeResponse = ctaJSONResponse["bustime-response"];
+
+    let length = Object.keys(bustimeResponse.stops).length;
+    let closestStopId = bustimeResponse.stops[0].stpid;
+    let closestDistance = distanceCalc.getDistance(latitude, longitude, bustimeResponse.stops[0].lat, bustimeResponse.stops[0].lon);
+
+    for (let i = 1; i < length; i++){
+        let lat = bustimeResponse.stops[i].lat;
+        let long = bustimeResponse.stops[i].lon;
+        let thisDistance = distanceCalc.getDistance(latitude,longitude,lat,long, distanceUnit.M);
+        let thisStopId = bustimeResponse.stops[i].stpid;
+
         if (thisDistance < closestDistance){
             closestDistance = thisDistance;
             closestStopId = thisStopId;
