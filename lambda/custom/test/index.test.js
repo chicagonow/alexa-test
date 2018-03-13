@@ -23,7 +23,7 @@ describe('Get Events Handler', function() {
         //     //it should return an array of objects? maybe just an array of text TODO
         //     expect(String.isString(events)).to.equal(true);
         // });
-        console.log(getEventsHandler.searchEvents());
+        //console.log(getEventsHandler.searchEvents());
         //console.log("IMPLEMENT MEE!!!!!");
     });
 });
