@@ -23,8 +23,9 @@ exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {
         
     });
 
-    request(url,  (error, response, body) => {      
+    request(url,  (error, response, body) => {
         let stopId = closestStopId(latitude, longitude, JSON.parse(body));
+        return stopId;
     });
 };
 
@@ -37,10 +38,11 @@ closestStopId = (latitude, longitude, ctaJSONResponse) => {
     let closestDistance = distanceCalc.getDistance(latitude, longitude, bustimeResponse.stops[0].lat, bustimeResponse.stops[0].lon);
 
     for (let i = 1; i < length; i++){
-        let lat = bustimeResponse.stops[i].lat;
-        let long = bustimeResponse.stops[i].lon;
+        let thisStop = bustimeResponse.stops[i];
+        let lat = thisStop.lat;
+        let long = thisStop.lon;
         let thisDistance = distanceCalc.getDistance(latitude,longitude,lat,long, distanceUnit.M);
-        let thisStopId = bustimeResponse.stops[i].stpid;
+        let thisStopId = thisStop.stpid;
 
         if (thisDistance < closestDistance){
             closestDistance = thisDistance;
@@ -48,4 +50,4 @@ closestStopId = (latitude, longitude, ctaJSONResponse) => {
         }
     }
     return closestStopId;
-}
+};

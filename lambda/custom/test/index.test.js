@@ -62,7 +62,7 @@ describe('Get Bus Handler', function() {
             .reply(200, responseBuses);
     });
 
-    it('returns bus near me response', function(done) {
+    it('returns status of specific bus and stop', function(done) {
         this.timeout(3000);
 
         let parameters = {
@@ -72,9 +72,15 @@ describe('Get Bus Handler', function() {
 
         busHandler.getBusesForRouteAndStop(parameters, (alexaResponse) => {
             expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
+        });
+
+        busHandler.searchBusNearMe(parameters, alexaResponse => {
+            //TODO there's an error with the body >>         let stopId = closestStopId(latitude, longitude, JSON.parse(body));
+            expect(alexaResponse).to.equal("implement this test!");
             done();
         });
     });
+
 });
 
 describe('Get Transit Handler', function() {
