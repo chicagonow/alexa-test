@@ -4,7 +4,7 @@ const ParameterHelper = require('../../../helpers/ParameterHelper');
 
 let searchEventsNearMeTest = () => {
     let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
-    EventsHandler.searchEvents(parameters, (alexaResponse) => {
+    EventsHandler.searchEventsNearMe(parameters, (alexaResponse) => {
         console.log(alexaResponse);
     })
 };
