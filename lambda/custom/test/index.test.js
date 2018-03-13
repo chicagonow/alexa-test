@@ -9,6 +9,9 @@ const getTransitHandler = require('../handlers/transit/TransitHandler').searchTr
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
 const responseTrains = require('./response.trains');
 
+const busHandler = require('../handlers/transit/bus/BusHandler');
+const responseBuses = require('./response.buses');
+
 describe('Get Events Handler', function() {
     beforeEach(function() {
         //require(getEventsResponse);
@@ -43,6 +46,35 @@ describe('Get Events Response', function() {
         //     expect(String.isString(events)).to.equal(true);
         // });
         console.log(getEventsResponse(events));
+    });
+});
+
+describe('Get Bus Handler', function() {
+    beforeEach(function() {
+        // require(busHandler);
+        // nock('http://ctabustracker.com')
+        //     .get('/bustime/api/v2/getpredictions')
+        //     .query(true)
+        //     .reply(200, responses.buses);
+
+
+    });
+
+    it('returns bus near me response', function(done) {
+        this.timeout(3000);
+        let parameters = {
+            rt: "49",
+            stpid: "8269"
+        };
+
+        busHandler.getBusesForRouteAndStop(parameters, (alexaResponse) => {
+
+            expect(alexaResponse).to.equal("zzzzz");
+
+            done();
+        });
+
+
     });
 });
 
