@@ -17,7 +17,7 @@ const ParameterHelper = require('../../../../helpers/ParameterHelper');
 const geocoder = require('../../../../../custom/handlers/location/geocoder');
 
 /**
- * Verifies the CtaTrainHandler returns a proper alexa response with the user's location
+ * Verifies the CtaTrainHandler works properly
  */
 describe('CtaTrainHandler Tests', function() {
     // sinon test environment
