@@ -24,7 +24,7 @@ describe('Get Events Handler', function() {
         //     expect(String.isString(events)).to.equal(true);
         // });
         //console.log(getEventsHandler.searchEvents());
-        //console.log("IMPLEMENT MEE!!!!!");
+        console.log("IMPLEMENT MEE!!!!!");
     });
 });
 
