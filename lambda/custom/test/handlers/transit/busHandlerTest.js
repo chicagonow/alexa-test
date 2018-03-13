@@ -1,6 +1,6 @@
 const busHandler = require("../../../handlers/transit/bus/BusHandler");
 const alexaJson = require('../../example-alexa-json-bus.json');
-const ParameterHelper = require('../../../helpers/ParameterHelper')
+const ParameterHelper = require('../../../helpers/ParameterHelper');
 const util = require('util');
 
 exports.testBusHandler = () => {

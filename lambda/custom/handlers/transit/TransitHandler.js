@@ -42,7 +42,6 @@ exports.searchTrainNearMe = (parameters, callback) => {
  * @param {function} callback 
  */
 exports.searchBusNearMe = (parameters, callback) => {
-    console.log("TransitHandler routing to BusHandler");
     BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
         callback(alexaResponse);
     })
