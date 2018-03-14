@@ -21,8 +21,6 @@ after_success:
 #  - ask deploy -p default -t lambda #--no-wait
 #  - ask deploy -p default -t model #--no-wait
   - echo "after success on"
-  on:
-    branch: dan-CTABus-mergez
 
 deploy:
   provider: script
