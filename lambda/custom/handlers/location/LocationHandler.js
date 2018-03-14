@@ -32,7 +32,12 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
     // Call the Amazon API to get the device's location
     request(options, (error, response, body) => {
         let location = (response && response.statusCode === 200) ? JSON.parse(body) : DEFAULT_LOCATION;
-        let locationString = location.addressLine1 + ',' + location.city + ',' + location.stateOrRegion;
+
+        // Make an array of the location properties we want to send to the geocoder
+        let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
+
+        // Next line is filtering out any location properties that aren't null and joining them as a comma separated string
+        let locationString = locationProperties.filter((prop) => {return prop !== null}).join(",");
         geocoder.getLatLong(locationString, callback);
     });
 };
