@@ -2,6 +2,10 @@ language: node_js
 node_js:
   #lambda uses 6, but we need node 9 to use aws-cli and ask-cli, which deploy the alexa skill/intents, and the lambda
   - 9
+branches:
+  only:
+  - master
+  - stage
 
 cache:
   directories:
@@ -15,18 +19,7 @@ script:
   - ./deploy.sh
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm test"
-
 after_success:
-#  - ask deploy -p default -t skill #--no-wait
-#  - ask deploy -p default -t lambda #--no-wait
-#  - ask deploy -p default -t model #--no-wait
-  - echo "after success on"
-
-deploy:
-  provider: script
-  script:
-    - ask deploy -p default -t skill #--no-wait
-    - ask deploy -p default -t lambda #--no-wait
-    - ask deploy -p default -t model #--no-wait
-  on:
-    branch: master
+  - ask deploy -p default -t skill #--no-wait
+  - ask deploy -p default -t lambda #--no-wait
+  - ask deploy -p default -t model #--no-wait

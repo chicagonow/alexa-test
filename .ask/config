@@ -8,7 +8,7 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "chicago-now-dan-main"
+                "uri": "chicago-now-dev-main"
               }
             }
           }

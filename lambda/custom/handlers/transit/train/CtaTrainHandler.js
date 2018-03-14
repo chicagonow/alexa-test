@@ -9,6 +9,15 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 /**
+ * Calls the CTA api with the specified parameters
+ * @param {object} parameters 
+ * @param {function} callback 
+ */
+exports.searchTrain = (parameters, callback) => {
+    callCta(parameters, callback);
+};
+
+/**
  * Gets the nearest train station info
  * @param {object} parameters 
  * @param {function} callback 
@@ -18,7 +27,7 @@ exports.searchTrainNearMe = (parameters, callback) => {
     LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
         TrainRepository.getNearestTrainMapID(location.latitude, location.longitude, (mapID) => {
             let parameters = {
-                mapID: mapID,
+                mapid: mapID,
                 rt: ""
             };
 
@@ -37,7 +46,7 @@ let callCta = (parameters, callback) => {
         path: CTA_API_PATH,
         queryParams: {
             key: CTA_API_KEY,
-            mapid: parameters.mapID,
+            mapid: parameters.mapid,
             rt: parameters.rt,
             outputType: "JSON"
         }

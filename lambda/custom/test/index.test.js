@@ -108,10 +108,10 @@ describe('Cta Bus Handler', function() {
 
 describe('Get Transit Handler', function() {
     beforeEach(function() {
-        //require(getEventsResponse);
-        // nock('https://www.eventbriteapi.com')
-        //     .get('/v3/events/search/?location.within=1mi&location.latitude=41.878440&location.longitude=-87.625622&token=IO6EB7MM6TSCIL2TIOHC')
-        //     .reply(200, events);
+        nock('http://lapi.transitchicago.com')
+        .get('/api/1.0/ttarrivals.aspx')
+        .query(true)
+        .reply(200, responseTrains);
     });
     it('returns Transit Handler', function() {
         this.timeout(3000);
@@ -120,7 +120,7 @@ describe('Get Transit Handler', function() {
         //     //it should return an array of objects? maybe just an array of text TODO
         //     expect(String.isString(events)).to.equal(true);
         // });
-        console.log(getTransitHandler(getTransitBuilder(responseTrains)));
+        getTransitHandler({mapid: "123456", rt: ""}, (alexaResponse) => console.log(alexaResponse));
     });
 });
 

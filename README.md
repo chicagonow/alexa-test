@@ -47,30 +47,34 @@ nvm use 9
 * login to aws
 
 ####7. 
-* at this point, you could clone our alexa skill, but our repo already has the correct folder structure to do so
+* no need to clone since we have all the code structure in source control
 
-####8. simulate and test your alexa skill against a deployed lambda
+####8. create a new skill, or lambda, or both
+1st, to create a new skill, set the `skill_id` to and empty string in ``intent-service/config`
+
+`"skill_id": "",`
+
+2nd, to create a new lambda, name your endpoint.uri to whatever you'd like
+```bash
+
+"endpoint": {
+                "uri": "chicago-now-my-lambda"
+            }
+```
+3rd, run `ask deploy`.
+ 
+If a new skill or lambda, or both, are needed, they will be created, and a new `skill_id` will auto populate in the config file, but
+the lambda may not have picked it up.
+
+Go to your newly created lambda function in consol.aws.com and add a new alexa trigger with the newly created skill id. (you should only have to do this once)
+
+####9. simulate and test your alexa skill against a deployed lambda
 `ask simulate -t "ask chicago now what's the status of the diversey brown line" -l en-US`
 
-# deploy new lambda function to AWS from command line
-https://serverless.com/framework/docs/getting-started/
-
-Install `Serverless`
-```
-npm install -g serverless
-# Login to the serverless platform
-serverless login
-```
-If you'd like a new function to test, change one or all of these fields in the `serverless.yml`
-* `service` (change the value)
-* `stage` (change the value)
-* `main` (change the key)
-
-Deploy your new function:
-`serverless deploy`
-
 # run node tests
-`node -p "require('./index.js').requestTest()"`
+cd into the directory where package.json is located, and run `npm test`
+
+to run a specific exported runnable node function, `node -p "require('./index.js').theNameOfTheFunction()"`
 
 # git and sourcetree
 1. install git (comes with git-bash, or `$ brew install git` with homebrew on mac)
