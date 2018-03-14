@@ -2,7 +2,7 @@ const nock = require('nock');
 const assert = require('assert');
 const sinon = require('sinon');
 
-const alexaJson = require('../../example-alexa-json.json');
+const alexaJson = require('../../response.alexa.json');
 const responseDeviceLocation = require('../../response.deviceLocation');
 const responseEvents = require('../../response.events');
 
