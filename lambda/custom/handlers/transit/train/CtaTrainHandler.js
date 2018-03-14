@@ -46,7 +46,7 @@ let callCta = (parameters, callback) => {
         path: CTA_API_PATH,
         queryParams: {
             key: CTA_API_KEY,
-            mapid: parameters.mapID,
+            mapid: parameters.mapid,
             rt: parameters.rt,
             outputType: "JSON"
         }

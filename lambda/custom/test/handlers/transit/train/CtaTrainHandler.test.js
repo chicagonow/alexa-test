@@ -70,12 +70,11 @@ describe('CtaTrainHandler Tests', function() {
 
     // Tests the searchTrain method
     it('searchTrain: returns correct Alexa Response', function(done) {
-        // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the 
-        // callback, with that location object instead of the location retrieved from the geocode library
-        let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
-        fakeGeocoder.callsArgWith(1, {latitude: -10, longitude: -81.7});
-
-        let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
+       let parameters = {
+           mapid: "40530",
+           rt: "Brn"
+       }
+        
         TrainHandler.searchTrain(parameters, (alexaResponse) => {
             assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
             done();
