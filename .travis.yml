@@ -4,7 +4,11 @@ node_js:
   - 9
 
 dan-CTABus-merge:
-  - echo "hihi"
+  script:
+    - echo "hihi"
+fakedan-CTABus-merge:
+  script:
+    - echo "ohno"
 
 cache:
   directories:
