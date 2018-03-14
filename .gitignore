@@ -1,6 +1,7 @@
 **/node_modules
 **/.idea
 **/*.iml
+**/package-lock.json
 .serverless
 *.zip
 .DS_Store

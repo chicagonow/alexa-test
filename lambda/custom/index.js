@@ -2,6 +2,7 @@ const Alexa = require('alexa-sdk');
 const TransitHandler = require('./handlers/transit/TransitHandler');
 const EventsHandler = require('./handlers/events/EventsHandler');
 const ParameterHelper = require('./helpers/ParameterHelper');
+const BusHandler = require('./handlers/transit/bus/BusHandler');
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
@@ -21,9 +22,18 @@ const handlers = {
         });
     },
     'CtaBusIntent': function () {
-        // TODO: Build proper parameters object
+        let transitSlot = this.event.request.intent.slots.transitMode.value;
+        if (transitSlot === "bus") {
+            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+            parameters.rt = this.event.request.intent.slots.busStop.value;
+            parameters.dir = this.event.request.intent.slots.busDirection.value;
 
-        this.emit(':tell', "implement bus intent");
+            BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
+                this.emit(':tell', alexaResponse);
+            }); 
+        } else {
+            this.emit(':tell', "implement bus location intent");
+        }       
     },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;
