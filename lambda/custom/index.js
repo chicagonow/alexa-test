@@ -47,11 +47,10 @@ const handlers = {
         }       
     },
 	'EventLocationIntent': function() {		
-		EventsHandler.searchEvents((alexaResponse,error,response) => {				
-			this.emit(':tell', alexaResponse);			
-			console.log('error:',error);
-			console.log('statusCode:', response && response.statusCode);
-		 });		
+        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+        EventsHandler.searchEvents(parameters, (alexaResponse) => {
+            this.emit(':tell', alexaResponse);
+        });
 	},
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
