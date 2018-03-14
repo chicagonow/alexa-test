@@ -8,11 +8,11 @@ const util = require('util');
 
 const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
-const CTABUS_API_PATH = '/bustime/api/v2/getpredictions';
+const CTABUS_API_ROUTE_AND_STOP_PATH = '/bustime/api/v2/getpredictions';
 
 exports.getBusesForRouteAndStop = (parameters, callback) => {
     let url = buildUrl(CTABUS_API_DOMAIN, {
-        path: CTABUS_API_PATH,
+        path: CTABUS_API_ROUTE_AND_STOP_PATH,
         queryParams: {
             key: CTABUS_API_KEY,
             rt: parameters.rt,

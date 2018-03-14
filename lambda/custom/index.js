@@ -27,6 +27,7 @@ const handlers = {
             let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
             parameters.rt = this.event.request.intent.slots.busStop.value;
             parameters.dir = this.event.request.intent.slots.busDirection.value;
+
             BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
                 this.emit(':tell', alexaResponse);
             }); 

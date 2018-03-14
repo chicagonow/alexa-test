@@ -21,15 +21,14 @@ exports.getDistance = function (lat1, lon1, lat2, lon2, unit) {
     dist = dist * 60 * 1.1515;
 
     switch (unit) {
-        case Unit.K:
+        case this.Unit.K:
             dist *= 1.609344;
             break;
-        case Unit.N:
+        case this.Unit.N:
             dist *= 0.8684;
             break;
-        case Unit.M:
+        case this.Unit.M:
         default:
-            break;
     }
 
     return dist;
