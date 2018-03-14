@@ -1,13 +1,14 @@
 // import test stuff
 const nock = require('nock');
 const assert = require('assert');
+const sinon = require('sinon');
 
 // import test data
 const locationString = require('../../response.locationString');
 const responseGeo = require('../../response.latlong');
 
 // import files we need to test
-const geoCoder = require('../../../handlers/location/geocoder');
+const geocoder = require('../../../handlers/location/geocoder');
 
 /**
  * Verifies the CtaTrainHandler returns a proper alexa response with the user's location
@@ -15,34 +16,24 @@ const geoCoder = require('../../../handlers/location/geocoder');
 describe('geocoder tests', () => {
     beforeEach(() => {
 
-        // Mock Device Location request
-        // let deviceId = alexaJson.context.System.device.deviceId;
-        // nock('https://api.amazonalexa.com')
-        // .get('/v1/devices/' + deviceId + '/settings/address')        
+        // nock('https://www.mapquestapi.com')
+        // .get('/geocoding/v1/address?*')
         // .query(true)
-        // .reply(200, responseDeviceLocation);
-
-        // Mock Lat/Long location
-        // TODO: MOCK GEOCODE
-
-        // Mock CTA Train Repository call
-        // nock('https://data.cityofchicago.org')
-        // .get('/resource/8mj8-j3c4.json')
-        // .query(true)
-        // .reply(200, responseRepoTrains);
-
-        // Mock CTA API call
-        nock('https://www.mapquestapi.com')
-        .get('/geocoding/v1/address?*')
-        .query(true)
-        .reply(200, responseGeo);
+        // .reply(200, responseGeo);
         
+        sandbox = sinon.sandbox.create();
+
     });
 
+    afterEach(function() {
+        sandbox.restore();
+    })
+
     it('returns geocode lat long', function(done) {
-        //let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
-        geoCoder.getLatLong(locationString, (location) => {
-            console.log(responseGeo);
+        let mockGeoCoder = sandbox.stub(geocoder, 'geocode');
+        mockGeoCoder.callsArgWith(1, locationString);
+        
+        geoCoder.geocode(locationString, (location) => {
             assert.deepEqual(responseGeo, {latitude: -10, longitude:-20});
             done();
         });
