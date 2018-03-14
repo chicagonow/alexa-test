@@ -3,13 +3,6 @@ node_js:
   #lambda uses 6, but we need node 9 to use aws-cli and ask-cli, which deploy the alexa skill/intents, and the lambda
   - 9
 
-dan-CTABus-merge:
-  script:
-    - echo "hihi"
-fakedan-CTABus-merge:
-  script:
-    - echo "ohno"
-
 cache:
   directories:
     - node_modules
@@ -23,6 +16,14 @@ script:
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm test"
 
+after_success:
+#  - ask deploy -p default -t skill #--no-wait
+#  - ask deploy -p default -t lambda #--no-wait
+#  - ask deploy -p default -t model #--no-wait
+  - echo "after success on"
+  on:
+    branch: dan-CTABus-mergez
+
 deploy:
   provider: script
   script:
@@ -30,4 +31,4 @@ deploy:
     - ask deploy -p default -t lambda #--no-wait
     - ask deploy -p default -t model #--no-wait
   on:
-    branch: dan-CTABus-mergeNOT
+    branch: master
