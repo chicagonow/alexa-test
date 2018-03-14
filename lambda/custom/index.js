@@ -32,7 +32,7 @@ const handlers = {
                 this.emit(':tell', alexaResponse);
             }); 
         } else {
-            this.emit(':tell', "implement bus location intent");
+            this.emit(':tell', "implement bus stop intent");
         }       
     },
     'CtaLocationIntent': function () {     
@@ -43,12 +43,12 @@ const handlers = {
                 this.emit(':tell', alexaResponse);
             }); 
         } else {
-            this.emit(':tell', "implement bus location intent");
+            this.emit(':tell', "implement nearest bus location intent");
         }       
     },
 	'EventLocationIntent': function() {		
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-        EventsHandler.searchEvents(parameters, (alexaResponse) => {
+        EventsHandler.searchEventsNearMe(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
         });
 	},
