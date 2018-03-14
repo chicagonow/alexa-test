@@ -8,7 +8,7 @@ const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_API_PATH = '/v3/events/search/';
 
-exports.searchEvents = (parameters, callback) => {
+exports.searchEventsNearMe = (parameters, callback) => {
 
 	LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
 		searchEventbrite(location.latitude, location.longitude, callback);
