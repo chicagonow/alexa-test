@@ -21,13 +21,13 @@ exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {
     });
 
     request(url,  (error, response, body) => {
-        let stopId = closestStopId(latitude, longitude, JSON.parse(body));
+        let stopId = this.closestStopId(latitude, longitude, JSON.parse(body));
         callback(stopId);
     });
 };
 
 /* take JSON response from API, return nearest stopID*/
-closestStopId = (latitude, longitude, ctaBusStopResponse) => {
+exports.closestStopId = (latitude, longitude, ctaBusStopResponse) => {
     const bustimeResponse = ctaBusStopResponse["bustime-response"];
 
     let length = Object.keys(bustimeResponse.stops).length;

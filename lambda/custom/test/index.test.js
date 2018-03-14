@@ -52,7 +52,9 @@ describe('Cta Bus Handler', function() {
     const SOUTHBOUND_DIRECTION = "Southbound";
 
     const busHandler = require('../handlers/transit/bus/BusHandler');
-    const responseBuses = require('./response.buses');
+    const busResponse = require('./response.buses');
+    const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
+
 
     beforeEach(function() {
 
@@ -60,12 +62,12 @@ describe('Cta Bus Handler', function() {
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query(true)
-            .reply(200, responseBuses);
+            .reply(200, busResponse);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
             .query(true)
-            .reply(200, responseBuses);
+            .reply(200, busResponse);
     });
 
     it('returns status of specific bus and stop', (done) => {
@@ -94,7 +96,14 @@ describe('Cta Bus Handler', function() {
             expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
             done();
         });
-    })
+    });
+
+    it('calculates the closest bus stop id', done => {
+        let closestStopId = ctaBusRepository.closestStopId(41.775450009211, -87.683650731711, busResponse);
+        expect(closestStopId).to.equal("14857");
+
+        done();
+    });
 
 });
 
