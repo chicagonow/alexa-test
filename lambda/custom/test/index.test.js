@@ -46,6 +46,66 @@ describe('Get Events Response', function() {
     });
 });
 
+describe('Cta Bus Handler', function() {
+    const WESTERN_BUS_ROUTE = "49";
+    const WESTERN_BUS_STOP_ID = "8269";
+    const SOUTHBOUND_DIRECTION = "Southbound";
+
+    const busHandler = require('../handlers/transit/bus/BusHandler');
+    const busResponse = require('./response.buses');
+    const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
+
+
+    beforeEach(function() {
+
+        // require(busHandler);
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query(true)
+            .reply(200, busResponse);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getstops')
+            .query(true)
+            .reply(200, busResponse);
+    });
+
+    it('returns status of specific bus and stop', (done) => {
+        this.timeout(3000);
+
+        let parameters = {
+            rt: WESTERN_BUS_ROUTE,
+            stpid: WESTERN_BUS_STOP_ID
+        };
+
+        busHandler.getBusesForRouteAndStop(parameters, (alexaResponse) => {
+            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
+            done();
+        });
+
+    });
+
+    it('return status of nearest bus stop', (done) => {
+        this.timeout(3000);
+        let parameters = {
+            rt: WESTERN_BUS_ROUTE,
+            dir: SOUTHBOUND_DIRECTION
+        };
+
+        busHandler.searchBusNearMe(parameters, alexaResponse => {
+            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
+            done();
+        });
+    });
+
+    it('calculates the closest bus stop id', done => {
+        let closestStopId = ctaBusRepository.closestStopId(41.775450009211, -87.683650731711, busResponse);
+        expect(closestStopId).to.equal("14857");
+        done();
+    });
+
+});
+
 describe('Get Transit Handler', function() {
     beforeEach(function() {
         nock('http://lapi.transitchicago.com')
