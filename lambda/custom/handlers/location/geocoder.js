@@ -9,10 +9,10 @@ var options = {
   formatter: null         // 'gpx', 'string', ...
 };
 
-var NodeGeocoder = NodeGeocoder(options);
+var geocoder = NodeGeocoder(options);
 
 exports.getLatLong = (locationString, callback) => {
-  NodeGeocoder.geocode(locationString, function (err, res) {
+  geocoder.geocode(locationString, function (err, res) {
     var jsonObject = res[0];
     let location = {
       latitude: jsonObject.latitude,
