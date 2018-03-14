@@ -27,7 +27,7 @@ exports.searchTrainNearMe = (parameters, callback) => {
     LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
         TrainRepository.getNearestTrainMapID(location.latitude, location.longitude, (mapID) => {
             let parameters = {
-                mapID: mapID,
+                mapid: mapID,
                 rt: ""
             };
 
