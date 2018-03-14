@@ -101,7 +101,6 @@ describe('Cta Bus Handler', function() {
     it('calculates the closest bus stop id', done => {
         let closestStopId = ctaBusRepository.closestStopId(41.775450009211, -87.683650731711, busResponse);
         expect(closestStopId).to.equal("14857");
-
         done();
     });
 
