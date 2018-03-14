@@ -6,6 +6,6 @@ exports.getLocationParameters = (systemObject) => {
     return {
         apiEndpoint: systemObject.apiEndpoint,
         token: systemObject.apiAccessToken,
-        deviceID: systemObject.deviceId
+        deviceID: systemObject.device.deviceId
     };
 };
