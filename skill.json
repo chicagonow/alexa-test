@@ -12,7 +12,7 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "sourceDir": "lambda/custom/lib"
+          "sourceDir": "lambda/custom/target"
         }
       }
     },

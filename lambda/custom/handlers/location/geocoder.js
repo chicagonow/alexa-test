@@ -13,7 +13,7 @@ var geocoder = NodeGeocoder(options);
 
 exports.getLatLong = (locationString, callback) => {
   geocoder.geocode(locationString, function (err, res) {
-    var jsonObject = res[0];
+    let jsonObject = res[0];
     let location = {
       latitude: jsonObject.latitude,
       longitude: jsonObject.longitude
@@ -24,7 +24,7 @@ exports.getLatLong = (locationString, callback) => {
 
 exports.asyncGetLatLong = async function asyncGetLatLong(locationString){
   let response = await geocoder.geocode(locationString);
-  jsonObject = response[0];
+  let jsonObject = response[0];
   let location = {
     latitude: jsonObject.latitude,
     longitude: jsonObject.longitude

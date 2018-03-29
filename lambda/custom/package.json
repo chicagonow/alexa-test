@@ -23,8 +23,9 @@
     "virtual-alexa": "^0.5.1"
   },
   "scripts": {
-    "build": "babel . --ignore node_modules,lib --out-dir lib",
-    "test": "node ./node_modules/mocha/bin/mocha test/**/*.test.js"
+    "build": "babel . --ignore node_modules,target --out-dir target --copy-files && cp -r ./node_modules ./target/node_modules",
+    "test": "node ./node_modules/mocha/bin/mocha test/**/*.js",
+    "testTranspile": "node ./target/node_modules/mocha/bin/mocha target/test/**/*Test.js"
   },
   "repository": {
     "type": "git",
