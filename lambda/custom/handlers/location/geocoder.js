@@ -21,3 +21,13 @@ exports.getLatLong = (locationString, callback) => {
     callback && callback(location);
   })
 }
+
+exports.asyncGetLatLong = async function asyncGetLatLong(locationString){
+  let response = await geocoder.geocode(locationString);
+  jsonObject = response[0];
+  let location = {
+    latitude: jsonObject.latitude,
+    longitude: jsonObject.longitude
+  }
+  return location;
+}

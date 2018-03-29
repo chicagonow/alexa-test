@@ -43,5 +43,18 @@ describe('LocationHandler tests', () => {
             done();
         });
     });
+
+    it('Tests that asyncGetLocation returns lat long', async function(){
+        let mockGeoCoder = sandbox.stub(geocoder, 'asyncGetLatLong')
+            .returns({latitude: -10, longitude: -20});
+
+        
+        let apiEndpoint = alexaJson.context.System.apiEndpoint;
+        let apiAccessToken = alexaJson.context.System.apiAccessToken;
+        let funcDeviceId = alexaJson.context.System.device.deviceId;
+
+        let locationObj = await locationHandler.asyncGetLocation(apiEndpoint, apiAccessToken, funcDeviceId);
+        assert.deepEqual(locationObj,{ latitude: -10, longitude: -20});
+    })
 });
 

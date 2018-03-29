@@ -1,4 +1,5 @@
 const request = require('request');
+const asyncRequest = require('request-promise');
 const API_LOCATION_QUERY = "/v1/devices/{deviceID}/settings/address";
 const geocoder = require('./geocoder');
 
@@ -41,3 +42,30 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
         geocoder.getLatLong(locationString, callback);
     });
 };
+
+exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, deviceId){
+    // build the api url to get the location
+    let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
+
+    var options = {
+        url: url,
+        headers: {
+            'Authorization': "Bearer " + token
+        },
+        resolveWithFullResponse: true
+    };
+
+    
+    let response = await asyncRequest(options);
+    let location = (response.statusCode === 200) ? JSON.parse(response.body) : DEFAULT_LOCATION;
+
+    // Make an array of the location properties we want to send to the geocoder
+    let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
+    
+    // Next line is filtering out any location properties that aren't null and joining them as a comma separated string
+    let locationString = locationProperties.filter((prop) => {return prop !== null}).join(",");
+
+    let locationObj = await geocoder.asyncGetLatLong(locationString);
+
+    return locationObj;
+}
