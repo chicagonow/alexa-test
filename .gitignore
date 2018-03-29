@@ -5,4 +5,4 @@
 .serverless
 *.zip
 .DS_Store
-.vs
+**/*.vs*
