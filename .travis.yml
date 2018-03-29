@@ -20,5 +20,7 @@ script:
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm test"
+  - sh -c "cp ./lambda/custom/node_modules ./lambda/custom/lib"
+  - sh -c "cp ./lambda/custom/package.json ./lambda/custom/lib"
 after_success:
   - ask deploy -p default
