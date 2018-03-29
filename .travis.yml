@@ -18,6 +18,7 @@ before_install:
 script:
   - ./deploy.sh
   - sh -c "cd ./lambda/custom/ && npm install"
+  - sh -c "cd ./lambda/custom/ && npm build"
   - sh -c "cd ./lambda/custom/ && npm test"
 after_success:
   - ask deploy -p default
