@@ -1,8 +1,9 @@
 **/node_modules
+**/target/
 **/.idea
 **/*.iml
 **/package-lock.json
 .serverless
 *.zip
 .DS_Store
-.vs
+**/*.vs*

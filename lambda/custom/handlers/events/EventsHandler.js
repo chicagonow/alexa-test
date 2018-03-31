@@ -1,7 +1,8 @@
 const request = require('request');
+const asyncRequest = require('request-promise');
 const buildUrl = require('build-url');
 const EventsResponseBuilder = require('./EventsResponseBuilder');
-const LocationHandler = require('../location/LocationHandler')
+const LocationHandler = require('../location/LocationHandler');
 
 //used sample token,replace later. 
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
@@ -33,5 +34,23 @@ let searchEventbrite = (latitude, longitude, callback) => {
 		callback && callback(alexaResponse, error, response);
 	});
 };
+
+//return Alexa response string
+exports.asyncGetEventsNearUserLocation = async function asyncGetEventsNearUserLocation(latitude, longitude){
+	const qp = {};
+	qp[encodeURIComponent('token')] = AUTH_TOKEN;
+	qp[encodeURIComponent('location.within')] = '1mi';
+	qp[encodeURIComponent('location.latitude')] = latitude;
+	qp[encodeURIComponent('location.longitude')] = longitude;
+
+	let url = buildUrl(EVENTBRITE_API_DOMAIN, {
+		path: EVENTBRITE_API_PATH,
+		queryParams: qp
+	});
+
+	let body = await asyncRequest(url);
+	let alexaResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
+	return alexaResponse;
+}
 
 require('make-runnable');

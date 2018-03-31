@@ -1,19 +1,19 @@
 exports.buildAlexaResponse = (jsonObject) => {
-    var msg = ""
-    var stationName = jsonObject.ctatt.eta[0].staNm;
-    var stopDestination = jsonObject.ctatt.eta[0].stpDe;
-    var routeName = jsonObject.ctatt.eta[0].rt;
-    var arrivalTime = utcToString(jsonObject.ctatt.eta[0].arrT);
+    let msg = "";
+    let stationName = jsonObject.ctatt.eta[0].staNm;
+    let stopDestination = jsonObject.ctatt.eta[0].stpDe;
+    let routeName = jsonObject.ctatt.eta[0].rt;
+    let arrivalTime = utcToString(jsonObject.ctatt.eta[0].arrT);
     msg = msg + "The " + stationName + " " + routeName + " "
              + stopDestination + " will arrive at " + arrivalTime; 
     return msg;
 };
 
-utcToString = (dateObj) => {
-    var d = new Date(dateObj);
-    var hour = d.getHours() == 0 ? 12 : (d.getHours() > 12 ? d.getHours() - 12 : d.getHours());
-    var min = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
-    var ampm = d.getHours() < 12 ? 'AM' : 'PM';
-    var time = hour + ':' + min + ' ' + ampm;
+let utcToString = (dateObj) => {
+    let d = new Date(dateObj);
+    let hour = d.getHours() == 0 ? 12 : (d.getHours() > 12 ? d.getHours() - 12 : d.getHours());
+    let min = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+    let ampm = d.getHours() < 12 ? 'AM' : 'PM';
+    let time = hour + ':' + min + ' ' + ampm;
     return time;
-}
+};

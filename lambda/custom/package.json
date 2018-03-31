@@ -9,10 +9,13 @@
     "make-runnable": "^1.3.x",
     "node-geocoder": "^3.22.x",
     "request": "^2.83.x",
+    "request-promise": "^4.2.2",
     "sinon": "^4.4.3",
     "sprintf-js": "^1.1.x"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "chia": "0.0.1",
     "mocha": "^5.0.4",
@@ -20,7 +23,9 @@
     "virtual-alexa": "^0.5.1"
   },
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha test/**/*.test.js"
+    "build": "babel . --ignore node_modules,target --out-dir target --copy-files && cp -r ./node_modules ./target/node_modules",
+    "test": "node ./node_modules/mocha/bin/mocha test/**/*.js",
+    "testTranspile": "node ./target/node_modules/mocha/bin/mocha target/test/**/*Test.js"
   },
   "repository": {
     "type": "git",

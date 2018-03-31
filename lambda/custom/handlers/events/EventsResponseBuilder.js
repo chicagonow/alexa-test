@@ -13,7 +13,7 @@ exports.buildAlexaResponse = (jsonObject) => {
     return msg;
 };
 
-buildEventArray = (events) => {
+let buildEventArray = (events) => {
     let eventsArray = [];
     for (let index = 0; index < NUMBER_OF_EVENTS; index++) {
         eventsArray.push(events[index].name.text);

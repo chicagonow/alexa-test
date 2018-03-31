@@ -48,4 +48,10 @@ describe('EventsHandler Tests', function() {
             done();
         });
     });
+
+    // Tests the searchEventsNearMe method
+    it('searchEventsNearMe: returns correct Alexa Response', async function(){
+        let alexaResponse = await EventsHandler.asyncGetEventsNearUserLocation(-10, -81.7);
+        assert.equal(alexaResponse, 'Here are 3 events going on in Chicago <break time="1s"/>Martin Trivia Night (FREE ENTRY), 2018 KIDFITSTRONG FITNESS CHALLENGE-CHICAGO , Redesigning the System: How Artists, Policymakers, and Practitioners are Shaping Criminal Justice Reform');
+    });
 });
