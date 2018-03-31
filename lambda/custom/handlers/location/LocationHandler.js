@@ -43,6 +43,13 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
     });
 };
 
+/**
+ * Returns an address object
+ * @param {string} apiEndpoint 
+ * @param {string} token 
+ * @param {string} deviceId 
+ * @param {function} callback 
+ */
 exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, deviceId){
     // build the api url to get the location
     let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);

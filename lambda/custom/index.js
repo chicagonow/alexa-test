@@ -51,10 +51,6 @@ const handlers = {
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let alexaResponse = await IntentController.getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID);
         this.emit(':tell', alexaResponse);
-        /*
-        EventsHandler.searchEventsNearMe(parameters, (alexaResponse) => {
-            this.emit(':tell', alexaResponse);
-        });*/
 	},
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');

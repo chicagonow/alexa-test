@@ -36,8 +36,7 @@ describe('IntentController Tests', function() {
         sandbox.restore();
     });
 
-    // Tests the searchEventsNearMe method
-    it('In: returns correct Alexa Response', async function(){
+    it('Test IntentController.getEventsWithUserLocation: return 3 events in string', async function(){
 
         let apiEndpoint = alexaJson.context.System.apiEndpoint;
         let apiAccessToken = alexaJson.context.System.apiAccessToken;

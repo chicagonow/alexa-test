@@ -35,6 +35,7 @@ let searchEventbrite = (latitude, longitude, callback) => {
 	});
 };
 
+//return Alexa response string
 exports.asyncGetEventsNearUserLocation = async function asyncGetEventsNearUserLocation(latitude, longitude){
 	const qp = {};
 	qp[encodeURIComponent('token')] = AUTH_TOKEN;
