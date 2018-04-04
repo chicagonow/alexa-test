@@ -3,7 +3,7 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "name": "chicago-now-{BRANCH}"
+          "name": "ChicagoNow-stage"
         }
       },
       "isAvailableWorldwide": true,

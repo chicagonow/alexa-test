@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "babel . --ignore node_modules,target --out-dir target --copy-files && cp -r ./node_modules ./target/node_modules",
-    "test": "node ./node_modules/mocha/bin/mocha test/**/*.js",
+    "test": "node ./node_modules/mocha/bin/mocha test/**/*Test.js",
     "testTranspile": "node ./target/node_modules/mocha/bin/mocha target/test/**/*Test.js"
   },
   "repository": {

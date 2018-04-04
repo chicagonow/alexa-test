@@ -12,15 +12,21 @@ cache:
     - node_modules
 
 before_install:
-  - chmod +x deploy.sh
+  - chmod +x upateAskCredentials.sh
+  - chmod +x resolveSkillAndLambdaVariables.sh
   - npm install -g ask-cli
 
 script:
-  - ./deploy.sh
+  - ./upateAskCredentials.sh
   - sh -c "cd ./lambda/custom/ && npm install"
   - nvm use 6
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
+  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 after_success:
   - nvm use 9
-  - ask deploy -p default
+  - ask deploy -p default -t skill
+  - ask deploy -p default -t model --no-wait
+  - ask deploy -p default -t lambda --no-wait
+

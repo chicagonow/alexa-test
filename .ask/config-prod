@@ -1,14 +1,14 @@
 {
   "deploy_settings": {
     "default": {
-      "skill_id": "",
+      "skill_id": "amzn1.ask.skill.ca83748e-4ae7-4486-8021-d1d13ede9d60",
       "was_cloned": false,
       "merge": {
         "manifest": {
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "chicago-now-dev-{BRANCH}"
+                "uri": "chicago-now-prod"
               }
             }
           }
