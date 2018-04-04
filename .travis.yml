@@ -22,7 +22,10 @@ script:
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
   - ./upateAskCredentials.sh
+  - BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   - ./resolveSkillAndLambdaVariables.sh
+  -
 after_success:
   - nvm use 9
   - ask deploy -p default -t skill
