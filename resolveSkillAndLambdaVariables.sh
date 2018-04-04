@@ -13,7 +13,6 @@ then
     mv .ask/config-prod .ask/config
     mv skill-prod.json skill.json
 else
-then
     sed -i '' s/{BRANCH}/${BRANCH}/g .ask/config
     sed -i '' s/{BRANCH}/${BRANCH}/g skill.json
 fi
