@@ -4,12 +4,10 @@
 BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 
-if [ "$BRANCH" == "stage" ]
-then
+if [ "$BRANCH" == "stage" ]; then
     mv .ask/config-stage .ask/config
     mv skill-stage.json skill.json
-elif [ "$BRANCH" == "master" ]
-then
+elif [ "$BRANCH" == "master" ]; then
     mv .ask/config-prod .ask/config
     mv skill-prod.json skill.json
 else
