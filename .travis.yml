@@ -6,6 +6,7 @@ branches:
   only:
   - master
   - stage
+  - asyncTrainStatus
 
 cache:
   directories:
