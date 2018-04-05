@@ -54,45 +54,53 @@ describe('CtaTrainHandler Tests', function() {
         sandbox.restore();
     });
 
-    // Tests the searchTrainNearMe method
-    it('searchTrainNearMe: returns correct Alexa Response', function(done) {
-        // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the 
-        // callback, with that location object instead of the location retrieved from the geocode library
-        let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
-        fakeGeocoder.callsArgWith(1, {latitude: -10, longitude: -81.7});
+    describe("searchTrainNearMe", function () {
+        it('returns correct Alexa Response', function (done) {
+            // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the
+            // callback, with that location object instead of the location retrieved from the geocode library
+            let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
+            fakeGeocoder.callsArgWith(1, {latitude: -10, longitude: -81.7});
 
-        let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
-        TrainHandler.searchTrainNearMe(parameters, (alexaResponse) => {
-            assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
-            done();
+            let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
+            TrainHandler.searchTrainNearMe(parameters, (alexaResponse) => {
+                assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+                done();
+            });
+        });
+
+    });
+
+    describe("searchTrain", function () {
+        it('returns correct Alexa Response', function (done) {
+            let parameters = {
+                mapid: "40530",
+                rt: "Brn"
+            };
+
+            TrainHandler.searchTrain(parameters, (alexaResponse) => {
+                assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+                done();
+            });
         });
     });
 
-    // Tests the searchTrain method
-    it('searchTrain: returns correct Alexa Response', function(done) {
-       let parameters = {
-           mapid: "40530",
-           rt: "Brn"
-       }
-        
-        TrainHandler.searchTrain(parameters, (alexaResponse) => {
-            assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+    describe("asyncCallCta", function () {
+        it('builds the correct url', function(done) {
+            assert.fail("IMPLEMENT ME");
+
+        });
+
+        it('returns correct Alexa Response', function(done) {
+            let ctaTrainParameters = {
+                mapid: "40530",
+                rt: "Brn"
+            };
+
+            let actualAlexaTrainStatusResponse = TrainHandler.asyncCallCta(ctaTrainParameters)
+            let expectedAlexaResponse = "The Diversey Brn Service toward Loop will arrive at 9:55 PM";
+            assert.equal(actualAlexaTrainStatusResponse, expectedAlexaResponse);
             done();
+
         });
     });
-
-    // Tests the asyncCallCta method
-    it('asyncCallCta: returns correct Alexa Response', function(done) {
-        let ctaTrainParameters = {
-            mapid: "40530",
-            rt: "Brn"
-        }
-        
-      let actualAlexaTrainStatusResponse = TrainHandler.asyncCallCta(ctaTrainParameters)
-      let expectedAlexaResponse = "zz";
-      assert.equal(actualAlexaTrainStatusResponse, expectedAlexaResponse);
-      done();
-        
-   });
-
 });
