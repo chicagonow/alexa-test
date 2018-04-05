@@ -19,7 +19,7 @@ const handlers = {
         };
 
         let alexaTrainStatusResponse = IntentController.getStatusOfTrainStation(ctaTrainParameters);
-        this.emit(':tell', alexaTrainStatusResponse);
+        this.emit(':tell', "HIHIHIHIHHIH");
         // TransitHandler.searchTransit(ctaTrainParameters, (alexaResponse) => {
         //     this.emit(':tell', alexaResponse);
         // });
