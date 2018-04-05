@@ -23,7 +23,7 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
     // build the api url to get the location
     let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
 
-    var options = {
+    let options = {
         url: url,
         headers: {
             'Authorization': "Bearer " + token
@@ -54,7 +54,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     // build the api url to get the location
     let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
 
-    var options = {
+    let options = {
         url: url,
         headers: {
             'Authorization': "Bearer " + token
@@ -75,4 +75,4 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     let locationObj = await geocoder.asyncGetLatLong(locationString);
 
     return locationObj;
-}
+};

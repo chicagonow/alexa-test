@@ -3,7 +3,7 @@ const NUMBER_OF_EVENTS = 3;
 exports.buildAlexaResponse = (jsonObject) => {    
     let eventsArray = buildEventArray(jsonObject.events);
     // set prefix
-    var msg = "Here are " + NUMBER_OF_EVENTS + " events going on in Chicago ";
+    let msg = "Here are " + NUMBER_OF_EVENTS + " events going on in Chicago ";
 
     // add a break
     msg += "<break time=\"1s\"/>";

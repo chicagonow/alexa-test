@@ -8,12 +8,12 @@ const responseEvents = require('../../response.events');
 
 
 const EventsHandler = require('../../../handlers/events/EventsHandler');
-const ParameterHelper = require('../../../helpers/ParameterHelper')
+const ParameterHelper = require('../../../helpers/ParameterHelper');
 
 const geocoder = require('../../../handlers/location/geocoder');
 
 describe('EventsHandler Tests', function() {
-    var sandbox;
+    let sandbox;
 
     beforeEach(function() {
 

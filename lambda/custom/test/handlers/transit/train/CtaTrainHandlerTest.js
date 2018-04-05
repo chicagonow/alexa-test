@@ -14,38 +14,38 @@ const TrainHandler = require('../../../../handlers/transit/train/CtaTrainHandler
 const ParameterHelper = require('../../../../helpers/ParameterHelper');
 
 // Geocoder we need to mock
-const geocoder = require('./../../../../handlers/location/geocoder');
+const geocoder = require('../../../../handlers/location/geocoder');
 
 /**
  * Verifies the CtaTrainHandler works properly
  */
 describe('CtaTrainHandler Tests', function() {
     // sinon test environment
-    var sandbox;
+    let sandbox;
 
     beforeEach(function() {
 
         // Mock Device Location request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
-        .get('/v1/devices/' + deviceId + '/settings/address')        
-        .query(true)
-        .reply(200, responseDeviceLocation);
+            .get('/v1/devices/' + deviceId + '/settings/address')
+            .query(true)
+            .reply(200, responseDeviceLocation);
 
         // Initialize the sandbox for sinon testing
         sandbox = sinon.sandbox.create();        
 
         // Mock CTA Train Repository call
         nock('https://data.cityofchicago.org')
-        .get('/resource/8mj8-j3c4.json')
-        .query(true)
-        .reply(200, responseRepoTrains);
+            .get('/resource/8mj8-j3c4.json')
+            .query(true)
+            .reply(200, responseRepoTrains);
 
         // Mock CTA API call
         nock('http://lapi.transitchicago.com')
-        .get('/api/1.0/ttarrivals.aspx')
-        .query(true)
-        .reply(200, responseTrains);
+            .get('/api/1.0/ttarrivals.aspx')
+            .query(true)
+            .reply(200, responseTrains);
         
     });
 
@@ -73,7 +73,7 @@ describe('CtaTrainHandler Tests', function() {
        let parameters = {
            mapid: "40530",
            rt: "Brn"
-       }
+       };
         
         TrainHandler.searchTrain(parameters, (alexaResponse) => {
             assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");

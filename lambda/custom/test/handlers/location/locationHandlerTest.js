@@ -12,9 +12,8 @@ const locationHandler = require("../../../handlers/location/LocationHandler");
 const geocoder = require('../../../handlers/location/geocoder');
 
 describe('LocationHandler tests', () => {
-    // sinon test environment
-    var sandbox;
-    
+    let sandbox;
+
     beforeEach(() => {
 
         // Mock Device Location request
