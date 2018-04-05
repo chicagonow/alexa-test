@@ -1,4 +1,5 @@
 const request = require('request');
+const asyncRequest = require('request-promise');
 const buildUrl = require('build-url');
 const BusResponseBuilder = require('./BusResponseBuilder');
 const LocationHandler = require('../../location/LocationHandler');
@@ -38,4 +39,28 @@ exports.searchBusNearMe = (parameters, callback) => {
             this.getBusesForRouteAndStop(parameters, callback);
         });
     });    
+};
+
+exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude){
+    let stopId = await BusRepository.asyncGetStopIdWithLocation(route, direction, latitude, longitude);
+    let alexaResponse = await asyncGetBusesForRouteAndStop(route, stopId);
+    return alexaResponse;
+}
+
+// take route, stopId, return String Alexa Response
+exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndStop(route, stopId){
+    let url = buildUrl(CTABUS_API_DOMAIN, {
+        path: CTABUS_API_ROUTE_AND_STOP_PATH,
+        queryParams: {
+            key: CTABUS_API_KEY,
+            rt: route,
+            stpid: stopId,
+            format: "json"
+        }
+        
+    });
+
+    let body = asyncRequest(url);
+    let alexaResponse = BusResponseBuilder.buildAlexaResponse(JSON.parse(body));
+    return alexaResponse;
 };

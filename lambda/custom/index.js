@@ -24,6 +24,12 @@ const handlers = {
     },
     'CtaBusIntent': function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
+        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+        let route = this.event.request.intent.slots.busStop.value;
+        let direction = this.event.request.intent.slots.busDirection.value;
+        let alexaResponse = await IntentController.getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        this.emit(':tell', alexaResponse);
+        /*
         if (transitSlot === "bus") {
             let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
             parameters.rt = this.event.request.intent.slots.busStop.value;
@@ -34,7 +40,8 @@ const handlers = {
             }); 
         } else {
             this.emit(':tell', "implement bus stop intent");
-        }       
+        }    
+        */   
     },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;
