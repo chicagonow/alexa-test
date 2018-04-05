@@ -77,4 +77,4 @@ exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters){
     let alexaTrainStatusResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
     // return alexaTrainStatusResponse;
     return "hi";
-}
+};

@@ -7,9 +7,9 @@ exports.getEventsWithUserLocation = async function getEventsWithUserLocation(api
     let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID);
     let alexaResponse = await EventsHandler.asyncGetEventsNearUserLocation(locationObj.latitude, locationObj.longitude);
     return alexaResponse;
-}
+};
 
 exports.getStatusOfTrainStation = async function getStatusOfTrainStation(ctaTrainParameters){
     let alexaTrainStatusResponse = await CtaTrainHandler.asyncCallCta(ctaTrainParameters);
     return alexaTrainStatusResponse;
-}
+};
