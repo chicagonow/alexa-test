@@ -19,7 +19,7 @@ const geocoder = require('../../../../../custom/handlers/location/geocoder');
 /**
  * Verifies the CtaTrainHandler works properly
  */
-describe('CtaTrainHandler Tests', function() {
+describe('CtaBusHandler Tests', function() {
     // sinon test environment
     var sandbox;
 
@@ -55,29 +55,22 @@ describe('CtaTrainHandler Tests', function() {
     });
 
     // Tests the searchTrainNearMe method
-    it('searchTrainNearMe: returns correct Alexa Response', function(done) {
+    it('searchBusNearMe: returns correct Alexa Response', function(done) {
         // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the 
         // callback, with that location object instead of the location retrieved from the geocode library
         let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
         fakeGeocoder.callsArgWith(1, {latitude: -10, longitude: -81.7});
 
         let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
-        BusHandler.asyncGetBusesWithUserLocation(parameters, (alexaResponse) => {
-            assert.equal(alexaResponse, "bus shit");
+        BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
+            assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
             done();
         });
     });
 
     // Tests the BusHandler method
-    it('BusHandler: returns correct Alexa Response', function(done) {
-       let parameters = {
-           stopId: "4727",
-           rt: "20"
-       }
-        
-        BusHandler.asyncGetBusesWithUserLocation(parameters, (alexaResponse) => {
-            assert.equal(alexaResponse, "The Eastbound Bus towards Michigan will arrive at 8:27 PM");
-            done();
-        });
+    it('AsyncBusHandler: returns correct Alexa Response', async function() {
+        let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(20, 'Eastbound', -10, -81.7);
+        assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at 8:27 PM');
     });
 });

@@ -42,8 +42,9 @@ exports.searchBusNearMe = (parameters, callback) => {
 };
 
 exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude){
+
     let stopId = await BusRepository.asyncGetStopIdWithLocation(route, direction, latitude, longitude);
-    let alexaResponse = await asyncGetBusesForRouteAndStop(route, stopId);
+    let alexaResponse = await this.asyncGetBusesForRouteAndStop(route, stopId);
     return alexaResponse;
 }
 
@@ -60,7 +61,8 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         
     });
 
-    let body = asyncRequest(url);
+    let body = await asyncRequest(url);
+
     let alexaResponse = BusResponseBuilder.buildAlexaResponse(JSON.parse(body));
     return alexaResponse;
 };
