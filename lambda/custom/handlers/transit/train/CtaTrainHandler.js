@@ -57,3 +57,23 @@ let callCta = (parameters, callback) => {
         callback(alexaResponse);        
     });
 };
+
+/**
+ * Calls the CTA Train API
+ * @param {object} ctaTrainParameters 
+ */
+exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters){
+    let url = buildUrl(CTA_API_DOMAIN, {
+        path: CTA_API_PATH,
+        queryParams: {
+            key: CTA_API_KEY,
+            mapid: ctaTrainParameters.mapid,
+            rt: ctaTrainParameters.rt,
+            outputType: "JSON"
+        }
+    });
+
+    let body = await asyncRequest(url);
+    let alexaTrainStatusResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
+    return alexaTrainStatusResponse;
+}

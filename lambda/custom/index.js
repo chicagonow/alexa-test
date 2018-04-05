@@ -13,14 +13,16 @@ const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 const handlers = {
     'CtaTrainIntent': function () {        
         // TODO: Build proper parameters object
-        let parameters = {
+        let ctaTrainParameters = {
             mapid: "40530",
-            rt: "Brn"
+            route: "Brn"
         };
 
-        TransitHandler.searchTransit(parameters, (alexaResponse) => {
-            this.emit(':tell', alexaResponse);
-        });
+        let alexaTrainStatusResponse = IntentController.getStatusOfTrainStation(ctaTrainParameters);
+        this.emit(':tell', alexaTrainStatusResponse);
+        // TransitHandler.searchTransit(ctaTrainParameters, (alexaResponse) => {
+        //     this.emit(':tell', alexaResponse);
+        // });
     },
     'CtaBusIntent': function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
