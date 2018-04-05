@@ -68,7 +68,7 @@ exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters){
         queryParams: {
             key: CTA_API_KEY,
             mapid: ctaTrainParameters.mapid,
-            rt: ctaTrainParameters.rt,
+            rt: ctaTrainParameters.route,
             outputType: "JSON"
         }
     });
