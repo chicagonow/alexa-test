@@ -80,4 +80,19 @@ describe('CtaTrainHandler Tests', function() {
             done();
         });
     });
+
+    // Tests the asyncCallCta method
+    it('asyncCallCta: returns correct Alexa Response', function(done) {
+        let ctaTrainParameters = {
+            mapid: "40530",
+            rt: "Brn"
+        }
+        
+      let actualAlexaTrainStatusResponse = TrainHandler.asyncCallCta(ctaTrainParameters)
+      let expectedAlexaResponse = "zz";
+      assert.equal(actualAlexaTrainStatusResponse, expectedAlexaResponse);
+      done();
+        
+   });
+
 });

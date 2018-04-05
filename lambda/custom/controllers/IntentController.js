@@ -1,5 +1,6 @@
 const LocationHandler=require('../handlers/location/LocationHandler');
 const EventsHandler=require('../handlers/events/EventsHandler');
+const CtaTrainHandler=require('../handlers/transit/train/CtaTrainHandler');
 
 // take device information, get lat long
 // take lat long return events near location

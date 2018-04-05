@@ -11,7 +11,7 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
-    'CtaTrainIntent': function () {        
+    'CtaTrainIntent': async function () {        
         // TODO: Build proper parameters object
         let ctaTrainParameters = {
             mapid: "40530",
@@ -20,6 +20,7 @@ const handlers = {
 
         let alexaTrainStatusResponse = IntentController.getStatusOfTrainStation(ctaTrainParameters);
         this.emit(':tell', alexaTrainStatusResponse);
+
         // TransitHandler.searchTransit(ctaTrainParameters, (alexaResponse) => {
         //     this.emit(':tell', alexaResponse);
         // });

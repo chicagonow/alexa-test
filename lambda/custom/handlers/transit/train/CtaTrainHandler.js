@@ -3,6 +3,7 @@ const buildUrl = require('build-url');
 const TransitResponseBuilder = require('../TransitResponseBuilder');
 const TrainRepository = require('../../../repositories/transit/CtaTrainRepository');
 const LocationHandler = require('../../location/LocationHandler');
+const asyncRequest = require('request-promise');
 
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
 const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
@@ -68,13 +69,12 @@ exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters){
         queryParams: {
             key: CTA_API_KEY,
             mapid: ctaTrainParameters.mapid,
-            rt: ctaTrainParameters.route,
+            rt: ctaTrainParameters.rt,
             outputType: "JSON"
         }
     });
 
     let body = await asyncRequest(url);
     let alexaTrainStatusResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
-    // return alexaTrainStatusResponse;
-    return "hi";
-};
+    return alexaTrainStatusResponse;
+}
