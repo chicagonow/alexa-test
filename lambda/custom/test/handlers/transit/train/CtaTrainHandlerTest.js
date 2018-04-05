@@ -14,7 +14,7 @@ const TrainHandler = require('../../../../handlers/transit/train/CtaTrainHandler
 const ParameterHelper = require('../../../../helpers/ParameterHelper');
 
 // Geocoder we need to mock
-const geocoder = require('../../../../../custom/handlers/location/geocoder');
+const geocoder = require('./../../../../handlers/location/geocoder');
 
 /**
  * Verifies the CtaTrainHandler works properly
