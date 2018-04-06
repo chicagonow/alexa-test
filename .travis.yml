@@ -17,8 +17,8 @@ before_install:
 
 script:
   - ./deploy.sh
-  - sh -c "cd ./lambda/custom/ && npm install"
   - nvm use 6.10
+  - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
 after_success:
