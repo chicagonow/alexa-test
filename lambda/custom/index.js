@@ -18,10 +18,9 @@ const handlers = {
             rt: "Brn"
         };
 
-        this.emit(":tell", "hihihihihihihiz");
-        // TransitHandler.searchTransit(parameters, (alexaResponse) => {
-        //     this.emit(':tell', alexaResponse);
-        // });
+        TransitHandler.searchTransit(parameters, (alexaResponse) => {
+            this.emit(':tell', alexaResponse);
+        });
     },
     'CtaBusIntent': function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
