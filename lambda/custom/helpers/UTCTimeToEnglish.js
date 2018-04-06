@@ -11,11 +11,11 @@ exports.utcToString = (dateObj) => {
 };
 
 exports.ctaBusDateToString = (date) => {
-    var d = CtaDate(date);
-    var hour = d.hour == 0 ? 12 : (d.hour > 12 ? d.hour - 12 : d.hour);
-    var min = d.minute;
-    var ampm = d.hour < 12 ? 'AM' : 'PM';
-    var time = hour + ':' + min + ' ' + ampm;
+    let d = CtaDate(date);
+    let hour = d.hour == 0 ? 12 : (d.hour > 12 ? d.hour - 12 : d.hour);
+    let min = d.minute;
+    let ampm = d.hour < 12 ? 'AM' : 'PM';
+    let time = hour + ':' + min + ' ' + ampm;
     return time;
 };
 

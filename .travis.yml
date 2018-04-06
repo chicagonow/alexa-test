@@ -1,11 +1,12 @@
 language: node_js
 node_js:
   #lambda uses 6, but we need node 9 to use aws-cli and ask-cli, which deploy the alexa skill/intents, and the lambda
-  - 9
+  - "6.10"
 branches:
   only:
   - master
   - stage
+  - add-for-ruben
 
 cache:
   directories:
@@ -18,9 +19,9 @@ before_install:
 script:
   - ./deploy.sh
   - sh -c "cd ./lambda/custom/ && npm install"
-  - nvm use 6
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
 after_success:
-  - nvm use 9
-  - ask deploy -p default
+  - ask deploy -p default -t skill
+  - ask deploy -p default -t lambda --no-wait
+  - ask deploy -p default -t model

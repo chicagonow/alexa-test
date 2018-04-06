@@ -13,7 +13,7 @@ const alexaJson = require('../response.alexa.json');
 
 
 describe('IntentController Tests', function() {
-    var sandbox;
+    let sandbox;
 
     beforeEach(function() {
 
