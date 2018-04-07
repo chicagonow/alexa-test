@@ -23,25 +23,11 @@ const handlers = {
         });
     },
     'CtaBusIntent': async function () {
-        let transitSlot = this.event.request.intent.slots.transitMode.value;
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let route = this.event.request.intent.slots.bus.value;
-        let direction = this.event.request.intent.slots.busDirection.resolutions.resolutionsperAuthority.values.value.name;
-        let alexaResponse = await IntentController.getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
-        this.emit(':tell', alexaResponse);
-        /*
-        if (transitSlot === "bus") {
-            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-            parameters.rt = this.event.request.intent.slots.busStop.value;
-            parameters.dir = this.event.request.intent.slots.busDirection.value;
-
-            BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
-                this.emit(':tell', alexaResponse);
-            }); 
-        } else {
-            this.emit(':tell', "implement bus stop intent");
-        }    
-        */   
+        let direction = this.event.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        this.emit(':tell', alexaResponse); 
     },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;

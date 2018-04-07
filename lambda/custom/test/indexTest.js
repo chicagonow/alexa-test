@@ -1,13 +1,17 @@
 const expect = require('chai').expect;
 const nock = require('nock');
+const assert = require('assert');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
 const events = require('./response.events.js');
+const ParameterHelper = require('../helpers/ParameterHelper');
+const IntentController = require('../controllers/IntentController');
 
 const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
 const responseTrains = require('./response.trains');
+const alexaBusRequest = require('./example-alexa-json-bus');
 
 describe('Get Events Handler', function() {
     beforeEach(function() {
@@ -105,6 +109,14 @@ describe('Cta Bus Handler', function() {
         expect(closestStopId).to.equal("1121");
         done();
     });
+
+    it('test Alexa JSON input returns correct response', async function() {
+        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest.context.System);
+        let route = alexaBusRequest.request.intent.slots.bus.value;
+        let direction = alexaBusRequest.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
+    })
 
 });
 
