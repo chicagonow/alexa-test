@@ -78,7 +78,7 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
 
     console.log(body);
 
-    jsBody = JSON.parse(body);
+    let jsBody = JSON.parse(body);
     let alexaResponse = "";
     try{
         alexaResponse = BusResponseBuilder.buildAlexaResponse(jsBody);
