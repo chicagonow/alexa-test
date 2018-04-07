@@ -1340,6 +1340,14 @@
         {
           "values": [
             {
+              "id": "-1",
+              "name": "fake bus stop"
+            }
+          ],
+          "name": "CTA_BUS_STOP"},
+        {
+          "values": [
+            {
               "name": {
                 "value": "Northbound",
                 "synonyms": [
