@@ -47,12 +47,14 @@ describe('Get Events Response', function() {
 });
 
 describe('Cta Bus Handler', function() {
-    const WESTERN_BUS_ROUTE = "49";
-    const WESTERN_BUS_STOP_ID = "8269";
-    const SOUTHBOUND_DIRECTION = "Southbound";
+
+    const BUS_ROUTE = "20";
+    const BUS_STOP_ID = "4727";
+    const DIRECTION = "Eastbound";
 
     const busHandler = require('../handlers/transit/bus/BusHandler');
     const busResponse = require('./response.buses');
+    const busStopsResponse = require('./response.repo.buses');
     const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
 
 
@@ -67,19 +69,19 @@ describe('Cta Bus Handler', function() {
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
             .query(true)
-            .reply(200, busResponse);
+            .reply(200, busStopsResponse);
     });
-/*
+
     it('returns status of specific bus and stop', (done) => {
         this.timeout(3000);
 
         let parameters = {
-            rt: WESTERN_BUS_ROUTE,
-            stpid: WESTERN_BUS_STOP_ID
+            rt: BUS_ROUTE,
+            stpid: BUS_STOP_ID
         };
 
         busHandler.getBusesForRouteAndStop(parameters, (alexaResponse) => {
-            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
+            expect(alexaResponse).to.equal("The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
             done();
         });
 
@@ -88,22 +90,22 @@ describe('Cta Bus Handler', function() {
     it('return status of nearest bus stop', (done) => {
         this.timeout(3000);
         let parameters = {
-            rt: WESTERN_BUS_ROUTE,
-            dir: SOUTHBOUND_DIRECTION
+            rt: BUS_ROUTE,
+            stpid: BUS_STOP_ID
         };
 
         busHandler.searchBusNearMe(parameters, alexaResponse => {
-            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
+            expect(alexaResponse).to.equal("The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
             done();
         });
     });
 
     it('calculates the closest bus stop id', done => {
-        let closestStopId = ctaBusRepository.closestStopId(41.775450009211, -87.683650731711, busResponse);
-        expect(closestStopId).to.equal("14857");
+        let closestStopId = ctaBusRepository.closestStopId(41.888045629769, -87.624405026432, busStopsResponse);
+        expect(closestStopId).to.equal("1121");
         done();
     });
-*/
+
 });
 
 describe('Get Transit Handler', function() {
