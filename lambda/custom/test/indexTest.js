@@ -104,7 +104,7 @@ describe('Cta Bus Index.JS Test', function() {
             stpid: BUS_STOP_ID
         };
 
-        alexaResponse = await busHandler.asyncGetBusesForRouteAndStop(parameters.rt, parameters.stpid)
+        let alexaResponse = await busHandler.asyncGetBusesForRouteAndStop(parameters.rt, parameters.stpid)
         assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
@@ -115,7 +115,7 @@ describe('Cta Bus Index.JS Test', function() {
             dir: 'Eastbound'
         };
 
-        alexaResponse = await busHandler.asyncGetBusesWithUserLocation(parameters.rt, parameters.dir, 41.881383249235, -87.668550968956);
+        let alexaResponse = await busHandler.asyncGetBusesWithUserLocation(parameters.rt, parameters.dir, 41.881383249235, -87.668550968956);
         assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
