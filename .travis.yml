@@ -6,7 +6,7 @@ branches:
   only:
   - master
   - stage
-  - add-for-ruben
+  - BusSyncTests
 
 cache:
   directories:
@@ -23,5 +23,6 @@ script:
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
 after_success:
   - ask deploy -p default -t skill
+  - ask deploy -p default -t model &
   - ask deploy -p default -t lambda --no-wait
-  - ask deploy -p default -t model
+  - wait

@@ -1,0 +1,60 @@
+	{
+		"bustime-response": {
+			"prd": [
+				{
+					"tmstmp": "20180404 20:24",
+					"typ": "A",
+					"stpnm": "1633 W Madison",
+					"stpid": "4727",
+					"vid": "2013",
+					"dstp": 3365,
+					"rt": "20",
+					"rtdd": "20",
+					"rtdir": "Eastbound",
+					"des": "Michigan",
+					"prdtm": "20180404 20:27",
+					"tablockid": "20 -807",
+					"tatripid": "1040611",
+					"dly": false,
+					"prdctdn": "3",
+					"zone": ""
+				},
+				{
+					"tmstmp": "20180404 20:23",
+					"typ": "A",
+					"stpnm": "1633 W Madison",
+					"stpid": "4727",
+					"vid": "1977",
+					"dstp": 15694,
+					"rt": "20",
+					"rtdd": "20",
+					"rtdir": "Eastbound",
+					"des": "Michigan",
+					"prdtm": "20180404 20:38",
+					"tablockid": "20 -810",
+					"tatripid": "1040612",
+					"dly": false,
+					"prdctdn": "14",
+					"zone": ""
+				},
+				{
+					"tmstmp": "20180404 20:23",
+					"typ": "A",
+					"stpnm": "1633 W Madison",
+					"stpid": "4727",
+					"vid": "1947",
+					"dstp": 28844,
+					"rt": "20",
+					"rtdd": "20",
+					"rtdir": "Eastbound",
+					"des": "Michigan",
+					"prdtm": "20180404 20:53",
+					"tablockid": "20 -803",
+					"tatripid": "1040613",
+					"dly": false,
+					"prdctdn": "29",
+					"zone": ""
+				}
+			]
+		}
+	}

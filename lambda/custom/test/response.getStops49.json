@@ -1,0 +1,750 @@
+{
+	"bustime-response": {
+		"stops": [
+			{
+				"stpid": "2970",
+				"stpnm": "10200 S Cottage Grove",
+				"lat": 41.70927805996,
+				"lon": -87.606026530266
+			},
+			{
+				"stpid": "2962",
+				"stpnm": "11000 S Cottage Grove",
+				"lat": 41.694637928425,
+				"lon": -87.609395384789
+			},
+			{
+				"stpid": "2893",
+				"stpnm": "111th Street \u0026 Vernon",
+				"lat": 41.692663130765,
+				"lon": -87.612318992615
+			},
+			{
+				"stpid": "18241",
+				"stpnm": "115th Street Metra Station",
+				"lat": 41.685670738112,
+				"lon": -87.612446397502
+			},
+			{
+				"stpid": "1564",
+				"stpnm": "3000 S Michigan",
+				"lat": 41.840592684542,
+				"lon": -87.623230218887
+			},
+			{
+				"stpid": "7629",
+				"stpnm": "35th Street \u0026 Cottage Grove",
+				"lat": 41.8312841342,
+				"lon": -87.610859870911
+			},
+			{
+				"stpid": "7631",
+				"stpnm": "35th Street \u0026 Giles",
+				"lat": 41.831132244524,
+				"lon": -87.619161416515
+			},
+			{
+				"stpid": "2528",
+				"stpnm": "35th Street \u0026 King Drive",
+				"lat": 41.831205790758,
+				"lon": -87.616641639616
+			},
+			{
+				"stpid": "2487",
+				"stpnm": "7000 S Cottage Grove",
+				"lat": 41.767550784908,
+				"lon": -87.605581283569
+			},
+			{
+				"stpid": "2461",
+				"stpnm": "95th Street \u0026 Langley",
+				"lat": 41.721883623844,
+				"lon": -87.606929684262
+			},
+			{
+				"stpid": "2976",
+				"stpnm": "9600 S Cottage Grove",
+				"lat": 41.720176651897,
+				"lon": -87.603569626808
+			},
+			{
+				"stpid": "2975",
+				"stpnm": "9700 S Cottage Grove",
+				"lat": 41.718354795876,
+				"lon": -87.603998780251
+			},
+			{
+				"stpid": "2103",
+				"stpnm": "Chicago State University",
+				"lat": 41.72102950301,
+				"lon": -87.608917951584
+			},
+			{
+				"stpid": "2530",
+				"stpnm": "Columbus \u0026 Randolph",
+				"lat": 41.884846719606,
+				"lon": -87.62047290933
+			},
+			{
+				"stpid": "2972",
+				"stpnm": "Cottage Grove \u0026 100th Street",
+				"lat": 41.712800819381,
+				"lon": -87.605241608253
+			},
+			{
+				"stpid": "2971",
+				"stpnm": "Cottage Grove \u0026 101st Street",
+				"lat": 41.711272370813,
+				"lon": -87.605570554734
+			},
+			{
+				"stpid": "15033",
+				"stpnm": "Cottage Grove \u0026 103rd Street",
+				"lat": 41.707823055595,
+				"lon": -87.606380581856
+			},
+			{
+				"stpid": "2968",
+				"stpnm": "Cottage Grove \u0026 104th Street",
+				"lat": 41.705516253994,
+				"lon": -87.606863379478
+			},
+			{
+				"stpid": "2967",
+				"stpnm": "Cottage Grove \u0026 105th Street",
+				"lat": 41.703653931905,
+				"lon": -87.607330083847
+			},
+			{
+				"stpid": "2966",
+				"stpnm": "Cottage Grove \u0026 106th Street",
+				"lat": 41.701831607541,
+				"lon": -87.607716321945
+			},
+			{
+				"stpid": "14553",
+				"stpnm": "Cottage Grove \u0026 107th Street",
+				"lat": 41.700217505689,
+				"lon": -87.608113288879
+			},
+			{
+				"stpid": "2964",
+				"stpnm": "Cottage Grove \u0026 108th Street",
+				"lat": 41.698086668993,
+				"lon": -87.608585357666
+			},
+			{
+				"stpid": "15157",
+				"stpnm": "Cottage Grove \u0026 109th Street",
+				"lat": 41.696516533617,
+				"lon": -87.60895550251
+			},
+			{
+				"stpid": "17676",
+				"stpnm": "Cottage Grove \u0026 111th Street",
+				"lat": 41.692725780508,
+				"lon": -87.609974741936
+			},
+			{
+				"stpid": "2524",
+				"stpnm": "Cottage Grove \u0026 35th Street",
+				"lat": 41.831100267704,
+				"lon": -87.610532641411
+			},
+			{
+				"stpid": "2523",
+				"stpnm": "Cottage Grove \u0026 36th Street",
+				"lat": 41.829029734614,
+				"lon": -87.609438300133
+			},
+			{
+				"stpid": "2522",
+				"stpnm": "Cottage Grove \u0026 37th Street",
+				"lat": 41.827582719997,
+				"lon": -87.608708739281
+			},
+			{
+				"stpid": "15866",
+				"stpnm": "Cottage Grove \u0026 38th Street",
+				"lat": 41.826279579396,
+				"lon": -87.608038187027
+			},
+			{
+				"stpid": "2518",
+				"stpnm": "Cottage Grove \u0026 40th Street",
+				"lat": 41.821346592228,
+				"lon": -87.60677754879
+			},
+			{
+				"stpid": "2517",
+				"stpnm": "Cottage Grove \u0026 41st Street ",
+				"lat": 41.820411120676,
+				"lon": -87.606756091118
+			},
+			{
+				"stpid": "2516",
+				"stpnm": "Cottage Grove \u0026 42nd Street",
+				"lat": 41.818456180876,
+				"lon": -87.60669708252
+			},
+			{
+				"stpid": "2515",
+				"stpnm": "Cottage Grove \u0026 43rd Street",
+				"lat": 41.816669097806,
+				"lon": -87.606675624847
+			},
+			{
+				"stpid": "2514",
+				"stpnm": "Cottage Grove \u0026 44th Street",
+				"lat": 41.814798004375,
+				"lon": -87.606632709503
+			},
+			{
+				"stpid": "2513",
+				"stpnm": "Cottage Grove \u0026 45th Street",
+				"lat": 41.813106776743,
+				"lon": -87.606595158577
+			},
+			{
+				"stpid": "15932",
+				"stpnm": "Cottage Grove \u0026 46th Street",
+				"lat": 41.811515462687,
+				"lon": -87.606557607651
+			},
+			{
+				"stpid": "14574",
+				"stpnm": "Cottage Grove \u0026 47th Street",
+				"lat": 41.809672207795,
+				"lon": -87.606514692307
+			},
+			{
+				"stpid": "2510",
+				"stpnm": "Cottage Grove \u0026 48th Street",
+				"lat": 41.807560996032,
+				"lon": -87.606482505798
+			},
+			{
+				"stpid": "2509",
+				"stpnm": "Cottage Grove \u0026 49th Street",
+				"lat": 41.805753615537,
+				"lon": -87.606434226036
+			},
+			{
+				"stpid": "2508",
+				"stpnm": "Cottage Grove \u0026 50th Street",
+				"lat": 41.80395418165,
+				"lon": -87.606402039528
+			},
+			{
+				"stpid": "2507",
+				"stpnm": "Cottage Grove \u0026 51st Street",
+				"lat": 41.802482607043,
+				"lon": -87.606364488602
+			},
+			{
+				"stpid": "2505",
+				"stpnm": "Cottage Grove \u0026 52nd Street",
+				"lat": 41.80030317495,
+				"lon": -87.606316208839
+			},
+			{
+				"stpid": "2504",
+				"stpnm": "Cottage Grove \u0026 53rd Street",
+				"lat": 41.798507587132,
+				"lon": -87.606262564659
+			},
+			{
+				"stpid": "2503",
+				"stpnm": "Cottage Grove \u0026 54th Street",
+				"lat": 41.79658797213,
+				"lon": -87.606225013733
+			},
+			{
+				"stpid": "15148",
+				"stpnm": "Cottage Grove \u0026 55th Street",
+				"lat": 41.795172219227,
+				"lon": -87.606198191643
+			},
+			{
+				"stpid": "2501",
+				"stpnm": "Cottage Grove \u0026 56th Street",
+				"lat": 41.793216509119,
+				"lon": -87.606155276299
+			},
+			{
+				"stpid": "15164",
+				"stpnm": "Cottage Grove \u0026 57th Street",
+				"lat": 41.791691899034,
+				"lon": -87.606123084551
+			},
+			{
+				"stpid": "2499",
+				"stpnm": "Cottage Grove \u0026 58th Street",
+				"lat": 41.789337707806,
+				"lon": -87.606035112549
+			},
+			{
+				"stpid": "2498",
+				"stpnm": "Cottage Grove \u0026 59th Street",
+				"lat": 41.787617009089,
+				"lon": -87.60601580143
+			},
+			{
+				"stpid": "2497",
+				"stpnm": "Cottage Grove \u0026 60th Street",
+				"lat": 41.785771626758,
+				"lon": -87.605974601757
+			},
+			{
+				"stpid": "2496",
+				"stpnm": "Cottage Grove \u0026 61st Street",
+				"lat": 41.783965071646,
+				"lon": -87.605956792831
+			},
+			{
+				"stpid": "2495",
+				"stpnm": "Cottage Grove \u0026 62nd Street",
+				"lat": 41.782119744362,
+				"lon": -87.60589091893
+			},
+			{
+				"stpid": "17572",
+				"stpnm": "Cottage Grove \u0026 63rd Street (Green Line)",
+				"lat": 41.780651668646,
+				"lon": -87.60584778749
+			},
+			{
+				"stpid": "18007",
+				"stpnm": "Cottage Grove \u0026 64th Street",
+				"lat": 41.778521666666,
+				"lon": -87.605803333334
+			},
+			{
+				"stpid": "18006",
+				"stpnm": "Cottage Grove \u0026 65th Street",
+				"lat": 41.776694999999,
+				"lon": -87.605755000001
+			},
+			{
+				"stpid": "18005",
+				"stpnm": "Cottage Grove \u0026 67th Street",
+				"lat": 41.773046666667,
+				"lon": -87.605643333335
+			},
+			{
+				"stpid": "2489",
+				"stpnm": "Cottage Grove \u0026 68th Street",
+				"lat": 41.771535726116,
+				"lon": -87.605651021004
+			},
+			{
+				"stpid": "2488",
+				"stpnm": "Cottage Grove \u0026 69th Street",
+				"lat": 41.769435260849,
+				"lon": -87.605597376823
+			},
+			{
+				"stpid": "14573",
+				"stpnm": "Cottage Grove \u0026 71st Street/South Chicago",
+				"lat": 41.766178403475,
+				"lon": -87.605565190315
+			},
+			{
+				"stpid": "2484",
+				"stpnm": "Cottage Grove \u0026 73rd Street",
+				"lat": 41.762137109813,
+				"lon": -87.605420351028
+			},
+			{
+				"stpid": "2483",
+				"stpnm": "Cottage Grove \u0026 74th Street",
+				"lat": 41.7602204073,
+				"lon": -87.605372071266
+			},
+			{
+				"stpid": "14572",
+				"stpnm": "Cottage Grove \u0026 75th Street",
+				"lat": 41.758895888397,
+				"lon": -87.60533452034
+			},
+			{
+				"stpid": "2481",
+				"stpnm": "Cottage Grove \u0026 76th Street",
+				"lat": 41.756546900939,
+				"lon": -87.605270147324
+			},
+			{
+				"stpid": "17103",
+				"stpnm": "Cottage Grove \u0026 77th Street",
+				"lat": 41.755206298863,
+				"lon": -87.605243325233
+			},
+			{
+				"stpid": "2479",
+				"stpnm": "Cottage Grove \u0026 78th Street",
+				"lat": 41.752986840171,
+				"lon": -87.60515427537
+			},
+			{
+				"stpid": "2478",
+				"stpnm": "Cottage Grove \u0026 79th Street",
+				"lat": 41.751312391371,
+				"lon": -87.605114579201
+			},
+			{
+				"stpid": "2477",
+				"stpnm": "Cottage Grove \u0026 80th Street",
+				"lat": 41.74936334794,
+				"lon": -87.605066299438
+			},
+			{
+				"stpid": "14952",
+				"stpnm": "Cottage Grove \u0026 81st Street",
+				"lat": 41.747918536281,
+				"lon": -87.605018019676
+			},
+			{
+				"stpid": "2475",
+				"stpnm": "Cottage Grove \u0026 82nd Street",
+				"lat": 41.745659602537,
+				"lon": -87.604952574038
+			},
+			{
+				"stpid": "2474",
+				"stpnm": "Cottage Grove \u0026 83rd Street",
+				"lat": 41.743888100321,
+				"lon": -87.604916095734
+			},
+			{
+				"stpid": "2473",
+				"stpnm": "Cottage Grove \u0026 84th Street",
+				"lat": 41.741910812818,
+				"lon": -87.604851722717
+			},
+			{
+				"stpid": "2472",
+				"stpnm": "Cottage Grove \u0026 85th Street",
+				"lat": 41.740109586997,
+				"lon": -87.604808807373
+			},
+			{
+				"stpid": "2471",
+				"stpnm": "Cottage Grove \u0026 86th Street",
+				"lat": 41.738356345343,
+				"lon": -87.604765892029
+			},
+			{
+				"stpid": "2470",
+				"stpnm": "Cottage Grove \u0026 87th Street",
+				"lat": 41.736531001806,
+				"lon": -87.60470688343
+			},
+			{
+				"stpid": "2469",
+				"stpnm": "Cottage Grove \u0026 88th Street",
+				"lat": 41.734721618855,
+				"lon": -87.60465323925
+			},
+			{
+				"stpid": "2468",
+				"stpnm": "Cottage Grove \u0026 89th Street",
+				"lat": 41.732932201071,
+				"lon": -87.604588866234
+			},
+			{
+				"stpid": "2467",
+				"stpnm": "Cottage Grove \u0026 90th Street",
+				"lat": 41.731098696692,
+				"lon": -87.60457277298
+			},
+			{
+				"stpid": "2466",
+				"stpnm": "Cottage Grove \u0026 91st Street",
+				"lat": 41.729261136521,
+				"lon": -87.604556679726
+			},
+			{
+				"stpid": "2465",
+				"stpnm": "Cottage Grove \u0026 92nd Street",
+				"lat": 41.727435534499,
+				"lon": -87.604497671127
+			},
+			{
+				"stpid": "2464",
+				"stpnm": "Cottage Grove \u0026 93rd Street",
+				"lat": 41.725581854806,
+				"lon": -87.604460120201
+			},
+			{
+				"stpid": "2977",
+				"stpnm": "Cottage Grove \u0026 95th Street",
+				"lat": 41.721517985405,
+				"lon": -87.603247761726
+			},
+			{
+				"stpid": "2462",
+				"stpnm": "Cottage Grove \u0026 95th Street",
+				"lat": 41.722418865327,
+				"lon": -87.604374289513
+			},
+			{
+				"stpid": "2974",
+				"stpnm": "Cottage Grove \u0026 98th Street",
+				"lat": 41.716515589573,
+				"lon": -87.604399394622
+			},
+			{
+				"stpid": "2973",
+				"stpnm": "Cottage Grove \u0026 99th Street",
+				"lat": 41.714693469924,
+				"lon": -87.604789281467
+			},
+			{
+				"stpid": "2485",
+				"stpnm": "Cottage Grove \u0026 Anthony",
+				"lat": 41.763557593527,
+				"lon": -87.605463266373
+			},
+			{
+				"stpid": "2506",
+				"stpnm": "Cottage Grove \u0026 Drexel Square Drive",
+				"lat": 41.801314920535,
+				"lon": -87.606332302094
+			},
+			{
+				"stpid": "2463",
+				"stpnm": "Cottage Grove \u0026 Lyon",
+				"lat": 41.72397635682,
+				"lon": -87.604417204857
+			},
+			{
+				"stpid": "2491",
+				"stpnm": "Cottage Grove \u0026 Marquette Rd",
+				"lat": 41.774832317676,
+				"lon": -87.605720758438
+			},
+			{
+				"stpid": "2519",
+				"stpnm": "Cottage Grove \u0026 Oakwood",
+				"lat": 41.822577875833,
+				"lon": -87.606799006462
+			},
+			{
+				"stpid": "2520",
+				"stpnm": "Cottage Grove \u0026 Pershing",
+				"lat": 41.824268853364,
+				"lon": -87.607008218765
+			},
+			{
+				"stpid": "1563",
+				"stpnm": "Indiana \u0026 31st Street",
+				"lat": 41.838238696449,
+				"lon": -87.621856927872
+			},
+			{
+				"stpid": "1562",
+				"stpnm": "Indiana \u0026 32nd Street",
+				"lat": 41.836400207496,
+				"lon": -87.621819376945
+			},
+			{
+				"stpid": "16119",
+				"stpnm": "Indiana \u0026 33rd Boulevard",
+				"lat": 41.834613625243,
+				"lon": -87.621781826019
+			},
+			{
+				"stpid": "1560",
+				"stpnm": "Indiana \u0026 34th Street",
+				"lat": 41.832978878774,
+				"lon": -87.621755003929
+			},
+			{
+				"stpid": "15314",
+				"stpnm": "Indiana \u0026 35th Street",
+				"lat": 41.831336096375,
+				"lon": -87.621728181839
+			},
+			{
+				"stpid": "14052",
+				"stpnm": "King Drive \u0026 111th Street",
+				"lat": 41.692663130765,
+				"lon": -87.613279223442
+			},
+			{
+				"stpid": "14051",
+				"stpnm": "King Drive \u0026 112th Street",
+				"lat": 41.690845782451,
+				"lon": -87.61328458786
+			},
+			{
+				"stpid": "14050",
+				"stpnm": "King Drive \u0026 113th Street",
+				"lat": 41.688977747838,
+				"lon": -87.613236308098
+			},
+			{
+				"stpid": "2527",
+				"stpnm": "Lake Meadows Shopping Center",
+				"lat": 41.83126814583,
+				"lon": -87.614985108376
+			},
+			{
+				"stpid": "1581",
+				"stpnm": "Michigan \u0026 11th Street",
+				"lat": 41.86931714977,
+				"lon": -87.62398660183
+			},
+			{
+				"stpid": "1579",
+				"stpnm": "Michigan \u0026 13th Street",
+				"lat": 41.866114106851,
+				"lon": -87.624010203436
+			},
+			{
+				"stpid": "18318",
+				"stpnm": "Michigan \u0026 14th Street",
+				"lat": 41.86436497513,
+				"lon": -87.623993136645
+			},
+			{
+				"stpid": "14760",
+				"stpnm": "Michigan \u0026 16th Street",
+				"lat": 41.860517782903,
+				"lon": -87.623943686485
+			},
+			{
+				"stpid": "1575",
+				"stpnm": "Michigan \u0026 18th Street",
+				"lat": 41.858114984183,
+				"lon": -87.623900771141
+			},
+			{
+				"stpid": "1573",
+				"stpnm": "Michigan \u0026 21st Street",
+				"lat": 41.854554969306,
+				"lon": -87.623820304871
+			},
+			{
+				"stpid": "1570",
+				"stpnm": "Michigan \u0026 23rd Street",
+				"lat": 41.85103871072,
+				"lon": -87.623684477439
+			},
+			{
+				"stpid": "15313",
+				"stpnm": "Michigan \u0026 24th Street",
+				"lat": 41.849449617869,
+				"lon": -87.623627185822
+			},
+			{
+				"stpid": "1568",
+				"stpnm": "Michigan \u0026 25th Street",
+				"lat": 41.847294481991,
+				"lon": -87.623487710953
+			},
+			{
+				"stpid": "1567",
+				"stpnm": "Michigan \u0026 26th Street",
+				"lat": 41.845927803893,
+				"lon": -87.623369693756
+			},
+			{
+				"stpid": "1566",
+				"stpnm": "Michigan \u0026 28th Street",
+				"lat": 41.843629960584,
+				"lon": -87.62330532074
+			},
+			{
+				"stpid": "1565",
+				"stpnm": "Michigan \u0026 29th Street",
+				"lat": 41.841940933128,
+				"lon": -87.623255968356
+			},
+			{
+				"stpid": "1583",
+				"stpnm": "Michigan \u0026 8th Street",
+				"lat": 41.871793825843,
+				"lon": -87.624050974846
+			},
+			{
+				"stpid": "1582",
+				"stpnm": "Michigan \u0026 9th Street",
+				"lat": 41.870519548042,
+				"lon": -87.624008059502
+			},
+			{
+				"stpid": "1584",
+				"stpnm": "Michigan \u0026 Balbo",
+				"lat": 41.873391630449,
+				"lon": -87.624072432518
+			},
+			{
+				"stpid": "15312",
+				"stpnm": "Michigan \u0026 Cermak",
+				"lat": 41.853396223626,
+				"lon": -87.623782753944
+			},
+			{
+				"stpid": "14485",
+				"stpnm": "Michigan \u0026 Congress",
+				"lat": 41.875520643017,
+				"lon": -87.624131441116
+			},
+			{
+				"stpid": "1574",
+				"stpnm": "Michigan \u0026 Cullerton",
+				"lat": 41.855713693993,
+				"lon": -87.623841762543
+			},
+			{
+				"stpid": "76",
+				"stpnm": "Michigan \u0026 Jackson",
+				"lat": 41.878124892161,
+				"lon": -87.624158263206
+			},
+			{
+				"stpid": "1105",
+				"stpnm": "Michigan \u0026 Lake/Randolph",
+				"lat": 41.885195772118,
+				"lon": -87.624652862287
+			},
+			{
+				"stpid": "2188",
+				"stpnm": "Michigan \u0026 Madison",
+				"lat": 41.882404897016,
+				"lon": -87.6241400234
+			},
+			{
+				"stpid": "15241",
+				"stpnm": "Michigan \u0026 Monroe",
+				"lat": 41.880658580873,
+				"lon": -87.624167276372
+			},
+			{
+				"stpid": "1580",
+				"stpnm": "Michigan \u0026 Roosevelt",
+				"lat": 41.867815118829,
+				"lon": -87.623997330666
+			},
+			{
+				"stpid": "14482",
+				"stpnm": "Randolph \u0026 Michigan",
+				"lat": 41.884289988942,
+				"lon": -87.623636841381
+			},
+			{
+				"stpid": "2532",
+				"stpnm": "South Water (Mid) \u0026 Michigan",
+				"lat": 41.886907459115,
+				"lon": -87.623616456985
+			},
+			{
+				"stpid": "18154",
+				"stpnm": "State \u0026 Washington",
+				"lat": 41.883178663638,
+				"lon": -87.627803736836
+			}
+		]
+	}
+}
