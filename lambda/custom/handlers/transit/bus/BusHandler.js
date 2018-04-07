@@ -45,7 +45,7 @@ exports.searchBusNearMe = (parameters, callback) => {
 
 exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude) {
 
-    let stopId = await BusRepository.asyncGetStopIdWithLocation(route, direction, latitude, longitude)
+    let stopId = await BusRepository.asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude)
         .catch(error => {
             console.error(error);
         });
