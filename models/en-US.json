@@ -32,7 +32,7 @@
             }
           ],
           "samples": [
-            "what's the status of the {direction} {bus}"
+            "what's the status of the {busDirection} {bus}"
           ]
         },
 		{
