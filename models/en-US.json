@@ -66,6 +66,7 @@
         },
         {
           "name": "EventLocationIntent",
+          "slots": [],
           "samples": [
             "what events are going on near me"
           ]
@@ -73,6 +74,7 @@
       ],
       "types": [
         {
+          "name": "CTA_BUS",
           "values": [
             {
               "id": "1",
@@ -1334,10 +1336,20 @@
                 ]
               }
             }
-          ],
-          "name": "CTA_BUS_STOP"
+          ]
         },
         {
+          "name": "CTA_BUS_STOP",
+          "values": [
+            {
+              "name": {
+                "value": "fake bus stop"
+              }
+            }
+          ]
+        },
+        {
+          "name": "CTA_BUS_DIRECTION",
           "values": [
             {
               "name": {
@@ -1375,63 +1387,55 @@
                 ]
               }
             }
-          ],
-          "name": "CTA_BUS_DIRECTION"
+          ]
         },
         {
+          "name": "CTA_TRAIN",
           "values": [
             {
               "name": {
-                "value": "red line",
-                "synonyms": []
+                "value": "red line"
               }
             },
             {
               "name": {
-                "value": "blue line",
-                "synonyms": []
+                "value": "blue line"
               }
             },
             {
               "name": {
-                "value": "orange line",
-                "synonyms": []
+                "value": "orange line"
               }
             },
             {
               "name": {
-                "value": "green line",
-                "synonyms": []
+                "value": "green line"
               }
             },
             {
               "name": {
-                "value": "pink line",
-                "synonyms": []
+                "value": "pink line"
               }
             },
             {
               "name": {
-                "value": "purple line",
-                "synonyms": []
+                "value": "purple line"
               }
             },
             {
               "name": {
-                "value": "yellow line",
-                "synonyms": []
+                "value": "yellow line"
               }
             },
             {
               "name": {
-                "value": "test line",
-                "synonyms": []
+                "value": "test line"
               }
             }
-          ],
-          "name": "CTA_TRAIN"
+          ]
         },
         {
+          "name": "CTA_TRAIN_STATION",
           "values": [
             {
               "id": "40530",
@@ -1442,10 +1446,10 @@
                 ]
               }
             }
-          ],
-          "name": "CTA_TRAIN_STATION"
+          ]
         },
         {
+          "name": "TRANSIT_MODE",
           "values": [
             {
               "name": {
@@ -1463,19 +1467,17 @@
                 ]
               }
             }
-          ],
-          "name": "TRANSIT_MODE"
+          ]
         },
         {
+          "name": "EVENTS",
           "values": [
             {
               "name": {
-                "value": "chicago",
-                "synonyms": []
+                "value": "chicago"
               }
             }
-          ],
-          "name": "EVENTS"
+          ]
         }
       ]
     }
