@@ -11,7 +11,8 @@ const IntentController = require('../controllers/IntentController');
 const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
 const responseTrains = require('./response.trains');
-const alexaBusRequest = require('./example-alexa-json-bus');
+const alexaBusRequest20East = require('./alexaRequest20EastboundBus');
+const alexaBusRequest49South = require('./alexaRequest49SouthboundBus');
 
 describe('Get Events Handler', function() {
     beforeEach(function() {
@@ -110,10 +111,18 @@ describe('Cta Bus Handler', function() {
         done();
     });
 
-    it('test Alexa JSON input returns correct response', async function() {
-        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest.context.System);
-        let route = alexaBusRequest.request.intent.slots.bus.value;
-        let direction = alexaBusRequest.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+    it('test Alexa JSON 20 East input returns correct response', async function() {
+        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest20East.context.System);
+        let route = alexaBusRequest20East.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = alexaBusRequest20East.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
+    })
+
+    it('test Alexa JSON 49 South input returns correct response', async function() {
+        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
+        let route = alexaBusRequest49South.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = alexaBusRequest49South.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
         assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
     })

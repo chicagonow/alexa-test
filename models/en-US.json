@@ -76,6 +76,48 @@
           "values": [
             {
               "name": {
+                "value": "1",
+                "synonyms": [
+                  "1",
+                  "One",
+                  "Bronzeville/Union Station",
+                  "Bronzeville",
+                  "Union Station"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "2",
+                "synonyms": [
+                  "2 bus",
+                  "two",
+                  "Hyde Park Express",
+                  "Hyde Park"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "3",
+                "synonyms": [
+                  "3 bus",
+                  "King Drive",
+                  "King"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "4",
+                "synonyms": [
+                  "Cottage Grove",
+                  "Four"
+                ]
+              }
+            },
+            {
+              "name": {
                 "value": "20",
                 "synonyms": [
                   "20 bus",
