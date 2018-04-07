@@ -76,8 +76,16 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         console.error(JSON.stringify(error))
     });
 
-    console.log(JSON.stringify(body));
+    console.log(body);
 
-    let alexaResponse = BusResponseBuilder.buildAlexaResponse(JSON.parse(body));
+    jsBody = JSON.parse(body);
+    let alexaResponse = "";
+    try{
+        alexaResponse = BusResponseBuilder.buildAlexaResponse(jsBody);
+    }
+    catch(error){
+        console.error(error);
+        alexaResponse = "The closest bus stop has no scheduled service";
+    }
     return alexaResponse;
 };
