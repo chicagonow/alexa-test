@@ -25,11 +25,14 @@
             {
               "name": "busStop",
               "type": "CTA_BUS_STOP"
+            },
+            {
+              "name": "busDirection",
+              "type": "CTA_BUS_DIRECTION"
             }
           ],
           "samples": [
-            "what's the status of the {bus}",
-            "what's the status of the {busStop}"
+            "what's the status of the {direction} {bus}"
           ]
         },
 		{
@@ -73,9 +76,19 @@
           "values": [
             {
               "name": {
-                "value": "135 bus",
+                "value": "20",
                 "synonyms": [
-                  "135"
+                  "20 bus",
+                  "Madison"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "49",
+                "synonyms": [
+                  "49 bus",
+                  "Western"
                 ]
               }
             }
