@@ -22,7 +22,7 @@ const handlers = {
             this.emit(':tell', alexaResponse);
         });
     },
-    'CtaBusIntent': function () {
+    'CtaBusIntent': async function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let route = this.event.request.intent.slots.busStop.value;
