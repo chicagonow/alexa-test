@@ -69,7 +69,7 @@ describe('Cta Bus Handler', function() {
             .query(true)
             .reply(200, busResponse);
     });
-
+/*
     it('returns status of specific bus and stop', (done) => {
         this.timeout(3000);
 
@@ -103,7 +103,7 @@ describe('Cta Bus Handler', function() {
         expect(closestStopId).to.equal("14857");
         done();
     });
-
+*/
 });
 
 describe('Get Transit Handler', function() {
