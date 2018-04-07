@@ -27,7 +27,8 @@ exports.asyncGetLatLong = async function asyncGetLatLong(locationString){
   let response = await geocoder.geocode(locationString).catch(error => {
     console.error(error);
     console.error(JSON.stringify(error))
-  });;
+  });
+
   console.log(JSON.stringify(response));
   let jsonObject = response[0];
   let location = {

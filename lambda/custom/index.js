@@ -27,7 +27,11 @@ const handlers = {
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let route = this.event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let direction = this.event.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        let alexaResponse =
+            await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
+                .catch(error => {
+                    console.error(error)
+                });
         this.emit(':tell', alexaResponse); 
     },
     'CtaLocationIntent': function () {     
