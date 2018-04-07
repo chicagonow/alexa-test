@@ -7,26 +7,6 @@ const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
 const CTABUS_API_STOPS_PATH = '/bustime/api/v2/getstops';
 
-
-/*take latitude, long, return nearest stopID*/
-exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {
-    let url = buildUrl(CTABUS_API_DOMAIN, {
-        path: CTABUS_API_STOPS_PATH,
-        queryParams: {
-            key: CTABUS_API_KEY,
-            rt: parameters.rt,
-            dir: parameters.dir,
-            format: "json"
-        }
-        
-    });
-
-    request(url,  (error, response, body) => {
-        let stopId = closestStopId(latitude, longitude, JSON.parse(body));
-        callback(stopId);
-    });
-};
-
 /*take latitude, long, return nearest stopID*/
 exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(route, direction, latitude, longitude){
     // build url
@@ -66,6 +46,25 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
         }
     }
     return closestStopId;
+};
+
+/*take latitude, long, return nearest stopID*/
+exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {
+    let url = buildUrl(CTABUS_API_DOMAIN, {
+        path: CTABUS_API_STOPS_PATH,
+        queryParams: {
+            key: CTABUS_API_KEY,
+            rt: parameters.rt,
+            dir: parameters.dir,
+            format: "json"
+        }
+        
+    });
+
+    request(url,  (error, response, body) => {
+        let stopId = closestStopId(latitude, longitude, JSON.parse(body));
+        callback(stopId);
+    });
 };
 
 /* take JSON response from API, return nearest stopID*/

@@ -6,8 +6,8 @@ const sinon = require('sinon');
 // import test data
 const alexaJson = require('../../../response.alexa.json');
 const responseDeviceLocation = require('../../../response.deviceLocation');
-const responseBuses = require('../../../response.buses.json');
-const responseRepoBuses = require('../../../response.repo.buses.json');
+const responseBuses = require('../../../response.getPredictions20');
+const responseRepoBuses = require('../../../response.getStops20');
 
 // import files we need to test
 const BusHandler = require('../../../../handlers/transit/bus/BusHandler');
@@ -19,12 +19,13 @@ const geocoder = require('../../../../handlers/location/geocoder');
 /**
  * Verifies the CtaTrainHandler works properly
  */
+
 describe('CtaBusHandler Tests', function() {
     // sinon test environment
     var sandbox;
 
     beforeEach(function() {
-
+        nock.cleanAll();
         // Mock Device Location request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
@@ -63,7 +64,7 @@ describe('CtaBusHandler Tests', function() {
 
         let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
         BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
-            assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at 8:27 PM");
+            assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
             done();
         });
     });
@@ -71,6 +72,6 @@ describe('CtaBusHandler Tests', function() {
     // Tests the BusHandler method
     it('AsyncBusHandler: returns correct Alexa Response', async function() {
         let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(20, 'Eastbound', -10, -81.7);
-        assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at 8:27 PM');
+        assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM');
     });
 });

@@ -9,7 +9,8 @@ exports.buildAlexaResponse = (jsonObject) => {
     let routeDirection = predictionResponse.rtdir;
     let predictedTime = predictionResponse.prdtm;
     let arrivalTime = utcToString.ctaBusDateToString(predictedTime);
+    let busStopId = predictionResponse.stpid;
 
-    msg += "The " + routeDirection + " " + route + " bus towards " + destination + " will arrive at " + arrivalTime;
+    msg += "The " + routeDirection + " " + route + " bus towards " + destination + " will arrive at stop " + busStopId + " at " + arrivalTime;
     return msg;
 };
