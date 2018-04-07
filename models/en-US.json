@@ -1340,11 +1340,14 @@
         {
           "values": [
             {
-              "id": "-1",
-              "name": "fake bus stop"
+              "name": {
+                "value": "fake bus stop",
+                "synonyms":[]
+              }
             }
           ],
-          "name": "CTA_BUS_STOP"},
+          "name": "CTA_BUS_STOP"
+        },
         {
           "values": [
             {
