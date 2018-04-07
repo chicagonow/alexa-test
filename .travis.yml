@@ -6,7 +6,7 @@ branches:
   only:
   - master
   - stage
-  - add-for-ruben
+  - stage-west
 
 cache:
   directories:
@@ -22,6 +22,6 @@ script:
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
 after_success:
-  - ask deploy -p default -t skill
-  - ask deploy -p default -t lambda --no-wait
-  - ask deploy -p default -t model
+  - ask deploy -p region-west -t skill
+  - ask deploy -p region-west -t lambda --no-wait
+  - ask deploy -p region-west -t model
