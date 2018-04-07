@@ -1,6 +1,6 @@
-var NodeGeocoder = require('node-geocoder');
+let NodeGeocoder = require('node-geocoder');
 
-var options = {
+let options = {
   provider: 'mapquest',
 
   // Optional depending on the providers
@@ -9,7 +9,7 @@ var options = {
   formatter: null         // 'gpx', 'string', ...
 };
 
-var geocoder = NodeGeocoder(options);
+let geocoder = NodeGeocoder(options);
 
 exports.getLatLong = (locationString, callback) => {
   geocoder.geocode(locationString, function (err, res) {
@@ -29,6 +29,6 @@ exports.asyncGetLatLong = async function asyncGetLatLong(locationString){
   let location = {
     latitude: jsonObject.latitude,
     longitude: jsonObject.longitude
-  }
+  };
   return location;
-}
+};

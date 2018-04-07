@@ -11,7 +11,7 @@ const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
 const CTABUS_API_ROUTE_AND_STOP_PATH = '/bustime/api/v2/getpredictions';
 
-exports.getBusesForRouteAndStop = (parameters, callback) => {
+let getBusesForRouteAndStop = (parameters, callback) => {
     let url = buildUrl(CTABUS_API_DOMAIN, {
         path: CTABUS_API_ROUTE_AND_STOP_PATH,
         queryParams: {
@@ -29,6 +29,8 @@ exports.getBusesForRouteAndStop = (parameters, callback) => {
     });
 };
 
+exports.getBusesForRouteAndStop = getBusesForRouteAndStop;
+
 /*
 Call getLocation, forward longitude and parameters entered to Bus Stop Repository
 */
@@ -36,7 +38,7 @@ exports.searchBusNearMe = (parameters, callback) => {
     LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
         BusRepository.getNearestBusStopId(parameters, location.latitude, location.longitude, (stopID) => {
             parameters.stpid = stopID;
-            this.getBusesForRouteAndStop(parameters, callback);
+            getBusesForRouteAndStop(parameters, callback);
         });
     });    
 };

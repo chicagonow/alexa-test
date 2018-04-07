@@ -22,7 +22,7 @@ exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {
     });
 
     request(url,  (error, response, body) => {
-        let stopId = this.closestStopId(latitude, longitude, JSON.parse(body));
+        let stopId = closestStopId(latitude, longitude, JSON.parse(body));
         callback(stopId);
     });
 };
@@ -69,7 +69,7 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
 };
 
 /* take JSON response from API, return nearest stopID*/
-exports.closestStopId = (latitude, longitude, ctaBusStopResponse) => {
+let closestStopId = (latitude, longitude, ctaBusStopResponse) => {
     const bustimeResponse = ctaBusStopResponse["bustime-response"];
 
     let length = Object.keys(bustimeResponse.stops).length;
@@ -90,3 +90,5 @@ exports.closestStopId = (latitude, longitude, ctaBusStopResponse) => {
     }
     return closestStopId;
 };
+
+exports.closestStopId = closestStopId;
