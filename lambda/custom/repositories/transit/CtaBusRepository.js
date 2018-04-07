@@ -21,9 +21,13 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
         
     });
     // call cta
-    let body = await asyncRequest(url);
+    let body = await asyncRequest(url).catch(error => {
+        console.error(error);
+        console.error(JSON.stringify(error))
+    });;
     // parse JSON
     let ctaBusStopResponse = JSON.parse(body);
+    console.log(JSON.stringify(body));
     // convert to Javascript object
     const bustimeResponse = ctaBusStopResponse["bustime-response"];
 
@@ -45,6 +49,7 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
             closestStopId = thisStopId;
         }
     }
+    console.log("Closest Stop ID Found: " + closestStopId);
     return closestStopId;
 };
 
