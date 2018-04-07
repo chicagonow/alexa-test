@@ -18,6 +18,7 @@ const handlers = {
             rt: "Brn"
         };
 
+        console.error('testing logs');
         TransitHandler.searchTransit(parameters, (alexaResponse) => {
             this.emit(':tell', alexaResponse);
         });

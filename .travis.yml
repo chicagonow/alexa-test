@@ -6,7 +6,7 @@ branches:
   only:
   - master
   - stage
-  - add-for-ruben
+  - BusSyncTests
 
 cache:
   directories:
