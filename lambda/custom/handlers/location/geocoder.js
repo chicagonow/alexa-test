@@ -29,7 +29,6 @@ exports.asyncGetLatLong = async function asyncGetLatLong(locationString){
     console.error(JSON.stringify(error))
   });
 
-  console.log(JSON.stringify(response));
   let jsonObject = response[0];
   let location = {
     latitude: jsonObject.latitude,

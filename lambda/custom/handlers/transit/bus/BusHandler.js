@@ -76,7 +76,7 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         console.error(JSON.stringify(error))
     });
 
-    console.log(body);
+    
 
     let jsBody = JSON.parse(body);
     let alexaResponse = "";

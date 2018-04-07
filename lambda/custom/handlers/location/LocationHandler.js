@@ -70,7 +70,6 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
 
     let location = (response.statusCode === 200) ? JSON.parse(response.body) : DEFAULT_LOCATION;
 
-    console.log(JSON.stringify(response));
     // Make an array of the location properties we want to send to the geocoder
     let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
     
