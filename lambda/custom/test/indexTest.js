@@ -104,8 +104,8 @@ describe('Cta Bus Index.JS Test', function() {
             stpid: BUS_STOP_ID
         };
 
-        let alexaResponse = await busHandler.asyncGetBusesForRouteAndStop(parameters.rt, parameters.stpid)
-        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
+        let string = await busHandler.asyncGetBusesForRouteAndStop(parameters.rt, parameters.stpid)
+        assert.equal(string, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
     it('return status of nearest bus stop', async function() {
@@ -115,8 +115,8 @@ describe('Cta Bus Index.JS Test', function() {
             dir: 'Eastbound'
         };
 
-        let alexaResponse = await busHandler.asyncGetBusesWithUserLocation(parameters.rt, parameters.dir, 41.881383249235, -87.668550968956);
-        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
+        let stringResponse = await busHandler.asyncGetBusesWithUserLocation(parameters.rt, parameters.dir, 41.881383249235, -87.668550968956);
+        assert.equal(stringResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
     it('test Alexa JSON 20 East input returns correct response', async function() {
