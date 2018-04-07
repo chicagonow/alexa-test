@@ -25,8 +25,8 @@ const handlers = {
     'CtaBusIntent': async function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-        let route = this.event.request.intent.slots.busStop.value;
-        let direction = this.event.request.intent.slots.busDirection.value;
+        let route = this.event.request.intent.slots.bus.value;
+        let direction = this.event.request.intent.slots.busDirection.resolutions.resolutionsperAuthority.values.value.name;
         let alexaResponse = await IntentController.getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
         this.emit(':tell', alexaResponse);
         /*

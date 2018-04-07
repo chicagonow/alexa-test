@@ -115,7 +115,8 @@
               "name": {
                 "value": "Northbound",
                 "synonyms": [
-                  "north"
+                  "north",
+                  "North"
                 ]
               }
             },
@@ -123,7 +124,8 @@
               "name": {
                 "value": "Southbound",
                 "synonyms": [
-                  "south"
+                  "south",
+                  "South"
                 ]
               }
             },
@@ -131,7 +133,8 @@
               "name": {
                 "value": "Eastbound",
                 "synonyms": [
-                  "east"
+                  "east",
+                  "East"
                 ]
               }
             },
@@ -139,7 +142,8 @@
               "name": {
                 "value": "Westbound",
                 "synonyms": [
-                  "west"
+                  "west",
+                  "West"
                 ]
               }
             }
