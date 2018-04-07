@@ -432,7 +432,8 @@
                 "value": "49",
                 "synonyms": [
                   "Western",
-                  "49"
+                  "49",
+                  "forty nine"
                 ]
               }
             },
@@ -1343,7 +1344,8 @@
           "values": [
             {
               "name": {
-                "value": "fake bus stop"
+                "value": "fake bus stop",
+                "synonyms":[]
               }
             }
           ]

@@ -19,16 +19,13 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
             dir: direction,
             format: "json"
         }
-
     });
-    // call cta
+
     let body = await asyncRequest(url).catch(error => {
         console.error(error);
-        console.error(JSON.stringify(error))
-    });;
-    // parse JSON
+    });
+
     let ctaBusStopResponse = JSON.parse(body);
-    // convert to Javascript object
     const bustimeResponse = ctaBusStopResponse["bustime-response"];
 
     // set closest stop to first stop
@@ -53,8 +50,6 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
     return closestStopId;
 };
 
-/*
-*/
 exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude) {
     // build url
     let url = buildUrl(CTABUS_API_DOMAIN, {
@@ -69,8 +64,8 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
     // call cta
     let body = await asyncRequest(url).catch(error => {
         console.error(error);
-        console.error(JSON.stringify(error))
-    });;
+    });
+
     // parse JSON
     let ctaBusPatternsResponse = JSON.parse(body);
 
@@ -89,8 +84,6 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
     if (busPattern == "") {
         console.error("Incorrect Direction for Route Specified");
     }
-
-
 
     // set closest stop to first stop
     let length = Object.keys(busPattern.pt).length;

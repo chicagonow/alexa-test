@@ -73,19 +73,17 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
 
     let body = await asyncRequest(url).catch(error => {
         console.error(error);
-        console.error(JSON.stringify(error))
     });
 
-    
-
-    let jsBody = JSON.parse(body);
+    let responseBodyJson = JSON.parse(body);
     let alexaResponse = "";
-    try{
-        alexaResponse = BusResponseBuilder.buildAlexaResponse(jsBody);
-    }
-    catch(error){
+    try {
+        alexaResponse = BusResponseBuilder.buildAlexaResponse(responseBodyJson);
+    } catch(error) {
+        console.error("response body was: " + responseBodyJson);
         console.error(error);
         alexaResponse = "The closest bus stop has no scheduled service";
     }
+
     return alexaResponse;
 };
