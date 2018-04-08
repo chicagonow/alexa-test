@@ -18,21 +18,19 @@ const handlers = {
             route: "Brn"
         };
 
-        let alexaTrainStatusResponse = IntentController.getStatusOfTrainStation(ctaTrainParameters);
+        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(ctaTrainParameters);
         this.emit(':tell', alexaTrainStatusResponse);
-
-        // TransitHandler.searchTransit(ctaTrainParameters, (alexaResponse) => {
-        //     this.emit(':tell', alexaResponse);
-        // });
     },
     'CtaBusIntent': function () {
-        let transitSlot = this.event.request.intent.slots.transitMode.value;
-        if (transitSlot === "bus") {
-            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-            parameters.rt = this.event.request.intent.slots.busStop.value;
-            parameters.dir = this.event.request.intent.slots.busDirection.value;
+        let requestSlots = this.event.request.intent.slots;
+        let transitMode = requestSlots.transitMode.value;
 
-            BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
+        if (transitMode === "bus") {
+            let ctaBusParamters = ParameterHelper.getLocationParameters(this.event.context.System);
+            ctaBusParamters.rt = requestSlots.busStop.value;
+            ctaBusParamters.dir = requestSlots.busDirection.value;
+
+            BusHandler.searchBusNearMe(ctaBusParamters, (alexaResponse) => {
                 this.emit(':tell', alexaResponse);
             }); 
         } else {
