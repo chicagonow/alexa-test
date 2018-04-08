@@ -14,7 +14,7 @@ exports.searchEventsNearMe = (parameters, callback) => {
 	LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
 		searchEventbrite(location.latitude, location.longitude, callback);
 	});
-}
+};
 
 let searchEventbrite = (latitude, longitude, callback) => {
 
@@ -51,6 +51,6 @@ exports.asyncGetEventsNearUserLocation = async function asyncGetEventsNearUserLo
 	let body = await asyncRequest(url);
 	let alexaResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
 	return alexaResponse;
-}
+};
 
 require('make-runnable');
