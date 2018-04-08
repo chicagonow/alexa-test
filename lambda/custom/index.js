@@ -11,7 +11,7 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
-    'CtaTrainIntent': async function () {        
+    'CtaTrainIntent': async function () {
         // TODO: Build proper parameters object
         let ctaTrainParameters = {
             mapid: "40530",
@@ -21,21 +21,16 @@ const handlers = {
         let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(ctaTrainParameters);
         this.emit(':tell', alexaTrainStatusResponse);
     },
-    'CtaBusIntent': function () {
-        let requestSlots = this.event.request.intent.slots;
-        let transitMode = requestSlots.transitMode.value;
-
-        if (transitMode === "bus") {
-            let ctaBusParamters = ParameterHelper.getLocationParameters(this.event.context.System);
-            ctaBusParamters.rt = requestSlots.busStop.value;
-            ctaBusParamters.dir = requestSlots.busDirection.value;
-
-            BusHandler.searchBusNearMe(ctaBusParamters, (alexaResponse) => {
-                this.emit(':tell', alexaResponse);
-            }); 
-        } else {
-            this.emit(':tell', "implement bus stop intent");
-        }       
+    'CtaBusIntent': async function () {
+        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+        let route = this.event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = this.event.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse =
+            await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
+                .catch(error => {
+                    console.error(error)
+                });
+        this.emit(':tell', alexaResponse);
     },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;
