@@ -43,6 +43,6 @@ describe('IntentController Tests', function() {
         let funcDeviceId = alexaJson.context.System.device.deviceId;
 
         let alexaResponse = await IntentController.getEventsWithUserLocation(apiEndpoint, apiAccessToken, funcDeviceId);
-        assert.equal(alexaResponse, 'Here are 3 events going on in Chicago <break time="1s"/>Martin Trivia Night (FREE ENTRY), 2018 KIDFITSTRONG FITNESS CHALLENGE-CHICAGO , Redesigning the System: How Artists, Policymakers, and Practitioners are Shaping Criminal Justice Reform');
+        assert.equal(alexaResponse, "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform");
     });
 });
