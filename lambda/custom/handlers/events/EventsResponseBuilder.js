@@ -1,22 +1,23 @@
 const NUMBER_OF_EVENTS = 3;
 
-exports.buildAlexaResponse = (jsonObject) => {    
-    let eventsArray = buildEventArray(jsonObject.events);
-    // set prefix
+exports.buildAlexaResponse = (jsonObject) => {
     let msg = "Here are " + NUMBER_OF_EVENTS + " events going on in Chicago ";
 
-    // add a break
-    msg += "<break time=\"1s\"/>";
+    msg += "<break time=\"1s\"/>" +
+        "<speak>";
 
-    // add events to the message
+    let eventsArray = buildEventArray(jsonObject.events);
+
     msg += eventsArray.join(", ");
+    msg += "</speak>";
+
     return msg;
 };
 
 let buildEventArray = (events) => {
     let eventsArray = [];
     for (let index = 0; index < NUMBER_OF_EVENTS; index++) {
-        eventsArray.push(events[index].name.text);
+        eventsArray.push("<s>" + events[index].name.text + "</s>");
     }
     return eventsArray;
 };

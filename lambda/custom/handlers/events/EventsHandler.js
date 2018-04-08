@@ -48,9 +48,18 @@ exports.asyncGetEventsNearUserLocation = async function asyncGetEventsNearUserLo
 		queryParams: qp
 	});
 
-	let body = await asyncRequest(url);
-	let alexaResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
-	return alexaResponse;
+    let body = await asyncRequest(url)
+        .catch(err => console.error(err));
+
+    let alexaEventResponse = "";
+    try {
+        alexaEventResponse  = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
+    } catch (err) {
+        console.error("event response body was: " + body);
+        console.error(err);
+        alexaEventResponse = "There was an error with the event service. Try again soon."
+    }
+	return alexaEventResponse;
 };
 
 require('make-runnable');
