@@ -19,16 +19,16 @@ describe('EventsHandler Tests', function() {
 
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
-        .get('/v1/devices/' + deviceId + '/settings/address')        
-        .query(true)
-        .reply(200, responseDeviceLocation);
+            .get('/v1/devices/' + deviceId + '/settings/address')
+            .query(true)
+            .reply(200, responseDeviceLocation);
 
         sandbox = sinon.sandbox.create();        
 
         nock('https://www.eventbriteapi.com')
-        .get('/v3/events/search/')
-        .query(true)
-        .reply(200, responseEvents);
+            .get('/v3/events/search/')
+            .query(true)
+            .reply(200, responseEvents);
         
     });
 
