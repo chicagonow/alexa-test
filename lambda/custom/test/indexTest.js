@@ -3,7 +3,7 @@ const nock = require('nock');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
-const events = require('./response.events.js');
+const events = require('./response.events');
 
 const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;

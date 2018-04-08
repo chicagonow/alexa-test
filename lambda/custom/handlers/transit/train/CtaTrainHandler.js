@@ -63,18 +63,32 @@ let callCta = (parameters, callback) => {
  * Calls the CTA Train API
  * @param {object} ctaTrainParameters 
  */
-exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters){
+exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters) {
     let url = buildUrl(CTA_API_DOMAIN, {
         path: CTA_API_PATH,
         queryParams: {
             key: CTA_API_KEY,
             mapid: ctaTrainParameters.mapid,
-            rt: ctaTrainParameters.rt,
+            rt: ctaTrainParameters.route,
             outputType: "JSON"
         }
     });
 
-    let body = await asyncRequest(url);
-    let alexaTrainStatusResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
+
+    let alexaTrainStatusResponse = "";
+
+    let responseBody = await asyncRequest(url)
+        .catch(err => {
+            console.error(err);
+        });
+
+    try {
+        alexaTrainStatusResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(responseBody));
+    } catch (err) {
+        alexaTrainStatusResponse = "There was an error with the CTA train service response.";
+        console.error("The request body was: " + responseBody);
+        console.error(err);
+    }
+
     return alexaTrainStatusResponse;
-}
+};

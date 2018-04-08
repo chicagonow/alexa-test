@@ -4,8 +4,11 @@ const ParameterHelper = require('../../../helpers/ParameterHelper');
 const util = require('util');
 
 exports.testBusHandler = () => {
-    let parameters = {rt: 22,
-                      stpid: 1806};
+    let parameters = {
+        rt: 22,
+        stpid: 1806
+    };
+
     let response = busHandler.getBusesForRouteAndStop(parameters, (response) => {
     });
 };
