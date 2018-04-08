@@ -10,6 +10,17 @@
           "expires_at": "2018-03-06T02:09:39.158Z"
         },
         "vendor_id": "M3SXX64ZUEQ12W"
+      },
+      "region-west": {
+        "aws_profile": "region-west",
+        "token": {
+          "access_token": "ASK_ACCESS_TOKEN",
+          "refresh_token": "ASK_REFRESH_TOKEN",
+          "token_type": "bearer",
+          "expires_in": 3600,
+          "expires_at": "2018-03-06T02:09:39.158Z"
+        },
+        "vendor_id": "M3SXX64ZUEQ12W"
       }
     }
   }
