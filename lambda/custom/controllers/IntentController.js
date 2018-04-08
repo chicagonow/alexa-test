@@ -1,6 +1,7 @@
 const LocationHandler=require('../handlers/location/LocationHandler');
 const EventsHandler=require('../handlers/events/EventsHandler');
 const BusHandler=require('../handlers/transit/bus/BusHandler');
+const CtaTrainHandler=require('../handlers/transit/train/CtaTrainHandler');
 
 // take device information, get lat long
 // take lat long return events near location
@@ -30,4 +31,13 @@ exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEn
         });
 
     return alexaResponse;
+};
+
+exports.getStatusOfTrainStation = async function getStatusOfTrainStation(ctaTrainParameters){
+    let alexaTrainStatusResponse = await CtaTrainHandler.asyncCallCta(ctaTrainParameters)
+        .catch(error => {
+            console.error(error);
+        });
+
+    return alexaTrainStatusResponse;
 };

@@ -4,7 +4,7 @@ const assert = require('assert');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
-const events = require('./response.events.js');
+const events = require('./response.events');
 const ParameterHelper = require('../helpers/ParameterHelper');
 const IntentController = require('../controllers/IntentController');
 
@@ -100,7 +100,7 @@ describe('Cta Bus Index.JS Test', function() {
             .get('/bustime/api/v2/getstops')
             .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', dir: 'Southbound', format: 'json'})
             .reply(200, busStops49Response);
-        
+
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
             .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', dir: 'Eastbound', format: 'json'})

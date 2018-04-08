@@ -11,17 +11,15 @@ const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
-    'CtaTrainIntent': function () {        
+    'CtaTrainIntent': async function () {
         // TODO: Build proper parameters object
-        let parameters = {
+        let ctaTrainParameters = {
             mapid: "40530",
-            rt: "Brn"
+            route: "Brn"
         };
 
-        console.error('testing logs');
-        TransitHandler.searchTransit(parameters, (alexaResponse) => {
-            this.emit(':tell', alexaResponse);
-        });
+        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(ctaTrainParameters);
+        this.emit(':tell', alexaTrainStatusResponse);
     },
     'CtaBusIntent': async function () {
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
@@ -32,7 +30,7 @@ const handlers = {
                 .catch(error => {
                     console.error(error)
                 });
-        this.emit(':tell', alexaResponse); 
+        this.emit(':tell', alexaResponse);
     },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;
