@@ -5,6 +5,12 @@ Alex Baumann
 Omar Chughtai
 Ameet Sarkar
 
+# Disaster Recovery
+Use the `stage-west` branch
+1. merge in new code from stage (careful overwritting config)
+2. initiate build for `stage-west` branch on travis-ci
+3. check that lambda was deployed to us-west-2 (oregon) region
+4. manually update Alexa Skill to point to newly deployed west endpoint
 
 # run ask-cli to test alexa locally
 NOTE: use a bash terminal (cygwin, gitbash, …)
