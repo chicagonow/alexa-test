@@ -1,0 +1,698 @@
+{
+	"bustime-response": {
+		"ptr": [
+			{
+				"pid": 6351,
+				"ln": 21632.0,
+				"rtdir": "Southbound",
+				"pt": [
+					{
+						"seq": 1,
+						"lat": 41.877962249154,
+						"lon": -87.639819790347,
+						"typ": "S",
+						"stpid": "67",
+						"stpnm": "Jackson \u0026 Canal",
+						"pdist": 0.0
+					},
+					{
+						"seq": 2,
+						"lat": 41.878024718581,
+						"lon": -87.638242650137,
+						"typ": "S",
+						"stpid": "14461",
+						"stpnm": "Jackson \u0026 Chicago River",
+						"pdist": 453.0
+					},
+					{
+						"seq": 3,
+						"lat": 41.877994362476,
+						"lon": -87.635552287101,
+						"typ": "S",
+						"stpid": "68",
+						"stpnm": "Jackson \u0026 Franklin",
+						"pdist": 1416.0
+					},
+					{
+						"seq": 4,
+						"lat": 41.878047724802,
+						"lon": -87.632923937054,
+						"typ": "S",
+						"stpid": "69",
+						"stpnm": "Jackson \u0026 Financial Place",
+						"pdist": 2104.0
+					},
+					{
+						"seq": 5,
+						"lat": 41.878094216746,
+						"lon": -87.629504871001,
+						"typ": "S",
+						"stpid": "70",
+						"stpnm": "Jackson \u0026 Dearborn",
+						"pdist": 3023.0
+					},
+					{
+						"seq": 6,
+						"lat": 41.878128886327,
+						"lon": -87.628054547676,
+						"typ": "S",
+						"stpid": "71",
+						"stpnm": "Jackson \u0026 State",
+						"pdist": 3450.0
+					},
+					{
+						"seq": 7,
+						"lat": 41.878150294993,
+						"lon": -87.62578711452,
+						"typ": "S",
+						"stpid": "72",
+						"stpnm": "Jackson \u0026 Wabash",
+						"pdist": 4157.0
+					},
+					{
+						"seq": 8,
+						"lat": 41.878171543972,
+						"lon": -87.624471116432,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 9,
+						"lat": 41.876275566652,
+						"lon": -87.624405026436,
+						"typ": "S",
+						"stpid": "73",
+						"stpnm": "Michigan \u0026 Van Buren/Congress",
+						"pdist": 5085.0
+					},
+					{
+						"seq": 10,
+						"lat": 41.874573980144,
+						"lon": -87.624356746674,
+						"typ": "S",
+						"stpid": "1586",
+						"stpnm": "Michigan \u0026 Harrison",
+						"pdist": 5724.0
+					},
+					{
+						"seq": 11,
+						"lat": 41.873279785427,
+						"lon": -87.624335289001,
+						"typ": "S",
+						"stpid": "1587",
+						"stpnm": "Michigan \u0026 Balbo",
+						"pdist": 6227.0
+					},
+					{
+						"seq": 12,
+						"lat": 41.871981569955,
+						"lon": -87.624297738075,
+						"typ": "S",
+						"stpid": "1588",
+						"stpnm": "Michigan \u0026 8th Street",
+						"pdist": 6689.0
+					},
+					{
+						"seq": 13,
+						"lat": 41.870279869128,
+						"lon": -87.624254822731,
+						"typ": "S",
+						"stpid": "1589",
+						"stpnm": "Michigan \u0026 9th Street",
+						"pdist": 7327.0
+					},
+					{
+						"seq": 14,
+						"lat": 41.86908545581,
+						"lon": -87.624228000641,
+						"typ": "S",
+						"stpid": "1590",
+						"stpnm": "Michigan \u0026 11th Street",
+						"pdist": 7873.0
+					},
+					{
+						"seq": 15,
+						"lat": 41.86719192542,
+						"lon": -87.624228000641,
+						"typ": "S",
+						"stpid": "1591",
+						"stpnm": "Michigan \u0026 Roosevelt",
+						"pdist": 8637.0
+					},
+					{
+						"seq": 16,
+						"lat": 41.865644302082,
+						"lon": -87.624209762143,
+						"typ": "S",
+						"stpid": "1592",
+						"stpnm": "Michigan \u0026 13th Street",
+						"pdist": 9088.0
+					},
+					{
+						"seq": 17,
+						"lat": 41.863928529408,
+						"lon": -87.624217168412,
+						"typ": "S",
+						"stpid": "1593",
+						"stpnm": "Michigan \u0026 14th Street",
+						"pdist": 9721.0
+					},
+					{
+						"seq": 18,
+						"lat": 41.859993122142,
+						"lon": -87.624125004077,
+						"typ": "S",
+						"stpid": "1595",
+						"stpnm": "Michigan \u0026 16th Street",
+						"pdist": 11123.0
+					},
+					{
+						"seq": 19,
+						"lat": 41.857712244772,
+						"lon": -87.624084663547,
+						"typ": "S",
+						"stpid": "1596",
+						"stpnm": "Michigan \u0026 18th Street",
+						"pdist": 11994.0
+					},
+					{
+						"seq": 20,
+						"lat": 41.855420578645,
+						"lon": -87.624030804582,
+						"typ": "S",
+						"stpid": "1597",
+						"stpnm": "Michigan \u0026 Cullerton",
+						"pdist": 12854.0
+					},
+					{
+						"seq": 21,
+						"lat": 41.854032497434,
+						"lon": -87.623987031402,
+						"typ": "S",
+						"stpid": "1598",
+						"stpnm": "Michigan \u0026 21st Street",
+						"pdist": 13296.0
+					},
+					{
+						"seq": 22,
+						"lat": 41.852497981301,
+						"lon": -87.62394518999,
+						"typ": "S",
+						"stpid": "1599",
+						"stpnm": "Michigan \u0026 Cermak",
+						"pdist": 13872.0
+					},
+					{
+						"seq": 23,
+						"lat": 41.851316502258,
+						"lon": -87.623896049772,
+						"typ": "S",
+						"stpid": "16014",
+						"stpnm": "Michigan \u0026 23rd Street",
+						"pdist": 14308.0
+					},
+					{
+						"seq": 24,
+						"lat": 41.849535450901,
+						"lon": -87.623862147593,
+						"typ": "S",
+						"stpid": "17243",
+						"stpnm": "Michigan \u0026 24th Street",
+						"pdist": 14970.0
+					},
+					{
+						"seq": 25,
+						"lat": 41.847211842782,
+						"lon": -87.623804211616,
+						"typ": "S",
+						"stpid": "1602",
+						"stpnm": "Michigan \u0026 25th Street",
+						"pdist": 15790.0
+					},
+					{
+						"seq": 26,
+						"lat": 41.845502929108,
+						"lon": -87.623750568091,
+						"typ": "S",
+						"stpid": "1603",
+						"stpnm": "Michigan \u0026 26th Street",
+						"pdist": 16459.0
+					},
+					{
+						"seq": 27,
+						"lat": 41.843271409777,
+						"lon": -87.623686195729,
+						"typ": "S",
+						"stpid": "1604",
+						"stpnm": "Michigan \u0026 28th Street",
+						"pdist": 17273.0
+					},
+					{
+						"seq": 28,
+						"lat": 41.842164572607,
+						"lon": -87.623659588425,
+						"typ": "S",
+						"stpid": "1605",
+						"stpnm": "Michigan \u0026 29th Street",
+						"pdist": 17758.0
+					},
+					{
+						"seq": 29,
+						"lat": 41.840532737342,
+						"lon": -87.623604012478,
+						"typ": "S",
+						"stpid": "1606",
+						"stpnm": "3000 S Michigan",
+						"pdist": 18242.0
+					},
+					{
+						"seq": 30,
+						"lat": 41.838190736782,
+						"lon": -87.623541355133,
+						"typ": "S",
+						"stpid": "1607",
+						"stpnm": "Michigan \u0026 31st Street",
+						"pdist": 19137.0
+					},
+					{
+						"seq": 31,
+						"lat": 41.836245612422,
+						"lon": -87.62352869453,
+						"typ": "S",
+						"stpid": "1608",
+						"stpnm": "Michigan \u0026 32nd Street",
+						"pdist": 19799.0
+					},
+					{
+						"seq": 32,
+						"lat": 41.834497715012,
+						"lon": -87.623469902028,
+						"typ": "S",
+						"stpid": "1609",
+						"stpnm": "Michigan \u0026 33rd Street",
+						"pdist": 20443.0
+					},
+					{
+						"seq": 33,
+						"lat": 41.832740498016,
+						"lon": -87.623407244682,
+						"typ": "S",
+						"stpid": "1610",
+						"stpnm": "Michigan \u0026 34th Street",
+						"pdist": 21065.0
+					},
+					{
+						"seq": 34,
+						"lat": 41.830879147284,
+						"lon": -87.623358964921,
+						"typ": "S",
+						"stpid": "1611",
+						"stpnm": "Michigan \u0026 35th Street",
+						"pdist": 21632.0
+					}
+				]
+			},
+			{
+				"pid": 8085,
+				"ln": 23022.0,
+				"rtdir": "Northbound",
+				"pt": [
+					{
+						"seq": 1,
+						"lat": 41.831336096375,
+						"lon": -87.621728181839,
+						"typ": "S",
+						"stpid": "15314",
+						"stpnm": "Indiana \u0026 35th Street",
+						"pdist": 0.0
+					},
+					{
+						"seq": 2,
+						"lat": 41.832978878774,
+						"lon": -87.621755003929,
+						"typ": "S",
+						"stpid": "1560",
+						"stpnm": "Indiana \u0026 34th Street",
+						"pdist": 561.0
+					},
+					{
+						"seq": 3,
+						"lat": 41.834613625243,
+						"lon": -87.621781826019,
+						"typ": "S",
+						"stpid": "16119",
+						"stpnm": "Indiana \u0026 33rd Boulevard",
+						"pdist": 1279.0
+					},
+					{
+						"seq": 4,
+						"lat": 41.836400207496,
+						"lon": -87.621819376945,
+						"typ": "S",
+						"stpid": "1562",
+						"stpnm": "Indiana \u0026 32nd Street",
+						"pdist": 1788.0
+					},
+					{
+						"seq": 5,
+						"lat": 41.838238696449,
+						"lon": -87.621856927872,
+						"typ": "S",
+						"stpid": "1563",
+						"stpnm": "Indiana \u0026 31st Street",
+						"pdist": 2452.0
+					},
+					{
+						"seq": 6,
+						"lat": 41.838554431629,
+						"lon": -87.621856927872,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 7,
+						"lat": 41.838554431629,
+						"lon": -87.62224316597,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 8,
+						"lat": 41.838550434991,
+						"lon": -87.622602581978,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 9,
+						"lat": 41.838586404725,
+						"lon": -87.622827887535,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 10,
+						"lat": 41.83871030032,
+						"lon": -87.623037099838,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 11,
+						"lat": 41.838962087405,
+						"lon": -87.623192667961,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 12,
+						"lat": 41.840592684542,
+						"lon": -87.623230218887,
+						"typ": "S",
+						"stpid": "1564",
+						"stpnm": "3000 S Michigan",
+						"pdist": 3536.0
+					},
+					{
+						"seq": 13,
+						"lat": 41.841940933128,
+						"lon": -87.623255968356,
+						"typ": "S",
+						"stpid": "1565",
+						"stpnm": "Michigan \u0026 29th Street",
+						"pdist": 4022.0
+					},
+					{
+						"seq": 14,
+						"lat": 41.843629960584,
+						"lon": -87.62330532074,
+						"typ": "S",
+						"stpid": "1566",
+						"stpnm": "Michigan \u0026 28th Street",
+						"pdist": 4676.0
+					},
+					{
+						"seq": 15,
+						"lat": 41.845927803893,
+						"lon": -87.623369693756,
+						"typ": "S",
+						"stpid": "1567",
+						"stpnm": "Michigan \u0026 26th Street",
+						"pdist": 5490.0
+					},
+					{
+						"seq": 16,
+						"lat": 41.847294481991,
+						"lon": -87.623487710953,
+						"typ": "S",
+						"stpid": "1568",
+						"stpnm": "Michigan \u0026 25th Street",
+						"pdist": 6017.0
+					},
+					{
+						"seq": 17,
+						"lat": 41.849449617869,
+						"lon": -87.623627185822,
+						"typ": "S",
+						"stpid": "15313",
+						"stpnm": "Michigan \u0026 24th Street",
+						"pdist": 6801.0
+					},
+					{
+						"seq": 18,
+						"lat": 41.85103871072,
+						"lon": -87.623684477439,
+						"typ": "S",
+						"stpid": "1570",
+						"stpnm": "Michigan \u0026 23rd Street",
+						"pdist": 7450.0
+					},
+					{
+						"seq": 19,
+						"lat": 41.853396223626,
+						"lon": -87.623782753944,
+						"typ": "S",
+						"stpid": "15312",
+						"stpnm": "Michigan \u0026 Cermak",
+						"pdist": 8182.0
+					},
+					{
+						"seq": 20,
+						"lat": 41.854554969306,
+						"lon": -87.623820304871,
+						"typ": "S",
+						"stpid": "1573",
+						"stpnm": "Michigan \u0026 21st Street",
+						"pdist": 8608.0
+					},
+					{
+						"seq": 21,
+						"lat": 41.855713693993,
+						"lon": -87.623841762543,
+						"typ": "S",
+						"stpid": "1574",
+						"stpnm": "Michigan \u0026 Cullerton",
+						"pdist": 9047.0
+					},
+					{
+						"seq": 22,
+						"lat": 41.858114984183,
+						"lon": -87.623900771141,
+						"typ": "S",
+						"stpid": "1575",
+						"stpnm": "Michigan \u0026 18th Street",
+						"pdist": 9930.0
+					},
+					{
+						"seq": 23,
+						"lat": 41.860517782903,
+						"lon": -87.623943686485,
+						"typ": "S",
+						"stpid": "14760",
+						"stpnm": "Michigan \u0026 16th Street",
+						"pdist": 10818.0
+					},
+					{
+						"seq": 24,
+						"lat": 41.86436497513,
+						"lon": -87.623993136645,
+						"typ": "S",
+						"stpid": "18318",
+						"stpnm": "Michigan \u0026 14th Street",
+						"pdist": 12237.0
+					},
+					{
+						"seq": 25,
+						"lat": 41.866114106851,
+						"lon": -87.624010203436,
+						"typ": "S",
+						"stpid": "1579",
+						"stpnm": "Michigan \u0026 13th Street",
+						"pdist": 12894.0
+					},
+					{
+						"seq": 26,
+						"lat": 41.867815118829,
+						"lon": -87.623997330666,
+						"typ": "S",
+						"stpid": "1580",
+						"stpnm": "Michigan \u0026 Roosevelt",
+						"pdist": 13577.0
+					},
+					{
+						"seq": 27,
+						"lat": 41.86931714977,
+						"lon": -87.62398660183,
+						"typ": "S",
+						"stpid": "1581",
+						"stpnm": "Michigan \u0026 11th Street",
+						"pdist": 13941.0
+					},
+					{
+						"seq": 28,
+						"lat": 41.870519548042,
+						"lon": -87.624008059502,
+						"typ": "S",
+						"stpid": "1582",
+						"stpnm": "Michigan \u0026 9th Street",
+						"pdist": 14419.0
+					},
+					{
+						"seq": 29,
+						"lat": 41.871793825843,
+						"lon": -87.624050974846,
+						"typ": "S",
+						"stpid": "1583",
+						"stpnm": "Michigan \u0026 8th Street",
+						"pdist": 14908.0
+					},
+					{
+						"seq": 30,
+						"lat": 41.873391630449,
+						"lon": -87.624072432518,
+						"typ": "S",
+						"stpid": "1584",
+						"stpnm": "Michigan \u0026 Balbo",
+						"pdist": 15563.0
+					},
+					{
+						"seq": 31,
+						"lat": 41.875520643017,
+						"lon": -87.624131441116,
+						"typ": "S",
+						"stpid": "14485",
+						"stpnm": "Michigan \u0026 Congress",
+						"pdist": 16290.0
+					},
+					{
+						"seq": 32,
+						"lat": 41.876790826869,
+						"lon": -87.624126076698,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 33,
+						"lat": 41.877006515959,
+						"lon": -87.624126076698,
+						"typ": "S",
+						"stpid": "75",
+						"stpnm": "Michigan \u0026 Van Buren",
+						"pdist": 16683.0
+					},
+					{
+						"seq": 34,
+						"lat": 41.878328594291,
+						"lon": -87.624168992043,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 35,
+						"lat": 41.879570763814,
+						"lon": -87.624206542969,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 36,
+						"lat": 41.879538811203,
+						"lon": -87.625778317451,
+						"typ": "S",
+						"stpid": "77",
+						"stpnm": "Adams \u0026 Wabash",
+						"pdist": 18143.0
+					},
+					{
+						"seq": 37,
+						"lat": 41.879502864496,
+						"lon": -87.628160119056,
+						"typ": "S",
+						"stpid": "4732",
+						"stpnm": "Adams \u0026 State",
+						"pdist": 18726.0
+					},
+					{
+						"seq": 38,
+						"lat": 41.879453337792,
+						"lon": -87.630654573441,
+						"typ": "S",
+						"stpid": "17046",
+						"stpnm": "Adams \u0026 Clark",
+						"pdist": 19550.0
+					},
+					{
+						"seq": 39,
+						"lat": 41.879400615586,
+						"lon": -87.634122134041,
+						"typ": "S",
+						"stpid": "80",
+						"stpnm": "Adams \u0026 Wells",
+						"pdist": 20409.0
+					},
+					{
+						"seq": 40,
+						"lat": 41.879383041994,
+						"lon": -87.637048959732,
+						"typ": "S",
+						"stpid": "1108",
+						"stpnm": "Adams \u0026 S. Wacker",
+						"pdist": 20898.0
+					},
+					{
+						"seq": 41,
+						"lat": 41.879343900221,
+						"lon": -87.639442562141,
+						"typ": "S",
+						"stpid": "12713",
+						"stpnm": "Adams \u0026 Canal",
+						"pdist": 21812.0
+					},
+					{
+						"seq": 42,
+						"lat": 41.879357638678,
+						"lon": -87.641106606316,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 43,
+						"lat": 41.877951704957,
+						"lon": -87.641072273254,
+						"typ": "W",
+						"pdist": 0.0
+					},
+					{
+						"seq": 44,
+						"lat": 41.877962249154,
+						"lon": -87.639819790347,
+						"typ": "S",
+						"stpid": "67",
+						"stpnm": "Jackson \u0026 Canal",
+						"pdist": 23022.0
+					}
+				]
+			}
+		]
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"bustime-response": {
+		"error": [
+			{
+				"rt": "1",
+				"stpid": "70",
+				"msg": "No arrival times"
+			}
+		]
+	}
+}
