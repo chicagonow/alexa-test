@@ -1,0 +1,42 @@
+{
+	"bustime-response": {
+		"prd": [
+			{
+				"tmstmp": "20180406 23:05",
+				"typ": "A",
+				"stpnm": "Western \u0026 14th Street",
+				"stpid": "8245",
+				"vid": "1473",
+				"dstp": 16175,
+				"rt": "49",
+				"rtdd": "49",
+				"rtdir": "Southbound",
+				"des": "79th",
+				"prdtm": "20180406 23:20",
+				"tablockid": "N49 -691",
+				"tatripid": "10001465",
+				"dly": false,
+				"prdctdn": "13",
+				"zone": ""
+			},
+			{
+				"tmstmp": "20180406 23:07",
+				"typ": "A",
+				"stpnm": "Western \u0026 14th Street",
+				"stpid": "8245",
+				"vid": "1534",
+				"dstp": 25523,
+				"rt": "49",
+				"rtdd": "49",
+				"rtdir": "Southbound",
+				"des": "79th",
+				"prdtm": "20180406 23:31",
+				"tablockid": "49 -660",
+				"tatripid": "10001463",
+				"dly": false,
+				"prdctdn": "24",
+				"zone": ""
+			}
+		]
+	}
+}

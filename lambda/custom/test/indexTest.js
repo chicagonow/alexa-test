@@ -1,13 +1,18 @@
 const expect = require('chai').expect;
 const nock = require('nock');
+const assert = require('assert');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
-const events = require('./response.events.js');
+const events = require('./response.events');
+const ParameterHelper = require('../helpers/ParameterHelper');
+const IntentController = require('../controllers/IntentController');
 
 const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
 const responseTrains = require('./response.trains');
+const alexaBusRequest20East = require('./alexaRequest20EastboundBus');
+const alexaBusRequest49South = require('./alexaRequest49SouthboundBus');
 
 describe('Get Events Handler', function() {
     beforeEach(function() {
@@ -46,63 +51,113 @@ describe('Get Events Response', function() {
     });
 });
 
-describe('Cta Bus Handler', function() {
-    const WESTERN_BUS_ROUTE = "49";
-    const WESTERN_BUS_STOP_ID = "8269";
-    const SOUTHBOUND_DIRECTION = "Southbound";
+describe('Cta Bus Index.JS Test', function() {
+
+    const BUS_ROUTE = "20";
+    const BUS_STOP_ID = "4727";
+    const DIRECTION = "Eastbound";
 
     const busHandler = require('../handlers/transit/bus/BusHandler');
-    const busResponse = require('./response.buses');
+    const busPred20Response = require('./response.getPredictions20');
+    const busPred49Response = require('./response.getPredictions49');
+    const busStops20Response = require('./response.getStops20');
+    const busStops49Response = require('./response.getStops49');
     const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
+    const getPatterns20Response = require('../test/response.getPatterns20');
+    const getPatterns49Response = require('../test/response.getPatterns49');
 
 
     beforeEach(function() {
 
+        //nock.cleanAll();
         // require(busHandler);
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query(true)
-            .reply(200, busResponse);
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '76', format: 'json'})
+            .reply(200, busPred49Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '14182', format: 'json'})
+            .reply(200, busPred49Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '4727', format: 'json'})
+            .reply(200, busPred20Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '449', format: 'json'})
+            .reply(200, busPred20Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '386', format: 'json'})
+            .reply(200, busPred20Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
-            .query(true)
-            .reply(200, busResponse);
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', dir: 'Southbound', format: 'json'})
+            .reply(200, busStops49Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getstops')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', dir: 'Eastbound', format: 'json'})
+            .reply(200, busStops20Response);
+
+        // Mock getpatterns
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+        .reply(200, getPatterns20Response);
+
+        // Mock getpatterns
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+        .reply(200, getPatterns49Response);
+
     });
 
-    it('returns status of specific bus and stop', (done) => {
+    it('returns status of specific bus and stop', async function() {
         this.timeout(3000);
 
         let parameters = {
-            rt: WESTERN_BUS_ROUTE,
-            stpid: WESTERN_BUS_STOP_ID
+            rt: BUS_ROUTE,
+            stpid: BUS_STOP_ID
         };
 
-        busHandler.getBusesForRouteAndStop(parameters, (alexaResponse) => {
-            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
-            done();
-        });
-
+        let string = await busHandler.asyncGetBusesForRouteAndStop(parameters.rt, parameters.stpid)
+        assert.equal(string, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
-    it('return status of nearest bus stop', (done) => {
+    it('return status of nearest bus stop', async function() {
         this.timeout(3000);
         let parameters = {
-            rt: WESTERN_BUS_ROUTE,
-            dir: SOUTHBOUND_DIRECTION
+            rt: BUS_ROUTE,
+            dir: 'Eastbound'
         };
 
-        busHandler.searchBusNearMe(parameters, alexaResponse => {
-            expect(alexaResponse).to.equal("The Southbound 49 bus towards 79th will arrive at 10:14 PM");
-            done();
-        });
+        let stringResponse = await busHandler.asyncGetBusesWithUserLocation(parameters.rt, parameters.dir, 41.881383249235, -87.668550968956);
+        assert.equal(stringResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
-    it('calculates the closest bus stop id', done => {
-        let closestStopId = ctaBusRepository.closestStopId(41.775450009211, -87.683650731711, busResponse);
-        expect(closestStopId).to.equal("14857");
-        done();
-    });
+    it('test Alexa JSON 20 East input returns correct response', async function() {
+        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest20East.context.System);
+        let route = alexaBusRequest20East.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = alexaBusRequest20East.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
+    })
+
+    it('test Alexa JSON 49 South input returns correct response', async function() {
+        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
+        let route = alexaBusRequest49South.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = alexaBusRequest49South.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+        assert.equal(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
+    })
 
 });
 
