@@ -44,8 +44,7 @@ describe('EventsHandler Tests', function () {
                 "location.latitude":"41.87893",
                 "location.longitude":"-87.626088"
                 })
-            // .reply(200, responseEventsNearLocation);
-            .reply(200, "{}");
+            .reply(200, responseEventsNearLocation);        
     });
 
     afterEach(function () {
@@ -63,7 +62,7 @@ describe('EventsHandler Tests', function () {
     // });
 
     describe("getEventsNearLocation", () => {
-        const expectedEventsNearLocation = "";
+        const expectedEventsNearLocation = "fake response";
         it('returns events near the address inputed by user', async function () {
             let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(41.9, -87.7);
             assert.equal(alexaResponse, expectedEventsNearLocation);
