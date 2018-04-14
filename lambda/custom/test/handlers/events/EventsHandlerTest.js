@@ -66,7 +66,7 @@ describe('EventsHandler Tests', function () {
         const expectedEventsNearLocation = "";
         it('returns events near the address inputed by user', async function () {
             let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(41.9, -87.7);
-            assert.equal(alexaResponse, expectedEventsResponse);
+            assert.equal(alexaResponse, expectedEventsNearLocation);
         })
     });
 
