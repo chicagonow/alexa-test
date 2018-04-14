@@ -11,7 +11,7 @@ exports.getEventsWithUserLocation = async function getEventsWithUserLocation(api
             console.error(error);
         });
 
-    let alexaResponse = await EventsHandler.asyncGetEventsNearUserLocation(locationObj.latitude, locationObj.longitude)
+    let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(locationObj.latitude, locationObj.longitude)
         .catch(error => {
             console.error(error);
         });

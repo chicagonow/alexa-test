@@ -36,7 +36,7 @@ let searchEventbrite = (latitude, longitude, callback) => {
 };
 
 //return Alexa response string
-exports.asyncGetEventsNearUserLocation = async function asyncGetEventsNearUserLocation(latitude, longitude){
+exports.asyncGetEventsNearLocation = async function asyncGetEventsNearLocation(latitude, longitude){
 	const qp = {};
 	qp[encodeURIComponent('token')] = AUTH_TOKEN;
 	qp[encodeURIComponent('location.within')] = '1mi';
