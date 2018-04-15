@@ -13,6 +13,8 @@ const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').
 const responseTrains = require('./response.trains');
 const alexaBusRequest20East = require('./alexaRequest20EastboundBus');
 const alexaBusRequest49South = require('./alexaRequest49SouthboundBus');
+const alexaJson = require('./response.alexa.json');
+const responseDeviceLocation = require('./response.deviceLocation');
 
 describe('Get Events Handler', function() {
     beforeEach(function() {
@@ -118,6 +120,15 @@ describe('Cta Bus Index.JS Test', function() {
         .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
         .reply(200, getPatterns49Response);
 
+        // Mock Device Location request
+        let deviceId = alexaJson.context.System.device.deviceId;
+        nock('https://api.amazonalexa.com')
+        .get('/v1/devices/' + deviceId + '/settings/address')        
+        .query(true)
+        .reply(200, responseDeviceLocation);
+
+        
+        
     });
 
     it('returns status of specific bus and stop', async function() {
