@@ -65,6 +65,18 @@
           ]
         },
         {
+          "name": "EventTimeFrameIntent",
+          "slots": [
+            {
+              "name": "timeFrame",
+              "type": "TIME_FRAME"
+            }
+          ],
+          "samples": [
+            "what's going on {timeFrame}"
+          ]
+        },
+        {
           "name": "EventLocationIntent",
           "samples": [
             "what events are going on near me"
@@ -1488,6 +1500,35 @@
             }
           ],
           "name": "EVENTS"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "today",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "this weekend",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "this week",
+                "synonyms": []
+              }
+            },
+            {
+              "name": {
+                "value": "this month",
+                "synonyms": []
+              }
+            }
+          ],
+          "name": "TIME_FRAME"
         }
       ]
     }
