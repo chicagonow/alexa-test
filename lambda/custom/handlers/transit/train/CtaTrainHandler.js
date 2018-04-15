@@ -3,6 +3,7 @@ const buildUrl = require('build-url');
 const TransitResponseBuilder = require('../TransitResponseBuilder');
 const TrainRepository = require('../../../repositories/transit/CtaTrainRepository');
 const LocationHandler = require('../../location/LocationHandler');
+const asyncRequest = require('request-promise');
 
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
 const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
@@ -56,4 +57,38 @@ let callCta = (parameters, callback) => {
         let alexaResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
         callback(alexaResponse);        
     });
+};
+
+/**
+ * Calls the CTA Train API
+ * @param {object} ctaTrainParameters 
+ */
+exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters) {
+    let url = buildUrl(CTA_API_DOMAIN, {
+        path: CTA_API_PATH,
+        queryParams: {
+            key: CTA_API_KEY,
+            mapid: ctaTrainParameters.mapid,
+            rt: ctaTrainParameters.route,
+            outputType: "JSON"
+        }
+    });
+
+
+    let alexaTrainStatusResponse = "";
+
+    let responseBody = await asyncRequest(url)
+        .catch(err => {
+            console.error(err);
+        });
+
+    try {
+        alexaTrainStatusResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(responseBody));
+    } catch (err) {
+        alexaTrainStatusResponse = "There was an error with the CTA train service response.";
+        console.error("The request body was: " + responseBody);
+        console.error(err);
+    }
+
+    return alexaTrainStatusResponse;
 };

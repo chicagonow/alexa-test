@@ -6,7 +6,11 @@ branches:
   only:
   - master
   - stage
+<<<<<<< HEAD
   - BusSyncTests
+=======
+  - stage-west
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 
 cache:
   directories:

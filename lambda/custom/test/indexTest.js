@@ -4,7 +4,11 @@ const assert = require('assert');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
+<<<<<<< HEAD
 const events = require('./response.events.js');
+=======
+const events = require('./response.events');
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 const ParameterHelper = require('../helpers/ParameterHelper');
 const IntentController = require('../controllers/IntentController');
 
@@ -60,17 +64,51 @@ describe('Cta Bus Index.JS Test', function() {
     const busHandler = require('../handlers/transit/bus/BusHandler');
     const busPred20Response = require('./response.getPredictions20');
     const busPred49Response = require('./response.getPredictions49');
+<<<<<<< HEAD
+=======
+    const busPred1Response = require('./response.getPredictions1');
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     const busStops20Response = require('./response.getStops20');
     const busStops49Response = require('./response.getStops49');
     const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
+    const getPatterns20Response = require('../test/response.getPatterns20');
+    const getPatterns49Response = require('../test/response.getPatterns49');
+    const getPatterns1Response = require('../test/response.getPatterns1');
 
 
     beforeEach(function() {
 
         //nock.cleanAll();
         // require(busHandler);
+
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '76', format: 'json'})
+            .reply(200, busPred49Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '14182', format: 'json'})
+            .reply(200, busPred49Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '4727', format: 'json'})
+            .reply(200, busPred20Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '449', format: 'json'})
+            .reply(200, busPred20Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '386', format: 'json'})
+            .reply(200, busPred20Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getpredictions')
+<<<<<<< HEAD
             .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '76', format: 'json'})
             .reply(200, busPred49Response);
 
@@ -94,6 +132,44 @@ describe('Cta Bus Index.JS Test', function() {
             .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', dir: 'Eastbound', format: 'json'})
             .reply(200, busStops20Response);
 
+=======
+            .query(function(queryObject){
+                return (queryObject.key == 'mY73pz65XVB4Yc7GYAgqFrHQY' 
+                    && queryObject.rt == '1'
+                    && queryObject.format == 'json');
+            })
+            .reply(200, busPred1Response)
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getstops')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', dir: 'Southbound', format: 'json'})
+            .reply(200, busStops49Response);
+
+        nock('http://ctabustracker.com')
+            .get('/bustime/api/v2/getstops')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', dir: 'Eastbound', format: 'json'})
+            .reply(200, busStops20Response);
+
+        // Mock getpatterns
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+        .reply(200, getPatterns20Response);
+
+        // Mock getpatterns
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+        .reply(200, getPatterns49Response);
+
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '1', format: 'json'})
+        .reply(200, getPatterns1Response);
+
+        
+
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     });
 
     it('returns status of specific bus and stop', async function() {
@@ -134,6 +210,16 @@ describe('Cta Bus Index.JS Test', function() {
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
         assert.equal(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
     })
+<<<<<<< HEAD
+=======
+
+    it('test Error Response', async function(){
+        
+        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
+        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Southbound");
+        assert.equal(alexaResponse, "There is no scheduled service for stop 70 on route 1");
+    })
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 
 });
 

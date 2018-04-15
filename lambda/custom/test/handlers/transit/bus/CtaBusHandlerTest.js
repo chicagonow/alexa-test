@@ -8,6 +8,11 @@ const alexaJson = require('../../../response.alexa.json');
 const responseDeviceLocation = require('../../../response.deviceLocation');
 const responseBuses = require('../../../response.getPredictions20');
 const responseRepoBuses = require('../../../response.getStops20');
+<<<<<<< HEAD
+=======
+const getPatterns20Response = require('../../../../test/response.getPatterns20');
+const getPatterns49Response = require('../../../../test/response.getPatterns49');
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 
 // import files we need to test
 const BusHandler = require('../../../../handlers/transit/bus/BusHandler');
@@ -48,6 +53,20 @@ describe('CtaBusHandler Tests', function() {
         .query(true)
         .reply(200, responseBuses);
         
+<<<<<<< HEAD
+=======
+        // Mock getpatterns
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+        .reply(200, getPatterns20Response);
+
+        // Mock getpatterns
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpatterns')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+        .reply(200, getPatterns49Response);
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     });
 
     afterEach(function() {
@@ -60,7 +79,11 @@ describe('CtaBusHandler Tests', function() {
         // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the 
         // callback, with that location object instead of the location retrieved from the geocode library
         let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
+<<<<<<< HEAD
         fakeGeocoder.callsArgWith(1, {latitude: -10, longitude: -81.7});
+=======
+        fakeGeocoder.callsArgWith(1, {latitude: 41, longitude: -87});
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 
         let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
         BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
@@ -71,7 +94,15 @@ describe('CtaBusHandler Tests', function() {
 
     // Tests the BusHandler method
     it('AsyncBusHandler: returns correct Alexa Response', async function() {
+<<<<<<< HEAD
         let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(20, 'Eastbound', -10, -81.7);
         assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM');
     });
+=======
+        let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(20, 'Eastbound', 41, -81.7);
+        assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM');
+    });
+
+    
+>>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 });
