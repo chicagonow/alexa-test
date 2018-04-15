@@ -17,23 +17,29 @@ describe('EventsHandler Tests', function() {
 
     beforeEach(function() {
 
+        // Mock device location API request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
             .query(true)
-            .reply(200, responseDeviceLocation);
+            .reply(200, responseDeviceLocation);              
 
-        sandbox = sinon.sandbox.create();        
-
+        // Mock the eventbrite API call
         nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query(true)
             .reply(200, responseEvents);
+
+        // Initialize the sandbox for sinon testing
+        sandbox = sinon.sandbox.create();  
         
+        // Mock the geocoder call
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});
     });
 
     afterEach(function() {
         sandbox.restore();
+        nock.cleanAll();
     });
 
     // Tests the searchEventsNearMe method

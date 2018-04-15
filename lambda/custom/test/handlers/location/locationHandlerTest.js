@@ -25,11 +25,14 @@ describe('LocationHandler tests', () => {
 
         // Mock Lat/Long location
         sandbox = sinon.sandbox.create();
-        
+
+        // Mock the geocoder call
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});         
     });
 
     afterEach(function() {
         sandbox.restore();
+        nock.cleanAll();
     });
 
     it('Tests that locationHandler returns lat long', function(done) {
@@ -47,10 +50,6 @@ describe('LocationHandler tests', () => {
     });
 
     it('Tests that asyncGetLocation returns lat long', async function(){
-        let mockGeoCoder = sandbox.stub(geocoder, 'asyncGetLatLong')
-            .returns({latitude: -10, longitude: -20});
-
-        
         let apiEndpoint = alexaJson.context.System.apiEndpoint;
         let apiAccessToken = alexaJson.context.System.apiAccessToken;
         let funcDeviceId = alexaJson.context.System.device.deviceId;

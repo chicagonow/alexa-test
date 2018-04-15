@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const nock = require('nock');
 const assert = require('assert');
+const sinon = require('sinon');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
@@ -8,11 +9,16 @@ const events = require('./response.events');
 const ParameterHelper = require('../helpers/ParameterHelper');
 const IntentController = require('../controllers/IntentController');
 
+// Geocoder we need to mock
+const geocoder = require('../handlers/location/geocoder');
+
 const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
 const responseTrains = require('./response.trains');
 const alexaBusRequest20East = require('./alexaRequest20EastboundBus');
 const alexaBusRequest49South = require('./alexaRequest49SouthboundBus');
+const alexaJson = require('./response.alexa.json');
+const responseDeviceLocation = require('./response.deviceLocation');
 
 describe('Get Events Handler', function() {
     beforeEach(function() {
@@ -52,7 +58,7 @@ describe('Get Events Response', function() {
 });
 
 describe('Cta Bus Index.JS Test', function() {
-
+    let sandbox;
     const BUS_ROUTE = "20";
     const BUS_STOP_ID = "4727";
     const DIRECTION = "Eastbound";
@@ -68,12 +74,7 @@ describe('Cta Bus Index.JS Test', function() {
     const getPatterns49Response = require('../test/response.getPatterns49');
     const getPatterns1Response = require('../test/response.getPatterns1');
 
-
     beforeEach(function() {
-
-        //nock.cleanAll();
-        // require(busHandler);
-
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '76', format: 'json'})
@@ -135,8 +136,23 @@ describe('Cta Bus Index.JS Test', function() {
         .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '1', format: 'json'})
         .reply(200, getPatterns1Response);
 
-        
+        // Mock device location API request
+        let deviceId = alexaJson.context.System.device.deviceId;
+        nock('https://api.amazonalexa.com')
+        .get('/v1/devices/' + deviceId + '/settings/address')        
+        .query(true)
+        .reply(200, responseDeviceLocation);
 
+        // Initialize the sandbox for sinon testing
+        sandbox = sinon.sandbox.create();  
+        
+        // Mock the geocoder call
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20}); 
+    });
+
+    afterEach(function() {
+        sandbox.restore();
+        nock.cleanAll();
     });
 
     it('returns status of specific bus and stop', async function() {

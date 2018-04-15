@@ -33,8 +33,8 @@ exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEn
     return alexaResponse;
 };
 
-exports.getStatusOfTrainStation = async function getStatusOfTrainStation(ctaTrainParameters){
-    let alexaTrainStatusResponse = await CtaTrainHandler.asyncCallCta(ctaTrainParameters)
+exports.getStatusOfTrainStation = async function getStatusOfTrainStation(mapid, route){
+    let alexaTrainStatusResponse = await CtaTrainHandler.asyncCallCta(mapid, route)
         .catch(error => {
             console.error(error);
         });

@@ -27,16 +27,12 @@ describe('CtaBusHandler Tests', function() {
     var sandbox;
 
     beforeEach(function() {
-        nock.cleanAll();
         // Mock Device Location request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
         .get('/v1/devices/' + deviceId + '/settings/address')        
         .query(true)
-        .reply(200, responseDeviceLocation);
-
-        // Initialize the sandbox for sinon testing
-        sandbox = sinon.sandbox.create();        
+        .reply(200, responseDeviceLocation);   
 
         // Mock CTA Bus Repository call
         nock('http://ctabustracker.com')
@@ -61,14 +57,21 @@ describe('CtaBusHandler Tests', function() {
         .get('/bustime/api/v2/getpatterns')
         .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
         .reply(200, getPatterns49Response);
+
+        // Initialize the sandbox for sinon testing
+        sandbox = sinon.sandbox.create();  
+        
+        // Mock the geocoder call
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});        
     });
 
     afterEach(function() {
         // restore the test environment
         sandbox.restore();
+        nock.cleanAll();
     });
 
-    // Tests the searchTrainNearMe method
+    // Tests the searchBusNearMe method
     it('searchBusNearMe: returns correct Alexa Response', function(done) {
         // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the 
         // callback, with that location object instead of the location retrieved from the geocode library
@@ -86,7 +89,5 @@ describe('CtaBusHandler Tests', function() {
     it('AsyncBusHandler: returns correct Alexa Response', async function() {
         let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(20, 'Eastbound', 41, -81.7);
         assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM');
-    });
-
-    
+    }); 
 });
