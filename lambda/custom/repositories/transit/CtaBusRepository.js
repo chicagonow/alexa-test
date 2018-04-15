@@ -59,7 +59,6 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
             rt: route,
             format: "json"
         }
-
     });
     // call cta
     let body = await asyncRequest(url).catch(error => {
