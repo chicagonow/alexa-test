@@ -30,21 +30,21 @@ describe('EventsHandler Tests', function () {
         nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query({
-                    "token":EVENTBRITE_TOKEN,
-                    "location.within":"1mi",
-                    "location.latitude":"-10",
-                    "location.longitude":"-81.7"
-                    })
+                "token": EVENTBRITE_TOKEN,
+                "location.within": "1mi",
+                "location.latitude": "-10",
+                "location.longitude": "-81.7"
+            })
             .reply(200, responseEvents);
 
         nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query({
                 "token": EVENTBRITE_TOKEN,
-                "location.within":"1mi",
-                "location.latitude":"41.9",
-                "location.longitude":"-87.7"
-                })
+                "location.within": "1mi",
+                "location.latitude": "41.9",
+                "location.longitude": "-87.7"
+            })
             .reply(200, responseEventsNearLocation);
     });
 
