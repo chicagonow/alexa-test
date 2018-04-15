@@ -12,13 +12,8 @@ const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
     'CtaTrainIntent': async function () {
-        // TODO: Build proper parameters object
-        let ctaTrainParameters = {
-            mapid: "40530",
-            route: "Brn"
-        };
-
-        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(ctaTrainParameters);
+        // TODO: Build proper parameters
+        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation("40530", "Brn");
         this.emit(':tell', alexaTrainStatusResponse);
     },
     'CtaBusIntent': async function () {

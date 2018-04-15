@@ -30,10 +30,7 @@ describe('CtaTrainHandler Tests', function() {
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
             .query(true)
-            .reply(200, responseDeviceLocation);
-
-        // Initialize the sandbox for sinon testing
-        sandbox = sinon.sandbox.create();        
+            .reply(200, responseDeviceLocation);    
 
         // Mock CTA Train Repository call
         nock('https://data.cityofchicago.org')
@@ -44,14 +41,23 @@ describe('CtaTrainHandler Tests', function() {
         // Mock CTA API call
         nock('http://lapi.transitchicago.com')
             .get('/api/1.0/ttarrivals.aspx')
-            .query(true)
+            .query(function(queryObject) {
+                return queryObject.rt !== "fail" && queryObject.mapid !== "fail"
+            })
             .reply(200, responseTrains);
+
+        // Initialize the sandbox for sinon testing
+        sandbox = sinon.sandbox.create();  
         
+        // Mock the geocoder call
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20}); 
     });
 
     afterEach(function() {
         // restore the test environment
         sandbox.restore();
+        // Clear nocked API calls
+        nock.cleanAll();
     });
 
     describe("searchTrainNearMe", function () {
@@ -86,28 +92,17 @@ describe('CtaTrainHandler Tests', function() {
 
     describe("asyncCallCta", function () {
         it('has default fail response ', async () => {
+            
+            nock('http://lapi.transitchicago.com')
+                .get('/api/1.0/ttarrivals.aspx')
+                .query(function(queryObject){
+                    return queryObject.rt === "fail" && queryObject.mapid === "fail";
+                })
+                .reply(500, null);
 
-            console.error("need to find a way to implement failure. The regex matching of the nock will win over one will malformed query parameters")
-            // nock('http://lapi.transitchicago.com')
-            //     .get('/api/1.0/ttarrivals.aspx')
-            //     .query({
-            //         key: "541afb8f3df94db2a7afffc486ea4fbf",
-            //         mapid: "fail",
-            //         rt: "fail",
-            //         outputType: "JSON"
-            //     })
-            //     .reply(500);
-            //
-            // let ctaTrainParameters = {
-            //     mapid: "fail",
-            //     route: "fail"
-            // };
-            //
-            // let actualAlexaResponse = await CtaTrainHandler.asyncCallCta(ctaTrainParameters);
-            // let expectedAlexaResponse = "There was an error with the CTA train service response.";
-            // assert.equal(actualAlexaResponse, expectedAlexaResponse);
-            //
-            // // done();
+            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("fail", "fail");
+            let expectedAlexaResponse = "There was an error with the CTA train service response.";
+            assert.equal(actualAlexaResponse, expectedAlexaResponse);
         });
 
         it('with correct query parameters returns correct Alexa Response', async () => {
@@ -116,11 +111,9 @@ describe('CtaTrainHandler Tests', function() {
                 route: "Brn"
             };
 
-            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta(ctaTrainParameters);
+            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("40530", "Brn");
             let expectedAlexaResponse = "The Diversey Brn Service toward Loop will arrive at 9:55 PM";
             assert.equal(actualAlexaResponse, expectedAlexaResponse);
-
-            // done();
         });
     });
 });
