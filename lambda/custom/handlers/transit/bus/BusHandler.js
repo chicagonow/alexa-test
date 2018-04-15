@@ -75,9 +75,10 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         console.error(error);
     });
 
-    let responseBodyJson = JSON.parse(body);
+    
     let alexaResponse = "";
     try {
+        let responseBodyJson = JSON.parse(body);
         alexaResponse = BusResponseBuilder.buildAlexaResponse(responseBodyJson);
     } catch(error) {
         console.error("response body was: " + responseBodyJson);
