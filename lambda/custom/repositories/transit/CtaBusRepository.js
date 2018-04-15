@@ -9,11 +9,7 @@ const CTABUS_API_STOPS_PATH = '/bustime/api/v2/getstops';
 const CTABUS_API_PATTERNS_PATH = '/bustime/api/v2/getpatterns';
 
 /*take latitude, long, return nearest stopID*/
-<<<<<<< HEAD
-exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(route, direction, latitude, longitude){
-=======
 exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(route, direction, latitude, longitude) {
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     // build url
     let url = buildUrl(CTABUS_API_DOMAIN, {
         path: CTABUS_API_STOPS_PATH,
@@ -23,19 +19,6 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
             dir: direction,
             format: "json"
         }
-<<<<<<< HEAD
-        
-    });
-    // call cta
-    let body = await asyncRequest(url).catch(error => {
-        console.error(error);
-        console.error(JSON.stringify(error))
-    });;
-    // parse JSON
-    let ctaBusStopResponse = JSON.parse(body);
-    console.log(JSON.stringify(body));
-    // convert to Javascript object
-=======
     });
 
     let body = await asyncRequest(url).catch(error => {
@@ -43,7 +26,6 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
     });
 
     let ctaBusStopResponse = JSON.parse(body);
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     const bustimeResponse = ctaBusStopResponse["bustime-response"];
 
     // set closest stop to first stop
@@ -52,16 +34,6 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
     let closestDistance = 9999999999;
 
     // iterate through all stops find closest stop
-<<<<<<< HEAD
-    for (let i = 0; i < length; i++){
-        let thisStop = bustimeResponse.stops[i];
-        let lat = thisStop.lat;
-        let long = thisStop.lon;
-        let thisDistance = distanceCalc.getDistance(latitude,longitude,lat,long, distanceCalc.Unit.M);
-        let thisStopId = thisStop.stpid;
-
-        if (thisDistance < closestDistance){
-=======
     for (let i = 0; i < length; i++) {
         let thisStop = bustimeResponse.stops[i];
         let lat = thisStop.lat;
@@ -70,27 +42,15 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
         let thisStopId = thisStop.stpid;
 
         if (thisDistance < closestDistance) {
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
             closestDistance = thisDistance;
             closestStopId = thisStopId;
         }
     }
-<<<<<<< HEAD
-    
-    return closestStopId;
-};
-
-/*
-*/
-/*
-exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude){
-=======
 
     return closestStopId;
 };
 
 exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude) {
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     // build url
     let url = buildUrl(CTABUS_API_DOMAIN, {
         path: CTABUS_API_PATTERNS_PATH,
@@ -99,47 +59,10 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
             rt: route,
             format: "json"
         }
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     });
     // call cta
     let body = await asyncRequest(url).catch(error => {
         console.error(error);
-<<<<<<< HEAD
-        console.error(JSON.stringify(error))
-    });;
-    // parse JSON
-    let ctaBusStopResponse = JSON.parse(body);
-    console.log(JSON.stringify(body));
-    // convert to Javascript object
-    const bustimeResponse = ctaBusStopResponse["bustime-response"];
-
-    // set closest stop to first stop
-    let length = Object.keys(bustimeResponse.stops).length;
-    let closestStopId = bustimeResponse.stops[0].stpid;
-    let closestDistance = 9999999999;
-
-    // iterate through all stops find closest stop
-    for (let i = 0; i < length; i++){
-        let thisStop = bustimeResponse.stops[i];
-        let lat = thisStop.lat;
-        let long = thisStop.lon;
-        let thisDistance = distanceCalc.getDistance(latitude,longitude,lat,long, distanceCalc.Unit.M);
-        let thisStopId = thisStop.stpid;
-
-        if (thisDistance < closestDistance){
-            closestDistance = thisDistance;
-            closestStopId = thisStopId;
-        }
-    }
-    
-    return closestStopId;
-};
-*/
-=======
     });
 
     // parse JSON
@@ -186,7 +109,6 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
 
     return closestStopId;
 };
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
 
 /*take latitude, long, return nearest stopID*/
 exports.getNearestBusStopId = (parameters, latitude, longitude, callback) => {

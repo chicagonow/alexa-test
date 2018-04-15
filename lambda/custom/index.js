@@ -18,15 +18,8 @@ const handlers = {
             route: "Brn"
         };
 
-<<<<<<< HEAD
-        console.error('testing logs');
-        TransitHandler.searchTransit(parameters, (alexaResponse) => {
-            this.emit(':tell', alexaResponse);
-        });
-=======
         let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(ctaTrainParameters);
         this.emit(':tell', alexaTrainStatusResponse);
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     },
     'CtaBusIntent': async function () {
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
@@ -37,11 +30,7 @@ const handlers = {
                 .catch(error => {
                     console.error(error)
                 });
-<<<<<<< HEAD
-        this.emit(':tell', alexaResponse); 
-=======
         this.emit(':tell', alexaResponse);
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
     },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;

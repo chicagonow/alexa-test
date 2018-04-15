@@ -45,11 +45,7 @@ exports.searchBusNearMe = (parameters, callback) => {
 
 exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude) {
 
-<<<<<<< HEAD
-    let stopId = await BusRepository.asyncGetStopIdWithLocation(route, direction, latitude, longitude)
-=======
     let stopId = await BusRepository.asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude)
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
         .catch(error => {
             console.error(error);
         });
@@ -79,16 +75,10 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         console.error(error);
     });
 
-<<<<<<< HEAD
-    let responseBodyJson = JSON.parse(body);
-    let alexaResponse = "";
-    try {
-=======
     
     let alexaResponse = "";
     try {
         let responseBodyJson = JSON.parse(body);
->>>>>>> fde15110a3deb50d229f65dc9e84b449f28df0b2
         alexaResponse = BusResponseBuilder.buildAlexaResponse(responseBodyJson);
     } catch(error) {
         console.error("response body was: " + responseBodyJson);
