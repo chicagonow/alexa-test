@@ -13,13 +13,12 @@ exports.buildAlexaResponse = (jsonObject) => {
 let buildEventArray = (events) => {
     let eventsArray = [];
     for (let index = 0; index < NUMBER_OF_EVENTS; index++) {
-        eventsArray.push(
-            events[index].name.text
-                .toLocaleLowerCase()
-                .replace("[^a-z\d\s:]", " ")
-                .replace("®", "")
-                .replace("&", " and ")
-        );
+        let sanitizedEvent = events[index].name.text
+            .toLocaleLowerCase()
+            .replace("®", "")
+            .replace("&", " and ");
+
+        eventsArray.push(sanitizedEvent);
     }
     return eventsArray;
 };
