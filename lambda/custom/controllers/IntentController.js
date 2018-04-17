@@ -19,6 +19,20 @@ exports.getEventsWithUserLocation = async function getEventsWithUserLocation(api
     return alexaResponse;
 };
 
+exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEndpoint, token, deviceID, timeFrame) {
+    let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
+        .catch(error => {
+            console.error(error);
+        });
+
+    let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame)
+        .catch(error => {
+            console.error(error);
+        });
+    
+    return alexaResponse;
+};
+
 exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEndpoint, token, deviceID, route, direction){
     let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
         .catch(error => {
