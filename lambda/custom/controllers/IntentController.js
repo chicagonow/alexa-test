@@ -36,7 +36,12 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
         });
     
     // Get Date time frame
-    var timeFrame = new AmazonDateParser(date);
+    let timeFrame;
+    try {
+        timeFrame = new AmazonDateParser(date);
+    } catch(error) {
+        console.log(error);
+    }    
 
     // Return response
     let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)

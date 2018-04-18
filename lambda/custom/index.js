@@ -45,10 +45,14 @@ const handlers = {
         this.emit(':tell', alexaResponse);
     },
     'EventTimeFrameIntent': async function() {
-        let timeFrame = this.event.request.intent.slots.timeFrame
+        let timeFrame = this.event.request.intent.slots.timeFrame.value;
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-        let alexaResponse = await IntentController.getEventsWithinTimeFrame(parameters.apiEndpoint, parameters.token, parameters.deviceID, timeFrame);
-        this.emit('tell', alexaResposne);
+        let alexaResponse = 
+            await IntentController.getEventsWithinTimeFrame(parameters.apiEndpoint, parameters.token, parameters.deviceID, timeFrame)
+                .catch(error => {
+                    console.error(error)
+                });
+        this.emit(':tell', alexaResponse);
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
