@@ -77,8 +77,7 @@ describe('EventsHandler Tests', function() {
             nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query(function(queryObject) {
-                return queryObject["start_date.range_start"] === "2018-05-15T00:00:00"
-                    && queryObject["start_date.range_end"] === "2018-05-15T23:59:59";
+                return queryObject["start_date.range_start"];
             })
             .reply(200, responseToday);
         });
