@@ -66,9 +66,18 @@
         },
         {
           "name": "EventLocationIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "locationQualifier",
+              "type": "LOCATION_QUALIFIER"
+            },
+            {
+              "name": "location",
+              "type": "LOCATION"
+            }
+          ],
           "samples": [
-            "what events are going on near me"
+            "what events are going on {locationQualifier} {location}"
           ]
         }
       ],
