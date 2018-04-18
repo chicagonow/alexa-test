@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const getEventsHandler = require('../handlers/events/EventsHandler');
 const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
-const events = require('./response.events');
+const events = require('./data/events/response.events');
 const ParameterHelper = require('../helpers/ParameterHelper');
 const IntentController = require('../controllers/IntentController');
 
