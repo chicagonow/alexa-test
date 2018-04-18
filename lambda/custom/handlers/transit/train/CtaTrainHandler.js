@@ -63,13 +63,13 @@ let callCta = (parameters, callback) => {
  * Calls the CTA Train API
  * @param {object} ctaTrainParameters 
  */
-exports.asyncCallCta = async function asyncCallCta(ctaTrainParameters) {
+exports.asyncCallCta = async function asyncCallCta(mapid, route) {
     let url = buildUrl(CTA_API_DOMAIN, {
         path: CTA_API_PATH,
         queryParams: {
             key: CTA_API_KEY,
-            mapid: ctaTrainParameters.mapid,
-            rt: ctaTrainParameters.route,
+            mapid: mapid,
+            rt: route,
             outputType: "JSON"
         }
     });
