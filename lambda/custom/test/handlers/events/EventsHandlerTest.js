@@ -24,7 +24,7 @@ describe('EventsHandler Tests', function() {
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
             .query(true)
-            .reply(200, responseDeviceLocation);              
+            .reply(200, responseDeviceLocation);
 
         // Mock the eventbrite API call
         nock('https://www.eventbriteapi.com')
@@ -32,10 +32,10 @@ describe('EventsHandler Tests', function() {
             .query(function(queryObject) {
                 return !queryObject["start_date.range_start"];
             })
-            .reply(200, responseEvents); 
-            
+            .reply(200, responseEvents);
+
         // Initialize the sandbox for sinon testing
-        sandbox = sinon.sandbox.create();  
+        sandbox = sinon.sandbox.create();
         
         // Mock the geocoder call
         sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});
@@ -72,7 +72,7 @@ describe('EventsHandler Tests', function() {
 
         beforeEach(function() {
             nock.cleanAll();
-            
+
             // Mock response for events between a certain time range
             nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
