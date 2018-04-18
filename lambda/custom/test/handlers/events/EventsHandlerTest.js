@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const alexaJson = require('../../response.alexa.json');
 const responseDeviceLocation = require('../../response.deviceLocation');
-const responseEvents = require('../../data/events/response.events');
+const responseEvents = require('../../data/gevents/response.events');
 
 // Time response
 const responseToday = require('../../data/events/response.eventsToday');
