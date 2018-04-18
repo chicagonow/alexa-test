@@ -42,7 +42,13 @@ const handlers = {
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let alexaResponse = await IntentController.getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID);
         this.emit(':tell', alexaResponse);
-	},
+    },
+    'EventTimeFrameIntent': async function() {
+        let timeFrame = this.event.request.intent.slots.timeFrame
+        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+        let alexaResponse = await IntentController.getEventsWithinTimeFrame(parameters.apiEndpoint, parameters.token, parameters.deviceID, timeFrame);
+        this.emit('tell', alexaResposne);
+    },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
         const reprompt = this.t('HELP_MESSAGE');
