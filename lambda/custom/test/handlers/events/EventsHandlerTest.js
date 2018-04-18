@@ -4,11 +4,10 @@ const sinon = require('sinon');
 
 const alexaJson = require('../../response.alexa.json');
 const responseDeviceLocation = require('../../response.deviceLocation');
-const responseEvents = require('../../response.events');
+const responseEvents = require('../../data/events/response.events');
 
 // Time response
-const responseToday = require('../../response.eventsTime');
-
+const responseToday = require('../../data/events/response.eventsToday');
 
 const EventsHandler = require('../../../handlers/events/EventsHandler');
 const ParameterHelper = require('../../../helpers/ParameterHelper');
@@ -31,7 +30,7 @@ describe('EventsHandler Tests', function() {
         nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query(function(queryObject) {
-                return !queryObject.start_date;
+                return !queryObject["start_date.range_start"];
             })
             .reply(200, responseEvents); 
             
@@ -78,16 +77,21 @@ describe('EventsHandler Tests', function() {
             nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query(function(queryObject) {
-                return queryObject["start_date.range_start"] === "2018-05-15T05:00:00Z"
-                    && queryObject["start_date.range_end"] === "2018-05-16T04:00:00Z";
+                return queryObject["start_date.range_start"] === "2018-05-15T00:00:00"
+                    && queryObject["start_date.range_end"] === "2018-05-15T23:59:59";
             })
             .reply(200, responseToday);
+        });
+
+        afterEach(function() {
+            sandbox.restore();
+            nock.cleanAll();
         });
 
         it('returns events for today', async function() {
             let expectedResponse = "Here are 3 events going on in Chicago. chicago professional  and  technology diversity career fair, 10th stem cell clonality and genome stability retreat, made to win rooftop social ";
             let startDate = new Date("2018-05-15T00:00:00"); // replace with start date
-            let endDate = new Date("2018-05-15T23:00:00"); // replace with end date
+            let endDate = new Date("2018-05-15T23:59:59"); // replace with end date
             let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(41.87893, -87.626088, startDate, endDate);
             assert.equal(alexaResponse, expectedResponse);
         });

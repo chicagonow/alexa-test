@@ -3,6 +3,7 @@ const asyncRequest = require('request-promise');
 const buildUrl = require('build-url');
 const EventsResponseBuilder = require('./EventsResponseBuilder');
 const LocationHandler = require('../location/LocationHandler');
+const moment = require('moment-timezone');
 
 //used sample token,replace later. 
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
@@ -69,8 +70,8 @@ exports.asyncGetEventsWithinTimeFrame = async function asyncGetEventsWithinTimeF
 	qp[encodeURIComponent('location.within')] = '1mi';
 	qp[encodeURIComponent('location.latitude')] = latitude;
 	qp[encodeURIComponent('location.longitude')] = longitude;
-	qp[encodeURIComponent('start_date.range_start')] = startDate.toISOString().split('.')[0]+"Z" ;
-	qp[encodeURIComponent('start_date.range_end')] = endDate.toISOString().split('.')[0]+"Z" ;
+	qp[encodeURIComponent('start_date.range_start')] = getLocalDateString(startDate);
+	qp[encodeURIComponent('start_date.range_end')] = getLocalDateString(endDate);
 
 	let url = buildUrl(EVENTBRITE_API_DOMAIN, {
 		path: EVENTBRITE_API_PATH,
@@ -96,6 +97,12 @@ let getCommonQueryObjectParameters = () => {
 	let qp = {};
 	qp[encodeURIComponent('token')] = AUTH_TOKEN;
 	return qp;
+};
+
+// Returns the local date as a string
+let getLocalDateString = (date) => {
+	let dateString = date.toISOString().split('.')[0]+"Z";
+	return moment.tz(dateString, "America/Chicago").format("YYYY-MM-DDTHH:mm:ss");
 };
 
 require('make-runnable');
