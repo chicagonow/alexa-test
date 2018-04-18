@@ -80,16 +80,26 @@
           "name": "EventLocationIntent",
           "slots": [
             {
-              "name": "locationQualifier",
-              "type": "LOCATION_QUALIFIER"
+              "name": "address",
+              "type": "AMAZON.PostalAddress"
             },
             {
-              "name": "location",
-              "type": "LOCATION"
+              "name": "venueName",
+              "type": "AMAZON.MusicVenue"
+            },
+            {
+              "name": "landmark",
+              "type": "AMAZON.LandmarksOrHistoricalBuildings"
             }
           ],
           "samples": [
-            "what events are going on {locationQualifier} {location}"
+            "what events are going on near me",
+            "what events are going on at {landmark}",
+            "what events are going on near {landmark}",
+            "what events are going on at {venueName}",
+            "what events are going on near {venueName}",
+            "what events are going on at {address}",
+            "what events are going on near {address}"
           ]
         }
       ],
