@@ -65,6 +65,18 @@
           ]
         },
         {
+          "name": "EventTimeFrameIntent",
+          "slots": [
+            {
+              "name": "timeFrame",
+              "type": "AMAZON.DATE"
+            }
+          ],
+          "samples": [
+            "what's going on {timeFrame}"
+          ]
+        },
+        {
           "name": "EventLocationIntent",
           "slots": [],
           "samples": [
