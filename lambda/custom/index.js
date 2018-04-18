@@ -51,7 +51,7 @@ const handlers = {
                 .catch(error => {
                     console.error(error)
                 });
-        this.emit('tell', alexaResponse);
+        this.emit(':tell', alexaResponse);
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
