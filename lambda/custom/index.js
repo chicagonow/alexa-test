@@ -70,7 +70,7 @@ const handlers = {
     }
 };
 
-exports.handler = bst.Logless.capture("3910389a-c04b-457c-85d0-d792d3884af0", function (event, context) {
+exports.handler = bst.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     const alexa = Alexa.handler(event, context);
     alexa.APP_ID = process.env.skill_id;
     alexa.registerHandlers(handlers);
