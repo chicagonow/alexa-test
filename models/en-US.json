@@ -32,7 +32,33 @@
             }
           ],
           "samples": [
-            "what's the status of the {busDirection} {bus}"
+            "what's the status of the {busDirection} {bus}",
+            "what's the status of the {busDirection} {bus} bus",
+            "what's the status of the {bus} going {busDirection}",
+            "what's the status of the {bus} bus going {busDirection}"
+          ]
+        },
+        {
+          "name": "CtaBusStopIntent",
+          "slots": [
+            {
+              "name": "bus",
+              "type": "CTA_BUS"
+            },
+            {
+              "name": "busStop",
+              "type": "CTA_BUS_STOP"
+            },
+            {
+              "name": "busDirection",
+              "type": "CTA_BUS_DIRECTION"
+            }
+          ],
+          "samples": [
+            "what's the status of the {bus} bus at stop {busStop}",
+            "what's the status of the {bus} at stop {busStop}",
+            "what's the status of the {bus} at {busStop}",
+            "what's the status of the {bus} bus at {busStop}"
           ]
         },
         {
@@ -735,7 +761,10 @@
                 "value": "72",
                 "synonyms": [
                   "North",
-                  "72"
+                  "72",
+                  "Seventy Two",
+                  "Seventy too",
+                  "seventy to"
                 ]
               }
             },
@@ -1356,8 +1385,59 @@
           "values": [
             {
               "name": {
-                "value": "fake bus stop",
-                "synonyms":[]
+                "value": "67",
+                "synonyms":[
+                  "Jackson and Canal"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "4727",
+                "synonyms":[
+                  "1633 W Madison"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "14461",
+                "synonyms":[
+                  "Jackson and Chicago River"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "386",
+                "synonyms":[
+                  "Madison and Austin",
+                  "Madison and Austin Terminal"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "388",
+                "synonyms":[
+                  "Madison and Mayfield"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "14182",
+                "synonyms":[
+                  "Western and Berwyn Terminal"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "14529",
+                "synonyms":[
+                  "Western and Berwyn"
+                ]
               }
             }
           ]
@@ -1370,7 +1450,8 @@
                 "value": "Northbound",
                 "synonyms": [
                   "north",
-                  "North"
+                  "North",
+                  "north bound"
                 ]
               }
             },
@@ -1379,7 +1460,8 @@
                 "value": "Southbound",
                 "synonyms": [
                   "south",
-                  "South"
+                  "South",
+                  "south bound"
                 ]
               }
             },
@@ -1388,7 +1470,8 @@
                 "value": "Eastbound",
                 "synonyms": [
                   "east",
-                  "East"
+                  "East",
+                  "east bound"
                 ]
               }
             },
@@ -1397,7 +1480,8 @@
                 "value": "Westbound",
                 "synonyms": [
                   "west",
-                  "West"
+                  "West",
+                  "west bound"
                 ]
               }
             }
