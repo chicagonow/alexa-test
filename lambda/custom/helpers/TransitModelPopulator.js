@@ -18,6 +18,9 @@ let populateBusModel = (csvFilePath, callback) => {
     // find the train station type
     let busTypeIndex = _.findIndex(newTypes, ["name", "CTA_BUS_STOP"]);
 
+    // clear existing values
+    newTypes[busTypeIndex].values = [];
+
     // read csv from the specified file path
     csv()
     .fromFile(csvFilePath)
@@ -25,7 +28,7 @@ let populateBusModel = (csvFilePath, callback) => {
         // Get the stop id without all of the decimal spots
         let stop = Math.trunc(busStop.SYSTEMSTOP).toString();
 
-        let formattedStopName = formatName(busStop.STREET + " and " + busStop.CROSS_ST);
+        let formattedStopName = formatName(busStop.STREET + " and " + busStop.CROSS_ST, false);
 
         // create new object to import
         let value = {
@@ -59,6 +62,9 @@ let populateTrainModel = () => {
 
     // find the train station type
     let trainTypeIndex = _.findIndex(newTypes, ["name", "CTA_TRAIN_STATION"]);
+
+    // clear existing values
+    newTypes[trainTypeIndex].values = [];
 
     let newValues = [];
 
@@ -110,18 +116,23 @@ let writeToModel = (jsonString, callback) => {
 /**
  * Formats the stop/station names
  * @param {*} stopName 
- * @param {*} showParentheses 
+ * @param {*} hideParentheses 
  */
-let formatName = (stopName, showParentheses = true) => {
-    // Some stations have () in them and we don't want those
-    let pIndex = stopName.indexOf("(");
-
+let formatName = (stopName, hideParentheses = true) => {
     let formattedStopName = stopName;
 
-    if (!showParentheses) {
+    if (hideParentheses) {
+        // Some stations have () in them and we don't want those
+        let pIndex = stopName.indexOf("(");
         // If it has (), get the substring. Otherwise get the whole thang
         formattedStopName = pIndex === -1 ? stopName : stopName.substring(0, pIndex - 1);
     }
+
+    // Replace any / with english
+    formattedStopName = formattedStopName.replace("/", " and ");
+
+    // Remove any extra quotes
+    formattedStopName = formattedStopName.replace(/\"/g, "");
 
     return formattedStopName;
 };
