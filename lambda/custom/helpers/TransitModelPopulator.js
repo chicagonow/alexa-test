@@ -1,7 +1,7 @@
 const fs = require('fs');
 const csv = require('csvtojson');
 const _ = require('lodash');
-const logger = require("../../logging/Logger");
+const logger = require("../logging/Logger");
 
 const TrainRepo = require('../repositories/transit/CtaTrainRepository');
 

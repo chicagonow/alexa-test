@@ -5,7 +5,7 @@ const EventsHandler = require('./handlers/events/EventsHandler');
 const ParameterHelper = require('./helpers/ParameterHelper');
 const BusHandler = require('./handlers/transit/bus/BusHandler');
 const IntentController = require('./controllers/IntentController');
-const logger = require("../../logging/Logger");
+const logger = require("logging/Logger");
 
 const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';

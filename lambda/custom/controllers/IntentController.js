@@ -2,7 +2,7 @@ const LocationHandler=require('../handlers/location/LocationHandler');
 const EventsHandler=require('../handlers/events/EventsHandler');
 const BusHandler=require('../handlers/transit/bus/BusHandler');
 const CtaTrainHandler=require('../handlers/transit/train/CtaTrainHandler');
-const logger = require("../../logging/Logger");
+const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
 
 // take device information, get lat long

@@ -5,7 +5,7 @@ const BusResponseBuilder = require('./BusResponseBuilder');
 const LocationHandler = require('../../location/LocationHandler');
 const BusRepository = require('../../../repositories/transit/CtaBusRepository');
 const util = require('util');
-const logger = require("../../logging/Logger");
+const logger = require("../../../logging/Logger");
 
 const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
