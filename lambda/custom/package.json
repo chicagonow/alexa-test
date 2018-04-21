@@ -7,6 +7,8 @@
     "alexa-sdk": "^1.0.x",
     "amazon-date-parser": "^0.2.0",
     "build-url": "^1.0.x",
+    "csvtojson": "^1.1.9",
+    "lodash": "^4.17.5",
     "make-runnable": "^1.3.x",
     "moment-timezone": "^0.5.14",
     "node-geocoder": "^3.22.x",
