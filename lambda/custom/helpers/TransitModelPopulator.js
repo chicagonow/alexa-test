@@ -9,16 +9,14 @@ const alexaModel = require('../../../models/en-US.json');
 /**
  * Updates the bus types in the alexa model
  * @param {string} csvFilePath 
+ * @param {function} callback
  */
-let populateBusModel = (csvFilePath) => {    
+let populateBusModel = (csvFilePath, callback) => {    
     // get the slot types
-    let types = alexaModel.interactionModel.languageModel.types;
-    
-    // build new type object to add buses
-    let newType = {
-        name: "CTA_BUS_STOP",
-        values: []
-    };
+    let newTypes = alexaModel.interactionModel.languageModel.types;
+
+    // find the train station type
+    let busTypeIndex = _.findIndex(newTypes, ["name", "CTA_BUS_STOP"]);
 
     // read csv from the specified file path
     csv()
@@ -41,14 +39,14 @@ let populateBusModel = (csvFilePath) => {
         }; 
 
         // add object to the type array
-        newType.values.push(value);       
+        newTypes[busTypeIndex].values.push(value);       
     })
     .on('done', err => {
         // Update the alexa model with the new bus stuff we just added
-        alexaModel.interactionModel.languageModel.types.push(newType);
+        alexaModel.interactionModel.languageModel.types = newTypes;
 
         // Finally, write to file
-        writeToModel(JSON.stringify(alexaModel));
+        writeToModel(JSON.stringify(alexaModel), callback);
     });
 };
 
@@ -73,7 +71,7 @@ let populateTrainModel = () => {
         // loop through each station 
         uniqueStations.forEach(station => {  
             // Format the name          
-            let formattedStopName = formatName(station.stop_name);
+            let formattedStopName = formatName(station.stop_name, false);
 
             // Create a new station model value
             let newTrainStationValue = {
@@ -86,12 +84,9 @@ let populateTrainModel = () => {
                 }
             };
 
-            // Add the new station to the array
-            newValues.push(newTrainStationValue);
+            // Add the new station to the type array
+            newTypes[trainTypeIndex].values.push(newTrainStationValue);
         });
-
-        // Add the new stations to the type
-        newTypes[trainTypeIndex].values.push(newValues);
 
         // Add the new type to the alexa model
         alexaModel.interactionModel.languageModel.types = newTypes;
@@ -101,23 +96,32 @@ let populateTrainModel = () => {
     });
 };
 
-let writeToModel = (jsonString) => {
+let writeToModel = (jsonString, callback) => {
     // Too scared to override the main model, so just spitting it out to a dummy file
     fs.writeFile('test.json', jsonString, fsError => {
         console.log("Saved model")
         fsError && console.log(fsError);
+
+        // If there's another function to run then go ahead and run it
+        callback && callback();
     });
 };
 
-let formatName = (stopName) => {
+/**
+ * Formats the stop/station names
+ * @param {*} stopName 
+ * @param {*} showParentheses 
+ */
+let formatName = (stopName, showParentheses = true) => {
     // Some stations have () in them and we don't want those
     let pIndex = stopName.indexOf("(");
 
-    // If it has (), get the substring. Otherwise get the whole thang
-    let formattedStopName = pIndex === -1 ? stopName : stopName.substring(0, pIndex - 1);
+    let formattedStopName = stopName;
 
-    // If it has a /, replace it with english
-    formattedStopName = formattedStopName.replace("/", " and ");
+    if (!showParentheses) {
+        // If it has (), get the substring. Otherwise get the whole thang
+        formattedStopName = pIndex === -1 ? stopName : stopName.substring(0, pIndex - 1);
+    }
 
     return formattedStopName;
 };
@@ -126,8 +130,7 @@ exports.populateBusModel = populateBusModel;
 exports.populateTrainModel = populateTrainModel;
 
 exports.updateBusAndTrainModels = (csvFilePath) => {
-    populateBusModel(csvFilePath);
-    populateTrainModel();
+    populateBusModel(csvFilePath, populateTrainModel);
 };
 
 require('make-runnable');
