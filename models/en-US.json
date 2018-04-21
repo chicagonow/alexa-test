@@ -32,7 +32,33 @@
                         }
                     ],
                     "samples": [
-                        "what's the status of the {busDirection} {bus}"
+                        "what's the status of the {busDirection} {bus}",
+                        "what's the status of the {busDirection} {bus} bus",
+                        "what's the status of the {bus} going {busDirection}",
+                        "what's the status of the {bus} bus going {busDirection}"
+                    ]
+                },
+                {
+                    "name": "CtaBusStopIntent",
+                    "slots": [
+                        {
+                            "name": "bus",
+                            "type": "CTA_BUS"
+                        },
+                        {
+                            "name": "busStop",
+                            "type": "CTA_BUS_STOP"
+                        },
+                        {
+                            "name": "busDirection",
+                            "type": "CTA_BUS_DIRECTION"
+                        }
+                    ],
+                    "samples": [
+                        "what's the status of the {bus} bus at stop {busStop}",
+                        "what's the status of the {bus} at stop {busStop}",
+                        "what's the status of the {bus} at {busStop}",
+                        "what's the status of the {bus} bus at {busStop}"
                     ]
                 },
                 {
@@ -735,7 +761,10 @@
                                 "value": "72",
                                 "synonyms": [
                                     "North",
-                                    "72"
+                                    "72",
+                                    "Seventy Two",
+                                    "Seventy too",
+                                    "seventy to"
                                 ]
                             }
                         },
@@ -1347,123 +1376,6 @@
                                     "Evanston Circulator",
                                     "206"
                                 ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "CTA_BUS_DIRECTION",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "Northbound",
-                                "synonyms": [
-                                    "north",
-                                    "North"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "Southbound",
-                                "synonyms": [
-                                    "south",
-                                    "South"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "Eastbound",
-                                "synonyms": [
-                                    "east",
-                                    "East"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "Westbound",
-                                "synonyms": [
-                                    "west",
-                                    "West"
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "CTA_TRAIN",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "red line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "blue line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "orange line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "green line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "pink line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "purple line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "yellow line"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "test line"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "TRANSIT_MODE",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "bus",
-                                "synonyms": [
-                                    "bus"
-                                ]
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "train",
-                                "synonyms": [
-                                    "train"
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "EVENTS",
-                    "values": [
-                        {
-                            "name": {
-                                "value": "chicago"
                             }
                         }
                     ]
@@ -100582,6 +100494,96 @@
                     ]
                 },
                 {
+                    "name": "CTA_BUS_DIRECTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Northbound",
+                                "synonyms": [
+                                    "north",
+                                    "North",
+                                    "north bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Southbound",
+                                "synonyms": [
+                                    "south",
+                                    "South",
+                                    "south bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Eastbound",
+                                "synonyms": [
+                                    "east",
+                                    "East",
+                                    "east bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Westbound",
+                                "synonyms": [
+                                    "west",
+                                    "West",
+                                    "west bound"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CTA_TRAIN",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "red line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "blue line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "orange line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "green line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pink line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "purple line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "yellow line"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "test line"
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "CTA_TRAIN_STATION",
                     "values": [
                         {
@@ -101869,6 +101871,37 @@
                                 "synonyms": [
                                     "Wilson (Loop-bound) station"
                                 ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TRANSIT_MODE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "bus",
+                                "synonyms": [
+                                    "bus"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "train",
+                                "synonyms": [
+                                    "train"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "EVENTS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "chicago"
                             }
                         }
                     ]

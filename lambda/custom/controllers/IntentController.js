@@ -66,6 +66,15 @@ exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEn
     return alexaResponse;
 };
 
+exports.getBusesByStop = async function getBusesByStop(route, stopId){
+    let alexaResponse = await BusHandler.asyncGetBusesByStop(route, stopId)
+        .catch(error => {
+            console.error(error);
+        });
+
+    return alexaResponse;
+};
+
 exports.getStatusOfTrainStation = async function getStatusOfTrainStation(mapid, route){
     let alexaTrainStatusResponse = await CtaTrainHandler.asyncCallCta(mapid, route)
         .catch(error => {

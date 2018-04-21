@@ -82,6 +82,7 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
 
     if (busPattern == "") {
         console.error("Incorrect Direction for Route Specified");
+        return -1;
     }
 
     // set closest stop to first stop
