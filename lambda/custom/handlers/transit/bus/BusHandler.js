@@ -45,11 +45,28 @@ exports.searchBusNearMe = (parameters, callback) => {
 
 exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude) {
 
+    let alexaResponse = "";
     let stopId = await BusRepository.asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude)
         .catch(error => {
             console.error(error);
         });
 
+    if (stopId == -1){
+        alexaResponse = "Bus " + route + " does not go " + direction + ". Please ask again.";
+        return alexaResponse;
+    }
+    else{
+
+    alexaResponse = await this.asyncGetBusesForRouteAndStop(route, stopId)
+        .catch(error => {
+            console.error(error);
+        });
+
+    return alexaResponse;
+    }
+};
+
+exports.asyncGetBusesByStop = async function asyncGetBusesWithUserLocation(route, stopId) {
     let alexaResponse = await this.asyncGetBusesForRouteAndStop(route, stopId)
         .catch(error => {
             console.error(error);
@@ -83,7 +100,7 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
     } catch(error) {
         console.error("response body was: " + responseBodyJson);
         console.error(error);
-        alexaResponse = "The closest bus stop has no scheduled service";
+        alexaResponse = "The specified bus stop has no scheduled service";
     }
 
     return alexaResponse;

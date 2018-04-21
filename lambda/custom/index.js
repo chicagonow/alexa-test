@@ -27,6 +27,16 @@ const handlers = {
                 });
         this.emit(':tell', alexaResponse);
     },
+    'CtaBusStopIntent': async function () {
+        let route = this.event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let stopId = this.event.request.intent.slots.busStop.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let alexaResponse =
+            await IntentController.getBusesByStop(route, stopId)
+                .catch(error => {
+                    console.error(error)
+                });
+        this.emit(':tell', alexaResponse);
+    },
     'CtaLocationIntent': function () {     
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         if (transitSlot === "train") {
