@@ -1,4 +1,5 @@
 const Alexa = require('alexa-sdk');
+const bst = require('bespoken-tools');
 const TransitHandler = require('./handlers/transit/TransitHandler');
 const EventsHandler = require('./handlers/events/EventsHandler');
 const ParameterHelper = require('./helpers/ParameterHelper');
@@ -79,9 +80,9 @@ const handlers = {
     }
 };
 
-exports.handler = function (event, context) {
+exports.handler = bst.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     const alexa = Alexa.handler(event, context);
     alexa.APP_ID = process.env.skill_id;
     alexa.registerHandlers(handlers);
     alexa.execute();
-};
+});
