@@ -4,6 +4,7 @@ const buildUrl = require('build-url');
 const EventsResponseBuilder = require('./EventsResponseBuilder');
 const LocationHandler = require('../location/LocationHandler');
 const moment = require('moment-timezone');
+const logger = require("../../logging/Logger");
 
 //used sample token,replace later. 
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
@@ -47,14 +48,14 @@ exports.asyncGetEventsNearUserLocation = async function asyncGetEventsNearUserLo
 	});
 
     let body = await asyncRequest(url)
-        .catch(err => console.error(err));
+        .catch(err => logger.error(err));
 
     let alexaEventResponse = "";
     try {
         alexaEventResponse  = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
     } catch (err) {
-        console.error("event response body was: " + body);
-        console.error(err);
+        logger.error("event response body was: " + body);
+        logger.error(err);
         alexaEventResponse = "There was an error with the event service. Try again soon."
     }
 	return alexaEventResponse;
@@ -79,14 +80,14 @@ exports.asyncGetEventsWithinTimeFrame = async function asyncGetEventsWithinTimeF
 	});
 
     let body = await asyncRequest(url)
-        .catch(err => console.error(err));
+        .catch(err => logger.error(err));
 
 	let alexaEventResponse = "";	
 	try {
         alexaEventResponse  = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
     } catch (err) {
-        console.error("event response body was: " + body);
-        console.error(err);
+        logger.error("event response body was: " + body);
+        logger.error(err);
         alexaEventResponse = "There was an error with the event service. Try again soon."
     }
 	return alexaEventResponse;
