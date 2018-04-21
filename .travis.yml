@@ -21,6 +21,7 @@ script:
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm run-script build"
   - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
+  - sh -c "echo `json-minify models/en-US.json` > models/en-US.json"
 after_success:
   - ask deploy -p default -t skill
   - ask deploy -p default -t model &
