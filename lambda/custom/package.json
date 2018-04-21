@@ -6,6 +6,7 @@
   "dependencies": {
     "alexa-sdk": "^1.0.x",
     "amazon-date-parser": "^0.2.0",
+    "bespoken-tools": "^1.2.8",
     "build-url": "^1.0.x",
     "csvtojson": "^1.1.9",
     "lodash": "^4.17.5",
