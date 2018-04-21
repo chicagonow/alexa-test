@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   #lambda uses 6, but we need node 9 to use aws-cli and ask-cli, which deploy the alexa skill/intents, and the lambda
-  - "8.10"
+  - "6.10"
 branches:
   only:
   - master
