@@ -48,7 +48,6 @@ exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLoca
     let alexaResponse = "";
     let stopId = await BusRepository.asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude)
         .catch(error => {
-            alexaResponse = 
             console.error(error);
         });
 
