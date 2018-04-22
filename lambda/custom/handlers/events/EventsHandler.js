@@ -9,31 +9,8 @@ const logger = require("../../logging/Logger");
 //used sample token,replace later. 
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
-const EVENTBRITE_API_PATH = '/v3/events/search/';
-
-exports.searchEventsNearMe = (parameters, callback) => {
-
-	LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
-		searchEventbrite(location.latitude, location.longitude, callback);
-	});
-};
-
-let searchEventbrite = (latitude, longitude, callback) => {
-	let qp = getCommonQueryObjectParameters();
-	qp[encodeURIComponent('location.within')] = '1mi';
-	qp[encodeURIComponent('location.latitude')] = latitude;
-	qp[encodeURIComponent('location.longitude')] = longitude;
-
-	let url = buildUrl(EVENTBRITE_API_DOMAIN, {
-		path: EVENTBRITE_API_PATH,
-		queryParams: qp
-	});
-
-	request(url, (error, response, body) => {
-		let alexaResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
-		callback && callback(alexaResponse, error, response);
-	});
-};
+const EVENTBRITE_EVENTS_SEARCH_PATH = '/v3/events/search/';
+const EVENTBRITE_VENUES_PATH = '/v3/venues/'; //"/v3/venues/:id"
 
 //return Alexa response string
 exports.asyncGetEventsNearLocation = async function asyncGetEventsNearUserLocation(latitude, longitude){
@@ -43,7 +20,7 @@ exports.asyncGetEventsNearLocation = async function asyncGetEventsNearUserLocati
 	qp[encodeURIComponent('location.longitude')] = longitude;
 
 	let url = buildUrl(EVENTBRITE_API_DOMAIN, {
-		path: EVENTBRITE_API_PATH,
+		path: EVENTBRITE_EVENTS_SEARCH_PATH,
 		queryParams: qp
 	});
 
@@ -75,7 +52,7 @@ exports.asyncGetEventsWithinTimeFrame = async function asyncGetEventsWithinTimeF
     qp[encodeURIComponent('start_date.range_end')] = getLocalDateString(endDate);
 
     let url = buildUrl(EVENTBRITE_API_DOMAIN, {
-        path: EVENTBRITE_API_PATH,
+        path: EVENTBRITE_EVENTS_SEARCH_PATH,
         queryParams: qp
     });
 
@@ -106,4 +83,28 @@ let getLocalDateString = (date) => {
 	return moment.tz(dateString, "America/Chicago").format("YYYY-MM-DDTHH:mm:ss");
 };
 
-require('make-runnable');
+exports.asyncGetEventsAtVenue = async (venueName) => {
+    let qp = getCommonQueryObjectParameters();
+    qp[encodeURIComponent("q")] = venueName + " chicago";
+
+    let url = buildUrl(EVENTBRITE_API_DOMAIN, {
+        path: EVENTBRITE_EVENTS_SEARCH_PATH,
+        queryParams: qp
+    });
+
+    let body = await asyncRequest(url)
+        .catch(err => logger.error(err));
+
+    let alexaEventResponse = "";
+    try {
+        alexaEventResponse  = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
+    } catch (err) {
+        logger.error("event response body was: " + body);
+        logger.error(err);
+        alexaEventResponse = "There was an error with the event service. Try again soon."
+    }
+    return alexaEventResponse;
+};
+
+
+// require('make-runnable');

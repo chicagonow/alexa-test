@@ -12,12 +12,14 @@ const responseDeviceLocation = require('../../response.deviceLocation');
 const responseEvents = require('../../data/events/response.events');
 const responseEventsNearLocation = require('../../response.eventsNearLocation.json');
 const responseToday = require('../../data/events/response.eventsToday');
+const responseEventsAtVenue = require('../../data/events/responseEventsAtVenue');
+
+const EVENTBRITE_TOKEN = "IO6EB7MM6TSCIL2TIOHC";
 
 describe('EventsHandler Tests', function () {
     let sandbox;
 
     beforeEach(function () {
-        const EVENTBRITE_TOKEN = "IO6EB7MM6TSCIL2TIOHC";
 
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
@@ -45,6 +47,15 @@ describe('EventsHandler Tests', function () {
             })
             .reply(200, responseEventsNearLocation);
 
+        nock("https://www.eventbriteapi.com")
+            .get("/v3/events/search")
+            .query(true)
+                // (queryParameters) => {
+                // return queryParameters.token === EVENTBRITE_TOKEN
+                //     && queryParameters.q === "house of blues chicago";
+            // })
+            .reply(200, responseEventsAtVenue);
+
         // Initialize the sandbox for sinon testing
         sandbox = sinon.sandbox.create();
 
@@ -70,6 +81,15 @@ describe('EventsHandler Tests', function () {
             let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(41.9, -87.7);
             assert.equal(alexaResponse, expectedEventsNearLocation);
         })
+    });
+
+    describe("getEventsAtVenue", () => {
+        const expectedEventsAtVenueResponse = "Here are 3 events going on in Chicago. ams-ix  and  epsilon house of blues networking event(by invite only), ams-ix  and  epsilon house of blues networking event (by invite only), hopped up: moody tongue  and  boulevard brewing";
+        // Tests the searchEventsNearMe method
+        it("returns events at venue specified by user", async function () {
+            let alexaResponse = await EventsHandler.asyncGetEventsAtVenue("house of blues");
+            assert.equal(alexaResponse, expectedEventsAtVenueResponse);
+        });
     });
 
     // Tests the searchEventsWithinTimeFrame method
