@@ -1,3 +1,5 @@
+<iframe src="https://search-chicago-now-pizg4l7baxxzpwctvm6ranhodu.us-east-1.es.amazonaws.com/_plugin/kibana/app/kibana#/dashboard/29db0610-45bf-11e8-a9db-578d63ea6553?embed=true&_g=(refreshInterval%3A('%24%24hashKey'%3A'object%3A351'%2Cdisplay%3A'10%20seconds'%2Cpause%3A!f%2Csection%3A1%2Cvalue%3A10000)%2Ctime%3A(from%3Anow-30m%2Cmode%3Aquick%2Cto%3Anow))" height="600" width="800"></iframe>
+
 Nick Allen
 Ruben Rodriguez
 Dan Pfeiffer
