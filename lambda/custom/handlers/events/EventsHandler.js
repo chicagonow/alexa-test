@@ -84,8 +84,9 @@ let getLocalDateString = (date) => {
 };
 
 exports.asyncGetEventsAtVenue = async (venueName) => {
+    //TODO delegate common eventbrite requests
     let qp = getCommonQueryObjectParameters();
-    qp[encodeURIComponent("q")] = venueName + " chicago";
+    qp["q"] = encodeURIComponent(venueName + " chicago");
 
     let url = buildUrl(EVENTBRITE_API_DOMAIN, {
         path: EVENTBRITE_EVENTS_SEARCH_PATH,
@@ -105,6 +106,3 @@ exports.asyncGetEventsAtVenue = async (venueName) => {
     }
     return alexaEventResponse;
 };
-
-
-// require('make-runnable');

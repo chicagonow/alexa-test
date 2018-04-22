@@ -9,7 +9,7 @@ module.exports = {
     "events": [
     {
         "name": {
-            "text": "AMS-IX & Epsilon House of Blues Networking Event(By Invite Only)",
+            "text": "DUMMY SAVED RESPONSE AMS-IX & Epsilon House of Blues Networking Event(By Invite Only)",
             "html": "AMS-IX &amp; Epsilon House of Blues Networking Event(By Invite Only)"
         },
         "description": {
