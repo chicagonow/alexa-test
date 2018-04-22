@@ -81,7 +81,8 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
         }
     }
 
-    if (busPattern == "") {
+    if (!!busPattern) {
+        //TODO throw and exception here, catch in above method
         logger.error("Incorrect Direction for Route Specified");
         return -1;
     }

@@ -102,27 +102,29 @@
                         "what's going on {timeFrame}"
                     ]
                 },
-              {
-                "name": "EventLocationIntent",
-                "slots": [
-                  {
-                    "name": "address",
-                    "type": "AMAZON.PostalAddress"
-                  },
-                  {
-                    "name": "venueName",
-                    "type": "AMAZON.MusicVenue"
-                  },
-                  {
-                    "name": "landmark",
-                    "type": "AMAZON.LandmarksOrHistoricalBuildings"
-                  }
-                ],
-                "samples": [
-                  "what events are going on near me",
-                  "what events are going on at {venueName}"
-                ]
-              }
+                {
+                  "name": "EventLocationIntent",
+                  "slots": [
+                    {
+                      "name": "address",
+                      "type": "AMAZON.PostalAddress"
+                    },
+                    {
+                      "name": "venueName",
+                      "type": "AMAZON.MusicVenue"
+                    },
+                    {
+                      "name": "landmark",
+                      "type": "AMAZON.LandmarksOrHistoricalBuildings"
+                    }
+                  ],
+                  "samples": [
+                    "what events are going on near me",
+                    "what's going on near me",
+                    "what events are going on at {venueName}"
+                    "what's going on at {venueName}"
+                  ]
+                }
             ],
             "types": [
                 {
