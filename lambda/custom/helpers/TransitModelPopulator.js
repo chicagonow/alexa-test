@@ -1,6 +1,7 @@
 const fs = require('fs');
 const csv = require('csvtojson');
 const _ = require('lodash');
+const logger = require("../logging/Logger");
 
 const TrainRepo = require('../repositories/transit/CtaTrainRepository');
 
@@ -105,8 +106,8 @@ let populateTrainModel = () => {
 let writeToModel = (jsonString, callback) => {
     // Too scared to override the main model, so just spitting it out to a dummy file
     fs.writeFile('test.json', jsonString, fsError => {
-        console.log("Saved model")
-        fsError && console.log(fsError);
+        logger.log("Saved model");
+        fsError && logger.log(fsError);
 
         // If there's another function to run then go ahead and run it
         callback && callback();

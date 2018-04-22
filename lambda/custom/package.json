@@ -17,7 +17,8 @@
     "request": "^2.83.x",
     "request-promise": "^4.2.2",
     "sinon": "^4.4.3",
-    "sprintf-js": "^1.1.x"
+    "sprintf-js": "^1.1.x",
+    "winston": "^3.0.0-rc5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -5,7 +5,7 @@ const BusResponseBuilder = require('./BusResponseBuilder');
 const LocationHandler = require('../../location/LocationHandler');
 const BusRepository = require('../../../repositories/transit/CtaBusRepository');
 const util = require('util');
-
+const logger = require("../../../logging/Logger");
 
 const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
@@ -48,7 +48,7 @@ exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLoca
     let alexaResponse = "";
     let stopId = await BusRepository.asyncGetActiveStopIdWithLocation(route, direction, latitude, longitude)
         .catch(error => {
-            console.error(error);
+            logger.error(error);
         });
 
     if (stopId == -1){
@@ -59,7 +59,7 @@ exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLoca
 
     alexaResponse = await this.asyncGetBusesForRouteAndStop(route, stopId)
         .catch(error => {
-            console.error(error);
+            logger.error(error);
         });
 
     return alexaResponse;
@@ -69,7 +69,7 @@ exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLoca
 exports.asyncGetBusesByStop = async function asyncGetBusesWithUserLocation(route, stopId) {
     let alexaResponse = await this.asyncGetBusesForRouteAndStop(route, stopId)
         .catch(error => {
-            console.error(error);
+            logger.error(error);
         });
 
     return alexaResponse;
@@ -89,7 +89,7 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
     });
 
     let body = await asyncRequest(url).catch(error => {
-        console.error(error);
+        logger.error(error);
     });
 
     
@@ -98,8 +98,8 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         let responseBodyJson = JSON.parse(body);
         alexaResponse = BusResponseBuilder.buildAlexaResponse(responseBodyJson);
     } catch(error) {
-        console.error("response body was: " + responseBodyJson);
-        console.error(error);
+        logger.error("response body was: " + responseBodyJson);
+        logger.error(error);
         alexaResponse = "The specified bus stop has no scheduled service";
     }
 

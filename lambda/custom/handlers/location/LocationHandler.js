@@ -2,6 +2,7 @@ const request = require('request');
 const asyncRequest = require('request-promise');
 const API_LOCATION_QUERY = "/v1/devices/{deviceID}/settings/address";
 const geocoder = require('./geocoder');
+const logger = require("../../logging/Logger");
 
 // Default Location if the API isn't able to get the device's location
 const DEFAULT_LOCATION = {
@@ -65,7 +66,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     
     let response = await asyncRequest(options)
         .catch(error => {
-            console.error(error);
+            logger.error(error);
         });
 
     let location = (response.statusCode === 200) ? JSON.parse(response.body) : DEFAULT_LOCATION;
