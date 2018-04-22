@@ -121,7 +121,7 @@
                   "samples": [
                     "what events are going on near me",
                     "what's going on near me",
-                    "what events are going on at {venueName}"
+                    "what events are going on at {venueName}",
                     "what's going on at {venueName}"
                   ]
                 }

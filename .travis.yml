@@ -23,6 +23,5 @@ script:
   - echo `json-minify models/en-US.json` > models/en-US.json
 after_success:
   - ask deploy -p default -t skill
-  - ask deploy -p default -t model &
-  - ask deploy -p default -t lambda --no-wait
-  - wait
+  - ask deploy -p default -t model --no-wait
+  - ask deploy -p default -t lambda
