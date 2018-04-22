@@ -72,7 +72,6 @@ describe('EventsHandler Tests', function () {
         })
     });
 
-
     // Tests the searchEventsWithinTimeFrame method
     describe("searchEventsWithinTimeFrame", () => {
 

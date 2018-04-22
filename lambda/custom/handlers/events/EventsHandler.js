@@ -12,6 +12,7 @@ const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_API_PATH = '/v3/events/search/';
 
 exports.searchEventsNearMe = (parameters, callback) => {
+
 	LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
 		searchEventbrite(location.latitude, location.longitude, callback);
 	});
@@ -66,31 +67,31 @@ exports.asyncGetEventsNearLocation = async function asyncGetEventsNearUserLocati
  * @param {Date} endDate
  */
 exports.asyncGetEventsWithinTimeFrame = async function asyncGetEventsWithinTimeFrame(latitude, longitude, startDate, endDate) {
-	let qp = getCommonQueryObjectParameters();
-	qp[encodeURIComponent('location.within')] = '1mi';
-	qp[encodeURIComponent('location.latitude')] = latitude;
-	qp[encodeURIComponent('location.longitude')] = longitude;
-	qp[encodeURIComponent('start_date.range_start')] = getLocalDateString(startDate);
-	qp[encodeURIComponent('start_date.range_end')] = getLocalDateString(endDate);
+    let qp = getCommonQueryObjectParameters();
+    qp[encodeURIComponent('location.within')] = '1mi';
+    qp[encodeURIComponent('location.latitude')] = latitude;
+    qp[encodeURIComponent('location.longitude')] = longitude;
+    qp[encodeURIComponent('start_date.range_start')] = getLocalDateString(startDate);
+    qp[encodeURIComponent('start_date.range_end')] = getLocalDateString(endDate);
 
-	let url = buildUrl(EVENTBRITE_API_DOMAIN, {
-		path: EVENTBRITE_API_PATH,
-		queryParams: qp
-	});
+    let url = buildUrl(EVENTBRITE_API_DOMAIN, {
+        path: EVENTBRITE_API_PATH,
+        queryParams: qp
+    });
 
     let body = await asyncRequest(url)
         .catch(err => logger.error(err));
 
     let alexaEventResponse = "";
     try {
-        alexaEventResponse  = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
+        alexaEventResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
     } catch (err) {
         logger.error("event response body was: " + body);
         logger.error(err);
         alexaEventResponse = "There was an error with the event service. Try again soon."
     }
-	return alexaEventResponse;
-}
+    return alexaEventResponse;
+};
 
 // Returns common query parameters
 let getCommonQueryObjectParameters = () => {
@@ -104,3 +105,5 @@ let getLocalDateString = (date) => {
 	let dateString = date.toISOString().split('.')[0]+"Z";
 	return moment.tz(dateString, "America/Chicago").format("YYYY-MM-DDTHH:mm:ss");
 };
+
+require('make-runnable');

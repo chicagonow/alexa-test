@@ -102,13 +102,32 @@
                         "what's going on {timeFrame}"
                     ]
                 },
-                {
-                    "name": "EventLocationIntent",
-                    "slots": [],
-                    "samples": [
-                        "what events are going on near me"
-                    ]
-                }
+              {
+                "name": "EventLocationIntent",
+                "slots": [
+                  {
+                    "name": "address",
+                    "type": "AMAZON.PostalAddress"
+                  },
+                  {
+                    "name": "venueName",
+                    "type": "AMAZON.MusicVenue"
+                  },
+                  {
+                    "name": "landmark",
+                    "type": "AMAZON.LandmarksOrHistoricalBuildings"
+                  }
+                ],
+                "samples": [
+                  "what events are going on near me",
+                  "what events are going on at {landmark}",
+                  "what events are going on near {landmark}",
+                  "what events are going on at {venueName}",
+                  "what events are going on near {venueName}",
+                  "what events are going on at {address}",
+                  "what events are going on near {address}"
+                ]
+              }
             ],
             "types": [
                 {

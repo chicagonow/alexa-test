@@ -7,7 +7,6 @@ branches:
   - master
   - stage
   - stage-west
-  - winston-logging
 
 cache:
   directories:
