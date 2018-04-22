@@ -31,6 +31,18 @@ let getBusesForRouteAndStop = (parameters, callback) => {
 
 exports.getBusesForRouteAndStop = getBusesForRouteAndStop;
 
+/*
+Call getLocation, forward longitude and parameters entered to Bus Stop Repository
+*/
+exports.searchBusNearMe = (parameters, callback) => {
+    LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
+        BusRepository.getNearestBusStopId(parameters, location.latitude, location.longitude, (stopID) => {
+            parameters.stpid = stopID;
+            getBusesForRouteAndStop(parameters, callback);
+        });
+    });
+};
+
 exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude) {
 
     let alexaResponse = "";

@@ -10,7 +10,29 @@ const logger = require("../../logging/Logger");
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_EVENTS_SEARCH_PATH = '/v3/events/search/';
-const EVENTBRITE_VENUES_PATH = '/v3/venues/'; //"/v3/venues/:id"
+
+exports.searchEventsNearMe = (parameters, callback) => {
+    LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
+        searchEventbrite(location.latitude, location.longitude, callback);
+    });
+};
+
+let searchEventbrite = (latitude, longitude, callback) => {
+    let qp = getCommonQueryObjectParameters();
+    qp[encodeURIComponent('location.within')] = '1mi';
+    qp[encodeURIComponent('location.latitude')] = latitude;
+    qp[encodeURIComponent('location.longitude')] = longitude;
+
+    let url = buildUrl(EVENTBRITE_API_DOMAIN, {
+        path: EVENTBRITE_API_PATH,
+        queryParams: qp
+    });
+
+    request(url, (error, response, body) => {
+        let alexaResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
+        callback && callback(alexaResponse, error, response);
+    });
+};
 
 //return Alexa response string
 exports.asyncGetEventsNearLocation = async function asyncGetEventsNearUserLocation(latitude, longitude){

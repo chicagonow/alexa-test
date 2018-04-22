@@ -60,6 +60,36 @@ describe('CtaTrainHandler Tests', function() {
         nock.cleanAll();
     });
 
+    describe("searchTrainNearMe", function () {
+        it('returns correct Alexa Response', function (done) {
+            // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the
+            // callback, with that location object instead of the location retrieved from the geocode library
+            let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
+            fakeGeocoder.callsArgWith(1, {latitude: -10, longitude: -81.7});
+
+            let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
+            CtaTrainHandler.searchTrainNearMe(parameters, (alexaResponse) => {
+                assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+                done();
+            });
+        });
+
+    });
+
+    describe("searchTrain", function () {
+        it('returns correct Alexa Response', function (done) {
+            let parameters = {
+                mapid: "40530",
+                rt: "Brn"
+            };
+
+            CtaTrainHandler.searchTrain(parameters, (alexaResponse) => {
+                assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+                done();
+            });
+        });
+    });
+
     describe("asyncCallCta", function () {
         it('has default fail response ', async () => {
             

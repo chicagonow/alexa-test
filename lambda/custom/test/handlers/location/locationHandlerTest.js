@@ -35,6 +35,20 @@ describe('LocationHandler tests', () => {
         nock.cleanAll();
     });
 
+    it('Tests that locationHandler returns lat long', function(done) {
+        let mockGeoCoder = sandbox.stub(geocoder, 'getLatLong');
+        mockGeoCoder.callsArgWith(1, {latitude: -10, longitude: -20});
+
+        let apiEndpoint = alexaJson.context.System.apiEndpoint;
+        let apiAccessToken = alexaJson.context.System.apiAccessToken;
+        let funcDeviceId = alexaJson.context.System.device.deviceId;
+        locationHandler.getLocation(apiEndpoint, apiAccessToken, funcDeviceId, (alexaResponse) => {
+
+            assert.deepEqual(alexaResponse,{ latitude: -10, longitude: -20 });
+            done();
+        });
+    });
+
     it('Tests that asyncGetLocation returns lat long', async function(){
         let apiEndpoint = alexaJson.context.System.apiEndpoint;
         let apiAccessToken = alexaJson.context.System.apiAccessToken;
