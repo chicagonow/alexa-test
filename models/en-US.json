@@ -106,10 +106,6 @@
                   "name": "EventLocationIntent",
                   "slots": [
                     {
-                      "name": "address",
-                      "type": "AMAZON.PostalAddress"
-                    },
-                    {
                       "name": "venueName",
                       "type": "AMAZON.MusicVenue"
                     },
@@ -122,7 +118,9 @@
                     "what events are going on near me",
                     "what's going on near me",
                     "what events are going on at {venueName}",
-                    "what's going on at {venueName}"
+                    "what's going on at {venueName}",
+                    "what events are going on at {landmark}",
+                    "what's going on at {landmark}"
                   ]
                 }
             ],
