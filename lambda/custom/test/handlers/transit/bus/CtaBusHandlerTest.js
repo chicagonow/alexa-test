@@ -6,7 +6,8 @@ const sinon = require('sinon');
 // import test data
 const alexaJson = require('../../../response.alexa.json');
 const responseDeviceLocation = require('../../../response.deviceLocation');
-const responseBuses = require('../../../response.getPredictions20');
+const getPred20Response = require('../../../response.getPredictions20');
+const getPred49Response = require('../../../response.getPredictions49');
 const responseRepoBuses = require('../../../response.getStops20');
 const getPatterns20Response = require('../../../../test/response.getPatterns20');
 const getPatterns49Response = require('../../../../test/response.getPatterns49');
@@ -42,9 +43,21 @@ describe('CtaBusHandler Tests', function() {
 
         // Mock CTA API call
         nock('http://ctabustracker.com')
-            .get('/bustime/api/v2/getpredictions')
-            .query(true)
-            .reply(200, responseBuses);
+        .get('/bustime/api/v2/getpredictions')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '4727', format: 'json'})
+        .reply(200, getPred20Response);
+
+         // Mock CTA API call
+         nock('http://ctabustracker.com')
+         .get('/bustime/api/v2/getpredictions')
+         .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '386', format: 'json'})
+         .reply(200, getPred20Response);
+
+        // Mock CTA API call
+        nock('http://ctabustracker.com')
+        .get('/bustime/api/v2/getpredictions')
+        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '8245', format: 'json'})
+        .reply(200, getPred49Response);
         
         // Mock getpatterns
         nock('http://ctabustracker.com')
@@ -71,23 +84,14 @@ describe('CtaBusHandler Tests', function() {
         nock.cleanAll();
     });
 
-    // Tests the searchBusNearMe method
-    it('searchBusNearMe: returns correct Alexa Response', function(done) {
-        // The next 2 lines are basically saying to call the 2nd argument of getLatLong, which is the 
-        // callback, with that location object instead of the location retrieved from the geocode library
-        let fakeGeocoder = sandbox.stub(geocoder, 'getLatLong');
-        fakeGeocoder.callsArgWith(1, {latitude: 41, longitude: -87});
-
-        let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
-        BusHandler.searchBusNearMe(parameters, (alexaResponse) => {
-            assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
-            done();
-        });
-    });
-
     // Tests the BusHandler method
-    it('AsyncBusHandler: returns correct Alexa Response', async function() {
+    it('AsyncGetBusesWithUserLocation: returns correct Alexa Response', async function() {
         let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(20, 'Eastbound', 41, -81.7);
         assert.equal(alexaResponse, 'The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM');
     }); 
+
+    it('AsyncGetBusesByStop: returns correct Alexa Response', async function() {
+        let alexaResponse = await BusHandler.asyncGetBusesByStop(49, 8245);
+        assert.equal(alexaResponse, 'The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM');
+    });
 });

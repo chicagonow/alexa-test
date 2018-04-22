@@ -1,3 +1,4 @@
+const logger = require("../../logging/Logger");
 const NUMBER_OF_EVENTS = 3;
 
 exports.buildAlexaResponse = (jsonObject) => {
@@ -6,7 +7,7 @@ exports.buildAlexaResponse = (jsonObject) => {
     let eventsArray = buildEventArray(jsonObject.events);
     msg += eventsArray.join(", ");
 
-    console.info("built event response: " + msg);
+    logger.info("built event response: " + msg);
     return msg;
 };
 

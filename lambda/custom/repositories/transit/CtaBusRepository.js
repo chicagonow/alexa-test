@@ -2,6 +2,7 @@ const request = require('request');
 const asyncRequest = require('request-promise');
 const buildUrl = require('build-url');
 const distanceCalc = require('../../helpers/DistanceCalculator');
+const logger = require("../../logging/Logger");
 
 const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
@@ -22,7 +23,7 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
     });
 
     let body = await asyncRequest(url).catch(error => {
-        console.error(error);
+        logger.error(error);
     });
 
     let ctaBusStopResponse = JSON.parse(body);
@@ -63,7 +64,7 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
     });
     // call cta
     let body = await asyncRequest(url).catch(error => {
-        console.error(error);
+        logger.error(error);
     });
 
     // parse JSON
@@ -82,7 +83,8 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
     }
 
     if (busPattern == "") {
-        console.error("Incorrect Direction for Route Specified");
+        logger.error("Incorrect Direction for Route Specified");
+        return -1;
     }
 
     // set closest stop to first stop
