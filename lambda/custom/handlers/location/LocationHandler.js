@@ -55,7 +55,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     // build the api url to get the location
     let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
 
-    let locationOptions = {
+    let locationRequest = {
         url: url,
         headers: {
             'Authorization': "Bearer " + token
@@ -64,7 +64,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     };
 
     
-    let response = await asyncRequest(locationOptions)
+    let response = await asyncRequest(locationRequest)
         .catch(error => {
             logger.error(error);
         });
