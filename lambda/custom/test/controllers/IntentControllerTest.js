@@ -5,6 +5,7 @@ const sinon = require('sinon');
 
 //imports
 const IntentController = require('../../controllers/IntentController');
+const EventsHandler = require('../../handlers/events/EventsHandler');
 const geocoder = require('../../handlers/location/geocoder');
 
 // responses
@@ -12,7 +13,9 @@ const responseDeviceLocation = require('../response.deviceLocation');
 const responseEvents = require('../data/events/response.events');
 const responseEventsToday = require('../data/events/response.eventsToday');
 const alexaJson = require('../response.alexa.json');
-const alexaRequest = require('../data/events/request.alexa.eventsNearMe.json');
+const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
+const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
+const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
 
 describe('IntentController Tests', function() {
     let sandbox;
@@ -33,14 +36,6 @@ describe('IntentController Tests', function() {
             })
             .reply(200, responseEvents);
 
-        // Mock response for events between a certain time range
-        nock('https://www.eventbriteapi.com')
-            .get('/v3/events/search/')
-            .query(function (queryObject) {
-                return queryObject["start_date.range_start"];
-            })
-            .reply(200, responseEventsToday);
-
         // Initialize the sandbox for sinon testing
         sandbox = sinon.sandbox.create();  
         
@@ -53,17 +48,51 @@ describe('IntentController Tests', function() {
         nock.cleanAll();
     });
 
-    it('Test IntentController.getEventsWithUserLocation: return 3 events in string', async function(){
+    describe("getEvents()", () => {
+        it('calls getEventsWithUserLocation when there is no venue or landmark: return 3 events in string', async function () {
 
-        let apiEndpoint = alexaJson.context.System.apiEndpoint;
-        let apiAccessToken = alexaJson.context.System.apiAccessToken;
-        let funcDeviceId = alexaJson.context.System.device.deviceId;
+            let alexaResponse = await IntentController.getEvents(alexaRequestNearMe);
+            assert.equal(alexaResponse, "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform");
+        });
 
-        let alexaResponse = await IntentController.getEvents(alexaRequest);
-        assert.equal(alexaResponse, "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform");
+        it('calls asyncGetEventsAtVenue with venue name when there is a venue slot type', async function () {
+            const fakeVenueName = "A CHICAGO VENUE";
+            let venueEventsStub = sinon.stub(EventsHandler, "asyncGetEventsAtVenue");
+            venueEventsStub
+                .withArgs(fakeVenueName)
+                .onFirstCall()
+                .returns("fake event response for venue: " + fakeVenueName);
+
+            let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
+            assert.equal(alexaResponse, "fake event response for venue: A CHICAGO VENUE");
+        });
+
+        it('calls asyncGetEventsAtVenue with landmark name when there is a landmark slot type', async function () {
+
+            const fakeLandmarkName = "A CHICAGO LANDMARK";
+            let landmarkEventsStub = sinon.stub(EventsHandler, "asyncGetEventsAtVenue");
+            landmarkEventsStub
+                .withArgs(fakeLandmarkName)
+                .onFirstCall()
+                .returns("fake event response for landmark: " + fakeLandmarkName);
+
+            let alexaResponse = await IntentController.getEvents(alexaRequestLandmark);
+            assert.equal(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
+        });
     });
 
+
+
+
+
     it('Test IntentController.getEventsWithinTimeFrame: return 3 events occuring today in string', async function() {
+        nock('https://www.eventbriteapi.com')
+            .get('/v3/events/search/')
+            .query(function (queryObject) {
+                return queryObject["start_date.range_start"];
+            })
+            .reply(200, responseEventsToday);
+
         let apiEndpoint = alexaJson.context.System.apiEndpoint;
         let apiAccessToken = alexaJson.context.System.apiAccessToken;
         let funcDeviceId = alexaJson.context.System.device.deviceId;

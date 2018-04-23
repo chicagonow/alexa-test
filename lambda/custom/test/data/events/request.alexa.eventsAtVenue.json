@@ -53,11 +53,11 @@
 			"slots": {
 				"venueName": {
 					"name": "venueName",
+					"value": "A CHICAGO VENUE",
 					"confirmationStatus": "NONE"
 				},
 				"landmark": {
 					"name": "landmark",
-					"value": "A CHICAGO LANDMARK",
 					"confirmationStatus": "NONE"
 				}
 			}

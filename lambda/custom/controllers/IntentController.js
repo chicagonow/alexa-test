@@ -9,7 +9,7 @@ const AmazonDateParser = require('amazon-date-parser');
 
 exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
-    let alexaResponse = "There was an error using events handler"
+    let alexaResponse = "There was an error using events handler";
 
     try {
         if (!!eventLocationIntentSlots.venueName.value) {
@@ -43,8 +43,6 @@ let getEventsWithUserLocation = async function getEventsWithUserLocation(apiEndp
 
     return alexaResponse;
 };
-
-let getEventsByVenue
 
 /**
  * Returns events within the specified time frame
