@@ -57,6 +57,7 @@
 				},
 				"landmark": {
 					"name": "landmark",
+					"value": "A CHICAGO LANDMARK",
 					"confirmationStatus": "NONE"
 				}
 			}

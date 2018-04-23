@@ -5,6 +5,7 @@ const sinon = require('sinon');
 
 //imports
 const IntentController = require('../../controllers/IntentController');
+const ParameterHelper = require("../../helpers/ParameterHelper");
 const EventsHandler = require('../../handlers/events/EventsHandler');
 const geocoder = require('../../handlers/location/geocoder');
 
@@ -48,34 +49,35 @@ describe('IntentController Tests', function() {
         nock.cleanAll();
     });
 
+    const stubbedLocationParameters = {
+        apiEndpoint: alexaJson.context.System.apiEndpoint,
+        token: alexaJson.context.System.apiAccessToken,
+        deviceID: alexaJson.context.System.device.deviceId
+    };
+
     describe("getEvents()", () => {
         it('calls getEventsWithUserLocation when there is no venue or landmark: return 3 events in string', async function () {
+            sinon.stub(ParameterHelper, "getLocationParameters")
+                .returns(stubbedLocationParameters);
 
             let alexaResponse = await IntentController.getEvents(alexaRequestNearMe);
             assert.equal(alexaResponse, "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform");
         });
 
-        it('calls asyncGetEventsAtVenue with venue name when there is a venue slot type', async function () {
-            const fakeVenueName = "A CHICAGO VENUE";
-            let venueEventsStub = sinon.stub(EventsHandler, "asyncGetEventsAtVenue");
-            venueEventsStub
-                .withArgs(fakeVenueName)
-                .onFirstCall()
-                .returns("fake event response for venue: " + fakeVenueName);
+        const fakeVenueName = "A CHICAGO VENUE";
+        const fakeLandmarkName = "A CHICAGO LANDMARK";
 
+        let venueEventsStub = sinon.stub(EventsHandler, "asyncGetEventsAtVenue");
+            venueEventsStub
+                .withArgs(fakeVenueName).returns("fake event response for venue: " + fakeVenueName)
+                .withArgs(fakeLandmarkName).returns("fake event response for landmark: " + fakeLandmarkName);
+
+        it('calls asyncGetEventsAtVenue with venue name when there is a venue slot type', async function () {
             let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
             assert.equal(alexaResponse, "fake event response for venue: A CHICAGO VENUE");
         });
 
         it('calls asyncGetEventsAtVenue with landmark name when there is a landmark slot type', async function () {
-
-            const fakeLandmarkName = "A CHICAGO LANDMARK";
-            let landmarkEventsStub = sinon.stub(EventsHandler, "asyncGetEventsAtVenue");
-            landmarkEventsStub
-                .withArgs(fakeLandmarkName)
-                .onFirstCall()
-                .returns("fake event response for landmark: " + fakeLandmarkName);
-
             let alexaResponse = await IntentController.getEvents(alexaRequestLandmark);
             assert.equal(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
         });
@@ -93,9 +95,9 @@ describe('IntentController Tests', function() {
             })
             .reply(200, responseEventsToday);
 
-        let apiEndpoint = alexaJson.context.System.apiEndpoint;
-        let apiAccessToken = alexaJson.context.System.apiAccessToken;
-        let funcDeviceId = alexaJson.context.System.device.deviceId;
+        let apiEndpoint = stubbedLocationParameters.apiEndpoint;
+        let apiAccessToken = stubbedLocationParameters.token;
+        let funcDeviceId = stubbedLocationParameters.deviceID;
         let date = "2018-05-15";
 
         let expectedResponse = "Here are 3 events going on in Chicago. chicago professional  and  technology diversity career fair, 10th stem cell clonality and genome stability retreat, made to win rooftop social ";
