@@ -1,13 +1,35 @@
-const LocationHandler=require('../handlers/location/LocationHandler');
-const EventsHandler=require('../handlers/events/EventsHandler');
-const BusHandler=require('../handlers/transit/bus/BusHandler');
-const CtaTrainHandler=require('../handlers/transit/train/CtaTrainHandler');
+const LocationHandler = require('../handlers/location/LocationHandler');
+const EventsHandler = require('../handlers/events/EventsHandler');
+const BusHandler = require('../handlers/transit/bus/BusHandler');
+const CtaTrainHandler = require('../handlers/transit/train/CtaTrainHandler');
 const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
 
+
+exports.getEvents = async (event) => {
+    let eventLocationIntentSlots = event.request.intent.slots;
+    let alexaResponse = "There was an error using events handler"
+    
+    try {
+        if (!!eventLocationIntentSlots.venueName.value) {
+            alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
+        } else if (!!eventLocationIntentSlots.landmark.value) {
+            alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
+        } else {
+            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
+            alexaResponse = await getEventsWithUserLocation(paramaters.apiEndpoint, parameters.token, parameters.deviceID);
+        }
+    } catch (error) {
+        logger.error(error);
+    }
+
+    return alexaResponse;
+};
+
+
 // take device information, get lat long
 // take lat long return events near location
-exports.getEventsWithUserLocation = async function getEventsWithUserLocation(apiEndpoint, token, deviceID){
+let getEventsWithUserLocation = async function getEventsWithUserLocation(apiEndpoint, token, deviceID) {
     let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
         .catch(error => {
             logger.error(error);
@@ -20,6 +42,8 @@ exports.getEventsWithUserLocation = async function getEventsWithUserLocation(api
 
     return alexaResponse;
 };
+
+let getEventsByVenue
 
 /**
  * Returns events within the specified time frame
@@ -39,7 +63,7 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
     let timeFrame;
     try {
         timeFrame = new AmazonDateParser(date);
-    } catch(error) {
+    } catch (error) {
         logger.log(error);
     }
 
@@ -52,7 +76,7 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
     return alexaResponse;
 };
 
-exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEndpoint, token, deviceID, route, direction){
+exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEndpoint, token, deviceID, route, direction) {
     let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
         .catch(error => {
             logger.error(error);
@@ -66,7 +90,7 @@ exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEn
     return alexaResponse;
 };
 
-exports.getBusesByStop = async function getBusesByStop(route, stopId){
+exports.getBusesByStop = async function getBusesByStop(route, stopId) {
     let alexaResponse = await BusHandler.asyncGetBusesByStop(route, stopId)
         .catch(error => {
             logger.error(error);
@@ -75,7 +99,7 @@ exports.getBusesByStop = async function getBusesByStop(route, stopId){
     return alexaResponse;
 };
 
-exports.getStatusOfTrainStation = async function getStatusOfTrainStation(mapid, route){
+exports.getStatusOfTrainStation = async function getStatusOfTrainStation(mapid, route) {
     let alexaTrainStatusResponse = await CtaTrainHandler.asyncCallCta(mapid, route)
         .catch(error => {
             logger.error(error);
