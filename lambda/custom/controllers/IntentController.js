@@ -2,6 +2,7 @@ const LocationHandler = require('../handlers/location/LocationHandler');
 const EventsHandler = require('../handlers/events/EventsHandler');
 const BusHandler = require('../handlers/transit/bus/BusHandler');
 const CtaTrainHandler = require('../handlers/transit/train/CtaTrainHandler');
+const ParameterHelper = require('../helpers/ParameterHelper');
 const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
 
@@ -9,15 +10,15 @@ const AmazonDateParser = require('amazon-date-parser');
 exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler"
-    
+
     try {
         if (!!eventLocationIntentSlots.venueName.value) {
             alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
         } else if (!!eventLocationIntentSlots.landmark.value) {
             alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
         } else {
-            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-            alexaResponse = await getEventsWithUserLocation(paramaters.apiEndpoint, parameters.token, parameters.deviceID);
+            let parameters = ParameterHelper.getLocationParameters(event.context.System);
+            alexaResponse = await getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID);
         }
     } catch (error) {
         logger.error(error);

@@ -12,7 +12,7 @@ const responseDeviceLocation = require('../response.deviceLocation');
 const responseEvents = require('../data/events/response.events');
 const responseEventsToday = require('../data/events/response.eventsToday');
 const alexaJson = require('../response.alexa.json');
-
+const alexaRequest = require('../data/events/request.alexa.eventsNearMe.json');
 
 describe('IntentController Tests', function() {
     let sandbox;
@@ -59,7 +59,7 @@ describe('IntentController Tests', function() {
         let apiAccessToken = alexaJson.context.System.apiAccessToken;
         let funcDeviceId = alexaJson.context.System.device.deviceId;
 
-        let alexaResponse = await IntentController.getEventsWithUserLocation(apiEndpoint, apiAccessToken, funcDeviceId);
+        let alexaResponse = await IntentController.getEvents(alexaRequest);
         assert.equal(alexaResponse, "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform");
     });
 
