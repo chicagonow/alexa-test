@@ -25,7 +25,7 @@ const geocoder = require('../../../../handlers/location/geocoder');
 
 describe('CtaBusHandler Tests', function() {
     // sinon test environment
-    var sandbox;
+    let sandbox;
 
     beforeEach(function() {
         // Mock Device Location request

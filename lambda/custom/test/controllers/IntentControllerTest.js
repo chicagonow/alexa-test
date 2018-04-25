@@ -57,7 +57,8 @@ describe('IntentController Tests', function() {
 
     describe("getEvents()", () => {
         it('calls getEventsWithUserLocation when there is no venue or landmark: return 3 events in string', async function () {
-            sinon.stub(ParameterHelper, "getLocationParameters")
+
+            sandbox.stub(ParameterHelper, "getLocationParameters")
                 .returns(stubbedLocationParameters);
 
             let alexaResponse = await IntentController.getEvents(alexaRequestNearMe);
@@ -67,17 +68,20 @@ describe('IntentController Tests', function() {
         const fakeVenueName = "A CHICAGO VENUE";
         const fakeLandmarkName = "A CHICAGO LANDMARK";
 
-        let venueEventsStub = sinon.stub(EventsHandler, "asyncGetEventsAtVenue");
-            venueEventsStub
-                .withArgs(fakeVenueName).returns("fake event response for venue: " + fakeVenueName)
-                .withArgs(fakeLandmarkName).returns("fake event response for landmark: " + fakeLandmarkName);
-
         it('calls asyncGetEventsAtVenue with venue name when there is a venue slot type', async function () {
+            let venueEventsStub = sandbox.stub(EventsHandler, "asyncGetEventsAtVenue")
+                .withArgs(fakeVenueName)
+                .returns("fake event response for venue: " + fakeVenueName);
+
             let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
             assert.equal(alexaResponse, "fake event response for venue: A CHICAGO VENUE");
         });
 
         it('calls asyncGetEventsAtVenue with landmark name when there is a landmark slot type', async function () {
+            sandbox.stub(EventsHandler, "asyncGetEventsAtVenue")
+                .withArgs(fakeLandmarkName)
+                .returns("fake event response for landmark: " + fakeLandmarkName);
+
             let alexaResponse = await IntentController.getEvents(alexaRequestLandmark);
             assert.equal(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
         });

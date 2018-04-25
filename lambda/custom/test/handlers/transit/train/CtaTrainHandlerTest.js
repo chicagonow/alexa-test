@@ -24,7 +24,6 @@ describe('CtaTrainHandler Tests', function() {
     let sandbox;
 
     beforeEach(function() {
-
         // Mock Device Location request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
@@ -54,9 +53,7 @@ describe('CtaTrainHandler Tests', function() {
     });
 
     afterEach(function() {
-        // restore the test environment
         sandbox.restore();
-        // Clear nocked API calls
         nock.cleanAll();
     });
 

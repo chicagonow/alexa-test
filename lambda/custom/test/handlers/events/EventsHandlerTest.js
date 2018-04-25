@@ -20,8 +20,6 @@ describe('EventsHandler Tests', function () {
     let sandbox;
 
     beforeEach(function () {
-        nock.cleanAll();
-
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
@@ -32,13 +30,12 @@ describe('EventsHandler Tests', function () {
         sandbox = sinon.sandbox.create();
 
         // Mock the geocoder call
-        sandbox
-            .stub(geocoder, 'asyncGetLatLong')
-            .returns({latitude: -10, longitude: -20});
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});
     });
 
     afterEach(function () {
         sandbox.restore();
+        nock.cleanAll();
     });
 
     describe("getEventsNearLocation", () => {
@@ -62,8 +59,6 @@ describe('EventsHandler Tests', function () {
         });
 
         it("returns events near the address specified by user", async function () {
-            sandbox.restore();
-
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
@@ -82,10 +77,10 @@ describe('EventsHandler Tests', function () {
     });
 
     describe("getEventsAtVenue", () => {
-        const expectedEventsAtVenueResponse = "Here are 3 events going on in Chicago. dummy saved response ams-ix  and  epsilon house of blues networking event(by invite only), ams-ix  and  epsilon house of blues networking event (by invite only), hopped up: moody tongue  and  boulevard brewing";
-
-        let venueName = "house of blues";
         it("returns events at house of blues venue specified by user", async function () {
+            const expectedEventsAtVenueResponse = "Here are 3 events going on in Chicago. dummy saved response ams-ix  and  epsilon house of blues networking event(by invite only), ams-ix  and  epsilon house of blues networking event (by invite only), hopped up: moody tongue  and  boulevard brewing";
+            let venueName = "house of blues";
+
             nock("https://www.eventbriteapi.com")
                 .get("/v3/events/search/")
                 .query( queryParameters => {
@@ -120,7 +115,7 @@ describe('EventsHandler Tests', function () {
                         "events": []
                     });
 
-            let alexaResponse = await EventsHandler.asyncGetEventsAtVenue(venueName);
+            let alexaResponse = await EventsHandler.asyncGetEventsAtVenue(fakeVenueName);
             assert.equal(alexaResponse, expectedEventsAtVenueResponse);
         });
     });
