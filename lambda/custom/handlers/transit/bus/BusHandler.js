@@ -40,7 +40,7 @@ exports.searchBusNearMe = (parameters, callback) => {
             parameters.stpid = stopID;
             getBusesForRouteAndStop(parameters, callback);
         });
-    });    
+    });
 };
 
 exports.asyncGetBusesWithUserLocation = async function asyncGetBusesWithUserLocation(route, direction, latitude, longitude) {

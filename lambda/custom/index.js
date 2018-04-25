@@ -51,8 +51,7 @@ const handlers = {
         }       
     },
 	'EventLocationIntent': async function() {		
-        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-        let alexaResponse = await IntentController.getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID);
+        let alexaResponse = await IntentController.getEvents(this.event);
         this.emit(':tell', alexaResponse);
     },
     'EventTimeFrameIntent': async function() {

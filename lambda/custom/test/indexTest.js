@@ -22,42 +22,6 @@ const alexaBusRequest49stop8245 = require('./alexaRequest49atStop8245');
 const alexaJson = require('./response.alexa.json');
 const responseDeviceLocation = require('./response.deviceLocation');
 
-describe('Get Events Handler', function() {
-    beforeEach(function() {
-        //require(getEventsResponse);
-        // nock('https://www.eventbriteapi.com')
-        //     .get('/v3/events/search/*')
-        //     .reply(200, events);
-    });
-    it('returns Events Handler', function() {
-        this.timeout(3000);
-
-        // getEventsResponse(function(err, events) {
-        //     //it should return an array of objects? maybe just an array of text TODO
-        //     expect(String.isString(events)).to.equal(true);
-        // });
-        //console.log(getEventsHandler.searchEvents());
-        console.log("IMPLEMENT MEE!!!!!");
-    });
-});
-
-describe('Get Events Response', function() {
-    beforeEach(function() {
-        //require(getEventsResponse);
-        // nock('https://www.eventbriteapi.com')
-        //     .get('/v3/events/search/?location.within=1mi&location.latitude=41.878440&location.longitude=-87.625622&token=IO6EB7MM6TSCIL2TIOHC')
-        //     .reply(200, events);
-    });
-    it('returns Events Response', function() {
-        this.timeout(3000);
-
-        // getEventsResponse(function(err, events) {
-        //     //it should return an array of objects? maybe just an array of text TODO
-        //     expect(String.isString(events)).to.equal(true);
-        // });
-        console.log(getEventsResponse(events));
-    });
-});
 
 describe('Cta Bus Index.JS Test', function() {
     let sandbox;
@@ -110,7 +74,7 @@ describe('Cta Bus Index.JS Test', function() {
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query(function(queryObject){
-                return (queryObject.key == 'mY73pz65XVB4Yc7GYAgqFrHQY' 
+                return (queryObject.key == 'mY73pz65XVB4Yc7GYAgqFrHQY'
                     && queryObject.rt == '1'
                     && queryObject.format == 'json');
             })
@@ -146,15 +110,15 @@ describe('Cta Bus Index.JS Test', function() {
         // Mock device location API request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
-        .get('/v1/devices/' + deviceId + '/settings/address')        
+        .get('/v1/devices/' + deviceId + '/settings/address')
         .query(true)
         .reply(200, responseDeviceLocation);
 
         // Initialize the sandbox for sinon testing
-        sandbox = sinon.sandbox.create();  
-        
+        sandbox = sinon.sandbox.create();
+
         // Mock the geocoder call
-        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20}); 
+        sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});
     });
 
     afterEach(function() {
@@ -202,14 +166,14 @@ describe('Cta Bus Index.JS Test', function() {
     })
 
     it('Test CTABusIntent No Service Error Response', async function(){
-        
+
         let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Southbound");
         assert.equal(alexaResponse, "There is no scheduled service for stop 70 on route 1");
     })
 
     it('Test GetBusesIntent Wrong Direction Error Response', async function(){
-        
+
         let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Eastbound");
         assert.equal(alexaResponse, "Bus 1 does not go Eastbound. Please ask again.");
@@ -229,40 +193,4 @@ describe('Cta Bus Index.JS Test', function() {
         assert.equal(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
     })
 
-});
-
-describe('Get Transit Handler', function() {
-    beforeEach(function() {
-        nock('http://lapi.transitchicago.com')
-        .get('/api/1.0/ttarrivals.aspx')
-        .query(true)
-        .reply(200, responseTrains);
-    });
-    it('returns Transit Handler', function() {
-        this.timeout(3000);
-
-        // getEventsResponse(function(err, events) {
-        //     //it should return an array of objects? maybe just an array of text TODO
-        //     expect(String.isString(events)).to.equal(true);
-        // });
-        getTransitHandler({mapid: "123456", rt: ""}, (alexaResponse) => console.log(alexaResponse));
-    });
-});
-
-describe('Get Transit Response', function() {
-    beforeEach(function() {
-        //require(getEventsResponse);
-        // nock('http://lapi.transitchicago.com')
-        //     .get('/api/1.0/ttarrivals.aspx')
-        //     .reply(200, responseTrains);
-    });
-    it('returns Transit Response', function() {
-        this.timeout(3000);
-
-        // getEventsResponse(function(err, events) {
-        //     //it should return an array of objects? maybe just an array of text TODO
-        //     expect(String.isString(events)).to.equal(true);
-        // });
-        console.log(getTransitBuilder(responseTrains));
-    });
 });

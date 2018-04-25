@@ -1,13 +1,12 @@
 language: node_js
 node_js:
   #lambda uses 6, but we need node 9 to use aws-cli and ask-cli, which deploy the alexa skill/intents, and the lambda
-  - "6.10"
+  - "8.10"
 branches:
   only:
   - master
   - stage
   - stage-west
-  - winston-logging
 
 cache:
   directories:
@@ -20,11 +19,9 @@ before_install:
 script:
   - ./deploy.sh
   - sh -c "cd ./lambda/custom/ && npm install"
-  - sh -c "cd ./lambda/custom/ && npm run-script build"
-  - sh -c "cd ./lambda/custom/ && npm run-script testTranspile"
+  - sh -c "cd ./lambda/custom/ && npm test"
   - echo `json-minify models/en-US.json` > models/en-US.json
 after_success:
   - ask deploy -p default -t skill
-  - ask deploy -p default -t model &
-  - ask deploy -p default -t lambda --no-wait
-  - wait
+  - ask deploy -p default -t model --no-wait
+  - ask deploy -p default -t lambda

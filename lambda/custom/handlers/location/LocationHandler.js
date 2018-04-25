@@ -15,10 +15,10 @@ const DEFAULT_LOCATION = {
 
 /**
  * Returns an address object
- * @param {string} apiEndpoint 
- * @param {string} token 
- * @param {string} deviceId 
- * @param {function} callback 
+ * @param {string} apiEndpoint
+ * @param {string} token
+ * @param {string} deviceId
+ * @param {function} callback
  */
 exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
     // build the api url to get the location
@@ -55,7 +55,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     // build the api url to get the location
     let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
 
-    let options = {
+    let locationRequest = {
         url: url,
         headers: {
             'Authorization': "Bearer " + token
@@ -64,7 +64,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     };
 
     
-    let response = await asyncRequest(options)
+    let response = await asyncRequest(locationRequest)
         .catch(error => {
             logger.error(error);
         });

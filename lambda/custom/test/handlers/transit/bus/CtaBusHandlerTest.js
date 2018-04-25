@@ -25,21 +25,21 @@ const geocoder = require('../../../../handlers/location/geocoder');
 
 describe('CtaBusHandler Tests', function() {
     // sinon test environment
-    var sandbox;
+    let sandbox;
 
     beforeEach(function() {
         // Mock Device Location request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
-        .get('/v1/devices/' + deviceId + '/settings/address')        
-        .query(true)
-        .reply(200, responseDeviceLocation);   
+            .get('/v1/devices/' + deviceId + '/settings/address')
+            .query(true)
+            .reply(200, responseDeviceLocation);
 
         // Mock CTA Bus Repository call
         nock('http://ctabustracker.com')
-        .get('/bustime/api/v2/getstops')
-        .query(true)
-        .reply(200, responseRepoBuses);
+            .get('/bustime/api/v2/getstops')
+            .query(true)
+            .reply(200, responseRepoBuses);
 
         // Mock CTA API call
         nock('http://ctabustracker.com')
@@ -61,15 +61,15 @@ describe('CtaBusHandler Tests', function() {
         
         // Mock getpatterns
         nock('http://ctabustracker.com')
-        .get('/bustime/api/v2/getpatterns')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
-        .reply(200, getPatterns20Response);
+            .get('/bustime/api/v2/getpatterns')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+            .reply(200, getPatterns20Response);
 
         // Mock getpatterns
         nock('http://ctabustracker.com')
-        .get('/bustime/api/v2/getpatterns')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
-        .reply(200, getPatterns49Response);
+            .get('/bustime/api/v2/getpatterns')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+            .reply(200, getPatterns49Response);
 
         // Initialize the sandbox for sinon testing
         sandbox = sinon.sandbox.create();  

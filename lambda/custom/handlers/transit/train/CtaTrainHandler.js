@@ -12,8 +12,8 @@ const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 /**
  * Calls the CTA api with the specified parameters
- * @param {object} parameters 
- * @param {function} callback 
+ * @param {object} parameters
+ * @param {function} callback
  */
 exports.searchTrain = (parameters, callback) => {
     callCta(parameters, callback);
@@ -21,8 +21,8 @@ exports.searchTrain = (parameters, callback) => {
 
 /**
  * Gets the nearest train station info
- * @param {object} parameters 
- * @param {function} callback 
+ * @param {object} parameters
+ * @param {function} callback
  */
 exports.searchTrainNearMe = (parameters, callback) => {
 
@@ -35,13 +35,13 @@ exports.searchTrainNearMe = (parameters, callback) => {
 
             callCta(parameters, callback);
         });
-    });    
+    });
 };
 
 /**
  * Calls the CTA Train API
- * @param {object} parameters 
- * @param {function} callback 
+ * @param {object} parameters
+ * @param {function} callback
  */
 let callCta = (parameters, callback) => {
     let url = buildUrl(CTA_API_DOMAIN, {
@@ -54,9 +54,9 @@ let callCta = (parameters, callback) => {
         }
     });
 
-    request(url,  (error, response, body) => {        
+    request(url,  (error, response, body) => {
         let alexaResponse = TransitResponseBuilder.buildAlexaResponse(JSON.parse(body));
-        callback(alexaResponse);        
+        callback(alexaResponse);
     });
 };
 
