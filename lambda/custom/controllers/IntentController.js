@@ -12,9 +12,9 @@ exports.getEvents = async (event) => {
     let alexaResponse = "There was an error using events handler";
 
     try {
-        if (!!eventLocationIntentSlots.venueName.value) {
+        if (eventLocationIntentSlots.venueName.value) {
             alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
-        } else if (!!eventLocationIntentSlots.landmark.value) {
+        } else if (eventLocationIntentSlots.landmark.value) {
             alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
         } else {
             let parameters = ParameterHelper.getLocationParameters(event.context.System);
