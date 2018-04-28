@@ -1,16 +1,9 @@
 const Alexa = require('alexa-sdk');
-const bst = require('bespoken-tools');
+const bespokenTools = require('bespoken-tools');
 const TransitHandler = require('./handlers/transit/TransitHandler');
-const EventsHandler = require('./handlers/events/EventsHandler');
 const ParameterHelper = require('./helpers/ParameterHelper');
-const BusHandler = require('./handlers/transit/bus/BusHandler');
 const IntentController = require('./controllers/IntentController');
 const logger = require("logging/Logger");
-
-const APP_ID = 'amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38';
-const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
-const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
-const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
 const handlers = {
     'CtaTrainIntent': async function () {
@@ -81,17 +74,9 @@ const handlers = {
     }
 };
 
-exports.handler = function (event, context) {
+exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     const alexa = Alexa.handler(event, context);
     alexa.APP_ID = process.env.skill_id;
     alexa.registerHandlers(handlers);
     alexa.execute();
-};
-
-//
-// exports.handler = bst.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
-//     const alexa = Alexa.handler(event, context);
-//     alexa.APP_ID = process.env.skill_id;
-//     alexa.registerHandlers(handlers);
-//     alexa.execute();
-// });
+});
