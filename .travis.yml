@@ -25,3 +25,6 @@ after_success:
   - ask deploy -p default -t skill
   - ask deploy -p default -t model --no-wait
   - ask deploy -p default -t lambda
+
+notifications:
+    slack: chicagonow:zHgjnp9n08qZrsNqcBq5JmLz
