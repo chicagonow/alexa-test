@@ -1,0 +1,171 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "request": [
+        {
+          "deviceid": 123,
+          "geolocation": {
+            "isdefault":true,
+            "latitude": 3.1,
+            "longitude": 3.1
+          },
+          "timestamp":"12344567ZUTC",
+          "intent":{
+            "type":"EVENT",
+            "slots":[
+              {
+                "type":"VENUE",
+                "value":"house of blues"
+              },
+              {
+                "type":"TIME",
+                "value":"this weekend"
+              }
+            ]
+
+          },
+          "response":{
+            "iserror":false,
+            "responsetext":"here are 3 events happening in..."
+          }
+        },
+        {
+          "deviceid": 123,
+          "geolocation": {
+            "latitude": 3.1,
+            "longitude": 3.1
+          },
+          "timestamp":"12344567ZUTC",
+          "intent":{
+            "type":"EVENT",
+            "slots":[
+              {
+                "type":"VENUE",
+                "value":"house of blues"
+              },
+              {
+                "type":"TIME",
+                "value":"this weekend"
+              }
+            ]
+
+          },
+          "response":{
+            "iserror":false,
+            "responsetext":"here are 3 events happening in..."
+          }
+        },
+        {
+          "deviceid": 543,
+          "geolocation": {
+            "latitude": 3.1,
+            "longitude": 3.1
+          },
+          "timestamp":"12344567ZUTC",
+          "intent":{
+            "type":"EVENT",
+            "slots":[
+              {
+                "type":"VENUE",
+                "value":"house of blues"
+              },
+              {
+                "type":"TIME",
+                "value":"this weekend"
+              }
+            ]
+
+          },
+          "response":{
+            "iserror":false,
+            "responsetext":"here are 3 events happening in..."
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "request": [
+        {
+          "deviceid": 123,
+          "geolocation": {
+            "latitude": 3.1,
+            "longitude": 3.1
+          },
+          "timestamp":"12344567ZUTC",
+          "intent":{
+            "type":"EVENT",
+            "slots":[
+              {
+                "type":"VENUE",
+                "value":"house of blues"
+              },
+              {
+                "type":"TIME",
+                "value":"this weekend"
+              }
+            ]
+
+          },
+          "response":{
+            "iserror":false,
+            "responsetext":"here are 3 events happening in..."
+          }
+        },
+        {
+          "deviceid": 123,
+          "geolocation": {
+            "latitude": 3.1,
+            "longitude": 3.1
+          },
+          "timestamp":"12344567ZUTC",
+          "intent":{
+            "type":"EVENT",
+            "slots":[
+              {
+                "type":"VENUE",
+                "value":"house of blues"
+              },
+              {
+                "type":"TIME",
+                "value":"this weekend"
+              }
+            ]
+
+          },
+          "response":{
+            "iserror":false,
+            "responsetext":"here are 3 events happening in..."
+          }
+        },
+        {
+          "deviceid": 543,
+          "geolocation": {
+            "latitude": 3.1,
+            "longitude": 3.1
+          },
+          "timestamp":"12344567ZUTC",
+          "intent":{
+            "type":"EVENT",
+            "slots":[
+              {
+                "type":"VENUE",
+                "value":"house of blues"
+              },
+              {
+                "type":"TIME",
+                "value":"this weekend"
+              }
+            ]
+
+          },
+          "response":{
+            "iserror":false,
+            "responsetext":"here are 3 events happening in..."
+          }
+        }
+      ]
+    }
+  ]
+}
