@@ -1,6 +1,7 @@
 const request = require('request');
 const buildUrl = require('build-url');
 const sprintf = require('sprintf-js').sprintf;
+const asyncRequest = require('request-promise');
 
 const API_ENDPOINT = "https://data.cityofchicago.org/resource/8mj8-j3c4.json";
 const APP_TOKEN = "STK4neXxNDIblSih7NUAfFmg3";
@@ -60,3 +61,23 @@ let buildWithinCircleQuery = (latitude, longitude) => {
     let query = "$where=within_circle(location, %f, %f, %d)";
     return sprintf(query, latitude, longitude, RADIUS);
 };
+
+/**
+ * Returns station object 
+ */
+
+ exports.getTrainStationObject = async function getTrainStationStatus(mapID, direction, color) {
+    let url = buildUrl(API_ENDPOINT, {
+        queryParams: {
+            map_id: mapID,
+            direction_id: direction
+        }
+    });
+
+    url += '&' + color.toLowerCase() + '=true';
+
+    let options = buildRequestOptions(url); 
+    let stations = await asyncRequest(options);
+
+    return JSON.parse(stations)[0];
+ }

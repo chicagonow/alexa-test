@@ -75,7 +75,8 @@
                     ],
                     "samples": [
                         "what's the status of the {train}",
-                        "what's the status of the {trainStation}"
+                        "what's the status of the {trainStation}",
+                        "what's the status of the {trainStation} {train}"
                     ]
                 },
                 {
@@ -100556,38 +100557,51 @@
                     "name": "CTA_TRAIN",
                     "values": [
                         {
+                            "id": "Red",
                             "name": {
                                 "value": "red line"
                             }
                         },
                         {
+                            "id": "Blue",
                             "name": {
                                 "value": "blue line"
                             }
                         },
                         {
+                            "id": "Org",
                             "name": {
                                 "value": "orange line"
                             }
                         },
                         {
+                            "id": "G",
                             "name": {
                                 "value": "green line"
                             }
                         },
                         {
+                            "id": "Pink",
                             "name": {
                                 "value": "pink line"
                             }
                         },
                         {
+                            "id": "P",
                             "name": {
                                 "value": "purple line"
                             }
                         },
                         {
+                            "id": "Y",
                             "name": {
                                 "value": "yellow line"
+                            }
+                        },
+                        {
+                            "id": "Brn",
+                            "name": {
+                                "value": "brown line"
                             }
                         },
                         {
