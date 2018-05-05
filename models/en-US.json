@@ -81,9 +81,9 @@
                         "what's the status of the {train}",
                         "what's the status of the {trainStation}",
                         "what's the status of the {trainStation} {train}",
-                        "what's the status of the {train} at {trainStation",
+                        "what's the status of the {train} at {trainStation}",
                         "what's the status of the {trainStation} {train} going {trainDirection}",
-                        "what's the status of the {trainDirection} {train} at {trainStation",
+                        "what's the status of the {trainDirection} {train} at {trainStation}",
                         "what's the status of the {train} going {trainDirection} at {trainStation}"
                     ]
                 },
