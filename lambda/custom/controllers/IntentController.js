@@ -114,7 +114,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
 
     // No matching names were found
     if (stations.length === 0) {
-        logger.log("No train stations found matching name");
+        logger.log({level: "info", message: "No train stations found matching name"});
         return "No train stations were found that match name " + stationName + ". Please try again";
     }
 
@@ -125,7 +125,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
 
     // No matching colors were found
     if (stations.length === 0) {
-        logger.log("No train stations found matching train line");
+        logger.log({level: "info", message: "No train stations found matching line"});
         return "No train stations were found that match that train line. Please try again";
     }
 
@@ -136,7 +136,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
 
     // No matching stations at all. You suck
     if (stations.length === 0) {
-        logger.log("No train stations found at all");
+        logger.log({level: "info", message: "No train stations found matching direction"});
         return "No train stations were found that match that direction. Please try again";
     } else {
         let stationMatch = stations[0];
