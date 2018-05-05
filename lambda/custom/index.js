@@ -12,13 +12,13 @@ const handlers = {
         let train = "";
         let trainStation = "";
         let trainDirection = "";
-        if (this.event.request.intent.slots.train){
+        if (this.event.request.intent.slots.train.resolutions){
             train =  this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
         }
-        if (this.event.request.intent.slots.trainStation){
+        if (this.event.request.intent.slots.trainStation.resolutions){
             trainStation =  this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         }
-        if (this.event.request.intent.slots.trainDirection){
+        if (this.event.request.intent.slots.trainDirection.resolutions){
             trainDirection =  this.event.request.intent.slots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         }
         if (train === "" && trainStation === "" && trainDirection ===""){
