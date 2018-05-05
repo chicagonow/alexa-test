@@ -115,12 +115,12 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
     // No matching names were found
     if (stations.length === 0) {
         logger.log({level: "info", message: "No train stations found matching name"});
-        return "No train stations were found that match name " + stationName + ". Please try again";
+        return "No train stations were found that match the name " + stationName + ". Please try again";
     }
 
     // If the user wants to filter by trainLine, get those results
     if (trainLine) {        
-        stations = _.filter(stations, [trainLine, true]);
+        stations = _.filter(stations, [trainLine.toLowerCase(), true]);
     }
 
     // No matching colors were found
@@ -131,7 +131,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
 
     // If the user wants to filter by direction as well, get those matching stations
     if (direction) {
-        stations = _.filter(stations, ['direction_id', direction]);
+        stations = _.filter(stations, ['direction_id', direction.toUpperCase()]);
     }
 
     // No matching stations at all. You suck

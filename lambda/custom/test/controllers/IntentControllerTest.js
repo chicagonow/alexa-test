@@ -17,6 +17,9 @@ const alexaJson = require('../response.alexa.json');
 const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
 const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
+const WilsonTrainStationResponse = require('../data/repository/response.WilsonTrainStation.json');
+const WilsonSouthPredictionResponse = require('../data/transit/train/response.WilsonSouthPredictions.json');
+const wrongStationResponse = require('../data/repository/response.WrongStation.json');
 
 describe('IntentController Tests', function() {
     let sandbox;
@@ -104,10 +107,59 @@ describe('IntentController Tests', function() {
         assert.equal(alexaResponse, expectedResponse);
     });
 
-    describe("getTrain()", () => {
-        nock('https://data.cityofchicago.org/resource/8mj8-j3c4.json?')
-        it('Test IntentController.asyncGetTrain: returns an alexa response', async function() {
+    describe("test AsyncGetTrain()", () => {
+        beforeEach(function() {
+            nock('https://data.cityofchicago.org')
+            .get('/resource/8mj8-j3c4.json')
+            .query(true)
+            .reply(200, WilsonTrainStationResponse);
 
+            nock('http://lapi.transitchicago.com')
+            .get('/api/1.0/ttarrivals.aspx')
+            .query(true)
+            .reply(200, WilsonSouthPredictionResponse);
+        });
+
+        afterEach(function(){
+            nock.cleanAll();
+        });
+        
+
+        it('Test IntentController.asyncGetTrain(Station, Train, Direction): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "S");
+            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, Train, ""): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "");
+            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, "", ""): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "", "");
+            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, wrongTrain, Direction): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Pink", "S");
+            assert.equal(alexaResponse, "No train stations were found that match that train line. Please try again");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, Train, wrongDirection): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "E");
+            assert.equal(alexaResponse, "No train stations were found that match that direction. Please try again");
+        });
+
+        it('Test IntentController.asyncGetTrain(wrongStation, Line, Direction): returns an alexa response', async function() {
+            nock.cleanAll();
+            
+            nock('https://data.cityofchicago.org')
+            .get('/resource/8mj8-j3c4.json')
+            .query(true)
+            .reply(200, wrongStationResponse);
+            
+            let alexaResponse = await IntentController.asyncGetTrain("adsf", "Red", "S");
+            assert.equal(alexaResponse, "No train stations were found that match the name adsf. Please try again");
         });
     });
 });
