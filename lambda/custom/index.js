@@ -8,9 +8,11 @@ const logger = require("logging/Logger");
 const handlers = {
     'CtaTrainIntent': async function () {
         // TODO: Build proper parameters
-        let stationId = this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-        let trainLine = this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(stationId, trainLine);
+        let stationName = "";
+        let trainLine = ""
+        stationName = this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        trainLine = this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(stationName, trainLine);
         this.emit(':tell', alexaTrainStatusResponse);
     },
     'CtaBusIntent': async function () {
