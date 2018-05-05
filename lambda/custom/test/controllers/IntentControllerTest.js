@@ -86,10 +86,6 @@ describe('IntentController Tests', function() {
         });
     });
 
-
-
-
-
     it('Test IntentController.getEventsWithinTimeFrame: return 3 events occuring today in string', async function() {
         nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
@@ -106,5 +102,11 @@ describe('IntentController Tests', function() {
         let expectedResponse = "Here are 3 events going on in Chicago. chicago professional  and  technology diversity career fair, 10th stem cell clonality and genome stability retreat, made to win rooftop social ";
         let alexaResponse = await IntentController.getEventsWithinTimeFrame(apiEndpoint, apiAccessToken, funcDeviceId, date);
         assert.equal(alexaResponse, expectedResponse);
+    });
+
+    describe("getTrain()", () => {
+        it('Testt IntentController.asyncGetTrain: returns an alexa response', async function() {
+
+        });
     });
 });

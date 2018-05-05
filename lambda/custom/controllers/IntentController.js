@@ -112,7 +112,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
     let alexaResponse = "";
 
     // Search the repo for any stations matching the given station name
-    let stations = TrainRepository.getPotentialTrainStations(stationName);
+    let stations = await TrainRepository.getPotentialTrainStations(stationName);
 
     // No matching names were found
     if (stations.length === 0) {
