@@ -8,12 +8,26 @@ const logger = require("logging/Logger");
 const handlers = {
     'CtaTrainIntent': async function () {
         // TODO: Build proper parameters
-        let stationName = "";
-        let trainLine = ""
-        stationName = this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        trainLine = this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-        let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(stationName, trainLine);
-        this.emit(':tell', alexaTrainStatusResponse);
+        // train = color, trainstation = stpid, traindirection =
+        let train = "";
+        let trainStation = "";
+        let trainDirection = "";
+        if (this.event.request.intent.slots.train){
+            train =  this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        }
+        if (this.event.request.intent.slots.trainStation){
+            trainStation =  this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        }
+        if (this.event.request.intent.slots.trainDirection){
+            trainDirection =  this.event.request.intent.slots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+        }
+        if (train === "" && trainStation === "" && trainDirection ===""){
+            this.emit(':tell', "No train line, train station, or train direction specified");
+        }
+        else{
+            let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(trainStation, train, trainDirection);
+            this.emit(':tell', alexaTrainStatusResponse);
+        }
     },
     'CtaBusIntent': async function () {
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);

@@ -104,11 +104,10 @@ describe('CtaTrainHandler Tests', function() {
 
         it('with correct query parameters returns correct Alexa Response', async () => {
             let ctaTrainParameters = {
-                mapid: "40530",
-                route: "Brn"
+                stpid: "30104"
             };
 
-            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("40530", "Brn");
+            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("30104");
             let expectedAlexaResponse = "The Diversey Brn Service toward Loop will arrive at 9:55 PM";
             assert.equal(actualAlexaResponse, expectedAlexaResponse);
         });
