@@ -5,6 +5,7 @@ const CtaTrainHandler = require('../handlers/transit/train/CtaTrainHandler');
 const ParameterHelper = require('../helpers/ParameterHelper');
 const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
+const TrainRepository = require('../repositories/transit/CtaTrainRepository');
 const _ = require('lodash');
 
 exports.getEvents = async (event) => {
