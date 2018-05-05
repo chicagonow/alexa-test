@@ -45,13 +45,15 @@ describe('CtaTrainRepository Tests', function() {
     });
 
     // Test the getTrainStationObject method
-    it('getTrainStationObject: returns station object', async function(){
+    it('getPossibleTrainStations: returns stations array', async function(){
         nock('https://data.cityofchicago.org')
         .get('/resource/8mj8-j3c4.json')
-        .query({map_id: '40830', direction_id: 'W', pnk: 'true'})
+        .query((queryObject) => {
+            return queryObject["$where"] !== undefined;
+        })
         .reply(200, responseTrainStationObject);
 
-        let trainStation = await TrainRepository.getTrainStationObject(40830, 'W', 'pnk');
-        assert.equal(trainStation.map_id, '40830'); 
+        let trainStations = await TrainRepository.getPotentialTrainStations("18th");
+        assert.equal(trainStations[0].map_id, '40830'); 
     });
 });

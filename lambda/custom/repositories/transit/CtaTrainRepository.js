@@ -66,18 +66,13 @@ let buildWithinCircleQuery = (latitude, longitude) => {
  * Returns station object 
  */
 
- exports.getTrainStationObject = async function getTrainStationStatus(mapID, direction, color) {
-    let url = buildUrl(API_ENDPOINT, {
-        queryParams: {
-            map_id: mapID,
-            direction_id: direction
-        }
-    });
-
-    url += '&' + color.toLowerCase() + '=true';
+ exports.getPotentialTrainStations = async function getPotentialTrainStations(stationName) {
+    // Similar to a SQL query, we're looking for stations that potentially match the station Name
+    // query: SELECT * FROM Trains WHERE station_name like "%stationName%"
+    let url = API_ENDPOINT + "?" + "$where=station_name%20like%20%27%25" + stationName + "%25%27";
 
     let options = buildRequestOptions(url); 
     let stations = await asyncRequest(options);
 
-    return JSON.parse(stations)[0];
+    return JSON.parse(stations);
  }
