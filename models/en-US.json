@@ -71,12 +71,20 @@
                         {
                             "name": "trainStation",
                             "type": "CTA_TRAIN_STATION"
+                        },
+                        {
+                            "name": "trainDirection",
+                            "type": "CTA_TRAIN_DIRECTION"
                         }
                     ],
                     "samples": [
                         "what's the status of the {train}",
                         "what's the status of the {trainStation}",
-                        "what's the status of the {trainStation} {train}"
+                        "what's the status of the {trainStation} {train}",
+                        "what's the status of the {train} at {trainStation",
+                        "what's the status of the {trainStation} {train} going {trainDirection}",
+                        "what's the status of the {trainDirection} {train} at {trainStation",
+                        "what's the status of the {train} going {trainDirection} at {trainStation}"
                     ]
                 },
                 {
@@ -100548,6 +100556,55 @@
                                     "west",
                                     "West",
                                     "west bound"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CTA_TRAIN_DIRECTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "N",
+                                "synonyms": [
+                                    "north",
+                                    "North",
+                                    "north bound",
+                                    "North bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "S",
+                                "synonyms": [
+                                    "south",
+                                    "South",
+                                    "south bound",
+                                    "South bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "W",
+                                "synonyms": [
+                                    "west",
+                                    "West",
+                                    "west bound",
+                                    "West bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "E",
+                                "synonyms": [
+                                    "east",
+                                    "East",
+                                    "east bound",
+                                    "East bound"
                                 ]
                             }
                         }
