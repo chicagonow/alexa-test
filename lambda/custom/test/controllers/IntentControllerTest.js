@@ -105,7 +105,8 @@ describe('IntentController Tests', function() {
     });
 
     describe("getTrain()", () => {
-        it('Testt IntentController.asyncGetTrain: returns an alexa response', async function() {
+        nock('https://data.cityofchicago.org/resource/8mj8-j3c4.json?')
+        it('Test IntentController.asyncGetTrain: returns an alexa response', async function() {
 
         });
     });

@@ -1,0 +1,72 @@
+{
+    "ctatt": {
+        "tmst": "2018-05-05T14:31:57",
+        "errCd": "0",
+        "errNm": null,
+        "eta": [
+            {
+                "staId": "40540",
+                "stpId": "30106",
+                "staNm": "Wilson",
+                "stpDe": "Service toward 95th/Dan Ryan",
+                "rn": "816",
+                "rt": "Red",
+                "destSt": "30089",
+                "destNm": "95th/Dan Ryan",
+                "trDr": "5",
+                "prdt": "2018-05-05T14:31:28",
+                "arrT": "2018-05-05T14:32:28",
+                "isApp": "1",
+                "isSch": "0",
+                "isDly": "0",
+                "isFlt": "0",
+                "flags": null,
+                "lat": "41.96914",
+                "lon": "-87.65849",
+                "heading": "180"
+            },
+            {
+                "staId": "40540",
+                "stpId": "30106",
+                "staNm": "Wilson",
+                "stpDe": "Service toward 95th/Dan Ryan",
+                "rn": "810",
+                "rt": "Red",
+                "destSt": "30089",
+                "destNm": "95th/Dan Ryan",
+                "trDr": "5",
+                "prdt": "2018-05-05T14:31:04",
+                "arrT": "2018-05-05T14:38:04",
+                "isApp": "0",
+                "isSch": "0",
+                "isDly": "0",
+                "isFlt": "0",
+                "flags": null,
+                "lat": "41.99196",
+                "lon": "-87.65912",
+                "heading": "178"
+            },
+            {
+                "staId": "40540",
+                "stpId": "30106",
+                "staNm": "Wilson",
+                "stpDe": "Service toward 95th/Dan Ryan",
+                "rn": "821",
+                "rt": "Red",
+                "destSt": "30089",
+                "destNm": "95th/Dan Ryan",
+                "trDr": "5",
+                "prdt": "2018-05-05T14:30:57",
+                "arrT": "2018-05-05T14:43:57",
+                "isApp": "0",
+                "isSch": "0",
+                "isDly": "0",
+                "isFlt": "0",
+                "flags": null,
+                "lat": "42.01906",
+                "lon": "-87.67289",
+                "heading": "130"
+            }
+        ]
+    }
+}
