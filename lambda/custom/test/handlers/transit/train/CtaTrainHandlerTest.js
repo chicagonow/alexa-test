@@ -41,7 +41,7 @@ describe('CtaTrainHandler Tests', function() {
         nock('http://lapi.transitchicago.com')
             .get('/api/1.0/ttarrivals.aspx')
             .query(function(queryObject) {
-                return queryObject.rt !== "fail" && queryObject.mapid !== "fail"
+                return queryObject.stpid !== "fail"
             })
             .reply(200, responseTrains);
 
@@ -93,11 +93,11 @@ describe('CtaTrainHandler Tests', function() {
             nock('http://lapi.transitchicago.com')
                 .get('/api/1.0/ttarrivals.aspx')
                 .query(function(queryObject){
-                    return queryObject.rt === "fail" && queryObject.mapid === "fail";
+                    return queryObject.stpid == "fail";
                 })
                 .reply(500, null);
 
-            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("fail", "fail");
+            let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("fail");
             let expectedAlexaResponse = "There was an error with the CTA train service response.";
             assert.equal(actualAlexaResponse, expectedAlexaResponse);
         });

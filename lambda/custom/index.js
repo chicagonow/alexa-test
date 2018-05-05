@@ -25,7 +25,7 @@ const handlers = {
             this.emit(':tell', "No train line, train station, or train direction specified");
         }
         else{
-            let alexaTrainStatusResponse = await IntentController.getStatusOfTrainStation(trainStation, train, trainDirection);
+            let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
             this.emit(':tell', alexaTrainStatusResponse);
         }
     },
