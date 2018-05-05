@@ -131,7 +131,6 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
 
     // If the user wants to filter by direction as well, get those matching stations
     if (direction) {
-        logger.log("No train stations found matching direction");
         stations = _.filter(stations, ['direction_id', direction]);
     }
 
