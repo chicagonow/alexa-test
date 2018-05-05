@@ -16,10 +16,10 @@ const handlers = {
             train =  this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
         }
         if (this.event.request.intent.slots.trainStation){
-            trainStation =  this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+            trainStation =  this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         }
         if (this.event.request.intent.slots.trainDirection){
-            trainDirection =  this.event.request.intent.slots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+            trainDirection =  this.event.request.intent.slots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         }
         if (train === "" && trainStation === "" && trainDirection ===""){
             this.emit(':tell', "No train line, train station, or train direction specified");
