@@ -100558,38 +100558,51 @@
                     "values": [
                         {
                             "name": {
-                                "value": "red line"
-                            }
+                                "value": "red line"    
+                            },
+                            "id": "red"
                         },
                         {
                             "name": {
                                 "value": "blue line"
-                            }
+                            },
+                            "id": "blue"
                         },
                         {
                             "name": {
                                 "value": "orange line"
-                            }
+                            },
+                            "id": "o"
                         },
                         {
                             "name": {
                                 "value": "green line"
-                            }
+                            },
+                            "id": "g"
                         },
                         {
                             "name": {
                                 "value": "pink line"
-                            }
+                            },
+                            "id": "pnk"
                         },
                         {
                             "name": {
                                 "value": "purple line"
-                            }
+                            },
+                            "id": "p"
+                        },
+                        {
+                            "name": {
+                                "value": "purple line express"
+                            },
+                            "id": "pexp"
                         },
                         {
                             "name": {
                                 "value": "yellow line"
-                            }
+                            },
+                            "id": "y"
                         },
                         {
                             "name": {
