@@ -69,7 +69,7 @@ const handlers = {
         this.emit(':tell', this.t('STOP_MESSAGE'));
     },
     'Unhandled': function () {
-        logger.error("Unhandled Intent. Alexa request was : " + JSON.stringify(this));
+        logger.info("Unhandled Intent. Alexa request was : " + JSON.stringify(this));
         this.emit(':tell', "You don goofed");
     }
 };
