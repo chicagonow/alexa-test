@@ -17,6 +17,7 @@ const alexaJson = require('../data/transit/train/response.alexa.json');
 const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
 const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
+const responseEventsWithGenreAndVenueAndTime = require('../data/events/request.alexa.eventsWithGenreAndVenueAndTime');
 
 describe('IntentController Tests', function() {
     let sandbox;

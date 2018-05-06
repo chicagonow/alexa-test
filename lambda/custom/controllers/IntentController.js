@@ -11,20 +11,53 @@ exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler";
 
+    let eventLocation =
+        (eventLocationIntentSlots.venueName.value || " ") +
+        (eventLocationIntentSlots.landmark.value || " ");
+
+    let date = eventLocationIntentSlots.timeFrame.value || "";
+
+    let timeFrame;
     try {
-        if (eventLocationIntentSlots.venueName.value) {
-            alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
-        } else if (eventLocationIntentSlots.landmark.value) {
-            alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
-        } else {
-            let parameters = ParameterHelper.getLocationParameters(event.context.System);
-            alexaResponse = await getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID);
-        }
+        timeFrame = new AmazonDateParser(date);
+    } catch (error) {
+        timeFrame = "";
+        logger.error(error);
+    }
+
+    let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
+
+    let locationParameters;
+    let locationObj;
+    if (eventLocation.trim() === "") {
+         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+         locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+    }
+
+    try {
+        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, timeFrame.startDate, timeFrame.endDate, locationObj.latitude, locationObj.longitude);
     } catch (error) {
         logger.error(error);
     }
 
     return alexaResponse;
+
+    //
+    //
+    // try {
+    //     if (eventLocationIntentSlots.venueName.value) {
+    //         alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
+    //     } else if (eventLocationIntentSlots.landmark.value) {
+    //         alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
+    //     } else {
+    //         let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+    //         alexaResponse = await getEventsWithUserLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+    //     }
+    // } catch (error) {
+    //     logger.error(error);
+    // }
+
+    // return alexaResponse;
 };
 
 
@@ -63,7 +96,7 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
     try {
         timeFrame = new AmazonDateParser(date);
     } catch (error) {
-        logger.log(error);
+        logger.error(error);
     }
 
     // Return response
