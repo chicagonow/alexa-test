@@ -18,7 +18,7 @@ const alexaJson = require('../data/transit/train/response.alexa.json');
 const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
 const requestGenreVenueTime = require('../data/events/request.genreEventsAtVenueThisWeekend.json');
 const requestGenreVenue = require('../data/events/request.genreEventsAtVenue.json');
-const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
+const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue.json');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
 const responseEventsWithGenreAndVenueAndTime = require('../data/events/request.alexa.eventsWithGenreAndVenueAndTime');
 
@@ -113,10 +113,9 @@ describe('IntentController Tests', function() {
         });
 
         it('calls asyncGetEvents with venue', async function () {
-            let parsedDate = new AmazonDateParser("2018-W19-WE");
 
              sandbox.stub(EventsHandler, "asyncGetEvents")
-                 .withArgs("", "house of blues", parsedDate.startDate, parsedDate.endDate, "", "")
+                 .withArgs("", "A CHICAGO VENUE", "", "", "", "")
                  .returns("logic successfully called for function with venue");
             
             let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
