@@ -136,10 +136,12 @@
                     "what events are going on at {venueName}",
                     "what {eventGenre} events are going on at {venueName}",
                     "what {eventGenre} events are going on at {venueName} {timeFrame}",
+                    "what events are going on at {venueName} {timeFrame}",
                     "what's going on at {venueName}",
                     "what events are going on at {landmark}",
                     "what {eventGenre} events are going on at {landmark}",
                     "what {eventGenre} events are going on at {landmark} {timeFrame}",
+                    "what events are going on at {landmark} {timeFrame}",
                     "what's going on at {landmark}"
                   ]
                 }
