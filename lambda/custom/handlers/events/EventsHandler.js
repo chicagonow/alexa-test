@@ -68,9 +68,13 @@ exports.asyncGetEvents = async (eventGenre, eventLocation, startDate, endDate, l
     if ((eventGenre + eventLocation).trim() !== ""){
         queryParameters["q"] = eventGenre + " " + eventLocation;
     }
-    queryParameters[encodeURIComponent('location.within')] = DEFAULT_RADIUS;
-    if (latitude) {queryParameters[encodeURIComponent('location.latitude')] = latitude;}
-    if (longitude) {queryParameters[encodeURIComponent('location.longitude')] = longitude;}
+
+    if (latitude && longitude){
+        queryParameters[encodeURIComponent('location.within')] = DEFAULT_RADIUS;
+        queryParameters[encodeURIComponent('location.latitude')] = latitude;
+        queryParameters[encodeURIComponent('location.longitude')] = longitude;
+    }
+
     if (startDate) {queryParameters[encodeURIComponent('start_date.range_start')] = getLocalDateString(startDate);}
     if (endDate) {queryParameters[encodeURIComponent('start_date.range_end')] = getLocalDateString(endDate);}
 

@@ -11,31 +11,41 @@ exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler";
 
-    let eventLocation =
-        (eventLocationIntentSlots.venueName.value || " ") +
-        (eventLocationIntentSlots.landmark.value || " ");
+    let eventLocation = eventLocationIntentSlots.venueName.value || "";
+    if (!eventLocation) {
+        eventLocation = eventLocationIntentSlots.landmark.value || "";
+    }
 
-    let date = eventLocationIntentSlots.timeFrame.value || "";
+    let locationParameters;
+    let locationObj = {
+        latitude : "",
+        longitude : ""
+    };
+    if (eventLocation.trim() === "") {
+        locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+        locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+    }
 
-    let timeFrame;
-    try {
-        timeFrame = new AmazonDateParser(date);
-    } catch (error) {
-        timeFrame = "";
-        logger.error(error);
+    let timeFrame = eventLocationIntentSlots.timeFrame.value || "";
+
+
+    let parsedDate = {
+        startDate: "",
+        endDate: ""
+    };
+
+    if (timeFrame.trim()) {
+        try {
+            parsedDate = new AmazonDateParser(timeFrame);
+        } catch (error) {
+            logger.error(error);
+        }
     }
 
     let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
 
-    let locationParameters;
-    let locationObj;
-    if (eventLocation.trim() === "") {
-         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
-         locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
-    }
-
     try {
-        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, timeFrame.startDate, timeFrame.endDate, locationObj.latitude, locationObj.longitude);
+        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObj.latitude, locationObj.longitude);
     } catch (error) {
         logger.error(error);
     }

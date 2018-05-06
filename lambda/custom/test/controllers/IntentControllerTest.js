@@ -39,7 +39,7 @@ describe('IntentController Tests', function() {
             .reply(200, responseEvents);
 
         // Initialize the sandbox for sinon testing
-        sandbox = sinon.sandbox.create();  
+        sandbox = sinon.sandbox.create();
         
         // Mock the geocoder call
         sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});        
@@ -69,8 +69,8 @@ describe('IntentController Tests', function() {
         const fakeVenueName = "A CHICAGO VENUE";
         const fakeLandmarkName = "A CHICAGO LANDMARK";
         it('calls asyncGetEventsAtVenue with venue name when there is a venue slot type', async function () {
-            let venueEventsStub = sandbox.stub(EventsHandler, "asyncGetEventsAtVenue")
-                .withArgs(fakeVenueName)
+            let venueEventsStub = sandbox.stub(EventsHandler, "asyncGetEvents")
+                .withArgs("", fakeVenueName, "", "", "", "")
                 .returns("fake event response for venue: " + fakeVenueName);
 
             let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
@@ -78,8 +78,8 @@ describe('IntentController Tests', function() {
         });
 
         it('calls asyncGetEventsAtVenue with landmark name when there is a landmark slot type', async function () {
-            sandbox.stub(EventsHandler, "asyncGetEventsAtVenue")
-                .withArgs(fakeLandmarkName)
+            sandbox.stub(EventsHandler, "asyncGetEvents")
+                .withArgs("", fakeLandmarkName, "", "", "", "")
                 .returns("fake event response for landmark: " + fakeLandmarkName);
 
             let alexaResponse = await IntentController.getEvents(alexaRequestLandmark);
