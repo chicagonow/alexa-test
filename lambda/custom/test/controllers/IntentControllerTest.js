@@ -15,6 +15,7 @@ const responseEvents = require('../data/events/response.events');
 const responseEventsToday = require('../data/events/response.eventsToday');
 const alexaJson = require('../data/transit/train/response.alexa.json');
 const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
+const alexaRequestVenueGenreTime = require('../data/events/request.genreEventsAtVenueThisWeekend.json');
 const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
 const responseEventsWithGenreAndVenueAndTime = require('../data/events/request.alexa.eventsWithGenreAndVenueAndTime');
@@ -84,6 +85,17 @@ describe('IntentController Tests', function() {
 
             let alexaResponse = await IntentController.getEvents(alexaRequestLandmark);
             assert.equal(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
+        });
+        it('calls asyncGetEvents with genre, venue, and time', async function () {
+            let startDate = new Date("Sat May 05 2018 00:00:00 GMT-0500 (Central Daylight Time)");
+            let endDate = new Date("Sun May 06 2018 23:59:59 GMT-0500 (Central Daylight Time)");
+
+             sandbox.stub(EventsHandler, "asyncGetEvents")
+                 .withArgs("jazz", "house of blues", startDate,endDate, "", "")
+                 .returns("logic successfully called for function with genre, venue, and time: ");
+            
+            let alexaResponse = await IntentController.getEvents(alexaRequestVenueGenreTime);
+            assert.equal(alexaResponse, "logic successfully called for function with genre, venue, and time: ");
         });
     });
 
