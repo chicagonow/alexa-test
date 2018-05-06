@@ -7,7 +7,7 @@ const ParameterHelper = require('../../../helpers/ParameterHelper');
 const geocoder = require('../../../handlers/location/geocoder');
 
 //responses
-const alexaJson = require('../../data/train/response.alexa.json');
+const alexaJson = require('../../data/transit/train/response.alexa.json');
 const responseDeviceLocation = require('../../data/response.deviceLocation');
 const responseEvents = require('../../data/events/response.events');
 const responseEventsNearLocation = require('../../data/events/response.eventsNearLocation.json');

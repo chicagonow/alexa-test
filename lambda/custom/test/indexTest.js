@@ -14,12 +14,12 @@ const geocoder = require('../handlers/location/geocoder');
 
 const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
 const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
-const responseTrains = require('./data/train/response.trains');
-const alexaBusRequest20East = require('./data/bus/alexaRequest20EastboundBus');
-const alexaBusRequest49South = require('./data/bus/alexaRequest49SouthboundBus');
-const alexaBusRequest20stop4727 = require('./data/bus/alexaRequest20atStop4727');
-const alexaBusRequest49stop8245 = require('./data/bus/alexaRequest49atStop8245');
-const alexaJson = require('./data/train/response.alexa.json');
+const responseTrains = require('./data/transit/train/response.trains');
+const alexaBusRequest20East = require('./data/transit/bus/alexaRequest20EastboundBus');
+const alexaBusRequest49South = require('./data/transit/bus/alexaRequest49SouthboundBus');
+const alexaBusRequest20stop4727 = require('./data/transit/bus/alexaRequest20atStop4727');
+const alexaBusRequest49stop8245 = require('./data/transit/bus/alexaRequest49atStop8245');
+const alexaJson = require('./data/transit/train/response.alexa.json');
 const responseDeviceLocation = require('./data/response.deviceLocation');
 
 
@@ -30,15 +30,15 @@ describe('Cta Bus Index.JS Test', function() {
     const DIRECTION = "Eastbound";
 
     const busHandler = require('../handlers/transit/bus/BusHandler');
-    const busPred20Response = require('./data/bus/response.getPredictions20');
-    const busPred49Response = require('./data/bus/response.getPredictions49');
-    const busPred1Response = require('./data/bus/response.getPredictions1');
-    const busStops20Response = require('./data/bus/response.getStops20');
-    const busStops49Response = require('./data/bus/response.getStops49');
+    const busPred20Response = require('./data/transit/bus/response.getPredictions20');
+    const busPred49Response = require('./data/transit/bus/response.getPredictions49');
+    const busPred1Response = require('./data/transit/bus/response.getPredictions1');
+    const busStops20Response = require('./data/transit/bus/response.getStops20');
+    const busStops49Response = require('./data/transit/bus/response.getStops49');
     const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
-    const getPatterns20Response = require('./data/bus/response.getPatterns20');
-    const getPatterns49Response = require('./data/bus/response.getPatterns49');
-    const getPatterns1Response = require('./data/bus/response.getPatterns1');
+    const getPatterns20Response = require('./data/transit/bus/response.getPatterns20');
+    const getPatterns49Response = require('./data/transit/bus/response.getPatterns49');
+    const getPatterns1Response = require('./data/transit/bus/response.getPatterns1');
 
     beforeEach(function() {
         nock('http://ctabustracker.com')
