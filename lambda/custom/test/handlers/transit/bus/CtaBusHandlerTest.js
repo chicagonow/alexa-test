@@ -4,13 +4,13 @@ const assert = require('assert');
 const sinon = require('sinon');
 
 // import test data
-const alexaJson = require('../../../response.alexa.json');
-const responseDeviceLocation = require('../../../response.deviceLocation');
-const getPred20Response = require('../../../response.getPredictions20');
-const getPred49Response = require('../../../response.getPredictions49');
-const responseRepoBuses = require('../../../response.getStops20');
-const getPatterns20Response = require('../../../../test/response.getPatterns20');
-const getPatterns49Response = require('../../../../test/response.getPatterns49');
+const alexaJson = require('../../../data/train/response.alexa.json');
+const responseDeviceLocation = require('../../../data/response.deviceLocation');
+const getPred20Response = require('../../../data/bus/response.getPredictions20');
+const getPred49Response = require('../../../data/bus/response.getPredictions49');
+const responseRepoBuses = require('../../../data/bus/response.getStops20');
+const getPatterns20Response = require('../../../data/bus/response.getPatterns20');
+const getPatterns49Response = require('../../../data/bus/response.getPatterns49');
 
 // import files we need to test
 const BusHandler = require('../../../../handlers/transit/bus/BusHandler');

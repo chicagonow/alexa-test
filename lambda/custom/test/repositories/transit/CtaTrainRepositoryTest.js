@@ -3,7 +3,7 @@ const nock = require('nock');
 const assert = require('assert');
 
 // import test data
-const responseRepoTrains = require('../../response.repo.trains.json');
+const responseRepoTrains = require('../../data/train/response.repo.trains.json');
 
 // import files we need to test
 const TrainRepository = require('../../../repositories/transit/CtaTrainRepository');
