@@ -51,40 +51,6 @@ exports.getEvents = async (event) => {
     }
 
     return alexaResponse;
-
-    //
-    //
-    // try {
-    //     if (eventLocationIntentSlots.venueName.value) {
-    //         alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
-    //     } else if (eventLocationIntentSlots.landmark.value) {
-    //         alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
-    //     } else {
-    //         let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
-    //         alexaResponse = await getEventsWithUserLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
-    //     }
-    // } catch (error) {
-    //     logger.error(error);
-    // }
-
-    // return alexaResponse;
-};
-
-
-// take device information, get lat long
-// take lat long return events near location
-let getEventsWithUserLocation = async function getEventsWithUserLocation(apiEndpoint, token, deviceID) {
-    let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
-        .catch(error => {
-            logger.error(error);
-        });
-
-    let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(locationObj.latitude, locationObj.longitude)
-        .catch(error => {
-            logger.error(error);
-        });
-
-    return alexaResponse;
 };
 
 /**
