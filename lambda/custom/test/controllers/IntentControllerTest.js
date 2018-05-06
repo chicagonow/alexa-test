@@ -16,7 +16,8 @@ const responseEvents = require('../data/events/response.events');
 const responseEventsToday = require('../data/events/response.eventsToday');
 const alexaJson = require('../data/transit/train/response.alexa.json');
 const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
-const alexaRequestVenueGenreTime = require('../data/events/request.genreEventsAtVenueThisWeekend.json');
+const requestGenreVenueTime = require('../data/events/request.genreEventsAtVenueThisWeekend.json');
+const requestGenreVenue = require('../data/events/request.genreEventsAtVenue.json');
 const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
 const responseEventsWithGenreAndVenueAndTime = require('../data/events/request.alexa.eventsWithGenreAndVenueAndTime');
@@ -59,13 +60,17 @@ describe('IntentController Tests', function() {
     };
 
     describe("getEvents()", () => {
-        it('calls getEventsWithUserLocation when there is no venue or landmark: return 3 events in string', async function () {
+        it('"events near me" calls getEvents() with location parameters only', async function () {
 
             sandbox.stub(ParameterHelper, "getLocationParameters")
                 .returns(stubbedLocationParameters);
 
+            sandbox.stub(EventsHandler, "asyncGetEvents")
+                .withArgs("", "", "", "", -10, -20)
+                .returns("logic correctly only parsed latitude and longitude");
+
             let alexaResponse = await IntentController.getEvents(alexaRequestNearMe);
-            assert.equal(alexaResponse, "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform");
+            assert.equal(alexaResponse, "logic correctly only parsed latitude and longitude");
         });
 
         const fakeVenueName = "A CHICAGO VENUE";
@@ -92,10 +97,19 @@ describe('IntentController Tests', function() {
 
              sandbox.stub(EventsHandler, "asyncGetEvents")
                  .withArgs("jazz", "house of blues", parsedDate.startDate, parsedDate.endDate, "", "")
-                 .returns("logic successfully called for function with genre, venue, and time: ");
+                 .returns("logic successfully called for function with genre, venue, and time");
             
-            let alexaResponse = await IntentController.getEvents(alexaRequestVenueGenreTime);
-            assert.equal(alexaResponse, "logic successfully called for function with genre, venue, and time: ");
+            let alexaResponse = await IntentController.getEvents(requestGenreVenueTime);
+            assert.equal(alexaResponse, "logic successfully called for function with genre, venue, and time");
+        });
+
+        it('calls asyncGetEvents with genre and venue', async function () {
+            sandbox.stub(EventsHandler, "asyncGetEvents")
+                .withArgs("jazz", "house of blues", "", "", "", "")
+                .returns("logic successfully called for function with genre, venue");
+
+            let alexaResponse = await IntentController.getEvents(requestGenreVenue);
+            assert.equal(alexaResponse, "logic successfully called for function with genre, venue");
         });
     });
 
