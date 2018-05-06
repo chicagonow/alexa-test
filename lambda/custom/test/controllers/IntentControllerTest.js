@@ -2,6 +2,7 @@
 const nock = require('nock');
 const assert = require('assert');
 const sinon = require('sinon');
+const AmazonDateParser = require('amazon-date-parser');
 
 //imports
 const IntentController = require('../../controllers/IntentController');
@@ -87,11 +88,10 @@ describe('IntentController Tests', function() {
             assert.equal(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
         });
         it('calls asyncGetEvents with genre, venue, and time', async function () {
-            let startDate = new Date("Sat May 05 2018 00:00:00 GMT-0500 (Central Daylight Time)");
-            let endDate = new Date("Sun May 06 2018 23:59:59 GMT-0500 (Central Daylight Time)");
+            let parsedDate = new AmazonDateParser("2018-W19-WE");
 
              sandbox.stub(EventsHandler, "asyncGetEvents")
-                 .withArgs("jazz", "house of blues", startDate,endDate, "", "")
+                 .withArgs("jazz", "house of blues", parsedDate.startDate, parsedDate.endDate, "", "")
                  .returns("logic successfully called for function with genre, venue, and time: ");
             
             let alexaResponse = await IntentController.getEvents(alexaRequestVenueGenreTime);
