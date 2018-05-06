@@ -4,8 +4,8 @@ const sinon = require('sinon');
 const assert = require('assert');
 
 //dummy files
-const alexaJson = require('../../response.alexa.json');
-const responseDeviceLocation = require('../../response.deviceLocation');
+const alexaJson = require('../../data/transit/train/response.alexa.json');
+const responseDeviceLocation = require('../../data/response.deviceLocation');
 
 //function under test
 const locationHandler = require("../../../handlers/location/LocationHandler");

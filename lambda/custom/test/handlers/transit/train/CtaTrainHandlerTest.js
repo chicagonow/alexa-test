@@ -4,10 +4,10 @@ const assert = require('assert');
 const sinon = require('sinon');
 
 // import test data
-const alexaJson = require('../../../response.alexa.json');
-const responseDeviceLocation = require('../../../response.deviceLocation');
-const responseTrains = require('../../../response.trains');
-const responseRepoTrains = require('../../../response.repo.trains.json');
+const alexaJson = require('../../../data/transit/train/response.alexa.json');
+const responseDeviceLocation = require('../../../data/response.deviceLocation');
+const responseTrains = require('../../../data/transit/train/response.trains');
+const responseRepoTrains = require('../../../data/transit/train/response.repo.trains.json');
 
 // import files we need to test
 const CtaTrainHandler = require('../../../../handlers/transit/train/CtaTrainHandler');

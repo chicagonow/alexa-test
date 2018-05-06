@@ -3,9 +3,9 @@ const nock = require('nock');
 const assert = require('assert');
 
 // import test data
-const getStopsResponse = require('../../../test/response.getStops49');
-const getPatterns20Response = require('../../../test/response.getPatterns20');
-const getPatterns49Response = require('../../../test/response.getPatterns49');
+const getStopsResponse = require('../../data/transit/bus/response.getStops49');
+const getPatterns20Response = require('../../data/transit/bus/response.getPatterns20');
+const getPatterns49Response = require('../../data/transit/bus/response.getPatterns49');
 
 // import files we need to test
 const BusRepository = require('../../../repositories/transit/CtaBusRepository');

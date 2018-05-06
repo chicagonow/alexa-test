@@ -10,10 +10,10 @@ const EventsHandler = require('../../handlers/events/EventsHandler');
 const geocoder = require('../../handlers/location/geocoder');
 
 // responses
-const responseDeviceLocation = require('../response.deviceLocation');
+const responseDeviceLocation = require('../data/response.deviceLocation');
 const responseEvents = require('../data/events/response.events');
 const responseEventsToday = require('../data/events/response.eventsToday');
-const alexaJson = require('../response.alexa.json');
+const alexaJson = require('../data/transit/train/response.alexa.json');
 const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.json');
 const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
