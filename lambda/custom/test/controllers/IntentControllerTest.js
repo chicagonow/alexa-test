@@ -97,6 +97,17 @@ describe('IntentController Tests', function() {
             let alexaResponse = await IntentController.getEvents(alexaRequestVenueGenreTime);
             assert.equal(alexaResponse, "logic successfully called for function with genre, venue, and time: ");
         });
+
+        it('calls asyncGetEvents with venue', async function () {
+            let parsedDate = new AmazonDateParser("2018-W19-WE");
+
+             sandbox.stub(EventsHandler, "asyncGetEvents")
+                 .withArgs("", "house of blues", parsedDate.startDate, parsedDate.endDate, "", "")
+                 .returns("logic successfully called for function with venue");
+            
+            let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
+            assert.equal(alexaResponse, "logic successfully called for function with venue");
+        });
     });
 
 
