@@ -11,35 +11,44 @@ exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler";
 
-    try {
-        if (eventLocationIntentSlots.venueName.value) {
-            alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.venueName.value);
-        } else if (eventLocationIntentSlots.landmark.value) {
-            alexaResponse = await EventsHandler.asyncGetEventsAtVenue(eventLocationIntentSlots.landmark.value);
-        } else {
-            let parameters = ParameterHelper.getLocationParameters(event.context.System);
-            alexaResponse = await getEventsWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID);
+    let eventLocation = eventLocationIntentSlots.venueName.value || "";
+    if (!eventLocation) {
+        eventLocation = eventLocationIntentSlots.landmark.value || "";
+    }
+
+    let locationParameters;
+    let locationObj = {
+        latitude : "",
+        longitude : ""
+    };
+    if (eventLocation.trim() === "") {
+        locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+        locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+    }
+
+    let timeFrame = eventLocationIntentSlots.timeFrame.value || "";
+
+
+    let parsedDate = {
+        startDate: "",
+        endDate: ""
+    };
+
+    if (timeFrame.trim()) {
+        try {
+            parsedDate = new AmazonDateParser(timeFrame);
+        } catch (error) {
+            logger.error(error);
         }
+    }
+
+    let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
+
+    try {
+        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObj.latitude, locationObj.longitude);
     } catch (error) {
         logger.error(error);
     }
-
-    return alexaResponse;
-};
-
-
-// take device information, get lat long
-// take lat long return events near location
-let getEventsWithUserLocation = async function getEventsWithUserLocation(apiEndpoint, token, deviceID) {
-    let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
-        .catch(error => {
-            logger.error(error);
-        });
-
-    let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(locationObj.latitude, locationObj.longitude)
-        .catch(error => {
-            logger.error(error);
-        });
 
     return alexaResponse;
 };
@@ -63,7 +72,7 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
     try {
         timeFrame = new AmazonDateParser(date);
     } catch (error) {
-        logger.log(error);
+        logger.error(error);
     }
 
     // Return response

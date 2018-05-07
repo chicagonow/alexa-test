@@ -55,8 +55,16 @@
 					"name": "venueName",
 					"confirmationStatus": "NONE"
 				},
+				"eventGenre": {
+					"name": "eventGenre",
+					"confirmationStatus": "NONE"
+				},
 				"landmark": {
 					"name": "landmark",
+					"confirmationStatus": "NONE"
+				},
+				"timeFrame": {
+					"name": "timeFrame",
 					"confirmationStatus": "NONE"
 				}
 			}

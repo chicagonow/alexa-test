@@ -55,9 +55,17 @@
 					"name": "venueName",
 					"confirmationStatus": "NONE"
 				},
+				"eventGenre": {
+					"name": "eventGenre",
+					"confirmationStatus": "NONE"
+				},
 				"landmark": {
 					"name": "landmark",
 					"value": "A CHICAGO LANDMARK",
+					"confirmationStatus": "NONE"
+				},
+				"timeFrame": {
+					"name": "timeFrame",
 					"confirmationStatus": "NONE"
 				}
 			}
