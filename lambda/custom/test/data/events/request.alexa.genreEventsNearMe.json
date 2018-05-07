@@ -52,12 +52,12 @@
 			"confirmationStatus": "NONE",
 			"slots": {
 				"venueName": {
-					"name": "venueName",
-					"value": "house of blues",
+					"name": "venueName",			
 					"confirmationStatus": "NONE"
 				},
 				"eventGenre": {
 					"name": "eventGenre",
+					"value": "jazz",
 					"confirmationStatus": "NONE"
 				},
 				"landmark": {
@@ -65,8 +65,7 @@
 					"confirmationStatus": "NONE"
 				},
 				"timeFrame": {
-					"name": "timeFrame",
-					"value": "2018-W19-WE",
+					"name": "timeFrame",			
 					"confirmationStatus": "NONE"
 				}
 			}
