@@ -1,3 +1,4 @@
+
 const asyncRequest = require('request-promise');
 const buildUrl = require('build-url');
 const EventsResponseBuilder = require('./EventsResponseBuilder');
@@ -9,10 +10,12 @@ const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_EVENTS_SEARCH_PATH = '/v3/events/search/';
 
+const DEFAULT_RADIUS = '1mi';
+
 //return Alexa response string
 exports.asyncGetEventsNearLocation = async (latitude, longitude) => {
-	let eventsNearLocationParameters = getCommonQueryObjectParameters();
-	eventsNearLocationParameters[encodeURIComponent('location.within')] = '1mi';
+    let eventsNearLocationParameters = getCommonQueryObjectParameters();
+    eventsNearLocationParameters[encodeURIComponent('location.within')] = DEFAULT_RADIUS;
 	eventsNearLocationParameters[encodeURIComponent('location.latitude')] = latitude;
 	eventsNearLocationParameters[encodeURIComponent('location.longitude')] = longitude;
 
@@ -22,12 +25,14 @@ exports.asyncGetEventsNearLocation = async (latitude, longitude) => {
 
 /**
  * Returns an alexa response with events occurring within the given time frame
+ * @param {Date} latitude
+ * @param {Date} longitude
  * @param {Date} startDate
  * @param {Date} endDate
  */
 exports.asyncGetEventsWithinTimeFrame = async (latitude, longitude, startDate, endDate) => {
     let eventsAtTimeParameters = getCommonQueryObjectParameters();
-    eventsAtTimeParameters[encodeURIComponent('location.within')] = '1mi';
+    eventsAtTimeParameters[encodeURIComponent('location.within')] = DEFAULT_RADIUS;
     eventsAtTimeParameters[encodeURIComponent('location.latitude')] = latitude;
     eventsAtTimeParameters[encodeURIComponent('location.longitude')] = longitude;
     eventsAtTimeParameters[encodeURIComponent('start_date.range_start')] = getLocalDateString(startDate);
@@ -57,6 +62,26 @@ exports.asyncGetEventsAtVenue = async (venueName) => {
     let eventsAtVenueResponse = await getAlexaResponseForEvents(EVENTBRITE_API_DOMAIN, EVENTBRITE_EVENTS_SEARCH_PATH, venueEventsQueryParameters);
     return eventsAtVenueResponse;
 };
+
+exports.asyncGetEvents = async (eventGenre, eventLocation, startDate, endDate, latitude, longitude) => {
+    let queryParameters = getCommonQueryObjectParameters();
+    if ((eventGenre + eventLocation).trim() !== ""){
+        queryParameters["q"] = eventGenre + " " + eventLocation;
+    }
+
+    if (latitude && longitude){
+        queryParameters[encodeURIComponent('location.within')] = DEFAULT_RADIUS;
+        queryParameters[encodeURIComponent('location.latitude')] = latitude;
+        queryParameters[encodeURIComponent('location.longitude')] = longitude;
+    }
+
+    if (startDate) {queryParameters[encodeURIComponent('start_date.range_start')] = getLocalDateString(startDate);}
+    if (endDate) {queryParameters[encodeURIComponent('start_date.range_end')] = getLocalDateString(endDate);}
+
+    let eventResponse = await getAlexaResponseForEvents(EVENTBRITE_API_DOMAIN, EVENTBRITE_EVENTS_SEARCH_PATH, queryParameters);
+    return eventResponse;
+};
+
 
 let getAlexaResponseForEvents = async (eventbriteDomain, eventbritePath, queryParameters) => {
     

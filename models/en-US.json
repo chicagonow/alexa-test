@@ -103,34 +103,62 @@
                     "name": "EventTimeFrameIntent",
                     "slots": [
                         {
-                            "name": "timeFrame",
-                            "type": "AMAZON.DATE"
+                          "name": "timeFrame",
+                          "type": "AMAZON.DATE"
                         }
                     ],
                     "samples": [
-                        "what's going on {timeFrame}"
+                        "what's going on {timeFrame}",
+                        "what {eventGenre} events are going on {timeFrame}",
+                        "what {eventGenre} shows are going on {timeFrame}"
                     ]
                 },
                 {
-                    "name": "EventLocationIntent",
-                    "slots": [
-                        {
-                            "name": "venueName",
-                            "type": "AMAZON.MusicVenue"
-                        },
-                        {
-                            "name": "landmark",
-                            "type": "AMAZON.LandmarksOrHistoricalBuildings"
-                        }
-                    ],
-                    "samples": [
-                        "what events are going on near me",
-                        "what's going on near me",
-                        "what events are going on at {venueName}",
-                        "what's going on at {venueName}",
-                        "what events are going on at {landmark}",
-                        "what's going on at {landmark}"
-                    ]
+                  "name": "EventLocationIntent",
+                  "slots": [
+                    {
+                      "name": "eventGenre",
+                      "type": "AMAZON.Genre"
+                    },
+                    {
+                      "name": "venueName",
+                      "type": "AMAZON.MusicVenue"
+                    },
+                    {
+                      "name": "landmark",
+                      "type": "AMAZON.LandmarksOrHistoricalBuildings"
+                    },
+                    {
+                      "name": "timeFrame",
+                      "type": "AMAZON.DATE"
+                    }
+                  ],
+                  "samples": [
+                    "what events are going on near me",
+                    "what events are going on",
+                    "what events are going on at {venueName}",
+                    "what events are going on at {landmark}",
+
+                    "what's going on near me",
+                    "what's going on",
+                    "what's going on at {venueName}",
+                    "what's going on at {landmark}",
+
+                    "what {eventGenre} events are going on near me",
+                    "what {eventGenre} events are going on",
+                    "what {eventGenre} events are going on at {venueName}",
+                    "what {eventGenre} events are going on at {landmark}",
+
+                    "what {eventGenre} events are going on {timeFrame}",
+                    "what {eventGenre} events are going on near me {timeFrame}",
+                    "what {eventGenre} events are going on at {venueName} {timeFrame}",
+                    "what {eventGenre} events are going on at {landmark} {timeFrame}",
+
+                    "what events are going on at {venueName} {timeFrame}",
+                    "what's going on at {venueName} {timeFrame}",
+                    "what events are going on at {landmark} {timeFrame}",
+                    "what's going on at {landmark} {timeFrame}"
+                  ]
                 }
             ],
             "types": [
@@ -100615,7 +100643,7 @@
                     "values": [
                         {
                             "name": {
-                                "value": "red line"    
+                                "value": "red line"
                             },
                             "id": "red"
                         },
