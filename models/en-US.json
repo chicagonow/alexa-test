@@ -94,10 +94,6 @@
                     "name": "EventTimeFrameIntent",
                     "slots": [
                         {
-                          "name": "eventGenre",
-                          "type": "AMAZON.Genre"
-                        },
-                        {
                           "name": "timeFrame",
                           "type": "AMAZON.DATE"
                         }
@@ -130,19 +126,24 @@
                   ],
                   "samples": [
                     "what events are going on near me",
-                    "what {eventGenre} events are going on near me",
-                    "what {eventGenre} events are going on near me {timeFrame}",
-                    "what's going on near me",
                     "what events are going on at {venueName}",
-                    "what {eventGenre} events are going on at {venueName}",
-                    "what {eventGenre} events are going on at {venueName} {timeFrame}",
-                    "what events are going on at {venueName} {timeFrame}",
-                    "what's going on at {venueName}",
                     "what events are going on at {landmark}",
+
+                    "what's going on near me",
+                    "what's going on at {venueName}",
+                    "what's going on at {landmark}",
+
+                    "what {eventGenre} events are going on near me",
+                    "what {eventGenre} events are going on at {venueName}",
                     "what {eventGenre} events are going on at {landmark}",
+
+                    "what {eventGenre} events are going on {timeFrame}",
+                    "what {eventGenre} events are going on near me {timeFrame}",
+                    "what {eventGenre} events are going on at {venueName} {timeFrame}",
                     "what {eventGenre} events are going on at {landmark} {timeFrame}",
-                    "what events are going on at {landmark} {timeFrame}",
-                    "what's going on at {landmark}"
+
+                    "what events are going on at {venueName} {timeFrame}",
+                    "what events are going on at {landmark} {timeFrame}"
                   ]
                 }
             ],
