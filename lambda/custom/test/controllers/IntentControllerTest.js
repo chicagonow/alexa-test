@@ -19,6 +19,7 @@ const alexaRequestNearMe = require('../data/events/request.alexa.eventsNearMe.js
 const requestGenreVenueTime = require('../data/events/request.genreEventsAtVenueThisWeekend.json');
 const requestGenreVenue = require('../data/events/request.genreEventsAtVenue.json');
 const alexaRequestVenue = require('../data/events/request.alexa.eventsAtVenue.json');
+const alexaRequestVenueWithTime = require('../data/events/request.eventsAtVenueThisWeekend.json');
 const alexaRequestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
 const responseEventsWithGenreAndVenueAndTime = require('../data/events/request.alexa.eventsWithGenreAndVenueAndTime');
 
@@ -121,7 +122,19 @@ describe('IntentController Tests', function() {
             let alexaResponse = await IntentController.getEvents(alexaRequestVenue);
             assert.equal(alexaResponse, "logic successfully called for function with venue");
         });
+
+        it('calls asyncGetEvents with venue and time', async function () {
+            let parsedDate = new AmazonDateParser("2018-W19-WE");
+
+            sandbox.stub(EventsHandler, "asyncGetEvents")
+                .withArgs("", "house of blues", parsedDate.startDate, parsedDate.endDate, "", "")
+                .returns("logic successfully called for function with venue and time");
+           
+           let alexaResponse = await IntentController.getEvents(alexaRequestVenueWithTime);
+           assert.equal(alexaResponse, "logic successfully called for function with venue and time");
+       });
     });
+    
 
 
 
