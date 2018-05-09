@@ -78,8 +78,8 @@ exports.asyncCallCta = async function asyncCallCta(stopId) {
     let alexaTrainStatusResponse = "";
 
     let responseBody = await asyncRequest(url)
-        .catch(err => {
-            logger.error(err);
+        .catch(error => {
+            logger.error("error with cta train request: " + error.message);
         });
 
     try {

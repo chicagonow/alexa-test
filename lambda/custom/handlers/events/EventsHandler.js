@@ -91,7 +91,7 @@ let getAlexaResponseForEvents = async (eventbriteDomain, eventbritePath, queryPa
     });
 
     let body = await asyncRequest(eventbriteUrl)
-        .catch(err => logger.error(err));
+        .catch(error => logger.error("error with event request: " + error.message));
 
     let alexaEventResponse = "";
     try {

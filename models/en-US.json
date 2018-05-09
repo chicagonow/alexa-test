@@ -105,6 +105,10 @@
                         {
                           "name": "timeFrame",
                           "type": "AMAZON.DATE"
+                        },
+                        {
+                          "name": "eventGenre",
+                          "type": "AMAZON.Genre"
                         }
                     ],
                     "samples": [
