@@ -88,9 +88,10 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
         
     });
 
-    let body = await asyncRequest(url).catch(error => {
-        logger.error(error);
-    });
+    let body = await asyncRequest(url)
+        .catch(error => {
+            logger.error("error with cta bus request:" + error);
+        });
 
     
     let alexaResponse = "";

@@ -22,9 +22,10 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
         }
     });
 
-    let body = await asyncRequest(url).catch(error => {
-        logger.error(error);
-    });
+    let body = await asyncRequest(url)
+        .catch(error => {
+            logger.error("error with cta bus request:" + error);
+        });
 
     let ctaBusStopResponse = JSON.parse(body);
     const bustimeResponse = ctaBusStopResponse["bustime-response"];
@@ -62,9 +63,10 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
         }
     });
     // call cta
-    let body = await asyncRequest(url).catch(error => {
-        logger.error(error);
-    });
+    let body = await asyncRequest(url)
+        .catch(error => {
+            logger.error("error with cta bus request:" + error);
+        });
 
     // parse JSON
     let ctaBusPatternsResponse = JSON.parse(body);
