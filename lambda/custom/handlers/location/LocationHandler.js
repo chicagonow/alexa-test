@@ -66,7 +66,7 @@ exports.asyncGetLocation = async function asyncGetLocation(apiEndpoint, token, d
     
     let response = await asyncRequest(locationRequest)
         .catch(error => {
-            logger.error("error with location request: " + error);
+            logger.error("error with location request: " + error.message);
         });
 
     let location = (response.statusCode === 200) ? JSON.parse(response.body) : DEFAULT_LOCATION;

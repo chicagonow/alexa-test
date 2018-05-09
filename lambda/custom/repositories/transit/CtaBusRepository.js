@@ -24,7 +24,7 @@ exports.asyncGetStopIdWithLocation = async function asyncGetStopIdWithLocation(r
 
     let body = await asyncRequest(url)
         .catch(error => {
-            logger.error("error with cta bus request: " + error);
+            logger.error("error with cta bus request: " + error.message);
         });
 
     let ctaBusStopResponse = JSON.parse(body);
@@ -65,7 +65,7 @@ exports.asyncGetActiveStopIdWithLocation = async function asyncGetActiveStopIdWi
     // call cta
     let body = await asyncRequest(url)
         .catch(error => {
-            logger.error("error with cta bus request: " + error);
+            logger.error("error with cta bus request: " + error.message);
         });
 
     // parse JSON

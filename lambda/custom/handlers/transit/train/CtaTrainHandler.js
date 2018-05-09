@@ -79,7 +79,7 @@ exports.asyncCallCta = async function asyncCallCta(stopId) {
 
     let responseBody = await asyncRequest(url)
         .catch(error => {
-            logger.error("error with cta train request: " + error);
+            logger.error("error with cta train request: " + error.message);
         });
 
     try {
