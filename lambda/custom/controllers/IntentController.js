@@ -5,7 +5,8 @@ const CtaTrainHandler = require('../handlers/transit/train/CtaTrainHandler');
 const ParameterHelper = require('../helpers/ParameterHelper');
 const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
-
+const TrainRepository = require('../repositories/transit/CtaTrainRepository');
+const _ = require('lodash');
 
 exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
@@ -114,4 +115,41 @@ exports.getStatusOfTrainStation = async function getStatusOfTrainStation(mapid, 
         });
 
     return alexaTrainStatusResponse;
+};
+
+exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, direction) {
+    // Search the repo for any stations matching the given station name
+    let stations = await TrainRepository.getPotentialTrainStations(stationName);
+
+    // No matching names were found
+    if (stations.length === 0) {
+        logger.log({level: "info", message: "No train stations found matching name"});
+        return "No train stations were found that match the name " + stationName + ". Please try again";
+    }
+
+    // If the user wants to filter by trainLine, get those results
+    if (trainLine) {        
+        stations = _.filter(stations, [trainLine.toLowerCase(), true]);
+    }
+
+    // No matching colors were found
+    if (stations.length === 0) {
+        logger.log({level: "info", message: "No train stations found matching line"});
+        return "No train stations were found that match that train line. Please try again";
+    }
+
+    // If the user wants to filter by direction as well, get those matching stations
+    if (direction) {
+        stations = _.filter(stations, ['direction_id', direction.toUpperCase()]);
+    }
+
+    // No matching stations at all. You suck
+    if (stations.length === 0) {
+        logger.log({level: "info", message: "No train stations found matching direction"});
+        return "No train stations were found that match that direction. Please try again";
+    } else {
+        let stationMatch = stations[0];
+        let alexaResponse = await CtaTrainHandler.asyncCallCta(stationMatch.stop_id);
+        return alexaResponse;
+    }
 };

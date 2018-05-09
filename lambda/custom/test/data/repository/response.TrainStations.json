@@ -1,0 +1,27 @@
+[
+    {
+        "ada": true,
+        "blue": false,
+        "brn": false,
+        "direction_id": "W",
+        "g": false,
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -87.669147,
+                41.857908
+            ]
+        },
+        "map_id": "40830",
+        "o": false,
+        "p": false,
+        "pexp": false,
+        "pnk": true,
+        "red": false,
+        "station_descriptive_name": "18th (Pink Line)",
+        "station_name": "18th",
+        "stop_id": "30162",
+        "stop_name": "18th (54th/Cermak-bound)",
+        "y": false
+    }
+]

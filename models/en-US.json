@@ -71,11 +71,20 @@
                         {
                             "name": "trainStation",
                             "type": "CTA_TRAIN_STATION"
+                        },
+                        {
+                            "name": "trainDirection",
+                            "type": "CTA_TRAIN_DIRECTION"
                         }
                     ],
                     "samples": [
                         "what's the status of the {train}",
-                        "what's the status of the {trainStation}"
+                        "what's the status of the {trainStation}",
+                        "what's the status of the {trainStation} {train}",
+                        "what's the status of the {train} at {trainStation}",
+                        "what's the status of the {trainStation} {train} going {trainDirection}",
+                        "what's the status of the {trainDirection} {train} at {trainStation}",
+                        "what's the status of the {train} going {trainDirection} at {trainStation}"
                     ]
                 },
                 {
@@ -100581,42 +100590,110 @@
                     ]
                 },
                 {
+                    "name": "CTA_TRAIN_DIRECTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "N",
+                                "synonyms": [
+                                    "north",
+                                    "North",
+                                    "north bound",
+                                    "North bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "S",
+                                "synonyms": [
+                                    "south",
+                                    "South",
+                                    "south bound",
+                                    "South bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "W",
+                                "synonyms": [
+                                    "west",
+                                    "West",
+                                    "west bound",
+                                    "West bound"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "E",
+                                "synonyms": [
+                                    "east",
+                                    "East",
+                                    "east bound",
+                                    "East bound"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "CTA_TRAIN",
                     "values": [
                         {
                             "name": {
                                 "value": "red line"
-                            }
+                            },
+                            "id": "red"
                         },
                         {
                             "name": {
                                 "value": "blue line"
-                            }
+                            },
+                            "id": "blue"
                         },
                         {
                             "name": {
                                 "value": "orange line"
-                            }
+                            },
+                            "id": "o"
                         },
                         {
                             "name": {
                                 "value": "green line"
-                            }
+                            },
+                            "id": "g"
                         },
                         {
                             "name": {
                                 "value": "pink line"
-                            }
+                            },
+                            "id": "pnk"
                         },
                         {
                             "name": {
                                 "value": "purple line"
-                            }
+                            },
+                            "id": "p"
+                        },
+                        {
+                            "name": {
+                                "value": "purple line express"
+                            },
+                            "id": "pexp"
                         },
                         {
                             "name": {
                                 "value": "yellow line"
-                            }
+                            },
+                            "id": "y"
+                        },
+                        {
+                            "name": {
+                                "value": "brown line"
+                            },
+                            "id": "brn"
                         },
                         {
                             "name": {
@@ -100629,1289 +100706,874 @@
                     "name": "CTA_TRAIN_STATION",
                     "values": [
                         {
-                            "id": "40830",
                             "name": {
-                                "value": "18th (54th and Cermak-bound)",
+                                "value": "18th",
                                 "synonyms": [
-                                    "18th (54th and Cermak-bound) station"
+                                    "18th station"
                                 ]
                             }
                         },
                         {
-                            "id": "40120",
                             "name": {
-                                "value": "35th and Archer (Loop-bound)",
+                                "value": "35th and Archer",
                                 "synonyms": [
-                                    "35th and Archer (Loop-bound) station"
+                                    "35th and Archer station"
                                 ]
                             }
                         },
                         {
-                            "id": "41120",
                             "name": {
-                                "value": "35-Bronzeville-IIT (63rd-bound)",
+                                "value": "35th-Bronzeville-IIT",
                                 "synonyms": [
-                                    "35-Bronzeville-IIT (63rd-bound) station"
+                                    "35th-Bronzeville-IIT station"
                                 ]
                             }
                         },
                         {
-                            "id": "41270",
                             "name": {
-                                "value": "43rd (63rd-bound)",
+                                "value": "43rd",
                                 "synonyms": [
-                                    "43rd (63rd-bound) station"
+                                    "43rd station"
                                 ]
                             }
                         },
                         {
-                            "id": "41080",
                             "name": {
-                                "value": "47th (63rd-bound)",
+                                "value": "47th",
                                 "synonyms": [
-                                    "47th (63rd-bound) station"
+                                    "47th station"
                                 ]
                             }
                         },
                         {
-                            "id": "41230",
                             "name": {
-                                "value": "47th (95th-bound)",
+                                "value": "51st",
                                 "synonyms": [
-                                    "47th (95th-bound) station"
+                                    "51st station"
                                 ]
                             }
                         },
                         {
-                            "id": "40130",
                             "name": {
-                                "value": "51st (63rd-bound)",
+                                "value": "54th and Cermak",
                                 "synonyms": [
-                                    "51st (63rd-bound) station"
+                                    "54th and Cermak station"
                                 ]
                             }
                         },
                         {
-                            "id": "40580",
                             "name": {
-                                "value": "54th and Cermak (Loop-bound)",
+                                "value": "63rd",
                                 "synonyms": [
-                                    "54th and Cermak (Loop-bound) station"
+                                    "63rd station"
                                 ]
                             }
                         },
                         {
-                            "id": "40910",
                             "name": {
-                                "value": "63rd (95th-bound)",
+                                "value": "69th",
                                 "synonyms": [
-                                    "63rd (95th-bound) station"
+                                    "69th station"
                                 ]
                             }
                         },
                         {
-                            "id": "40990",
                             "name": {
-                                "value": "69th (95th-bound)",
+                                "value": "79th",
                                 "synonyms": [
-                                    "69th (95th-bound) station"
+                                    "79th station"
                                 ]
                             }
                         },
                         {
-                            "id": "40240",
                             "name": {
-                                "value": "79th (95th-bound)",
+                                "value": "87th",
                                 "synonyms": [
-                                    "79th (95th-bound) station"
+                                    "87th station"
                                 ]
                             }
                         },
                         {
-                            "id": "41430",
                             "name": {
-                                "value": "87th (Howard-bound)",
+                                "value": "95th and Dan Ryan",
                                 "synonyms": [
-                                    "87th (Howard-bound) station"
+                                    "95th and Dan Ryan station"
                                 ]
                             }
                         },
                         {
-                            "id": "40450",
                             "name": {
-                                "value": "95th and Dan Ryan (95th-bound)",
+                                "value": "95th and Ran Ryan",
                                 "synonyms": [
-                                    "95th and Dan Ryan (95th-bound) station"
+                                    "95th and Ran Ryan station"
                                 ]
                             }
                         },
                         {
-                            "id": "40680",
                             "name": {
-                                "value": "Adams and Wabash (Inner Loop)",
+                                "value": "Adams and Wabash",
                                 "synonyms": [
-                                    "Adams and Wabash (Inner Loop) station"
+                                    "Adams and Wabash station"
                                 ]
                             }
                         },
                         {
-                            "id": "41240",
                             "name": {
-                                "value": "Addison (O'Hare-bound)",
+                                "value": "Addison",
                                 "synonyms": [
-                                    "Addison (O'Hare-bound) station"
+                                    "Addison station"
                                 ]
                             }
                         },
                         {
-                            "id": "41440",
                             "name": {
-                                "value": "Addison (Kimball-bound)",
+                                "value": "Argyle",
                                 "synonyms": [
-                                    "Addison (Kimball-bound) station"
+                                    "Argyle station"
                                 ]
                             }
                         },
                         {
-                            "id": "41420",
                             "name": {
-                                "value": "Addison (95th-bound)",
+                                "value": "Armitage",
                                 "synonyms": [
-                                    "Addison (95th-bound) station"
+                                    "Armitage station"
                                 ]
                             }
                         },
                         {
-                            "id": "41200",
                             "name": {
-                                "value": "Argyle (95th-bound)",
+                                "value": "Ashland",
                                 "synonyms": [
-                                    "Argyle (95th-bound) station"
+                                    "Ashland station"
                                 ]
                             }
                         },
                         {
-                            "id": "40660",
                             "name": {
-                                "value": "Armitage (Kimball-Linden-bound)",
+                                "value": "Ashland and 63rd",
                                 "synonyms": [
-                                    "Armitage (Kimball-Linden-bound) station"
+                                    "Ashland and 63rd station"
                                 ]
                             }
                         },
                         {
-                            "id": "41060",
                             "name": {
-                                "value": "Ashland (Loop-bound)",
+                                "value": "Austin",
                                 "synonyms": [
-                                    "Ashland (Loop-bound) station"
+                                    "Austin station"
                                 ]
                             }
                         },
                         {
-                            "id": "40170",
                             "name": {
-                                "value": "Ashland (Harlem-54th and Cermak-bound)",
+                                "value": "Belmont",
                                 "synonyms": [
-                                    "Ashland (Harlem-54th and Cermak-bound) station"
+                                    "Belmont station"
                                 ]
                             }
                         },
                         {
-                            "id": "40290",
                             "name": {
-                                "value": "Ashland and 63rd (Harlem-bound)",
+                                "value": "Berwyn",
                                 "synonyms": [
-                                    "Ashland and 63rd (Harlem-bound) station"
+                                    "Berwyn station"
                                 ]
                             }
                         },
                         {
-                            "id": "40010",
                             "name": {
-                                "value": "Austin (Forest Pk-bound)",
+                                "value": "Bryn Mawr",
                                 "synonyms": [
-                                    "Austin (Forest Pk-bound) station"
+                                    "Bryn Mawr station"
                                 ]
                             }
                         },
                         {
-                            "id": "41260",
                             "name": {
-                                "value": "Austin (63rd-bound)",
+                                "value": "California",
                                 "synonyms": [
-                                    "Austin (63rd-bound) station"
+                                    "California station"
                                 ]
                             }
                         },
                         {
-                            "id": "40060",
                             "name": {
-                                "value": "Belmont (O'Hare Branch) (Forest Pk-bound)",
+                                "value": "Central",
                                 "synonyms": [
-                                    "Belmont (O'Hare Branch) (Forest Pk-bound) station"
+                                    "Central station"
                                 ]
                             }
                         },
                         {
-                            "id": "41320",
                             "name": {
-                                "value": "Belmont (95th-bound)",
+                                "value": "Central Park",
                                 "synonyms": [
-                                    "Belmont (95th-bound) station"
+                                    "Central Park station"
                                 ]
                             }
                         },
                         {
-                            "id": "40340",
                             "name": {
-                                "value": "Berwyn (95th-bound)",
+                                "value": "Cermak-Chinatown",
                                 "synonyms": [
-                                    "Berwyn (95th-bound) station"
+                                    "Cermak-Chinatown station"
                                 ]
                             }
                         },
                         {
-                            "id": "41380",
                             "name": {
-                                "value": "Bryn Mawr (95th-bound)",
+                                "value": "Cermak-McCormick Place",
                                 "synonyms": [
-                                    "Bryn Mawr (95th-bound) station"
+                                    "Cermak-McCormick Place station"
                                 ]
                             }
                         },
                         {
-                            "id": "40440",
                             "name": {
-                                "value": "California (54th and Cermak-bound)",
+                                "value": "Chicago",
                                 "synonyms": [
-                                    "California (54th and Cermak-bound) station"
+                                    "Chicago station"
                                 ]
                             }
                         },
                         {
-                            "id": "41360",
                             "name": {
-                                "value": "California (63rd-bound)",
+                                "value": "Cicero",
                                 "synonyms": [
-                                    "California (63rd-bound) station"
+                                    "Cicero station"
                                 ]
                             }
                         },
                         {
-                            "id": "40570",
                             "name": {
-                                "value": "California (O'Hare-bound)",
+                                "value": "Clark and Division",
                                 "synonyms": [
-                                    "California (O'Hare-bound) station"
+                                    "Clark and Division station"
                                 ]
                             }
                         },
                         {
-                            "id": "40280",
                             "name": {
-                                "value": "Central (63rd-bound)",
+                                "value": "Clark and Lake",
                                 "synonyms": [
-                                    "Central (63rd-bound) station"
+                                    "Clark and Lake station"
                                 ]
                             }
                         },
                         {
-                            "id": "41250",
                             "name": {
-                                "value": "Central (Howard-Loop-bound)",
+                                "value": "Clinton",
                                 "synonyms": [
-                                    "Central (Howard-Loop-bound) station"
+                                    "Clinton station"
                                 ]
                             }
                         },
                         {
-                            "id": "40780",
                             "name": {
-                                "value": "Central Park (54th and Cermak-bound)",
+                                "value": "Conservatory",
                                 "synonyms": [
-                                    "Central Park (54th and Cermak-bound) station"
+                                    "Conservatory station"
                                 ]
                             }
                         },
                         {
-                            "id": "41000",
                             "name": {
-                                "value": "Cermak-Chinatown (95th-bound)",
+                                "value": "Cottage Grove",
                                 "synonyms": [
-                                    "Cermak-Chinatown (95th-bound) station"
+                                    "Cottage Grove station"
                                 ]
                             }
                         },
                         {
-                            "id": "41690",
                             "name": {
-                                "value": "Cermak-McCormick Place (63rd-bound)",
+                                "value": "Cumberland",
                                 "synonyms": [
-                                    "Cermak-McCormick Place (63rd-bound) station"
+                                    "Cumberland station"
                                 ]
                             }
                         },
                         {
-                            "id": "41410",
                             "name": {
-                                "value": "Chicago (O'Hare-bound)",
+                                "value": "Damen",
                                 "synonyms": [
-                                    "Chicago (O'Hare-bound) station"
+                                    "Damen station"
                                 ]
                             }
                         },
                         {
-                            "id": "40710",
                             "name": {
-                                "value": "Chicago (Loop-bound)",
+                                "value": "Davis",
                                 "synonyms": [
-                                    "Chicago (Loop-bound) station"
+                                    "Davis station"
                                 ]
                             }
                         },
                         {
-                            "id": "41450",
                             "name": {
-                                "value": "Chicago (95th-bound)",
+                                "value": "Dempster",
                                 "synonyms": [
-                                    "Chicago (95th-bound) station"
+                                    "Dempster station"
                                 ]
                             }
                         },
                         {
-                            "id": "40420",
                             "name": {
-                                "value": "Cicero (54th and Cermak-bound)",
+                                "value": "Dempster-Skokie",
                                 "synonyms": [
-                                    "Cicero (54th and Cermak-bound) station"
+                                    "Dempster-Skokie station"
                                 ]
                             }
                         },
                         {
-                            "id": "40970",
                             "name": {
-                                "value": "Cicero (Forest Pk-bound)",
+                                "value": "Diversey",
                                 "synonyms": [
-                                    "Cicero (Forest Pk-bound) station"
+                                    "Diversey station"
                                 ]
                             }
                         },
                         {
-                            "id": "40480",
                             "name": {
-                                "value": "Cicero (63rd-bound)",
+                                "value": "Division",
                                 "synonyms": [
-                                    "Cicero (63rd-bound) station"
+                                    "Division station"
                                 ]
                             }
                         },
                         {
-                            "id": "40630",
                             "name": {
-                                "value": "Clark and Division (95th-bound)",
+                                "value": "Forest Park",
                                 "synonyms": [
-                                    "Clark and Division (95th-bound) station"
+                                    "Forest Park station"
                                 ]
                             }
                         },
                         {
-                            "id": "40380",
                             "name": {
-                                "value": "Clark and Lake (Inner Loop)",
+                                "value": "Foster",
                                 "synonyms": [
-                                    "Clark and Lake (Inner Loop) station"
+                                    "Foster station"
                                 ]
                             }
                         },
                         {
-                            "id": "40430",
                             "name": {
-                                "value": "Clinton (Forest Pk-bound)",
+                                "value": "Francisco",
                                 "synonyms": [
-                                    "Clinton (Forest Pk-bound) station"
+                                    "Francisco station"
                                 ]
                             }
                         },
                         {
-                            "id": "41160",
                             "name": {
-                                "value": "Clinton (Harlem-54th and Cermak-bound)",
+                                "value": "Fullerton",
                                 "synonyms": [
-                                    "Clinton (Harlem-54th and Cermak-bound) station"
+                                    "Fullerton station"
                                 ]
                             }
                         },
                         {
-                            "id": "41670",
                             "name": {
-                                "value": "Conservatory (63rd-bound)",
+                                "value": "Garfield",
                                 "synonyms": [
-                                    "Conservatory (63rd-bound) station"
+                                    "Garfield station"
                                 ]
                             }
                         },
                         {
-                            "id": "40720",
                             "name": {
-                                "value": "Cottage Grove (Terminal arrival)",
+                                "value": "Grand",
                                 "synonyms": [
-                                    "Cottage Grove (Terminal arrival) station"
+                                    "Grand station"
                                 ]
                             }
                         },
                         {
-                            "id": "40230",
                             "name": {
-                                "value": "Cumberland (Forest Pk-bound)",
+                                "value": "Granville",
                                 "synonyms": [
-                                    "Cumberland (Forest Pk-bound) station"
+                                    "Granville station"
                                 ]
                             }
                         },
                         {
-                            "id": "40210",
                             "name": {
-                                "value": "Damen (54th and Cermak-bound)",
+                                "value": "Halsted",
                                 "synonyms": [
-                                    "Damen (54th and Cermak-bound) station"
+                                    "Halsted station"
                                 ]
                             }
                         },
                         {
-                            "id": "40590",
                             "name": {
-                                "value": "Damen and Milwaukee (Forest Pk-bound)",
+                                "value": "Harlem",
                                 "synonyms": [
-                                    "Damen and Milwaukee (Forest Pk-bound) station"
+                                    "Harlem station"
                                 ]
                             }
                         },
                         {
-                            "id": "40090",
                             "name": {
-                                "value": "Damen (Kimball-bound)",
+                                "value": "Harlem and Lake",
                                 "synonyms": [
-                                    "Damen (Kimball-bound) station"
+                                    "Harlem and Lake station"
                                 ]
                             }
                         },
                         {
-                            "id": "40050",
                             "name": {
-                                "value": "Davis (Howard-Loop-bound)",
+                                "value": "Harold Washington Library-State and Van Buren",
                                 "synonyms": [
-                                    "Davis (Howard-Loop-bound) station"
+                                    "Harold Washington Library-State and Van Buren station"
                                 ]
                             }
                         },
                         {
-                            "id": "40690",
                             "name": {
-                                "value": "Dempster (Howard-Loop-bound)",
+                                "value": "Harrison",
                                 "synonyms": [
-                                    "Dempster (Howard-Loop-bound) station"
+                                    "Harrison station"
                                 ]
                             }
                         },
                         {
-                            "id": "40140",
                             "name": {
-                                "value": "Dempster-Skokie (Howard-bound)",
+                                "value": "Howard",
                                 "synonyms": [
-                                    "Dempster-Skokie (Howard-bound) station"
+                                    "Howard station"
                                 ]
                             }
                         },
                         {
-                            "id": "40530",
                             "name": {
-                                "value": "Diversey (Kimball-Linden-bound)",
+                                "value": "Illinois Medical District",
                                 "synonyms": [
-                                    "Diversey (Kimball-Linden-bound) station"
+                                    "Illinois Medical District station"
                                 ]
                             }
                         },
                         {
-                            "id": "40320",
                             "name": {
-                                "value": "Division (Forest Pk-bound)",
+                                "value": "Indiana",
                                 "synonyms": [
-                                    "Division (Forest Pk-bound) station"
+                                    "Indiana station"
                                 ]
                             }
                         },
                         {
-                            "id": "40390",
                             "name": {
-                                "value": "Forest Park (O'Hare-bound)",
+                                "value": "Irving Park",
                                 "synonyms": [
-                                    "Forest Park (O'Hare-bound) station"
+                                    "Irving Park station"
                                 ]
                             }
                         },
                         {
-                            "id": "40520",
                             "name": {
-                                "value": "Foster (Howard-Loop-bound)",
+                                "value": "Jackson",
                                 "synonyms": [
-                                    "Foster (Howard-Loop-bound) station"
+                                    "Jackson station"
                                 ]
                             }
                         },
                         {
-                            "id": "40870",
                             "name": {
-                                "value": "Francisco (Kimball-bound)",
+                                "value": "Jarvis",
                                 "synonyms": [
-                                    "Francisco (Kimball-bound) station"
+                                    "Jarvis station"
                                 ]
                             }
                         },
                         {
-                            "id": "41220",
                             "name": {
-                                "value": "Fullerton (95th-bound)",
+                                "value": "Jefferson Park",
                                 "synonyms": [
-                                    "Fullerton (95th-bound) station"
+                                    "Jefferson Park station"
                                 ]
                             }
                         },
                         {
-                            "id": "40510",
                             "name": {
-                                "value": "Garfield (63rd-bound)",
+                                "value": "Kedzie",
                                 "synonyms": [
-                                    "Garfield (63rd-bound) station"
+                                    "Kedzie station"
                                 ]
                             }
                         },
                         {
-                            "id": "41170",
                             "name": {
-                                "value": "Garfield (95th-bound)",
+                                "value": "Kedzie-Homan",
                                 "synonyms": [
-                                    "Garfield (95th-bound) station"
+                                    "Kedzie-Homan station"
                                 ]
                             }
                         },
                         {
-                            "id": "40490",
                             "name": {
-                                "value": "Grand and Milwaukee (Forest Pk-bound)",
+                                "value": "Kimball",
                                 "synonyms": [
-                                    "Grand and Milwaukee (Forest Pk-bound) station"
+                                    "Kimball station"
                                 ]
                             }
                         },
                         {
-                            "id": "40330",
                             "name": {
-                                "value": "Grand and State (95th-bound)",
+                                "value": "King Drive",
                                 "synonyms": [
-                                    "Grand and State (95th-bound) station"
+                                    "King Drive station"
                                 ]
                             }
                         },
                         {
-                            "id": "40760",
                             "name": {
-                                "value": "Granville (95th-bound)",
+                                "value": "Kostner",
                                 "synonyms": [
-                                    "Granville (95th-bound) station"
+                                    "Kostner station"
                                 ]
                             }
                         },
                         {
-                            "id": "41130",
                             "name": {
-                                "value": "Halsted (Loop-bound)",
+                                "value": "Lake",
                                 "synonyms": [
-                                    "Halsted (Loop-bound) station"
+                                    "Lake station"
                                 ]
                             }
                         },
                         {
-                            "id": "40940",
                             "name": {
-                                "value": "Halsted and 63rd (Ashland-bound)",
+                                "value": "Laramie",
                                 "synonyms": [
-                                    "Halsted and 63rd (Ashland-bound) station"
+                                    "Laramie station"
                                 ]
                             }
                         },
                         {
-                            "id": "40750",
                             "name": {
-                                "value": "Harlem (O'Hare Branch) (Forest Pk-bound)",
+                                "value": "LaSalle",
                                 "synonyms": [
-                                    "Harlem (O'Hare Branch) (Forest Pk-bound) station"
+                                    "LaSalle station"
                                 ]
                             }
                         },
                         {
-                            "id": "40980",
                             "name": {
-                                "value": "Harlem (Forest Pk Branch) (O'Hare-bound)",
+                                "value": "LaSalle and Van Buren",
                                 "synonyms": [
-                                    "Harlem (Forest Pk Branch) (O'Hare-bound) station"
+                                    "LaSalle and Van Buren station"
                                 ]
                             }
                         },
                         {
-                            "id": "40020",
                             "name": {
-                                "value": "Harlem (Terminal arrival)",
+                                "value": "Lawrence",
                                 "synonyms": [
-                                    "Harlem (Terminal arrival) station"
+                                    "Lawrence station"
                                 ]
                             }
                         },
                         {
-                            "id": "40850",
                             "name": {
-                                "value": "H.W. Library (Inner Loop)",
+                                "value": "Linden",
                                 "synonyms": [
-                                    "H.W. Library (Inner Loop) station"
+                                    "Linden station"
                                 ]
                             }
                         },
                         {
-                            "id": "41490",
                             "name": {
-                                "value": "Harrison (95th-bound)",
+                                "value": "Logan Square",
                                 "synonyms": [
-                                    "Harrison (95th-bound) station"
+                                    "Logan Square station"
                                 ]
                             }
                         },
                         {
-                            "id": "40900",
                             "name": {
-                                "value": "Howard (Terminal arrival)",
+                                "value": "Loyola",
                                 "synonyms": [
-                                    "Howard (Terminal arrival) station"
+                                    "Loyola station"
                                 ]
                             }
                         },
                         {
-                            "id": "40810",
                             "name": {
-                                "value": "Illinois Medical District (Forest Pk-bound)",
+                                "value": "Main",
                                 "synonyms": [
-                                    "Illinois Medical District (Forest Pk-bound) station"
+                                    "Main station"
                                 ]
                             }
                         },
                         {
-                            "id": "40300",
                             "name": {
-                                "value": "Indiana (63rd-bound)",
+                                "value": "Merchandise Mart",
                                 "synonyms": [
-                                    "Indiana (63rd-bound) station"
+                                    "Merchandise Mart station"
                                 ]
                             }
                         },
                         {
-                            "id": "40550",
                             "name": {
-                                "value": "Irving Park (O'Hare Branch) (Forest Pk-bound)",
+                                "value": "Midway",
                                 "synonyms": [
-                                    "Irving Park (O'Hare Branch) (Forest Pk-bound) station"
+                                    "Midway station"
                                 ]
                             }
                         },
                         {
-                            "id": "41460",
                             "name": {
-                                "value": "Irving Park (Kimball-bound)",
+                                "value": "Monroe",
                                 "synonyms": [
-                                    "Irving Park (Kimball-bound) station"
+                                    "Monroe station"
                                 ]
                             }
                         },
                         {
-                            "id": "40070",
                             "name": {
-                                "value": "Jackson and Dearborn (Forest Pk-bound)",
+                                "value": "Montrose",
                                 "synonyms": [
-                                    "Jackson and Dearborn (Forest Pk-bound) station"
+                                    "Montrose station"
                                 ]
                             }
                         },
                         {
-                            "id": "40560",
                             "name": {
-                                "value": "Jackson and State (95th-bound)",
+                                "value": "Morgan",
                                 "synonyms": [
-                                    "Jackson and State (95th-bound) station"
+                                    "Morgan station"
                                 ]
                             }
                         },
                         {
-                            "id": "41190",
                             "name": {
-                                "value": "Jarvis (95th-bound)",
+                                "value": "Morse",
                                 "synonyms": [
-                                    "Jarvis (95th-bound) station"
+                                    "Morse station"
                                 ]
                             }
                         },
                         {
-                            "id": "41280",
                             "name": {
-                                "value": "Jefferson Park (Forest Pk-bound)",
+                                "value": "North and Clybourn",
                                 "synonyms": [
-                                    "Jefferson Park (Forest Pk-bound) station"
+                                    "North and Clybourn station"
                                 ]
                             }
                         },
                         {
-                            "id": "41150",
                             "name": {
-                                "value": "Kedzie (Loop-bound)",
+                                "value": "Noyes",
                                 "synonyms": [
-                                    "Kedzie (Loop-bound) station"
+                                    "Noyes station"
                                 ]
                             }
                         },
                         {
-                            "id": "41040",
                             "name": {
-                                "value": "Kedzie (54th and Cermak-bound)",
+                                "value": "Oak Park",
                                 "synonyms": [
-                                    "Kedzie (54th and Cermak-bound) station"
+                                    "Oak Park station"
                                 ]
                             }
                         },
                         {
-                            "id": "41180",
                             "name": {
-                                "value": "Kedzie (Kimball-bound)",
+                                "value": "Oakton-Skokie",
                                 "synonyms": [
-                                    "Kedzie (Kimball-bound) station"
+                                    "Oakton-Skokie station"
                                 ]
                             }
                         },
                         {
-                            "id": "41070",
                             "name": {
-                                "value": "Kedzie (63rd-bound)",
+                                "value": "O'Hare",
                                 "synonyms": [
-                                    "Kedzie (63rd-bound) station"
+                                    "O'Hare station"
                                 ]
                             }
                         },
                         {
-                            "id": "40250",
                             "name": {
-                                "value": "Kedzie-Homan (Forest Pk-bound)",
+                                "value": "Paulina",
                                 "synonyms": [
-                                    "Kedzie-Homan (Forest Pk-bound) station"
+                                    "Paulina station"
                                 ]
                             }
                         },
                         {
-                            "id": "41290",
                             "name": {
-                                "value": "Kimball (Loop-bound)",
+                                "value": "Polk",
                                 "synonyms": [
-                                    "Kimball (Loop-bound) station"
+                                    "Polk station"
                                 ]
                             }
                         },
                         {
-                            "id": "41140",
                             "name": {
-                                "value": "King Drive (Cottage Grove-bound)",
+                                "value": "Pulaski",
                                 "synonyms": [
-                                    "King Drive (Cottage Grove-bound) station"
+                                    "Pulaski station"
                                 ]
                             }
                         },
                         {
-                            "id": "40600",
                             "name": {
-                                "value": "Kostner (54th and Cermak-bound)",
+                                "value": "Quincy and Wells",
                                 "synonyms": [
-                                    "Kostner (54th and Cermak-bound) station"
+                                    "Quincy and Wells station"
                                 ]
                             }
                         },
                         {
-                            "id": "41660",
                             "name": {
-                                "value": "Lake (95th-bound)",
+                                "value": "Racine",
                                 "synonyms": [
-                                    "Lake (95th-bound) station"
+                                    "Racine station"
                                 ]
                             }
                         },
                         {
-                            "id": "40700",
                             "name": {
-                                "value": "Laramie (63rd-bound)",
+                                "value": "Ridgeland",
                                 "synonyms": [
-                                    "Laramie (63rd-bound) station"
+                                    "Ridgeland station"
                                 ]
                             }
                         },
                         {
-                            "id": "41340",
                             "name": {
-                                "value": "LaSalle (Forest Pk-bound)",
+                                "value": "Rockwell",
                                 "synonyms": [
-                                    "LaSalle (Forest Pk-bound) station"
+                                    "Rockwell station"
                                 ]
                             }
                         },
                         {
-                            "id": "40160",
                             "name": {
-                                "value": "LaSalle and Van Buren (Inner Loop)",
+                                "value": "Roosevelt",
                                 "synonyms": [
-                                    "LaSalle and Van Buren (Inner Loop) station"
+                                    "Roosevelt station"
                                 ]
                             }
                         },
                         {
-                            "id": "40770",
                             "name": {
-                                "value": "Lawrence (95th-bound)",
+                                "value": "Rosemont",
                                 "synonyms": [
-                                    "Lawrence (95th-bound) station"
+                                    "Rosemont station"
                                 ]
                             }
                         },
                         {
-                            "id": "41050",
                             "name": {
-                                "value": "Linden (Howard-Loop-bound)",
+                                "value": "Sedgwick",
                                 "synonyms": [
-                                    "Linden (Howard-Loop-bound) station"
+                                    "Sedgwick station"
                                 ]
                             }
                         },
                         {
-                            "id": "41020",
                             "name": {
-                                "value": "Logan Square (Forest Pk-bound)",
+                                "value": "Sheridan",
                                 "synonyms": [
-                                    "Logan Square (Forest Pk-bound) station"
+                                    "Sheridan station"
                                 ]
                             }
                         },
                         {
-                            "id": "41300",
                             "name": {
-                                "value": "Loyola (95th-bound)",
+                                "value": "South Boulevard",
                                 "synonyms": [
-                                    "Loyola (95th-bound) station"
+                                    "South Boulevard station"
                                 ]
                             }
                         },
                         {
-                            "id": "40270",
                             "name": {
-                                "value": "Main (Howard-Loop-bound)",
+                                "value": "Southport",
                                 "synonyms": [
-                                    "Main (Howard-Loop-bound) station"
+                                    "Southport station"
                                 ]
                             }
                         },
                         {
-                            "id": "40460",
                             "name": {
-                                "value": "Merchandise Mart (Kimball-Linden-bound)",
+                                "value": "Sox-35th",
                                 "synonyms": [
-                                    "Merchandise Mart (Kimball-Linden-bound) station"
+                                    "Sox-35th station"
                                 ]
                             }
                         },
                         {
-                            "id": "40930",
                             "name": {
-                                "value": "Midway (Arrival)",
+                                "value": "State and Lake",
                                 "synonyms": [
-                                    "Midway (Arrival) station"
+                                    "State and Lake station"
                                 ]
                             }
                         },
                         {
-                            "id": "40790",
                             "name": {
-                                "value": "Monroe (Forest Pk-bound)",
+                                "value": "Thorndale",
                                 "synonyms": [
-                                    "Monroe (Forest Pk-bound) station"
+                                    "Thorndale station"
                                 ]
                             }
                         },
                         {
-                            "id": "41090",
                             "name": {
-                                "value": "Monroe (95th-bound)",
+                                "value": "UIC-Halsted",
                                 "synonyms": [
-                                    "Monroe (95th-bound) station"
+                                    "UIC-Halsted station"
                                 ]
                             }
                         },
                         {
-                            "id": "41330",
                             "name": {
-                                "value": "Montrose (Forest Pk-bound)",
+                                "value": "Washington",
                                 "synonyms": [
-                                    "Montrose (Forest Pk-bound) station"
+                                    "Washington station"
                                 ]
                             }
                         },
                         {
-                            "id": "41500",
                             "name": {
-                                "value": "Montrose (Kimball-bound)",
+                                "value": "Washington and Wabash",
                                 "synonyms": [
-                                    "Montrose (Kimball-bound) station"
+                                    "Washington and Wabash station"
                                 ]
                             }
                         },
                         {
-                            "id": "41510",
                             "name": {
-                                "value": "Morgan (Harlem-54th and Cermak-bound)",
+                                "value": "Washington and Wells",
                                 "synonyms": [
-                                    "Morgan (Harlem-54th and Cermak-bound) station"
+                                    "Washington and Wells station"
                                 ]
                             }
                         },
                         {
-                            "id": "40100",
                             "name": {
-                                "value": "Morse (95th-bound)",
+                                "value": "Wellington",
                                 "synonyms": [
-                                    "Morse (95th-bound) station"
+                                    "Wellington station"
                                 ]
                             }
                         },
                         {
-                            "id": "40650",
                             "name": {
-                                "value": "North and Clybourn (95th-bound)",
+                                "value": "Western",
                                 "synonyms": [
-                                    "North and Clybourn (95th-bound) station"
+                                    "Western station"
                                 ]
                             }
                         },
                         {
-                            "id": "40400",
                             "name": {
-                                "value": "Noyes (Howard-Loop-bound)",
+                                "value": "Wilson",
                                 "synonyms": [
-                                    "Noyes (Howard-Loop-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40180",
-                            "name": {
-                                "value": "Oak Park (Forest Pk-bound)",
-                                "synonyms": [
-                                    "Oak Park (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41350",
-                            "name": {
-                                "value": "Oak Park (63rd-bound)",
-                                "synonyms": [
-                                    "Oak Park (63rd-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41680",
-                            "name": {
-                                "value": "Oakton-Skokie (Dempster-Skokie-bound)",
-                                "synonyms": [
-                                    "Oakton-Skokie (Dempster-Skokie-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40890",
-                            "name": {
-                                "value": "O'Hare (Forest Pk-bound)",
-                                "synonyms": [
-                                    "O'Hare (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41310",
-                            "name": {
-                                "value": "Paulina (Kimball-bound)",
-                                "synonyms": [
-                                    "Paulina (Kimball-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41030",
-                            "name": {
-                                "value": "Polk (54th and Cermak-bound)",
-                                "synonyms": [
-                                    "Polk (54th and Cermak-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40960",
-                            "name": {
-                                "value": "Pulaski (Loop-bound)",
-                                "synonyms": [
-                                    "Pulaski (Loop-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40150",
-                            "name": {
-                                "value": "Pulaski (54th and Cermak-bound)",
-                                "synonyms": [
-                                    "Pulaski (54th and Cermak-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40920",
-                            "name": {
-                                "value": "Pulaski (Forest Pk-bound)",
-                                "synonyms": [
-                                    "Pulaski (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40030",
-                            "name": {
-                                "value": "Pulaski (63rd-bound)",
-                                "synonyms": [
-                                    "Pulaski (63rd-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40040",
-                            "name": {
-                                "value": "Quincy and Wells (Inner Loop)",
-                                "synonyms": [
-                                    "Quincy and Wells (Inner Loop) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40470",
-                            "name": {
-                                "value": "Racine (Forest Pk-bound)",
-                                "synonyms": [
-                                    "Racine (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40610",
-                            "name": {
-                                "value": "Ridgeland (63rd-bound)",
-                                "synonyms": [
-                                    "Ridgeland (63rd-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41010",
-                            "name": {
-                                "value": "Rockwell (Kimball-bound)",
-                                "synonyms": [
-                                    "Rockwell (Kimball-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41400",
-                            "name": {
-                                "value": "Roosevelt (Loop-Harlem-bound)",
-                                "synonyms": [
-                                    "Roosevelt (Loop-Harlem-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40820",
-                            "name": {
-                                "value": "Rosemont (Forest Pk-bound)",
-                                "synonyms": [
-                                    "Rosemont (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40800",
-                            "name": {
-                                "value": "Sedgwick (Kimball-Linden-bound)",
-                                "synonyms": [
-                                    "Sedgwick (Kimball-Linden-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40080",
-                            "name": {
-                                "value": "Sheridan (95th-bound)",
-                                "synonyms": [
-                                    "Sheridan (95th-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40840",
-                            "name": {
-                                "value": "South Blvd (Howard-Loop-bound)",
-                                "synonyms": [
-                                    "South Blvd (Howard-Loop-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40360",
-                            "name": {
-                                "value": "Southport (Kimball-bound)",
-                                "synonyms": [
-                                    "Southport (Kimball-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40190",
-                            "name": {
-                                "value": "Sox-35th (95th-bound)",
-                                "synonyms": [
-                                    "Sox-35th (95th-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40260",
-                            "name": {
-                                "value": "State and Lake (Inner Loop)",
-                                "synonyms": [
-                                    "State and Lake (Inner Loop) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40880",
-                            "name": {
-                                "value": "Thorndale (95th-bound)",
-                                "synonyms": [
-                                    "Thorndale (95th-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40350",
-                            "name": {
-                                "value": "UIC-Halsted (Forest Pk-bound)",
-                                "synonyms": [
-                                    "UIC-Halsted (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40370",
-                            "name": {
-                                "value": "Washington (Forest Pk-bound)",
-                                "synonyms": [
-                                    "Washington (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41700",
-                            "name": {
-                                "value": "Washington and Wabash (Outer Loop)",
-                                "synonyms": [
-                                    "Washington and Wabash (Outer Loop) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40730",
-                            "name": {
-                                "value": "Washington and Wells (Inner Loop)",
-                                "synonyms": [
-                                    "Washington and Wells (Inner Loop) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41210",
-                            "name": {
-                                "value": "Wellington (Kimball-Linden-bound)",
-                                "synonyms": [
-                                    "Wellington (Kimball-Linden-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40310",
-                            "name": {
-                                "value": "Western (Loop-bound)",
-                                "synonyms": [
-                                    "Western (Loop-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40740",
-                            "name": {
-                                "value": "Western (54th and Cermak-bound)",
-                                "synonyms": [
-                                    "Western (54th and Cermak-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "41480",
-                            "name": {
-                                "value": "Western (Kimball-bound)",
-                                "synonyms": [
-                                    "Western (Kimball-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40670",
-                            "name": {
-                                "value": "Western (O'Hare Branch) (Forest Pk-bound)",
-                                "synonyms": [
-                                    "Western (O'Hare Branch) (Forest Pk-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40220",
-                            "name": {
-                                "value": "Western (Forest Pk Branch) (O'Hare-bound)",
-                                "synonyms": [
-                                    "Western (Forest Pk Branch) (O'Hare-bound) station"
-                                ]
-                            }
-                        },
-                        {
-                            "id": "40540",
-                            "name": {
-                                "value": "Wilson (Loop-bound)",
-                                "synonyms": [
-                                    "Wilson (Loop-bound) station"
+                                    "Wilson station"
                                 ]
                             }
                         }

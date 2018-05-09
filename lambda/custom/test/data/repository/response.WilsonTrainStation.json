@@ -1,0 +1,102 @@
+[
+    {
+        "ada": true,
+        "blue": false,
+        "brn": false,
+        "direction_id": "N",
+        "g": false,
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -87.657588,
+                41.964273
+            ]
+        },
+        "map_id": "40540",
+        "o": false,
+        "p": false,
+        "pexp": true,
+        "pnk": false,
+        "red": false,
+        "station_descriptive_name": "Wilson (Red & Purple Lines)",
+        "station_name": "Wilson",
+        "stop_id": "30386",
+        "stop_name": "Wilson (Linden-bound)",
+        "y": false
+    },
+    {
+        "ada": true,
+        "blue": false,
+        "brn": false,
+        "direction_id": "N",
+        "g": false,
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -87.657588,
+                41.964273
+            ]
+        },
+        "map_id": "40540",
+        "o": false,
+        "p": false,
+        "pexp": false,
+        "pnk": false,
+        "red": true,
+        "station_descriptive_name": "Wilson (Red & Purple Lines)",
+        "station_name": "Wilson",
+        "stop_id": "30105",
+        "stop_name": "Wilson (Howard-bound)",
+        "y": false
+    },
+    {
+        "ada": true,
+        "blue": false,
+        "brn": false,
+        "direction_id": "S",
+        "g": false,
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -87.657588,
+                41.964273
+            ]
+        },
+        "map_id": "40540",
+        "o": false,
+        "p": false,
+        "pexp": false,
+        "pnk": false,
+        "red": true,
+        "station_descriptive_name": "Wilson (Red & Purple Lines)",
+        "station_name": "Wilson",
+        "stop_id": "30106",
+        "stop_name": "Wilson (95th-bound)",
+        "y": false
+    },
+    {
+        "ada": true,
+        "blue": false,
+        "brn": false,
+        "direction_id": "S",
+        "g": false,
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -87.657588,
+                41.964273
+            ]
+        },
+        "map_id": "40540",
+        "o": false,
+        "p": false,
+        "pexp": true,
+        "pnk": false,
+        "red": false,
+        "station_descriptive_name": "Wilson (Red & Purple Lines)",
+        "station_name": "Wilson",
+        "stop_id": "30385",
+        "stop_name": "Wilson (Loop-bound)",
+        "y": false
+    }
+]

@@ -23,6 +23,9 @@ const requestVenueWithTime = require('../data/events/request.eventsAtVenueThisWe
 const requestLandmark = require('../data/events/request.alexa.eventsAtLandmark');
 const requestGenreEventsNearMe = require('../data/events/request.alexa.genreEventsNearMe.json');
 const requestGenreEventsNearMeThisWeekend = require('../data/events/request.alexa.genreEventsNearMeThisWeekend.json');
+const WilsonTrainStationResponse = require('../data/repository/response.WilsonTrainStation.json');
+const WilsonSouthPredictionResponse = require('../data/transit/train/response.WilsonSouthPredictions.json');
+const wrongStationResponse = require('../data/repository/response.WrongStation.json');
 
 describe('IntentController Tests', function() {
     let sandbox;
@@ -100,7 +103,7 @@ describe('IntentController Tests', function() {
              sandbox.stub(EventsHandler, "asyncGetEvents")
                  .withArgs("jazz", "house of blues", parsedDate.startDate, parsedDate.endDate, "", "")
                  .returns("logic successfully called asyncGetEvents with genre, venue, and time");
-            
+
             let alexaResponse = await IntentController.getEvents(requestGenreVenueTime);
             assert.equal(alexaResponse, "logic successfully called asyncGetEvents with genre, venue, and time");
         });
@@ -114,13 +117,13 @@ describe('IntentController Tests', function() {
             assert.equal(alexaResponse, "logic successfully called asyncGetEvents with genre, venue");
         });
         it('calls asyncGetEvents with genre near me', async function () {
-            
+
             sandbox.stub(ParameterHelper, "getLocationParameters")
             .returns(stubbedLocationParameters);
             sandbox.stub(EventsHandler, "asyncGetEvents")
                  .withArgs("jazz", "", "", "", -10, -20)
                  .returns("logic successfully called asyncGetEvents with genre and location parameters");
-            
+
             let alexaResponse = await IntentController.getEvents(requestGenreEventsNearMe);
             assert.equal(alexaResponse, "logic successfully called asyncGetEvents with genre and location parameters");
         });
@@ -132,7 +135,7 @@ describe('IntentController Tests', function() {
             sandbox.stub(EventsHandler, "asyncGetEvents")
                  .withArgs("jazz", "", parsedDate.startDate, parsedDate.endDate, -10, -20)
                  .returns("logic successfully called asyncGetEvents with with genre, location, and time.");
-            
+
             let alexaResponse = await IntentController.getEvents(requestGenreEventsNearMeThisWeekend);
             assert.equal(alexaResponse, "logic successfully called asyncGetEvents with with genre, location, and time.");
         });
@@ -142,7 +145,7 @@ describe('IntentController Tests', function() {
              sandbox.stub(EventsHandler, "asyncGetEvents")
                  .withArgs("", "A CHICAGO VENUE", "", "", "", "")
                  .returns("logic successfully called asyncGetEvents with venue");
-            
+
             let alexaResponse = await IntentController.getEvents(requestVenue);
             assert.equal(alexaResponse, "logic successfully called asyncGetEvents with venue");
         });
@@ -158,10 +161,6 @@ describe('IntentController Tests', function() {
             assert.equal(alexaResponse, "logic successfully called asyncGetEvents with venue and time");
         });
     });
-    
-
-
-
 
 
     it('Test IntentController.getEventsWithinTimeFrame: return 3 events occuring today in string', async function() {
@@ -180,5 +179,61 @@ describe('IntentController Tests', function() {
         let expectedResponse = "Here are 3 events going on in Chicago. chicago professional  and  technology diversity career fair, 10th stem cell clonality and genome stability retreat, made to win rooftop social ";
         let alexaResponse = await IntentController.getEventsWithinTimeFrame(apiEndpoint, apiAccessToken, funcDeviceId, date);
         assert.equal(alexaResponse, expectedResponse);
+    });
+
+    describe("test AsyncGetTrain()", () => {
+        beforeEach(function() {
+            nock('https://data.cityofchicago.org')
+            .get('/resource/8mj8-j3c4.json')
+            .query(true)
+            .reply(200, WilsonTrainStationResponse);
+
+            nock('http://lapi.transitchicago.com')
+            .get('/api/1.0/ttarrivals.aspx')
+            .query(true)
+            .reply(200, WilsonSouthPredictionResponse);
+        });
+
+        afterEach(function(){
+            nock.cleanAll();
+        });
+
+
+        it('Test IntentController.asyncGetTrain(Station, Train, Direction): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "S");
+            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, Train, ""): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "");
+            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, "", ""): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "", "");
+            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, wrongTrain, Direction): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Pink", "S");
+            assert.equal(alexaResponse, "No train stations were found that match that train line. Please try again");
+        });
+
+        it('Test IntentController.asyncGetTrain(Station, Train, wrongDirection): returns an alexa response', async function() {
+            let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "E");
+            assert.equal(alexaResponse, "No train stations were found that match that direction. Please try again");
+        });
+
+        it('Test IntentController.asyncGetTrain(wrongStation, Line, Direction): returns an alexa response', async function() {
+            nock.cleanAll();
+
+            nock('https://data.cityofchicago.org')
+            .get('/resource/8mj8-j3c4.json')
+            .query(true)
+            .reply(200, wrongStationResponse);
+
+            let alexaResponse = await IntentController.asyncGetTrain("adsf", "Red", "S");
+            assert.equal(alexaResponse, "No train stations were found that match the name adsf. Please try again");
+        });
     });
 });

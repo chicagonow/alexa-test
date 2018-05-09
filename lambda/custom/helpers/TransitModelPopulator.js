@@ -73,16 +73,15 @@ let populateTrainModel = () => {
     TrainRepo.getAll(trainStations => {
 
         // Only care about the unique train stations
-        let uniqueStations = _.uniqBy(trainStations, 'map_id');
+        let uniqueStations = _.uniqBy(trainStations, 'station_name');
 
         // loop through each station 
         uniqueStations.forEach(station => {  
             // Format the name          
-            let formattedStopName = formatName(station.stop_name, false);
+            let formattedStopName = formatName(station.station_name, false);
 
             // Create a new station model value
             let newTrainStationValue = {
-                id: station.map_id,
                 name: {
                     value: formattedStopName,
                     synonyms: [
