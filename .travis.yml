@@ -19,7 +19,7 @@ script:
   - ./deploy.sh
   - sh -c "cd ./lambda/custom/ && npm install"
   - sh -c "cd ./lambda/custom/ && npm test"
-  - echo `./lambda/custom/node_modules/.bin/json-minify models/en-US.json > models/en-US.json`
+  - echo `./lambda/custom/node_modules/.bin/json-minify models/en-US.json > models/en-US.json` || exit 1
 after_success:
   - ask deploy -p default -t model || exit 1
   - ask deploy -p default -t skill
