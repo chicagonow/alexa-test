@@ -43,7 +43,6 @@ describe('EventsHandler Tests', function () {
 
         // Tests the searchEventsNearMe method
         it("returns events near the user's current location", async function () {
-
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
