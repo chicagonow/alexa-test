@@ -15,6 +15,7 @@ const responseToday = require('../../data/events/response.eventsToday');
 const responseEventsAtVenue = require('../../data/events/responseEventsAtVenue');
 
 const EVENTBRITE_TOKEN = "IO6EB7MM6TSCIL2TIOHC";
+const DEFAULT_RADIUS = "5mi";
 
 describe('EventsHandler Tests', function () {
     let sandbox;
@@ -42,11 +43,12 @@ describe('EventsHandler Tests', function () {
 
         // Tests the searchEventsNearMe method
         it("returns events near the user's current location", async function () {
+
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
                     "token": EVENTBRITE_TOKEN,
-                    "location.within": "1mi",
+                    "location.within": DEFAULT_RADIUS,
                     "location.latitude": "-10",
                     "location.longitude": "-81.7"
                 })
@@ -63,7 +65,7 @@ describe('EventsHandler Tests', function () {
                 .get('/v3/events/search/')
                 .query({
                     "token": EVENTBRITE_TOKEN,
-                    "location.within": "1mi",
+                    "location.within": DEFAULT_RADIUS,
                     "location.latitude": "41.9",
                     "location.longitude": "-87.7"
                 })
