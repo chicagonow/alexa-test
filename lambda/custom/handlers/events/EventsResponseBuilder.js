@@ -1,10 +1,14 @@
 const logger = require("../../logging/Logger");
-const NUMBER_OF_EVENTS = 3;
+const MAX_NUMBER_OF_EVENTS = 3;
 
 exports.buildAlexaResponse = (jsonObject) => {
-    let msg = "Here are " + NUMBER_OF_EVENTS + " events going on in Chicago. ";
-
     let eventsArray = buildEventArray(jsonObject.events);
+
+    if (eventsArray.length < 1) {
+        return "Your request returned no events."
+    }
+
+    let msg = "Here are " + eventsArray.length + " events going on in Chicago. ";
     msg += eventsArray.join(", ");
 
     logger.info("built event response: " + msg);
@@ -13,7 +17,11 @@ exports.buildAlexaResponse = (jsonObject) => {
 
 let buildEventArray = (events) => {
     let eventsArray = [];
-    for (let index = 0; index < NUMBER_OF_EVENTS; index++) {
+    let numberOfEvents = events.length < MAX_NUMBER_OF_EVENTS
+        ? events.length
+        : MAX_NUMBER_OF_EVENTS;
+
+    for (let index = 0; index < numberOfEvents; index++) {
         let sanitizedEvent = events[index].name.text
             .toLocaleLowerCase()
             .replace("®", "")

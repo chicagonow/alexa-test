@@ -94,7 +94,7 @@ describe('EventsHandler Tests', function () {
         });
 
         it("returns error response for non existing venue", async ()=> {
-            const expectedEventsAtVenueResponse = "There was an error with the event service. Try again soon.";
+            const expectedEventsAtVenueResponse = "Your request returned no events.";
             const fakeVenueName = "asdfasdfasdf";
 
             nock("https://www.eventbriteapi.com")

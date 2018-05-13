@@ -9,7 +9,32 @@
                 },
                 {
                     "name": "AMAZON.HelpIntent",
-                    "samples": []
+                    "samples": [
+                      "help"
+                    ]
+                },
+                {
+                    "name": "EventHelpIntent",
+                    "samples": [
+                      "event",
+                      "event help"
+                    ]
+                },
+                {
+                    "name": "BusHelpIntent",
+                    "samples": [
+                      "bus",
+                      "busses",
+                      "bus help"
+                    ]
+                },
+                {
+                    "name": "TrainHelpIntent",
+                    "samples": [
+                      "train",
+                      "trains",
+                      "train help"
+                    ]
                 },
                 {
                     "name": "AMAZON.StopIntent",
@@ -157,6 +182,26 @@
                     "what {eventGenre} events are going on near me {timeFrame}",
                     "what {eventGenre} events are going on at {venueName} {timeFrame}",
                     "what {eventGenre} events are going on at {landmark} {timeFrame}",
+
+                    "what {eventGenre} games are going on near me",
+                    "what {eventGenre} games are going on",
+                    "what {eventGenre} games are going on at {venueName}",
+                    "what {eventGenre} games are going on at {landmark}",
+
+                    "what {eventGenre} games are going on {timeFrame}",
+                    "what {eventGenre} games are going on near me {timeFrame}",
+                    "what {eventGenre} games are going on at {venueName} {timeFrame}",
+                    "what {eventGenre} games are going on at {landmark} {timeFrame}",
+
+                    "what {eventGenre} matches are going on near me",
+                    "what {eventGenre} matches are going on",
+                    "what {eventGenre} matches are going on at {venueName}",
+                    "what {eventGenre} matches are going on at {landmark}",
+
+                    "what {eventGenre} matches are going on {timeFrame}",
+                    "what {eventGenre} matches are going on near me {timeFrame}",
+                    "what {eventGenre} matches are going on at {venueName} {timeFrame}",
+                    "what {eventGenre} matches are going on at {landmark} {timeFrame}",
 
                     "what events are going on at {venueName} {timeFrame}",
                     "what's going on at {venueName} {timeFrame}",
@@ -100526,6 +100571,8 @@
                                     "HALSTED and 29TH STREET",
                                     "18213"
                                 ]
+
+
                             }
                         },
                         {
