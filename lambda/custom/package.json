@@ -21,9 +21,6 @@
     "winston": "^3.0.0-rc5"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.x",
-    "babel-preset-env": "^1.6.x",
-    "babel-preset-minify": "^0.4.x",
     "chai": "^4.1.x",
     "chia": "0.0.x",
     "eslint": "^4.19.x",
