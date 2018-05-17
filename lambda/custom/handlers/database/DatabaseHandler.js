@@ -1,7 +1,7 @@
 const aws = require('aws-sdk');
 const logger = require("../../logging/Logger");
 
-exports.updateUser = (userID) => {
+exports.updateUser = async function(userID) {
     let lambda = getLambda();
 
     let payload = {
