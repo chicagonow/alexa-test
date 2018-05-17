@@ -6,10 +6,12 @@ exports.updateUser = (userID) => {
 
     let payload = {
         httpMethod: "PUT",
-        TableName: "User",
-        UserID: userID
+        parameters: {
+            TableName: "User",
+            UserID: userID
+        }
     };
-    
+
     lambda.invoke({
         FunctionName: 'DatabaseService',
         Payload: JSON.stringify(payload)
