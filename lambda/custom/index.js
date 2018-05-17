@@ -94,7 +94,11 @@ const handlers = {
 
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     const alexa = Alexa.handler(event, context);
+    logger.info("alexa.handler");
     alexa.appId = process.env.skill_id;
-    alexa.registerHandlers(handlers);
+    logger.info("alexa.appId");
+    alexa.registerHandlers(handlers); 
+    logger.info("alexa.registerHandlers");  
     alexa.execute();
+    logger.info("alexa.execute");
 });
