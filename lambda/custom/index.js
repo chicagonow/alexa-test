@@ -75,10 +75,35 @@ const handlers = {
                 });
         this.emit(':tell', alexaResponse);
     },
+    'EventHelpIntent': function () {
+        let eventHelpResponse =
+            "You can ask chicago now about events at specific venues, by timeframe, and or by category. " +
+            "For example: ask chicago now what pop events are going on at house of blues," +
+            "or, ask chicago now what baseball games are going on at this week";
+        this.emit(':tell', eventHelpResponse);
+    },
+    'TrainHelpIntent': function () {
+        let trainHelpIntent =
+            "You can ask chicago now about specific train schedules by line and direction." +
+            "For example: ask chicago now what's the status of the south brown line at Diversey," +
+            "or, ask chicago now what's the status of the wilson red line";
+        this.emit(':tell', trainHelpIntent);
+    },
+    'BusHelpIntent': function () {
+        let trainHelpIntent =
+            "You can ask chicago now about specific bus stop schedules by bus number, and by direction or intersection." +
+            "For example: ask chicago now what's the status of the southbound 49," +
+            "or, ask chicago now what's the status of 66 at chicago and state." +
+            " To reverse the direction, switch the order of the intersection. For example, change chicago and state, to state and chicago.";
+        this.emit(':tell', trainHelpIntent);
+    },
     'AMAZON.HelpIntent': function () {
-        const speechOutput = this.t('HELP_MESSAGE');
-        const reprompt = this.t('HELP_MESSAGE');
-        this.emit(':ask', speechOutput, reprompt);
+        const speechOutput = "Ok. Try : " +
+            "ask chicago now event help, or " +
+            "ask chicago now train help, or " +
+            "ask chicago now bus help.";
+
+        this.emit(':tell', speechOutput);
     },
     'AMAZON.CancelIntent': function () {
         this.emit(':tell', this.t('STOP_MESSAGE'));
