@@ -19,7 +19,7 @@ exports.updateUser = async function(userID) {
         if (error) {
             logger.error("Error adding user: " + error.message);
         } else {
-            logger.log("Added to User table user: " + userID);
+            logger.info("Added to User table user: " + userID);
         }
     });
 };
