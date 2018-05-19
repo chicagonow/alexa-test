@@ -10,7 +10,7 @@ const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_EVENTS_SEARCH_PATH = '/v3/events/search/';
 
-const DEFAULT_RADIUS = '1mi';
+const DEFAULT_RADIUS = '5mi';
 
 //return Alexa response string
 exports.asyncGetEventsNearLocation = async (latitude, longitude) => {
@@ -98,7 +98,7 @@ let getAlexaResponseForEvents = async (eventbriteDomain, eventbritePath, queryPa
         alexaEventResponse = EventsResponseBuilder.buildAlexaResponse(JSON.parse(body));
     } catch (err) {
         logger.error("event response body was: " + body);
-        logger.error(err);
+        logger.error(err.message);
         alexaEventResponse = "There was an error with the event service. Try again soon."
     }
     return alexaEventResponse;

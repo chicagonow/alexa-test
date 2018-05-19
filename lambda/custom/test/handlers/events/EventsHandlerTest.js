@@ -15,6 +15,7 @@ const responseToday = require('../../data/events/response.eventsToday');
 const responseEventsAtVenue = require('../../data/events/responseEventsAtVenue');
 
 const EVENTBRITE_TOKEN = "IO6EB7MM6TSCIL2TIOHC";
+const DEFAULT_RADIUS = "5mi";
 
 describe('EventsHandler Tests', function () {
     let sandbox;
@@ -46,7 +47,7 @@ describe('EventsHandler Tests', function () {
                 .get('/v3/events/search/')
                 .query({
                     "token": EVENTBRITE_TOKEN,
-                    "location.within": "1mi",
+                    "location.within": DEFAULT_RADIUS,
                     "location.latitude": "-10",
                     "location.longitude": "-81.7"
                 })
@@ -63,7 +64,7 @@ describe('EventsHandler Tests', function () {
                 .get('/v3/events/search/')
                 .query({
                     "token": EVENTBRITE_TOKEN,
-                    "location.within": "1mi",
+                    "location.within": DEFAULT_RADIUS,
                     "location.latitude": "41.9",
                     "location.longitude": "-87.7"
                 })
@@ -94,7 +95,7 @@ describe('EventsHandler Tests', function () {
         });
 
         it("returns error response for non existing venue", async ()=> {
-            const expectedEventsAtVenueResponse = "There was an error with the event service. Try again soon.";
+            const expectedEventsAtVenueResponse = "Your request returned no events.";
             const fakeVenueName = "asdfasdfasdf";
 
             nock("https://www.eventbriteapi.com")
