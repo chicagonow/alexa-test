@@ -63,7 +63,7 @@ exports.asyncGetEventsAtVenue = async (venueName) => {
     return eventsAtVenueResponse;
 };
 
-exports.asyncGetEvents = async (eventGenre, eventLocation, startDate, endDate, latitude, longitude) => {
+exports.asyncGetEvents = async (eventGenre, eventLocation, startDate, endDate, latitude, longitude) => {    
     let queryParameters = getCommonQueryObjectParameters();
     if ((eventGenre + eventLocation).trim() !== ""){
         queryParameters["q"] = eventGenre + " " + eventLocation;

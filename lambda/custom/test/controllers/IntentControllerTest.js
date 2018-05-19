@@ -75,7 +75,7 @@ describe('IntentController Tests', function() {
                 .returns("logic correctly only parsed latitude and longitude");
 
             let alexaResponse = await IntentController.getEvents(requestNearMe);
-            assert.equal(alexaResponse, "logic correctly only parsed latitude and longitude");
+            assert.strictEqual(alexaResponse, "logic correctly only parsed latitude and longitude");
         });
 
         const fakeVenueName = "A CHICAGO VENUE";
@@ -86,7 +86,7 @@ describe('IntentController Tests', function() {
                 .returns("fake event response for venue: " + fakeVenueName);
 
             let alexaResponse = await IntentController.getEvents(requestVenue);
-            assert.equal(alexaResponse, "fake event response for venue: A CHICAGO VENUE");
+            assert.strictEqual(alexaResponse, "fake event response for venue: A CHICAGO VENUE");
         });
 
         it('calls asyncGetEventsAtVenue with landmark name when there is a landmark slot type', async function () {
@@ -95,7 +95,7 @@ describe('IntentController Tests', function() {
                 .returns("fake event response for landmark: " + fakeLandmarkName);
 
             let alexaResponse = await IntentController.getEvents(requestLandmark);
-            assert.equal(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
+            assert.strictEqual(alexaResponse, "fake event response for landmark: A CHICAGO LANDMARK");
         });
         it('calls asyncGetEvents with genre, venue, and time', async function () {
             let parsedDate = new AmazonDateParser("2018-W19-WE");
@@ -105,7 +105,7 @@ describe('IntentController Tests', function() {
                  .returns("logic successfully called asyncGetEvents with genre, venue, and time");
 
             let alexaResponse = await IntentController.getEvents(requestGenreVenueTime);
-            assert.equal(alexaResponse, "logic successfully called asyncGetEvents with genre, venue, and time");
+            assert.strictEqual(alexaResponse, "logic successfully called asyncGetEvents with genre, venue, and time");
         });
 
         it('calls asyncGetEvents with genre and venue', async function () {
@@ -114,7 +114,7 @@ describe('IntentController Tests', function() {
                 .returns("logic successfully called asyncGetEvents with genre, venue");
 
             let alexaResponse = await IntentController.getEvents(requestGenreVenue);
-            assert.equal(alexaResponse, "logic successfully called asyncGetEvents with genre, venue");
+            assert.strictEqual(alexaResponse, "logic successfully called asyncGetEvents with genre, venue");
         });
         it('calls asyncGetEvents with genre near me', async function () {
 
@@ -125,7 +125,7 @@ describe('IntentController Tests', function() {
                  .returns("logic successfully called asyncGetEvents with genre and location parameters");
 
             let alexaResponse = await IntentController.getEvents(requestGenreEventsNearMe);
-            assert.equal(alexaResponse, "logic successfully called asyncGetEvents with genre and location parameters");
+            assert.strictEqual(alexaResponse, "logic successfully called asyncGetEvents with genre and location parameters");
         });
         it('calls asyncGetEvents with genre near me this weekend', async function () {
             let parsedDate = new AmazonDateParser("2018-W19-WE");
@@ -137,7 +137,7 @@ describe('IntentController Tests', function() {
                  .returns("logic successfully called asyncGetEvents with with genre, location, and time.");
 
             let alexaResponse = await IntentController.getEvents(requestGenreEventsNearMeThisWeekend);
-            assert.equal(alexaResponse, "logic successfully called asyncGetEvents with with genre, location, and time.");
+            assert.strictEqual(alexaResponse, "logic successfully called asyncGetEvents with with genre, location, and time.");
         });
 
         it('calls asyncGetEvents with venue', async function () {
@@ -147,7 +147,7 @@ describe('IntentController Tests', function() {
                  .returns("logic successfully called asyncGetEvents with venue");
 
             let alexaResponse = await IntentController.getEvents(requestVenue);
-            assert.equal(alexaResponse, "logic successfully called asyncGetEvents with venue");
+            assert.strictEqual(alexaResponse, "logic successfully called asyncGetEvents with venue");
         });
 
         it('calls asyncGetEvents with venue and time', async function () {
@@ -158,7 +158,7 @@ describe('IntentController Tests', function() {
                 .returns("logic successfully called asyncGetEvents with venue and time");
 
             let alexaResponse = await IntentController.getEvents(requestVenueWithTime);
-            assert.equal(alexaResponse, "logic successfully called asyncGetEvents with venue and time");
+            assert.strictEqual(alexaResponse, "logic successfully called asyncGetEvents with venue and time");
         });
     });
 
@@ -178,7 +178,7 @@ describe('IntentController Tests', function() {
 
         let expectedResponse = "Here are 3 events going on in Chicago. chicago professional  and  technology diversity career fair, 10th stem cell clonality and genome stability retreat, made to win rooftop social ";
         let alexaResponse = await IntentController.getEventsWithinTimeFrame(apiEndpoint, apiAccessToken, funcDeviceId, date);
-        assert.equal(alexaResponse, expectedResponse);
+        assert.strictEqual(alexaResponse, expectedResponse);
     });
 
     describe("test AsyncGetTrain()", () => {
@@ -201,27 +201,27 @@ describe('IntentController Tests', function() {
 
         it('Test IntentController.asyncGetTrain(Station, Train, Direction): returns an alexa response', async function() {
             let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "S");
-            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+            assert.strictEqual(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
         });
 
         it('Test IntentController.asyncGetTrain(Station, Train, ""): returns an alexa response', async function() {
             let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "");
-            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+            assert.strictEqual(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
         });
 
         it('Test IntentController.asyncGetTrain(Station, "", ""): returns an alexa response', async function() {
             let alexaResponse = await IntentController.asyncGetTrain("Wilson", "", "");
-            assert.equal(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
+            assert.strictEqual(alexaResponse, "The Wilson Red Service toward 95th/Dan Ryan will arrive at 2:32 PM");
         });
 
         it('Test IntentController.asyncGetTrain(Station, wrongTrain, Direction): returns an alexa response', async function() {
             let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Pink", "S");
-            assert.equal(alexaResponse, "No train stations were found that match that train line. Please try again");
+            assert.strictEqual(alexaResponse, "No train stations were found that match that train line. Please try again");
         });
 
         it('Test IntentController.asyncGetTrain(Station, Train, wrongDirection): returns an alexa response', async function() {
             let alexaResponse = await IntentController.asyncGetTrain("Wilson", "Red", "E");
-            assert.equal(alexaResponse, "No train stations were found that match that direction. Please try again");
+            assert.strictEqual(alexaResponse, "No train stations were found that match that direction. Please try again");
         });
 
         it('Test IntentController.asyncGetTrain(wrongStation, Line, Direction): returns an alexa response', async function() {
@@ -233,7 +233,7 @@ describe('IntentController Tests', function() {
             .reply(200, wrongStationResponse);
 
             let alexaResponse = await IntentController.asyncGetTrain("adsf", "Red", "S");
-            assert.equal(alexaResponse, "No train stations were found that match the name adsf. Please try again");
+            assert.strictEqual(alexaResponse, "No train stations were found that match the name adsf. Please try again");
         });
     });
 });

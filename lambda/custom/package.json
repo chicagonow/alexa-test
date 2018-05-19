@@ -6,6 +6,7 @@
   "dependencies": {
     "alexa-sdk": "^1.0.x",
     "amazon-date-parser": "^0.2.x",
+    "aws-sdk": "^2.241.x",
     "bespoken-tools": "^1.2.x",
     "build-url": "^1.0.x",
     "csvtojson": "^1.1.x",
@@ -22,7 +23,6 @@
   },
   "devDependencies": {
     "chai": "^4.1.x",
-    "chia": "0.0.x",
     "eslint": "^4.19.x",
     "mocha": "^5.0.x",
     "nock": "^9.2.x",

@@ -4,22 +4,24 @@ const TransitHandler = require('./handlers/transit/TransitHandler');
 const ParameterHelper = require('./helpers/ParameterHelper');
 const IntentController = require('./controllers/IntentController');
 const logger = require("logging/Logger");
+const UserRepository = require("./repositories/database/UserRepository");
 
 const handlers = {
     'CtaTrainIntent': async function () {
-        // TODO: Build proper parameters
-        // train = color, trainstation = stpid, traindirection =
+        trackUser(this.event);
         let train = "";
         let trainStation = "";
         let trainDirection = "";
-        if (this.event.request.intent.slots.train.resolutions){
-            train =  this.event.request.intent.slots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+
+        let trainIntentSlots = this.event.request.intent.slots;
+        if (trainIntentSlots.train.resolutions){
+            train =  trainIntentSlots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
         }
-        if (this.event.request.intent.slots.trainStation.resolutions){
-            trainStation =  this.event.request.intent.slots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        if (trainIntentSlots.trainStation.resolutions){
+            trainStation =  trainIntentSlots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         }
-        if (this.event.request.intent.slots.trainDirection.resolutions){
-            trainDirection =  this.event.request.intent.slots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        if (trainIntentSlots.trainDirection.resolutions){
+            trainDirection =  trainIntentSlots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         }
         if (train === "" && trainStation === "" && trainDirection ===""){
             this.emit(':tell', "No train line, train station, or train direction specified");
@@ -30,9 +32,12 @@ const handlers = {
         }
     },
     'CtaBusIntent': async function () {
+        trackUser(this.event);
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-        let route = this.event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let direction = this.event.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let busIntentSlots = this.event.request.intent.slots;
+
+        let route = busIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = busIntentSlots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let alexaResponse =
             await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
                 .catch(error => {
@@ -41,8 +46,10 @@ const handlers = {
         this.emit(':tell', alexaResponse);
     },
     'CtaBusStopIntent': async function () {
-        let route = this.event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let stopId = this.event.request.intent.slots.busStop.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        trackUser(this.event);
+        let bustStopIntentSlots = this.event.request.intent.slots;
+        let route = bustStopIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let stopId = bustStopIntentSlots.busStop.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let alexaResponse =
             await IntentController.getBusesByStop(route, stopId)
                 .catch(error => {
@@ -51,6 +58,7 @@ const handlers = {
         this.emit(':tell', alexaResponse);
     },
     'CtaLocationIntent': function () {     
+        trackUser(this.event);
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         if (transitSlot === "train") {
             let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
@@ -61,11 +69,13 @@ const handlers = {
             this.emit(':tell', "implement nearest bus location intent");
         }       
     },
-	'EventLocationIntent': async function() {		
+	'EventLocationIntent': async function() {	
+        trackUser(this.event);	
         let alexaResponse = await IntentController.getEvents(this.event);
         this.emit(':tell', alexaResponse);
     },
     'EventTimeFrameIntent': async function() {
+        trackUser(this.event);
         let timeFrame = this.event.request.intent.slots.timeFrame.value;
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let alexaResponse = 
@@ -98,6 +108,7 @@ const handlers = {
         this.emit(':tell', trainHelpIntent);
     },
     'AMAZON.HelpIntent': function () {
+        trackUser(this.event);
         const speechOutput = "Ok. Try : " +
             "ask chicago now event help, or " +
             "ask chicago now train help, or " +
@@ -117,9 +128,18 @@ const handlers = {
     }
 };
 
+let trackUser = (event) => {
+    let userID = event.context.System.user.userId;
+    UserRepository.updateUser(userID);
+};
+
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     const alexa = Alexa.handler(event, context);
+    logger.info("alexa.handler");
     alexa.appId = process.env.skill_id;
-    alexa.registerHandlers(handlers);
+    logger.info("alexa.appId");
+    alexa.registerHandlers(handlers); 
+    logger.info("alexa.registerHandlers");  
     alexa.execute();
+    logger.info("alexa.execute");
 });
