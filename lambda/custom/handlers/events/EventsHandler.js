@@ -4,7 +4,6 @@ const buildUrl = require('build-url');
 const EventsResponseBuilder = require('./EventsResponseBuilder');
 const moment = require('moment-timezone');
 const logger = require("../../logging/Logger");
-const DatabaseHandler = require('../database/DatabaseHandler');
 
 //used sample token,replace later. 
 const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
@@ -64,9 +63,7 @@ exports.asyncGetEventsAtVenue = async (venueName) => {
     return eventsAtVenueResponse;
 };
 
-exports.asyncGetEvents = async (eventGenre, eventLocation, startDate, endDate, latitude, longitude) => {
-    DatabaseHandler.updateUser("12345");
-    
+exports.asyncGetEvents = async (eventGenre, eventLocation, startDate, endDate, latitude, longitude) => {    
     let queryParameters = getCommonQueryObjectParameters();
     if ((eventGenre + eventLocation).trim() !== ""){
         queryParameters["q"] = eventGenre + " " + eventLocation;
