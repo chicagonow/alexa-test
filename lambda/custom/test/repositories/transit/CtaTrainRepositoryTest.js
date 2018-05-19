@@ -26,7 +26,7 @@ describe('CtaTrainRepository Tests', function() {
         .reply(200, responseRepoTrains);
 
         TrainRepository.getAll((trainInfo) => {
-            assert.equal(trainInfo.length, 104);
+            assert.strictEqual(trainInfo.length, 104);
             done();
         });
     });
@@ -39,7 +39,7 @@ describe('CtaTrainRepository Tests', function() {
         .reply(200, responseRepoTrains);
 
         TrainRepository.getNearestTrainMapID(41.87893, -87.626088, (mapID) => {
-            assert.equal(mapID, '40130');
+            assert.strictEqual(mapID, '40130');
             done();
         });
     });
@@ -54,6 +54,6 @@ describe('CtaTrainRepository Tests', function() {
         .reply(200, responseTrainStationObject);
 
         let trainStations = await TrainRepository.getPotentialTrainStations("18th");
-        assert.equal(trainStations[0].map_id, '40830'); 
+        assert.strictEqual(trainStations[0].map_id, '40830');
     });
 });

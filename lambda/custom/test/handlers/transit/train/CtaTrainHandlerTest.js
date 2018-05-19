@@ -66,7 +66,7 @@ describe('CtaTrainHandler Tests', function() {
 
             let parameters = ParameterHelper.getLocationParameters(alexaJson.context.System);
             CtaTrainHandler.searchTrainNearMe(parameters, (alexaResponse) => {
-                assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+                assert.strictEqual(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
                 done();
             });
         });
@@ -81,7 +81,7 @@ describe('CtaTrainHandler Tests', function() {
             };
 
             CtaTrainHandler.searchTrain(parameters, (alexaResponse) => {
-                assert.equal(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
+                assert.strictEqual(alexaResponse, "The Diversey Brn Service toward Loop will arrive at 9:55 PM");
                 done();
             });
         });
@@ -99,7 +99,7 @@ describe('CtaTrainHandler Tests', function() {
 
             let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("fail");
             let expectedAlexaResponse = "There was an error with the CTA train service response.";
-            assert.equal(actualAlexaResponse, expectedAlexaResponse);
+            assert.strictEqual(actualAlexaResponse, expectedAlexaResponse);
         });
 
         it('with correct query parameters returns correct Alexa Response', async () => {
@@ -109,7 +109,7 @@ describe('CtaTrainHandler Tests', function() {
 
             let actualAlexaResponse = await CtaTrainHandler.asyncCallCta("30104");
             let expectedAlexaResponse = "The Diversey Brn Service toward Loop will arrive at 9:55 PM";
-            assert.equal(actualAlexaResponse, expectedAlexaResponse);
+            assert.strictEqual(actualAlexaResponse, expectedAlexaResponse);
         });
     });
 });
