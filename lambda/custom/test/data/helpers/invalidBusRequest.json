@@ -53,13 +53,13 @@
 			"slots": {
 				"bus": {
 					"name": "bus",
-					"value": "20",
+					"value": "2000",
 					"resolutions": {
 						"resolutionsPerAuthority": [
 							{
 								"authority": "amzn1.er-authority.echo-sdk.amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38.CTA_BUS",
 								"status": {
-									"code": "ER_SUCCESS_MATCH"
+									"code": "ER_SUCCESS_NO_MATCH"
 								},
 								"values": [
 									{

@@ -51,10 +51,40 @@
 			"name": "CtaTrainIntent",
 			"confirmationStatus": "NONE",
 			"slots": {
+				"trainDirection": {
+                    "name": "trainDirection",
+                    "value": "weast",
+                    "resolutions": {
+						"resolutionsPerAuthority": [
+							{
+								"authority": "amzn1.er-authority.echo-sdk.amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38.CTA_TRAIN_STATION",
+								"status": {
+									"code": "ER_SUCCESS_NO_MATCH"
+								}
+							}
+						]
+					},
+					"confirmationStatus": "NONE"
+				},
 				"trainStation": {
 					"name": "trainStation",
 					"value": "asdfasddfs diversey station",
 					"resolutions": {
+						"resolutionsPerAuthority": [
+							{
+								"authority": "amzn1.er-authority.echo-sdk.amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38.CTA_TRAIN_STATION",
+								"status": {
+									"code": "ER_SUCCESS_NO_MATCH"
+								}
+							}
+						]
+					},
+					"confirmationStatus": "NONE"
+				},
+				"train": {
+                    "name": "train",
+                    "value": "fusia",
+                    "resolutions": {
 						"resolutionsPerAuthority": [
 							{
 								"authority": "amzn1.er-authority.echo-sdk.amzn1.ask.skill.e0929fb0-ad82-43f5-b785-95eee4ddef38.CTA_TRAIN_STATION",
