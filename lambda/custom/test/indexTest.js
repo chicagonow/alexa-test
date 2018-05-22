@@ -135,7 +135,7 @@ describe('Cta Bus Index.JS Test', function() {
         };
 
         let string = await busHandler.asyncGetBusesForRouteAndStop(parameters.rt, parameters.stpid)
-        assert.equal(string, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
+        assert.strictEqual(string, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
     it('Test asyncGetBusesWithUserLocation', async function() {
@@ -146,7 +146,7 @@ describe('Cta Bus Index.JS Test', function() {
         };
 
         let stringResponse = await busHandler.asyncGetBusesWithUserLocation(parameters.rt, parameters.dir, 41.881383249235, -87.668550968956);
-        assert.equal(stringResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
+        assert.strictEqual(stringResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
     it('Test CTABusIntent 20 East', async function() {
@@ -154,7 +154,7 @@ describe('Cta Bus Index.JS Test', function() {
         let route = alexaBusRequest20East.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let direction = alexaBusRequest20East.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
-        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
+        assert.strictEqual(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
     })
 
     it('Test CTABusIntent 49 South', async function() {
@@ -162,35 +162,34 @@ describe('Cta Bus Index.JS Test', function() {
         let route = alexaBusRequest49South.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let direction = alexaBusRequest49South.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
-        assert.equal(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
+        assert.strictEqual(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
     })
 
     it('Test CTABusIntent No Service Error Response', async function(){
 
         let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Southbound");
-        assert.equal(alexaResponse, "There is no scheduled service for stop 70 on route 1");
+        assert.strictEqual(alexaResponse, "There is no scheduled service for stop 70 on route 1");
     })
 
-    it('Test GetBusesIntent Wrong Direction Error Response', async function(){
+    it('Test GetBusesIntent Wrong Direction Error Response', async function () {
 
         let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
         let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Eastbound");
-        assert.equal(alexaResponse, "Bus 1 does not go Eastbound. Please ask again.");
-    })
+        assert.strictEqual(alexaResponse, "Bus 1 does not go Eastbound. Please ask again.");
+    });
 
     it('Test CTABusStopIntent 20 East', async function() {
         let route = alexaBusRequest20stop4727.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let stopId = alexaBusRequest20stop4727.request.intent.slots.busStop.value;
         let alexaResponse = await IntentController.getBusesByStop(route, stopId);
-        assert.equal(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
+        assert.strictEqual(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
     })
 
-    it('Test CTABusStopIntent 49 South', async function() {
+    it('Test CTABusStopIntent 49 South', async function () {
         let route = alexaBusRequest49stop8245.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let stopId = alexaBusRequest49stop8245.request.intent.slots.busStop.value;
         let alexaResponse = await IntentController.getBusesByStop(route, stopId);
-        assert.equal(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
-    })
-
+        assert.strictEqual(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
+    });
 });

@@ -3,7 +3,7 @@ const bespokenTools = require('bespoken-tools');
 const TransitHandler = require('./handlers/transit/TransitHandler');
 const ParameterHelper = require('./helpers/ParameterHelper');
 const IntentController = require('./controllers/IntentController');
-const logger = require("logging/Logger");
+const logger = require("./logging/Logger");
 const UserRepository = require("./repositories/database/UserRepository");
 
 let startTime;
@@ -128,13 +128,7 @@ const handlers = {
         logRequestInfo("BusHelpIntent", new Date());
     },
     'AMAZON.HelpIntent': function () {
-        trackUser(this.event);
-        const speechOutput = "Ok. Try : " +
-            "ask chicago now event help, or " +
-            "ask chicago now train help, or " +
-            "ask chicago now bus help.";
-
-        this.emit(':tell', speechOutput);
+        helpIntent(this);
         logRequestInfo("HelpIntent", new Date());
     },
     'AMAZON.CancelIntent': function () {
@@ -147,9 +141,19 @@ const handlers = {
     },
     'Unhandled': function () {
         logger.info("Unhandled Intent. Alexa request was : " + JSON.stringify(this));
-        this.emit(':tell', "You don goofed");
-        logRequestInfo("Unhandled", new Date());
-    }
+        helpIntent(this);
+    },
+
+};
+
+let helpIntent = (that) => {
+    trackUser(that.event);
+    const speechOutput = "Ok. Try : " +
+        "ask chicago now event help, or " +
+        "ask chicago now train help, or " +
+        "ask chicago now bus help.";
+
+    that.emit(':tell', speechOutput);
 };
 
 let trackUser = (event) => {
