@@ -5,6 +5,7 @@ const ParameterHelper = require('./helpers/ParameterHelper');
 const IntentController = require('./controllers/IntentController');
 const logger = require("./logging/Logger");
 const UserRepository = require("./repositories/database/UserRepository");
+const TransitSlotHelper = require('./helpers/TransitSlotHelper');
 
 let startTime;
 
@@ -37,8 +38,14 @@ const handlers = {
             this.emit(':tell', "No train line, train station, or train direction specified");
         }
         else {
-            let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
-            this.emit(':tell', alexaTrainStatusResponse);
+            // check for any unmatched slots
+            let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(trainIntentSlots, ["train", "trainStation", "trainDirection"], true);
+            if (failedSlotResponse) {
+                this.emit(':tell', failedSlotResponse);
+            } else {
+                let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
+                this.emit(':tell', alexaTrainStatusResponse);
+            }
         }
         logRequestInfo("CtaTrainIntent", new Date());
     },
@@ -50,12 +57,18 @@ const handlers = {
 
         let route = busIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let direction = busIntentSlots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let alexaResponse =
-            await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
-                .catch(error => {
-                    logger.error(error)
-                });
-        this.emit(':tell', alexaResponse);
+        
+        let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(busIntentSlots, ["bus", "busDirection"]);
+        if (failedSlotResponse) {
+            this.emit(':tell', failedSlotResponse);
+        } else {
+            let alexaResponse =
+                await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
+                    .catch(error => {
+                        logger.error(error)
+                    });
+            this.emit(':tell', alexaResponse);
+        }        
         logRequestInfo("CtaBusIntent", new Date());
     },
     'CtaBusStopIntent': async function () {
@@ -64,12 +77,18 @@ const handlers = {
         let bustStopIntentSlots = this.event.request.intent.slots;
         let route = bustStopIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let stopId = bustStopIntentSlots.busStop.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let alexaResponse =
-            await IntentController.getBusesByStop(route, stopId)
-                .catch(error => {
-                    logger.error(error)
-                });
-        this.emit(':tell', alexaResponse);
+        
+        let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(bustStopIntentSlots, ["bus", "busStop"]);
+        if (failedSlotResponse) {
+            this.emit(':tell', failedSlotResponse);
+        } else {
+            let alexaResponse =
+                await IntentController.getBusesByStop(route, stopId)
+                    .catch(error => {
+                        logger.error(error)
+                    });
+            this.emit(':tell', alexaResponse);
+        }
     },
     'CtaLocationIntent': function () {
         trackUser(this.event);
