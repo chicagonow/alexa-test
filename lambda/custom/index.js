@@ -12,56 +12,55 @@ let startTime;
 let logRequestInfo = (intentName, endTime) => {
     //this needs to be console.* instead of logger. so it is not json formatted
     console.info("IntentName: " + intentName + " Duration: " + (endTime - startTime));
-
 };
 
 const handlers = {
 
     'CtaTrainIntent': async function () {
-        trackUser(this.event);
         let train = "";
         let trainStation = "";
         let trainDirection = "";
 
         let trainIntentSlots = this.event.request.intent.slots;
 
-        if (trainIntentSlots.train.resolutions) {
-            train = trainIntentSlots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-        }
-        if (trainIntentSlots.trainStation.resolutions) {
-            trainStation = trainIntentSlots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        }
-        if (trainIntentSlots.trainDirection.resolutions) {
-            trainDirection = trainIntentSlots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        }
-        if (train === "" && trainStation === "" && trainDirection === "") {
-            this.emit(':tell', "No train line, train station, or train direction specified");
-        }
-        else {
-            // check for any unmatched slots
-            let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(trainIntentSlots, ["train", "trainStation", "trainDirection"], true);
-            if (failedSlotResponse) {
-                this.emit(':tell', failedSlotResponse);
-            } else {
-                let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
-                this.emit(':tell', alexaTrainStatusResponse);
+        // check for any unmatched slots
+        let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(trainIntentSlots, ["train", "trainStation", "trainDirection"], true);
+
+
+        if (failedSlotResponse) {
+            this.emit(':tell', failedSlotResponse);
+        } else {
+
+            if (trainIntentSlots.train.resolutions) {
+                train = trainIntentSlots.train.resolutions.resolutionsPerAuthority[0].values[0].value.id;
             }
+            if (trainIntentSlots.trainStation.resolutions) {
+                trainStation = trainIntentSlots.trainStation.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+            }
+            if (trainIntentSlots.trainDirection.resolutions) {
+                trainDirection = trainIntentSlots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+            }
+            if (train === "" && trainStation === "" && trainDirection === "") {
+                this.emit(':tell', "No train line, train station, or train direction specified");
+            }
+
+            let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
+            this.emit(':tell', alexaTrainStatusResponse);
         }
+
         logRequestInfo("CtaTrainIntent", new Date());
     },
     'CtaBusIntent': async function () {
-
-        trackUser(this.event);
         let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let busIntentSlots = this.event.request.intent.slots;
 
-        let route = busIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let direction = busIntentSlots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        
         let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(busIntentSlots, ["bus", "busDirection"]);
         if (failedSlotResponse) {
             this.emit(':tell', failedSlotResponse);
         } else {
+            let route = busIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+            let direction = busIntentSlots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+
             let alexaResponse =
                 await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
                     .catch(error => {
@@ -72,16 +71,15 @@ const handlers = {
         logRequestInfo("CtaBusIntent", new Date());
     },
     'CtaBusStopIntent': async function () {
-        logRequestInfo("CtaBusStopIntent", new Date());
-        trackUser(this.event);
         let bustStopIntentSlots = this.event.request.intent.slots;
-        let route = bustStopIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let stopId = bustStopIntentSlots.busStop.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        
+
         let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(bustStopIntentSlots, ["bus", "busStop"]);
         if (failedSlotResponse) {
             this.emit(':tell', failedSlotResponse);
         } else {
+            let route = bustStopIntentSlots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+            let stopId = bustStopIntentSlots.busStop.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+
             let alexaResponse =
                 await IntentController.getBusesByStop(route, stopId)
                     .catch(error => {
@@ -89,9 +87,9 @@ const handlers = {
                     });
             this.emit(':tell', alexaResponse);
         }
+        logRequestInfo("CtaBusStopIntent", new Date());
     },
     'CtaLocationIntent': function () {
-        trackUser(this.event);
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         if (transitSlot === "train") {
             let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
@@ -99,12 +97,12 @@ const handlers = {
                 this.emit(':tell', alexaResponse);
             });
         } else {
-            this.emit(':tell', "implement nearest bus location Intent", new Date());
+            this.emit(':tell', "implement nearest bus location Intent");
         }
         logRequestInfo("CtaLocationIntent", new Date());
     },
     'EventLocationIntent': async function () {
-        trackUser(this.event);
+
         let alexaResponse = await IntentController.getEvents(this.event);
         this.emit(':tell', alexaResponse);
         logRequestInfo("EventLocationIntent", new Date());
@@ -166,7 +164,6 @@ const handlers = {
 };
 
 let helpIntent = (that) => {
-    trackUser(that.event);
     const speechOutput = "Ok. Try : " +
         "ask chicago now event help, or " +
         "ask chicago now train help, or " +
@@ -182,6 +179,7 @@ let trackUser = (event) => {
 
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     startTime = new Date();
+    trackUser(event);
     const alexa = Alexa.handler(event, context);
     logger.info("alexa.handler");
     alexa.appId = process.env.skill_id;

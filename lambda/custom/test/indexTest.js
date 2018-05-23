@@ -1,20 +1,13 @@
-const expect = require('chai').expect;
 const nock = require('nock');
 const assert = require('assert');
 const sinon = require('sinon');
 
-const getEventsHandler = require('../handlers/events/EventsHandler');
-const getEventsResponse = require('../handlers/events/EventsResponseBuilder').buildAlexaResponse;
-const events = require('./data/events/response.events');
 const ParameterHelper = require('../helpers/ParameterHelper');
 const IntentController = require('../controllers/IntentController');
 
 // Geocoder we need to mock
 const geocoder = require('../handlers/location/geocoder');
 
-const getTransitHandler = require('../handlers/transit/TransitHandler').searchTransit;
-const getTransitBuilder = require('../handlers/transit/TransitResponseBuilder').buildAlexaResponse;
-const responseTrains = require('./data/transit/train/response.trains');
 const alexaBusRequest20East = require('./data/transit/bus/alexaRequest20EastboundBus');
 const alexaBusRequest49South = require('./data/transit/bus/alexaRequest49SouthboundBus');
 const alexaBusRequest20stop4727 = require('./data/transit/bus/alexaRequest20atStop4727');
