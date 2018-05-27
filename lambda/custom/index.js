@@ -26,9 +26,9 @@ const handlers = {
         // check for any unmatched slots
         let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(trainIntentSlots, ["train", "trainStation", "trainDirection"], true);
 
-
+        let alexaTrainStatusResponse = "";
         if (failedSlotResponse) {
-            this.emit(':tell', failedSlotResponse);
+            alexaTrainStatusResponse = failedSlotResponse;
         } else {
 
             if (trainIntentSlots.train.resolutions) {
@@ -40,14 +40,16 @@ const handlers = {
             if (trainIntentSlots.trainDirection.resolutions) {
                 trainDirection = trainIntentSlots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
             }
+
             if (train === "" && trainStation === "" && trainDirection === "") {
-                this.emit(':tell', "No train line, train station, or train direction specified");
+                alexaTrainStatusResponse = "No train line, train station, or train direction specified";
+            } else {
+                alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
             }
 
-            let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
-            this.emit(':tell', alexaTrainStatusResponse);
         }
 
+        this.emit(':tell', alexaTrainStatusResponse);
         logRequestInfo("CtaTrainIntent", new Date());
     },
     'CtaBusIntent': async function () {
