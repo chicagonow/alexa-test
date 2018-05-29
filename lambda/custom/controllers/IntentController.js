@@ -6,6 +6,7 @@ const ParameterHelper = require('../helpers/ParameterHelper');
 const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
 const TrainRepository = require('../repositories/transit/CtaTrainRepository');
+const locationRepository = require("../../repositories/database/LocationRepository");
 const _ = require('lodash');
 
 exports.getEvents = async (event) => {
@@ -18,13 +19,16 @@ exports.getEvents = async (event) => {
     }
 
     let locationParameters;
-    let locationObj = {
+    let locationObject = {
         latitude : "",
         longitude : ""
     };
     if (eventLocation.trim() === "") {
         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
-        locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+        locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+
+        let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
+        locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
     }
 
     let timeFrame = eventLocationIntentSlots.timeFrame.value || "";
@@ -46,7 +50,7 @@ exports.getEvents = async (event) => {
     let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
 
     try {
-        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObj.latitude, locationObj.longitude);
+        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObject.latitude, locationObject.longitude);
     } catch (error) {
         logger.error(error);
     }
@@ -56,19 +60,20 @@ exports.getEvents = async (event) => {
 
 /**
  * Returns events within the specified time frame
- * @param {string} apiEndpoint
- * @param {string} token
- * @param {string} deviceID
+ * @param {event} event
  * @param {string} date
  */
-exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEndpoint, token, deviceID, date) {
-    // Get location
-    let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
+exports.getEventsWithinTimeFrame = async (event, date) => {
+    let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+
+    let locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID)
         .catch(error => {
             logger.error(error);
         });
 
-    // Get Date time frame
+    let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
+    locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObj.latitude, locationObj.longitude);
+
     let timeFrame;
     try {
         timeFrame = new AmazonDateParser(date);
@@ -76,7 +81,6 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
         logger.error(error);
     }
 
-    // Return response
     let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)
         .catch(error => {
             logger.error(error);
@@ -85,11 +89,16 @@ exports.getEventsWithinTimeFrame = async function getEventsWithinTimeFrame(apiEn
     return alexaResponse;
 };
 
-exports.getBusesWithUserLocation = async function getBusesWithUserLocation(apiEndpoint, token, deviceID, route, direction) {
-    let locationObj = await LocationHandler.asyncGetLocation(apiEndpoint, token, deviceID)
+exports.getBusesWithUserLocation = async (event, route, direction) => {
+    let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+    let locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID)
         .catch(error => {
             logger.error(error);
         });
+
+    let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
+    locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObj.latitude, locationObj.longitude);
+
 
     let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(route, direction, locationObj.latitude, locationObj.longitude)
         .catch(error => {

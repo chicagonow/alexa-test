@@ -1,6 +1,6 @@
 /**
  * Returns a parameter object with the needed properties to get a device's location
- * @param {Context.System} systemObject 
+ * @param {event.context.System} systemObject
  */
 exports.getLocationParameters = (systemObject) => {
     return {

@@ -53,7 +53,6 @@ const handlers = {
         logRequestInfo("CtaTrainIntent", new Date());
     },
     'CtaBusIntent': async function () {
-        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let busIntentSlots = this.event.request.intent.slots;
 
         let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(busIntentSlots, ["bus", "busDirection"]);
@@ -64,7 +63,7 @@ const handlers = {
             let direction = busIntentSlots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
 
             let alexaResponse =
-                await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
+                await IntentController.getBusesWithUserLocation(this.event, route, direction)
                     .catch(error => {
                         logger.error(error)
                     });
@@ -94,8 +93,7 @@ const handlers = {
     'CtaLocationIntent': function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         if (transitSlot === "train") {
-            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-            TransitHandler.searchTrainNearMe(parameters, (alexaResponse) => {
+            TransitHandler.searchTrainNearMe(this.event, (alexaResponse) => {
                 this.emit(':tell', alexaResponse);
             });
         } else {
@@ -110,11 +108,9 @@ const handlers = {
         logRequestInfo("EventLocationIntent", new Date());
     },
     'EventTimeFrameIntent': async function () {
-        trackUser(this.event);
         let timeFrame = this.event.request.intent.slots.timeFrame.value;
-        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let alexaResponse =
-            await IntentController.getEventsWithinTimeFrame(parameters.apiEndpoint, parameters.token, parameters.deviceID, timeFrame)
+            await IntentController.getEventsWithinTimeFrame(this.event, timeFrame)
                 .catch(error => {
                     logger.error(error)
                 });
@@ -180,8 +176,8 @@ let trackUser = (event) => {
 };
 
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
-    startTime = new Date();
     trackUser(event);
+    startTime = new Date();
     const alexa = Alexa.handler(event, context);
     logger.info("alexa.handler");
     alexa.appId = process.env.skill_id;

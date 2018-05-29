@@ -5,36 +5,33 @@ const TrainRepository = require('../../../repositories/transit/CtaTrainRepositor
 const LocationHandler = require('../../location/LocationHandler');
 const asyncRequest = require('request-promise');
 const logger = require("../../../logging/Logger");
+const ParameterHelper = require("../../../helpers/ParameterHelper");
+const locationRepository = require("../../../repositories/database/LocationRepository");
 
 const CTA_API_KEY = '541afb8f3df94db2a7afffc486ea4fbf';
 const CTA_API_DOMAIN = 'http://lapi.transitchicago.com';
 const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 
-/**
- * Calls the CTA api with the specified parameters
- * @param {object} parameters
- * @param {function} callback
- */
-exports.searchTrain = (parameters, callback) => {
-    callCta(parameters, callback);
-};
 
 /**
  * Gets the nearest train station info
- * @param {object} parameters
+ * @param event
  * @param {function} callback
  */
-exports.searchTrainNearMe = (parameters, callback) => {
+exports.searchTrainNearMe = async (event, callback) => {
+    let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
+    let locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
 
-    LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
-        TrainRepository.getNearestTrainMapID(location.latitude, location.longitude, (mapID) => {
-            let parameters = {
-                mapid: mapID,
-                rt: ""
-            };
+    let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
+    locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
 
-            callCta(parameters, callback);
-        });
+    TrainRepository.getNearestTrainMapID(location.latitude, location.longitude, (mapID) => {
+        let parameters = {
+            mapid: mapID,
+            rt: ""
+        };
+
+        callCta(parameters, callback);
     });
 };
 
