@@ -14,7 +14,6 @@ const getPatterns49Response = require('../../../data/transit/bus/response.getPat
 
 // import files we need to test
 const BusHandler = require('../../../../handlers/transit/bus/BusHandler');
-const ParameterHelper = require('../../../../helpers/ParameterHelper');
 
 // Geocoder we need to mock
 const geocoder = require('../../../../handlers/location/geocoder');

@@ -6,7 +6,7 @@ const ParameterHelper = require('../helpers/ParameterHelper');
 const logger = require("../logging/Logger");
 const AmazonDateParser = require('amazon-date-parser');
 const TrainRepository = require('../repositories/transit/CtaTrainRepository');
-const locationRepository = require("../../repositories/database/LocationRepository");
+const locationRepository = require("../repositories/database/LocationRepository");
 const _ = require('lodash');
 
 exports.getEvents = async (event) => {
@@ -60,7 +60,7 @@ exports.getEvents = async (event) => {
 
 /**
  * Returns events within the specified time frame
- * @param {event} event
+ * @param {object} event
  * @param {string} date
  */
 exports.getEventsWithinTimeFrame = async (event, date) => {

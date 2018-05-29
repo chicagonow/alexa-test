@@ -25,7 +25,7 @@ exports.searchTrainNearMe = async (event, callback) => {
     let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
     locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
 
-    TrainRepository.getNearestTrainMapID(location.latitude, location.longitude, (mapID) => {
+    TrainRepository.getNearestTrainMapID(locationObject.latitude, locationObject.longitude, (mapID) => {
         let parameters = {
             mapid: mapID,
             rt: ""

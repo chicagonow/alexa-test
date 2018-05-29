@@ -1,7 +1,6 @@
 const Alexa = require('alexa-sdk');
 const bespokenTools = require('bespoken-tools');
 const TransitHandler = require('./handlers/transit/TransitHandler');
-const ParameterHelper = require('./helpers/ParameterHelper');
 const IntentController = require('./controllers/IntentController');
 const logger = require("./logging/Logger");
 const UserRepository = require("./repositories/database/UserRepository");

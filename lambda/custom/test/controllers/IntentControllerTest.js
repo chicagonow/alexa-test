@@ -163,7 +163,7 @@ describe('IntentController Tests', function() {
     });
 
 
-    it('Test IntentController.getEventsWithinTimeFrame: return 3 events occuring today in string', async function() {
+    it('getEventsWithinTimeFrame: return 3 events occurring today in string', async function() {
         nock('https://www.eventbriteapi.com')
             .get('/v3/events/search/')
             .query(function (queryObject) {
@@ -171,13 +171,15 @@ describe('IntentController Tests', function() {
             })
             .reply(200, responseEventsToday);
 
-        let apiEndpoint = stubbedLocationParameters.apiEndpoint;
-        let apiAccessToken = stubbedLocationParameters.token;
-        let funcDeviceId = stubbedLocationParameters.deviceID;
+        sandbox.stub(ParameterHelper, "getLocationParameters")
+            .returns(stubbedLocationParameters);
+
         let date = "2018-05-15";
 
+        let event = requestNearMe;
+        let alexaResponse = await IntentController.getEventsWithinTimeFrame(event, date);
+
         let expectedResponse = "Here are 3 events going on in Chicago. chicago professional  and  technology diversity career fair, 10th stem cell clonality and genome stability retreat, made to win rooftop social ";
-        let alexaResponse = await IntentController.getEventsWithinTimeFrame(apiEndpoint, apiAccessToken, funcDeviceId, date);
         assert.strictEqual(alexaResponse, expectedResponse);
     });
 
