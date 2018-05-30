@@ -5,6 +5,7 @@ const IntentController = require('./controllers/IntentController');
 const logger = require("./logging/Logger");
 const UserRepository = require("./repositories/database/UserRepository");
 const TransitSlotHelper = require('./helpers/TransitSlotHelper');
+const RequestRepository = require('./repositories/database/RequestRepository');
 
 let startTime;
 
@@ -174,8 +175,13 @@ let trackUser = (event) => {
     UserRepository.updateUser(userID);
 };
 
+let trackRequest = (event) => {
+    RequestRepository.insertRequest(event.request);
+};
+
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     trackUser(event);
+    trackRequest(event);
     logger.info(event);
     startTime = new Date();
     const alexa = Alexa.handler(event, context);
