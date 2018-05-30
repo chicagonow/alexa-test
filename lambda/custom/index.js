@@ -171,8 +171,8 @@ let helpIntent = (that) => {
 };
 
 let trackUser = (event) => {
-    let userID = event.context.System.user.userId;
-    UserRepository.updateUser(userID);
+    let userId = event.context.System.user.userId;
+    UserRepository.updateUser(userId);
 };
 
 let trackRequest = (event) => {
