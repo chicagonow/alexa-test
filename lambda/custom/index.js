@@ -176,13 +176,10 @@ let trackUser = (event) => {
 
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
     trackUser(event);
+    logger.info(event);
     startTime = new Date();
     const alexa = Alexa.handler(event, context);
-    logger.info("alexa.handler");
     alexa.appId = process.env.skill_id;
-    logger.info("alexa.appId");
-    alexa.registerHandlers(handlers); 
-    logger.info("alexa.registerHandlers");  
+    alexa.registerHandlers(handlers);
     alexa.execute();
-    logger.info("alexa.execute");
 });

@@ -35,7 +35,7 @@ exports.getBusesForRouteAndStop = getBusesForRouteAndStop;
 Call getLocation, forward longitude and parameters entered to Bus Stop Repository
 */
 exports.searchBusNearMe = (parameters, callback) => {
-    LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, (location) => {
+    LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceId, (location) => {
         BusRepository.getNearestBusStopId(parameters, location.latitude, location.longitude, (stopID) => {
             parameters.stpid = stopID;
             getBusesForRouteAndStop(parameters, callback);

@@ -1,6 +1,6 @@
 const request = require('request');
 const asyncRequest = require('request-promise');
-const API_LOCATION_QUERY = "/v1/devices/{deviceID}/settings/address";
+const API_LOCATION_QUERY = "/v1/devices/{deviceId}/settings/address";
 const geocoder = require('./geocoder');
 const logger = require("../../logging/Logger");
 
@@ -22,7 +22,7 @@ const DEFAULT_LOCATION = {
  */
 exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
     // build the api url to get the location
-    let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
+    let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceId}", deviceId);
 
     let options = {
         url: url,
@@ -52,7 +52,7 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
  */
 exports.asyncGetLocation = async (apiEndpoint, token, deviceId) => {
     // build the api url to get the location
-    let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceID}", deviceId);
+    let url = apiEndpoint + API_LOCATION_QUERY.replace("{deviceId}", deviceId);
 
     let locationRequest = {
         url: url,

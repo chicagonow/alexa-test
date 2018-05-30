@@ -26,7 +26,7 @@ describe('CtaTrainHandler Tests', function() {
     const stubbedLocationParameters = {
         apiEndpoint: alexaJson.context.System.apiEndpoint,
         token: alexaJson.context.System.apiAccessToken,
-        deviceID: alexaJson.context.System.device.deviceId
+        deviceId: alexaJson.context.System.device.deviceId
     };
 
     beforeEach(function() {

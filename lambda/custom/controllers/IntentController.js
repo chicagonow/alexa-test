@@ -25,7 +25,7 @@ exports.getEvents = async (event) => {
     };
     if (eventLocation.trim() === "") {
         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
-        locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID);
+        locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId);
 
         let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
         locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
@@ -66,7 +66,7 @@ exports.getEvents = async (event) => {
 exports.getEventsWithinTimeFrame = async (event, date) => {
     let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
 
-    let locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID)
+    let locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId)
         .catch(error => {
             logger.error(error);
         });
@@ -91,7 +91,7 @@ exports.getEventsWithinTimeFrame = async (event, date) => {
 
 exports.getBusesWithUserLocation = async (event, route, direction) => {
     let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
-    let locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceID)
+    let locationObj = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId)
         .catch(error => {
             logger.error(error);
         });
