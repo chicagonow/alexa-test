@@ -15,25 +15,29 @@ const alexaBusRequest49stop8245 = require('./data/transit/bus/alexaRequest49atSt
 const alexaJson = require('./data/transit/train/response.alexa.json');
 const responseDeviceLocation = require('./data/response.deviceLocation');
 
+const BUS_ROUTE = "20";
+const BUS_STOP_ID = "4727";
 
-describe('Cta Bus Index.JS Test', function() {
+const busHandler = require('../handlers/transit/bus/BusHandler');
+const busPred20Response = require('./data/transit/bus/response.getPredictions20');
+const busPred49Response = require('./data/transit/bus/response.getPredictions49');
+const busPred1Response = require('./data/transit/bus/response.getPredictions1');
+const busStops20Response = require('./data/transit/bus/response.getStops20');
+const busStops49Response = require('./data/transit/bus/response.getStops49');
+const getPatterns20Response = require('./data/transit/bus/response.getPatterns20');
+const getPatterns49Response = require('./data/transit/bus/response.getPatterns49');
+const getPatterns1Response = require('./data/transit/bus/response.getPatterns1');
+
+describe('Index.JS', function () {
     let sandbox;
-    const BUS_ROUTE = "20";
-    const BUS_STOP_ID = "4727";
-    const DIRECTION = "Eastbound";
 
-    const busHandler = require('../handlers/transit/bus/BusHandler');
-    const busPred20Response = require('./data/transit/bus/response.getPredictions20');
-    const busPred49Response = require('./data/transit/bus/response.getPredictions49');
-    const busPred1Response = require('./data/transit/bus/response.getPredictions1');
-    const busStops20Response = require('./data/transit/bus/response.getStops20');
-    const busStops49Response = require('./data/transit/bus/response.getStops49');
-    const ctaBusRepository = require("../repositories/transit/CtaBusRepository");
-    const getPatterns20Response = require('./data/transit/bus/response.getPatterns20');
-    const getPatterns49Response = require('./data/transit/bus/response.getPatterns49');
-    const getPatterns1Response = require('./data/transit/bus/response.getPatterns1');
+    const stubbedLocationParameters = {
+        apiEndpoint: alexaJson.context.System.apiEndpoint,
+        token: alexaJson.context.System.apiAccessToken,
+        deviceId: alexaJson.context.System.device.deviceId
+    };
 
-    beforeEach(function() {
+    beforeEach(function () {
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '76', format: 'json'})
@@ -66,12 +70,12 @@ describe('Cta Bus Index.JS Test', function() {
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query(function(queryObject){
+            .query(function (queryObject) {
                 return (queryObject.key == 'mY73pz65XVB4Yc7GYAgqFrHQY'
                     && queryObject.rt == '1'
                     && queryObject.format == 'json');
             })
-            .reply(200, busPred1Response)
+            .reply(200, busPred1Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
@@ -85,27 +89,27 @@ describe('Cta Bus Index.JS Test', function() {
 
         // Mock getpatterns
         nock('http://ctabustracker.com')
-        .get('/bustime/api/v2/getpatterns')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
-        .reply(200, getPatterns20Response);
+            .get('/bustime/api/v2/getpatterns')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+            .reply(200, getPatterns20Response);
 
         // Mock getpatterns
         nock('http://ctabustracker.com')
-        .get('/bustime/api/v2/getpatterns')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
-        .reply(200, getPatterns49Response);
+            .get('/bustime/api/v2/getpatterns')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+            .reply(200, getPatterns49Response);
 
         nock('http://ctabustracker.com')
-        .get('/bustime/api/v2/getpatterns')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '1', format: 'json'})
-        .reply(200, getPatterns1Response);
+            .get('/bustime/api/v2/getpatterns')
+            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '1', format: 'json'})
+            .reply(200, getPatterns1Response);
 
         // Mock device location API request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
-        .get('/v1/devices/' + deviceId + '/settings/address')
-        .query(true)
-        .reply(200, responseDeviceLocation);
+            .get('/v1/devices/' + deviceId + '/settings/address')
+            .query(true)
+            .reply(200, responseDeviceLocation);
 
         // Initialize the sandbox for sinon testing
         sandbox = sinon.sandbox.create();
@@ -114,12 +118,12 @@ describe('Cta Bus Index.JS Test', function() {
         sandbox.stub(geocoder, 'asyncGetLatLong').returns({latitude: -10, longitude: -20});
     });
 
-    afterEach(function() {
+    afterEach(function () {
         sandbox.restore();
         nock.cleanAll();
     });
 
-    it('Test BusHandler asyncGetBusesForRouteAndStop', async function() {
+    it('Test BusHandler asyncGetBusesForRouteAndStop', async function () {
         this.timeout(3000);
 
         let parameters = {
@@ -131,7 +135,7 @@ describe('Cta Bus Index.JS Test', function() {
         assert.strictEqual(string, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
-    it('Test asyncGetBusesWithUserLocation', async function() {
+    it('Test asyncGetBusesWithUserLocation', async function () {
         this.timeout(3000);
         let parameters = {
             rt: BUS_ROUTE,
@@ -142,37 +146,51 @@ describe('Cta Bus Index.JS Test', function() {
         assert.strictEqual(stringResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM")
     });
 
-    it('Test CTABusIntent 20 East', async function() {
-        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest20East.context.System);
-        let route = alexaBusRequest20East.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let direction = alexaBusRequest20East.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+    it('Test CTABusIntent 20 East', async function () {
+        let event = alexaBusRequest20East;
+        let route = event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = event.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+
+        sandbox.stub(ParameterHelper, "getLocationParameters")
+            .returns(stubbedLocationParameters);
+
+        let alexaResponse = await IntentController.getBusesWithUserLocation(event, route, direction);
         assert.strictEqual(alexaResponse, "The Eastbound 20 bus towards Michigan will arrive at stop 4727 at 8:27 PM");
     })
 
-    it('Test CTABusIntent 49 South', async function() {
-        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
-        let route = alexaBusRequest49South.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let direction = alexaBusRequest49South.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction);
+    it('Test CTABusIntent 49 South', async function () {
+        let event = alexaBusRequest49South;
+        let route = event.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+        let direction = event.request.intent.slots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+
+        sandbox.stub(ParameterHelper, "getLocationParameters")
+            .returns(stubbedLocationParameters);
+
+        let alexaResponse = await IntentController.getBusesWithUserLocation(event, route, direction);
         assert.strictEqual(alexaResponse, "The Southbound 49 bus towards 79th will arrive at stop 8245 at 11:20 PM");
     })
 
-    it('Test CTABusIntent No Service Error Response', async function(){
+    it('Test CTABusIntent No Service Error Response', async function () {
+        let event = alexaBusRequest49South;
 
-        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
-        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Southbound");
+        sandbox.stub(ParameterHelper, "getLocationParameters")
+            .returns(stubbedLocationParameters);
+
+        let alexaResponse = await IntentController.getBusesWithUserLocation(event, 1, "Southbound");
         assert.strictEqual(alexaResponse, "There is no scheduled service for stop 70 on route 1");
     })
 
     it('Test GetBusesIntent Wrong Direction Error Response', async function () {
+        let event = alexaBusRequest49South;
 
-        let parameters = ParameterHelper.getLocationParameters(alexaBusRequest49South.context.System);
-        let alexaResponse = await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, 1, "Eastbound");
+        sandbox.stub(ParameterHelper, "getLocationParameters")
+            .returns(stubbedLocationParameters);
+
+        let alexaResponse = await IntentController.getBusesWithUserLocation(event, 1, "Eastbound");
         assert.strictEqual(alexaResponse, "Bus 1 does not go Eastbound. Please ask again.");
     });
 
-    it('Test CTABusStopIntent 20 East', async function() {
+    it('Test CTABusStopIntent 20 East', async function () {
         let route = alexaBusRequest20stop4727.request.intent.slots.bus.resolutions.resolutionsPerAuthority[0].values[0].value.name;
         let stopId = alexaBusRequest20stop4727.request.intent.slots.busStop.value;
         let alexaResponse = await IntentController.getBusesByStop(route, stopId);

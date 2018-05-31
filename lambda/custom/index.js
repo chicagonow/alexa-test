@@ -1,11 +1,11 @@
 const Alexa = require('alexa-sdk');
 const bespokenTools = require('bespoken-tools');
 const TransitHandler = require('./handlers/transit/TransitHandler');
-const ParameterHelper = require('./helpers/ParameterHelper');
 const IntentController = require('./controllers/IntentController');
 const logger = require("./logging/Logger");
 const UserRepository = require("./repositories/database/UserRepository");
 const TransitSlotHelper = require('./helpers/TransitSlotHelper');
+const RequestRepository = require('./repositories/database/RequestRepository');
 
 let startTime;
 
@@ -26,9 +26,9 @@ const handlers = {
         // check for any unmatched slots
         let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(trainIntentSlots, ["train", "trainStation", "trainDirection"], true);
 
-
+        let alexaTrainStatusResponse = "";
         if (failedSlotResponse) {
-            this.emit(':tell', failedSlotResponse);
+            alexaTrainStatusResponse = failedSlotResponse;
         } else {
 
             if (trainIntentSlots.train.resolutions) {
@@ -40,18 +40,19 @@ const handlers = {
             if (trainIntentSlots.trainDirection.resolutions) {
                 trainDirection = trainIntentSlots.trainDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
             }
+
             if (train === "" && trainStation === "" && trainDirection === "") {
-                this.emit(':tell', "No train line, train station, or train direction specified");
+                alexaTrainStatusResponse = "No train line, train station, or train direction specified";
+            } else {
+                alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
             }
 
-            let alexaTrainStatusResponse = await IntentController.asyncGetTrain(trainStation, train, trainDirection);
-            this.emit(':tell', alexaTrainStatusResponse);
         }
 
+        this.emit(':tell', alexaTrainStatusResponse);
         logRequestInfo("CtaTrainIntent", new Date());
     },
     'CtaBusIntent': async function () {
-        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let busIntentSlots = this.event.request.intent.slots;
 
         let failedSlotResponse = TransitSlotHelper.getSlotErrorResponse(busIntentSlots, ["bus", "busDirection"]);
@@ -62,7 +63,7 @@ const handlers = {
             let direction = busIntentSlots.busDirection.resolutions.resolutionsPerAuthority[0].values[0].value.name;
 
             let alexaResponse =
-                await IntentController.getBusesWithUserLocation(parameters.apiEndpoint, parameters.token, parameters.deviceID, route, direction)
+                await IntentController.getBusesWithUserLocation(this.event, route, direction)
                     .catch(error => {
                         logger.error(error)
                     });
@@ -92,8 +93,7 @@ const handlers = {
     'CtaLocationIntent': function () {
         let transitSlot = this.event.request.intent.slots.transitMode.value;
         if (transitSlot === "train") {
-            let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
-            TransitHandler.searchTrainNearMe(parameters, (alexaResponse) => {
+            TransitHandler.searchTrainNearMe(this.event, (alexaResponse) => {
                 this.emit(':tell', alexaResponse);
             });
         } else {
@@ -108,11 +108,9 @@ const handlers = {
         logRequestInfo("EventLocationIntent", new Date());
     },
     'EventTimeFrameIntent': async function () {
-        trackUser(this.event);
         let timeFrame = this.event.request.intent.slots.timeFrame.value;
-        let parameters = ParameterHelper.getLocationParameters(this.event.context.System);
         let alexaResponse =
-            await IntentController.getEventsWithinTimeFrame(parameters.apiEndpoint, parameters.token, parameters.deviceID, timeFrame)
+            await IntentController.getEventsWithinTimeFrame(this.event, timeFrame)
                 .catch(error => {
                     logger.error(error)
                 });
@@ -173,19 +171,21 @@ let helpIntent = (that) => {
 };
 
 let trackUser = (event) => {
-    let userID = event.context.System.user.userId;
-    UserRepository.updateUser(userID);
+    let userId = event.context.System.user.userId;
+    UserRepository.updateUser(userId);
+};
+
+let trackRequest = (event) => {
+    RequestRepository.insertRequest(event.request);
 };
 
 exports.handler = bespokenTools.Logless.capture("92060b22-f9da-4f6a-a9f8-f3e5769a3745", function (event, context) {
-    startTime = new Date();
     trackUser(event);
+    trackRequest(event);
+    logger.info(event);
+    startTime = new Date();
     const alexa = Alexa.handler(event, context);
-    logger.info("alexa.handler");
     alexa.appId = process.env.skill_id;
-    logger.info("alexa.appId");
-    alexa.registerHandlers(handlers); 
-    logger.info("alexa.registerHandlers");  
+    alexa.registerHandlers(handlers);
     alexa.execute();
-    logger.info("alexa.execute");
 });
