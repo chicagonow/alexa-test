@@ -60,7 +60,12 @@
                         "what's the status of the {busDirection} {bus}",
                         "what's the status of the {busDirection} {bus} bus",
                         "what's the status of the {bus} going {busDirection}",
-                        "what's the status of the {bus} bus going {busDirection}"
+                        "what's the status of the {bus} bus going {busDirection}",
+
+                        "what's the current status of the {busDirection} {bus}",
+                        "what's the current status of the {busDirection} {bus} bus",
+                        "what's the current status of the {bus} going {busDirection}",
+                        "what's the current status of the {bus} bus going {busDirection}"
                     ]
                 },
                 {
@@ -83,7 +88,12 @@
                         "what's the status of the {bus} bus at stop {busStop}",
                         "what's the status of the {bus} at stop {busStop}",
                         "what's the status of the {bus} at {busStop}",
-                        "what's the status of the {bus} bus at {busStop}"
+                        "what's the status of the {bus} bus at {busStop}",
+
+                        "what's the current status of the {bus} bus at stop {busStop}",
+                        "what's the current status of the {bus} at stop {busStop}",
+                        "what's the current status of the {bus} at {busStop}",
+                        "what's the current status of the {bus} bus at {busStop}"
                     ]
                 },
                 {
@@ -109,7 +119,15 @@
                         "what's the status of the {train} at {trainStation}",
                         "what's the status of the {trainStation} {train} going {trainDirection}",
                         "what's the status of the {trainDirection} {train} at {trainStation}",
-                        "what's the status of the {train} going {trainDirection} at {trainStation}"
+                        "what's the status of the {train} going {trainDirection} at {trainStation}",
+
+                        "what's the current status of the {train}",
+                        "what's the current status of the {trainStation}",
+                        "what's the current status of the {trainStation} {train}",
+                        "what's the current status of the {train} at {trainStation}",
+                        "what's the current status of the {trainStation} {train} going {trainDirection}",
+                        "what's the current status of the {trainDirection} {train} at {trainStation}",
+                        "what's the current status of the {train} going {trainDirection} at {trainStation}"
                     ]
                 },
                 {
@@ -121,7 +139,8 @@
                         }
                     ],
                     "samples": [
-                        "what's the status of the nearest {transitMode} station"
+                        "what's the status of the nearest {transitMode} station",
+                        "what's the current status of the nearest {transitMode} station"
                     ]
                 },
                 {
@@ -139,7 +158,10 @@
                     "samples": [
                         "what's going on {timeFrame}",
                         "what {eventGenre} events are going on {timeFrame}",
-                        "what {eventGenre} shows are going on {timeFrame}"
+                        "what {eventGenre} shows are going on {timeFrame}",
+                        "what's happening {timeFrame}",
+                        "what {eventGenre} events are happening {timeFrame}",
+                        "what {eventGenre} shows are happening {timeFrame}"
                     ]
                 },
                 {
@@ -168,45 +190,90 @@
                     "what events are going on at {venueName}",
                     "what events are going on at {landmark}",
 
+                    "what events are happening near me",
+                    "what events are happening",
+                    "what events are happening at {venueName}",
+                    "what events are happening at {landmark}",
+
                     "what's going on near me",
                     "what's going on",
                     "what's going on at {venueName}",
                     "what's going on at {landmark}",
+
+                    "what's happening around me",
+                    "what's happening",
+                    "what's happening at {venueName}",
+                    "what's happening at {landmark}",
 
                     "what {eventGenre} events are going on near me",
                     "what {eventGenre} events are going on",
                     "what {eventGenre} events are going on at {venueName}",
                     "what {eventGenre} events are going on at {landmark}",
 
+                    "what {eventGenre} events are happening near me",
+                    "what {eventGenre} events are happening",
+                    "what {eventGenre} events are happening at {venueName}",
+                    "what {eventGenre} events are happening at {landmark}",
+
                     "what {eventGenre} events are going on {timeFrame}",
                     "what {eventGenre} events are going on near me {timeFrame}",
                     "what {eventGenre} events are going on at {venueName} {timeFrame}",
                     "what {eventGenre} events are going on at {landmark} {timeFrame}",
+
+                    "what {eventGenre} events are happening {timeFrame}",
+                    "what {eventGenre} events are happening near me {timeFrame}",
+                    "what {eventGenre} events are happening at {venueName} {timeFrame}",
+                    "what {eventGenre} events are happening at {landmark} {timeFrame}",
 
                     "what {eventGenre} games are going on near me",
                     "what {eventGenre} games are going on",
                     "what {eventGenre} games are going on at {venueName}",
                     "what {eventGenre} games are going on at {landmark}",
 
+                    "what {eventGenre} games are happening near me",
+                    "what {eventGenre} games are happening",
+                    "what {eventGenre} games are happening at {venueName}",
+                    "what {eventGenre} games are happening at {landmark}",
+
                     "what {eventGenre} games are going on {timeFrame}",
                     "what {eventGenre} games are going on near me {timeFrame}",
                     "what {eventGenre} games are going on at {venueName} {timeFrame}",
                     "what {eventGenre} games are going on at {landmark} {timeFrame}",
+
+                    "what {eventGenre} games are happening {timeFrame}",
+                    "what {eventGenre} games are happening near me {timeFrame}",
+                    "what {eventGenre} games are happening at {venueName} {timeFrame}",
+                    "what {eventGenre} games are happening at {landmark} {timeFrame}",
 
                     "what {eventGenre} matches are going on near me",
                     "what {eventGenre} matches are going on",
                     "what {eventGenre} matches are going on at {venueName}",
                     "what {eventGenre} matches are going on at {landmark}",
 
+                    "what {eventGenre} matches are happening near me",
+                    "what {eventGenre} matches are happening",
+                    "what {eventGenre} matches are happening at {venueName}",
+                    "what {eventGenre} matches are happening at {landmark}",
+
                     "what {eventGenre} matches are going on {timeFrame}",
                     "what {eventGenre} matches are going on near me {timeFrame}",
                     "what {eventGenre} matches are going on at {venueName} {timeFrame}",
                     "what {eventGenre} matches are going on at {landmark} {timeFrame}",
 
+                    "what {eventGenre} matches are happening {timeFrame}",
+                    "what {eventGenre} matches are happening near me {timeFrame}",
+                    "what {eventGenre} matches are happening at {venueName} {timeFrame}",
+                    "what {eventGenre} matches are happening at {landmark} {timeFrame}",
+
                     "what events are going on at {venueName} {timeFrame}",
                     "what's going on at {venueName} {timeFrame}",
                     "what events are going on at {landmark} {timeFrame}",
-                    "what's going on at {landmark} {timeFrame}"
+                    "what's going on at {landmark} {timeFrame}",
+
+                    "what events are happening at {venueName} {timeFrame}",
+                    "what's happening at {venueName} {timeFrame}",
+                    "what events are happening at {landmark} {timeFrame}",
+                    "what's happening at {landmark} {timeFrame}"
                   ]
                 }
             ],
