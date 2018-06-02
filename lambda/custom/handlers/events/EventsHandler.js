@@ -6,7 +6,6 @@ const moment = require('moment-timezone');
 const logger = require("../../logging/Logger");
 
 //used sample token,replace later. 
-const AUTH_TOKEN = 'IO6EB7MM6TSCIL2TIOHC';
 const EVENTBRITE_API_DOMAIN = 'https://www.eventbriteapi.com';
 const EVENTBRITE_EVENTS_SEARCH_PATH = '/v3/events/search/';
 
@@ -45,7 +44,7 @@ exports.asyncGetEventsWithinTimeFrame = async (latitude, longitude, startDate, e
 // Returns common query parameters
 let getCommonQueryObjectParameters = () => {
 	let qp = {};
-	qp[encodeURIComponent('token')] = AUTH_TOKEN;
+	qp[encodeURIComponent('token')] = process.env.EVENTBRITE_TOKEN;
 	return qp;
 };
 
