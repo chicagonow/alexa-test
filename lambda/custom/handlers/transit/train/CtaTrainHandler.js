@@ -21,7 +21,7 @@ const CTA_API_PATH = '/api/1.0/ttarrivals.aspx';
 exports.searchTrainNearMe = async (event, callback) => {
     let locationParameters = ParameterHelper.getLocationParameters(event.context.System);
     let locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId);
-
+//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
     let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
     locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
 

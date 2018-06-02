@@ -37,6 +37,7 @@ Call getLocation, forward longitude and parameters entered to Bus Stop Repositor
 exports.searchBusNearMe = (parameters, callback) => {
     LocationHandler.getLocation(parameters.apiEndpoint, parameters.token, parameters.deviceId, (location) => {
         BusRepository.getNearestBusStopId(parameters, location.latitude, location.longitude, (stopID) => {
+//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
             parameters.stpid = stopID;
             getBusesForRouteAndStop(parameters, callback);
         });
