@@ -27,6 +27,7 @@ const busStops49Response = require('./data/transit/bus/response.getStops49');
 const getPatterns20Response = require('./data/transit/bus/response.getPatterns20');
 const getPatterns49Response = require('./data/transit/bus/response.getPatterns49');
 const getPatterns1Response = require('./data/transit/bus/response.getPatterns1');
+const CTABUS_API_KEY = 'test';
 
 describe('Index.JS', function () {
     let sandbox;
@@ -38,7 +39,7 @@ describe('Index.JS', function () {
     };
 
     beforeEach(function () {
-        let CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
+        process.env.CTABUS_API_KEY = CTABUS_API_KEY;
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query({key: CTABUS_API_KEY, rt: '49', stpid: '76', format: 'json'})
