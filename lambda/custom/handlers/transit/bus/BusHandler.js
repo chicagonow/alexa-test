@@ -7,7 +7,7 @@ const BusRepository = require('../../../repositories/transit/CtaBusRepository');
 const util = require('util');
 const logger = require("../../../logging/Logger");
 
-const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
+//const CTABUS_API_KEY = 'mY73pz65XVB4Yc7GYAgqFrHQY';
 const CTABUS_API_DOMAIN = 'http://ctabustracker.com';
 const CTABUS_API_ROUTE_AND_STOP_PATH = '/bustime/api/v2/getpredictions';
 
@@ -15,7 +15,7 @@ let getBusesForRouteAndStop = (parameters, callback) => {
     let url = buildUrl(CTABUS_API_DOMAIN, {
         path: CTABUS_API_ROUTE_AND_STOP_PATH,
         queryParams: {
-            key: CTABUS_API_KEY,
+            key: process.env.CTABUS_API_KEY,
             rt: parameters.rt,
             stpid: parameters.stpid,
             format: "json"
