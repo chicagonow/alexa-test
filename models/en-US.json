@@ -17,7 +17,9 @@
                     "name": "EventHelpIntent",
                     "samples": [
                       "event",
-                      "event help"
+                      "event help",
+                      "how to ask for events",
+                      "how to ask about events"
                     ]
                 },
                 {
@@ -25,7 +27,9 @@
                     "samples": [
                       "bus",
                       "busses",
-                      "bus help"
+                      "bus help",
+                      "how to ask for busses",
+                      "how to ask about busses"
                     ]
                 },
                 {
@@ -33,7 +37,9 @@
                     "samples": [
                       "train",
                       "trains",
-                      "train help"
+                      "train help",
+                      "how to ask for trains",
+                      "how to ask about trains"
                     ]
                 },
                 {
