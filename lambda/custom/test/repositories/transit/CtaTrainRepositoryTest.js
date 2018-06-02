@@ -4,7 +4,7 @@ const assert = require('assert');
 
 // import test data
 const responseRepoTrains = require('../../data/transit/train/response.repo.trains.json');
-const responseTrainStationObject = require('../../data/repository/response.TrainStations.json')
+const responseTrainStationObject = require('../../data/repository/response.TrainStations.json');
 
 // import files we need to test
 const TrainRepository = require('../../../repositories/transit/CtaTrainRepository');

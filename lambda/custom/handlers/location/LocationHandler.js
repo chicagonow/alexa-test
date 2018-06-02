@@ -10,7 +10,8 @@ const DEFAULT_LOCATION = {
     city: "Chicago",
     countryCode: "US",
     postalCode: "98109",
-    addressLine1: "243 S Wabash Ave"
+    addressLine1: "243 S Wabash Ave",
+    isDefault:true
 };
 
 /**
@@ -77,6 +78,7 @@ exports.asyncGetLocation = async (apiEndpoint, token, deviceId) => {
     let locationString = locationProperties.filter((prop) => {return prop !== null}).join(",");
 
     let locationObj = await geocoder.asyncGetLatLong(locationString);
+    locationObj["isDefault"] = location.isDefault;
 
     return locationObj;
 };

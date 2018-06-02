@@ -27,7 +27,10 @@ exports.getEvents = async (event) => {
         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
         locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId);
 
-//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
+        alexaResponse = locationObject.isDefault
+            ? "for more accurate results, please enable the use my location permission in your alexa settings. "
+            : "";
+
         let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
         locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
     }
@@ -51,7 +54,7 @@ exports.getEvents = async (event) => {
     let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
 
     try {
-        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObject.latitude, locationObject.longitude);
+        alexaResponse += await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObject.latitude, locationObject.longitude);
     } catch (error) {
         logger.error(error);
     }
@@ -71,7 +74,7 @@ exports.getEventsWithinTimeFrame = async (event, date) => {
         .catch(error => {
             logger.error(error);
         });
-//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
+
     let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
     locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObj.latitude, locationObj.longitude);
 
@@ -82,7 +85,11 @@ exports.getEventsWithinTimeFrame = async (event, date) => {
         logger.error(error);
     }
 
-    let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)
+    let alexaResponse = locationObj.isDefault
+        ? "for more accurate results, please enable the use my location permission in your alexa settings. "
+        : "";
+
+    alexaResponse += await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)
         .catch(error => {
             logger.error(error);
         });
@@ -96,12 +103,16 @@ exports.getBusesWithUserLocation = async (event, route, direction) => {
         .catch(error => {
             logger.error(error);
         });
-//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
+
     let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
     locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObj.latitude, locationObj.longitude);
 
 
-    let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(route, direction, locationObj.latitude, locationObj.longitude)
+    let alexaResponse = locationObj.isDefault
+        ? "for more accurate results, please enable the use my location permission in your alexa settings. "
+        : "";
+
+    alexaResponse += await BusHandler.asyncGetBusesWithUserLocation(route, direction, locationObj.latitude, locationObj.longitude)
         .catch(error => {
             logger.error(error);
         });
