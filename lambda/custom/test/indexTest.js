@@ -27,6 +27,7 @@ const busStops49Response = require('./data/transit/bus/response.getStops49');
 const getPatterns20Response = require('./data/transit/bus/response.getPatterns20');
 const getPatterns49Response = require('./data/transit/bus/response.getPatterns49');
 const getPatterns1Response = require('./data/transit/bus/response.getPatterns1');
+const CTABUS_API_KEY = 'test';
 
 describe('Index.JS', function () {
     let sandbox;
@@ -38,40 +39,41 @@ describe('Index.JS', function () {
     };
 
     beforeEach(function () {
+        process.env.CTABUS_API_KEY = CTABUS_API_KEY;
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '76', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '49', stpid: '76', format: 'json'})
             .reply(200, busPred49Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '14182', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '49', stpid: '14182', format: 'json'})
             .reply(200, busPred49Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '8245', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '49', stpid: '8245', format: 'json'})
             .reply(200, busPred49Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '4727', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '20', stpid: '4727', format: 'json'})
             .reply(200, busPred20Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '449', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '20', stpid: '449', format: 'json'})
             .reply(200, busPred20Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '386', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '20', stpid: '386', format: 'json'})
             .reply(200, busPred20Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query(function (queryObject) {
-                return (queryObject.key == 'mY73pz65XVB4Yc7GYAgqFrHQY'
+                return (queryObject.key == CTABUS_API_KEY
                     && queryObject.rt == '1'
                     && queryObject.format == 'json');
             })
@@ -79,29 +81,29 @@ describe('Index.JS', function () {
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', dir: 'Southbound', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '49', dir: 'Southbound', format: 'json'})
             .reply(200, busStops49Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getstops')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', dir: 'Eastbound', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '20', dir: 'Eastbound', format: 'json'})
             .reply(200, busStops20Response);
 
         // Mock getpatterns
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpatterns')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '20', format: 'json'})
             .reply(200, getPatterns20Response);
 
         // Mock getpatterns
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpatterns')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '49', format: 'json'})
             .reply(200, getPatterns49Response);
 
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpatterns')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '1', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '1', format: 'json'})
             .reply(200, getPatterns1Response);
 
         // Mock device location API request

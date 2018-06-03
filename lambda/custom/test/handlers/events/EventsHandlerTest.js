@@ -3,6 +3,7 @@ const assert = require('assert');
 const sinon = require('sinon');
 
 const EventsHandler = require('../../../handlers/events/EventsHandler');
+const ParameterHelper = require('../../../helpers/ParameterHelper');
 const geocoder = require('../../../handlers/location/geocoder');
 
 //responses
@@ -12,14 +13,15 @@ const responseEvents = require('../../data/events/response.events');
 const responseEventsNearLocation = require('../../data/events/response.eventsNearLocation.json');
 const responseToday = require('../../data/events/response.eventsToday');
 const responseEventsAtVenue = require('../../data/events/responseEventsAtVenue');
+const EVENTBRITE_TOKEN = 'test';
 
-const EVENTBRITE_TOKEN = "IO6EB7MM6TSCIL2TIOHC";
 const DEFAULT_RADIUS = "5mi";
 
 describe('EventsHandler Tests', function () {
     let sandbox;
 
     beforeEach(function () {
+        process.env.EVENTBRITE_TOKEN = EVENTBRITE_TOKEN;
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
@@ -45,7 +47,7 @@ describe('EventsHandler Tests', function () {
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
-                    "token": EVENTBRITE_TOKEN,
+                    "token": process.env.EVENTBRITE_TOKEN,
                     "location.within": DEFAULT_RADIUS,
                     "location.latitude": "-10",
                     "location.longitude": "-81.7"
@@ -55,14 +57,14 @@ describe('EventsHandler Tests', function () {
             const expectedEventsNearMeResponse = "Here are 3 events going on in Chicago. martin trivia night (free entry), 2018 kidfitstrong fitness challenge-chicago , redesigning the system: how artists, policymakers, and practitioners are shaping criminal justice reform";
 
             let alexaResponse = await EventsHandler.asyncGetEventsNearLocation(-10, -81.7);
-            assert.strictEqual(alexaResponse, expectedEventsNearMeResponse);
+            assert.equal(alexaResponse, expectedEventsNearMeResponse);
         });
 
         it("returns events near the address specified by user", async function () {
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
-                    "token": EVENTBRITE_TOKEN,
+                    "token": process.env.EVENTBRITE_TOKEN,
                     "location.within": DEFAULT_RADIUS,
                     "location.latitude": "41.9",
                     "location.longitude": "-87.7"
@@ -84,13 +86,13 @@ describe('EventsHandler Tests', function () {
             nock("https://www.eventbriteapi.com")
                 .get("/v3/events/search/")
                 .query( queryParameters => {
-                    return queryParameters.token === EVENTBRITE_TOKEN
+                    return queryParameters.token === process.env.EVENTBRITE_TOKEN
                     && queryParameters.q === venueName + " chicago"
                 })
                 .reply(200, responseEventsAtVenue);
 
             let alexaResponse = await EventsHandler.asyncGetEventsAtVenue(venueName);
-            assert.strictEqual(alexaResponse, expectedEventsAtVenueResponse);
+            assert.equal(alexaResponse, expectedEventsAtVenueResponse);
         });
 
         it("returns error response for non existing venue", async ()=> {
@@ -100,7 +102,7 @@ describe('EventsHandler Tests', function () {
             nock("https://www.eventbriteapi.com")
                 .get("/v3/events/search/")
                 .query( queryParameters => {
-                    return queryParameters.token === EVENTBRITE_TOKEN
+                    return queryParameters.token === process.env.EVENTBRITE_TOKEN
                     && queryParameters.q === fakeVenueName + " chicago"
                 })
                 .reply(200,
@@ -116,7 +118,7 @@ describe('EventsHandler Tests', function () {
                     });
 
             let alexaResponse = await EventsHandler.asyncGetEventsAtVenue(fakeVenueName);
-            assert.strictEqual(alexaResponse, expectedEventsAtVenueResponse);
+            assert.equal(alexaResponse, expectedEventsAtVenueResponse);
         });
     });
 
@@ -136,7 +138,7 @@ describe('EventsHandler Tests', function () {
             let startDate = new Date("2018-05-15T00:00:00"); // replace with start date
             let endDate = new Date("2018-05-15T23:59:59"); // replace with end date
             let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(41.87893, -87.626088, startDate, endDate);
-            assert.strictEqual(alexaResponse, expectedResponse);
+            assert.equal(alexaResponse, expectedResponse);
         });
     });
 

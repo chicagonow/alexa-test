@@ -11,6 +11,7 @@ const getPred49Response = require('../../../data/transit/bus/response.getPredict
 const responseRepoBuses = require('../../../data/transit/bus/response.getStops20');
 const getPatterns20Response = require('../../../data/transit/bus/response.getPatterns20');
 const getPatterns49Response = require('../../../data/transit/bus/response.getPatterns49');
+const CTABUS_API_KEY = 'test';
 
 // import files we need to test
 const BusHandler = require('../../../../handlers/transit/bus/BusHandler');
@@ -27,6 +28,7 @@ describe('CtaBusHandler Tests', function() {
     let sandbox;
 
     beforeEach(function() {
+        process.env.CTABUS_API_KEY = CTABUS_API_KEY;
         // Mock Device Location request
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
@@ -43,31 +45,31 @@ describe('CtaBusHandler Tests', function() {
         // Mock CTA API call
         nock('http://ctabustracker.com')
         .get('/bustime/api/v2/getpredictions')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '4727', format: 'json'})
+        .query({key: CTABUS_API_KEY, rt: '20', stpid: '4727', format: 'json'})
         .reply(200, getPred20Response);
 
          // Mock CTA API call
          nock('http://ctabustracker.com')
          .get('/bustime/api/v2/getpredictions')
-         .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', stpid: '386', format: 'json'})
+         .query({key: CTABUS_API_KEY, rt: '20', stpid: '386', format: 'json'})
          .reply(200, getPred20Response);
 
         // Mock CTA API call
         nock('http://ctabustracker.com')
         .get('/bustime/api/v2/getpredictions')
-        .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', stpid: '8245', format: 'json'})
+        .query({key: CTABUS_API_KEY, rt: '49', stpid: '8245', format: 'json'})
         .reply(200, getPred49Response);
         
         // Mock getpatterns
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpatterns')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '20', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '20', format: 'json'})
             .reply(200, getPatterns20Response);
 
         // Mock getpatterns
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpatterns')
-            .query({key: 'mY73pz65XVB4Yc7GYAgqFrHQY', rt: '49', format: 'json'})
+            .query({key: CTABUS_API_KEY, rt: '49', format: 'json'})
             .reply(200, getPatterns49Response);
 
         // Initialize the sandbox for sinon testing
