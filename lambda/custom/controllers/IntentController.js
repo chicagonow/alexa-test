@@ -11,7 +11,6 @@ const _ = require('lodash');
 
 const ENABLE_LOCATION_MESSAGE = "for more accurate results, please enable the use my location permission in your alexa settings. ";
 
-
 exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler";
@@ -24,7 +23,7 @@ exports.getEvents = async (event) => {
     let locationParameters;
     let locationObject = {
         latitude : "",
-        longitude : "",
+        longitude : ""
     };
 
     if (eventLocation.trim() === "") {
