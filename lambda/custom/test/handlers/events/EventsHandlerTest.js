@@ -13,14 +13,15 @@ const responseEvents = require('../../data/events/response.events');
 const responseEventsNearLocation = require('../../data/events/response.eventsNearLocation.json');
 const responseToday = require('../../data/events/response.eventsToday');
 const responseEventsAtVenue = require('../../data/events/responseEventsAtVenue');
+const EVENTBRITE_TOKEN = 'test';
 
-const EVENTBRITE_TOKEN = "IO6EB7MM6TSCIL2TIOHC";
 const DEFAULT_RADIUS = "5mi";
 
 describe('EventsHandler Tests', function () {
     let sandbox;
 
     beforeEach(function () {
+        process.env.EVENTBRITE_TOKEN = EVENTBRITE_TOKEN;
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
@@ -46,7 +47,7 @@ describe('EventsHandler Tests', function () {
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
-                    "token": EVENTBRITE_TOKEN,
+                    "token": process.env.EVENTBRITE_TOKEN,
                     "location.within": DEFAULT_RADIUS,
                     "location.latitude": "-10",
                     "location.longitude": "-81.7"
@@ -63,7 +64,7 @@ describe('EventsHandler Tests', function () {
             nock('https://www.eventbriteapi.com')
                 .get('/v3/events/search/')
                 .query({
-                    "token": EVENTBRITE_TOKEN,
+                    "token": process.env.EVENTBRITE_TOKEN,
                     "location.within": DEFAULT_RADIUS,
                     "location.latitude": "41.9",
                     "location.longitude": "-87.7"
@@ -85,7 +86,7 @@ describe('EventsHandler Tests', function () {
             nock("https://www.eventbriteapi.com")
                 .get("/v3/events/search/")
                 .query( queryParameters => {
-                    return queryParameters.token === EVENTBRITE_TOKEN
+                    return queryParameters.token === process.env.EVENTBRITE_TOKEN
                     && queryParameters.q === venueName + " chicago"
                 })
                 .reply(200, responseEventsAtVenue);
@@ -101,7 +102,7 @@ describe('EventsHandler Tests', function () {
             nock("https://www.eventbriteapi.com")
                 .get("/v3/events/search/")
                 .query( queryParameters => {
-                    return queryParameters.token === EVENTBRITE_TOKEN
+                    return queryParameters.token === process.env.EVENTBRITE_TOKEN
                     && queryParameters.q === fakeVenueName + " chicago"
                 })
                 .reply(200,
