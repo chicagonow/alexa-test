@@ -10,7 +10,8 @@ const DEFAULT_LOCATION = {
     city: "Chicago",
     countryCode: "US",
     postalCode: "98109",
-    addressLine1: "243 S Wabash Ave"
+    addressLine1: "243 S Wabash Ave",
+    isDefault: true
 };
 
 /**
@@ -33,7 +34,9 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
 
     // Call the Amazon API to get the device's location
     request(options, (error, response, body) => {
-        let location = (response && response.statusCode === 200) ? JSON.parse(body) : DEFAULT_LOCATION;
+        let location = (response && response.statusCode === 200)
+            ? JSON.parse(body)
+            : DEFAULT_LOCATION;
 
         // Make an array of the location properties we want to send to the geocoder
         let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
@@ -68,7 +71,9 @@ exports.asyncGetLocation = async (apiEndpoint, token, deviceId) => {
             logger.error("error with location request: " + error.message);
         });
 
-    let location = (response.statusCode === 200) ? JSON.parse(response.body) : DEFAULT_LOCATION;
+    let location = (response.statusCode === 200)
+        ? JSON.parse(response.body)
+        : DEFAULT_LOCATION;
 
     // Make an array of the location properties we want to send to the geocoder
     let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
@@ -77,6 +82,7 @@ exports.asyncGetLocation = async (apiEndpoint, token, deviceId) => {
     let locationString = locationProperties.filter((prop) => {return prop !== null}).join(",");
 
     let locationObj = await geocoder.asyncGetLatLong(locationString);
+    locationObj["isDefault"] = location.isDefault;
 
     return locationObj;
 };

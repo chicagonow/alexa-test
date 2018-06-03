@@ -9,6 +9,8 @@ const TrainRepository = require('../repositories/transit/CtaTrainRepository');
 const locationRepository = require("../repositories/database/LocationRepository");
 const _ = require('lodash');
 
+const ENABLE_LOCATION_MESSAGE = "for more accurate results, please enable the use my location permission in your alexa settings. ";
+
 exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler";
@@ -23,11 +25,11 @@ exports.getEvents = async (event) => {
         latitude : "",
         longitude : ""
     };
+
     if (eventLocation.trim() === "") {
         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
         locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId);
 
-//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
         let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
         locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
     }
@@ -48,10 +50,14 @@ exports.getEvents = async (event) => {
         }
     }
 
+    alexaResponse = locationObject.isDefault
+        ? ENABLE_LOCATION_MESSAGE
+        : "";
+
     let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
 
     try {
-        alexaResponse = await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObject.latitude, locationObject.longitude);
+        alexaResponse += await EventsHandler.asyncGetEvents(eventGenre, eventLocation, parsedDate.startDate, parsedDate.endDate, locationObject.latitude, locationObject.longitude);
     } catch (error) {
         logger.error(error);
     }
@@ -71,7 +77,7 @@ exports.getEventsWithinTimeFrame = async (event, date) => {
         .catch(error => {
             logger.error(error);
         });
-//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
+
     let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
     locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObj.latitude, locationObj.longitude);
 
@@ -82,7 +88,11 @@ exports.getEventsWithinTimeFrame = async (event, date) => {
         logger.error(error);
     }
 
-    let alexaResponse = await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)
+    let alexaResponse = locationObj.isDefault
+        ? ENABLE_LOCATION_MESSAGE
+        : "";
+
+    alexaResponse += await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)
         .catch(error => {
             logger.error(error);
         });
@@ -96,12 +106,16 @@ exports.getBusesWithUserLocation = async (event, route, direction) => {
         .catch(error => {
             logger.error(error);
         });
-//TODO if lat long are default location then append "for more relevant responses, please enable "use my location" in the alexa settings"
+
     let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
     locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObj.latitude, locationObj.longitude);
 
 
-    let alexaResponse = await BusHandler.asyncGetBusesWithUserLocation(route, direction, locationObj.latitude, locationObj.longitude)
+    let alexaResponse = locationObj.isDefault
+        ? ENABLE_LOCATION_MESSAGE
+        : "";
+
+    alexaResponse += await BusHandler.asyncGetBusesWithUserLocation(route, direction, locationObj.latitude, locationObj.longitude)
         .catch(error => {
             logger.error(error);
         });
@@ -154,7 +168,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
     }
 
     // No matching stations at all. You suck
-    if (stations.length === 0) {
+    if (stations.length < 1) {
         logger.log({level: "info", message: "No train stations found matching direction"});
         return "No train stations were found that match that direction. Please try again";
     } else {

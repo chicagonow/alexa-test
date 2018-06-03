@@ -75,4 +75,4 @@ let buildWithinCircleQuery = (latitude, longitude) => {
     let stations = await asyncRequest(options);
 
     return JSON.parse(stations);
- }
+ };

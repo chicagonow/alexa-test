@@ -14,15 +14,15 @@ let options = {
 let geocoder = NodeGeocoder(options);
 
 exports.getLatLong = (locationString, callback) => {
-  geocoder.geocode(locationString, function (err, res) {
-    let jsonObject = res[0];
-    let location = {
-      latitude: jsonObject.latitude,
-      longitude: jsonObject.longitude
-    }
-    callback && callback(location);
-  })
-}
+    geocoder.geocode(locationString, function (err, res) {
+        let jsonObject = res[0];
+        let location = {
+            latitude: jsonObject.latitude,
+            longitude: jsonObject.longitude
+        };
+        callback && callback(location);
+    })
+};
 
 // take address, return location object with latitude and longitude
 exports.asyncGetLatLong = async function asyncGetLatLong(locationString){
