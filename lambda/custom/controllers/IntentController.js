@@ -9,6 +9,9 @@ const TrainRepository = require('../repositories/transit/CtaTrainRepository');
 const locationRepository = require("../repositories/database/LocationRepository");
 const _ = require('lodash');
 
+const ENABLE_LOCATION_MESSAGE = "for more accurate results, please enable the use my location permission in your alexa settings. ";
+
+
 exports.getEvents = async (event) => {
     let eventLocationIntentSlots = event.request.intent.slots;
     let alexaResponse = "There was an error using events handler";
@@ -28,7 +31,7 @@ exports.getEvents = async (event) => {
         locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId);
 
         alexaResponse = locationObject.isDefault
-            ? "for more accurate results, please enable the use my location permission in your alexa settings. "
+            ? ENABLE_LOCATION_MESSAGE
             : "";
 
         let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
@@ -86,7 +89,7 @@ exports.getEventsWithinTimeFrame = async (event, date) => {
     }
 
     let alexaResponse = locationObj.isDefault
-        ? "for more accurate results, please enable the use my location permission in your alexa settings. "
+        ? ENABLE_LOCATION_MESSAGE
         : "";
 
     alexaResponse += await EventsHandler.asyncGetEventsWithinTimeFrame(locationObj.latitude, locationObj.longitude, timeFrame.startDate, timeFrame.endDate)
@@ -109,7 +112,7 @@ exports.getBusesWithUserLocation = async (event, route, direction) => {
 
 
     let alexaResponse = locationObj.isDefault
-        ? "for more accurate results, please enable the use my location permission in your alexa settings. "
+        ? ENABLE_LOCATION_MESSAGE
         : "";
 
     alexaResponse += await BusHandler.asyncGetBusesWithUserLocation(route, direction, locationObj.latitude, locationObj.longitude)

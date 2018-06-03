@@ -84,14 +84,12 @@ exports.asyncGetBusesForRouteAndStop = async function asyncGetBusesForRouteAndSt
             stpid: stopId,
             format: "json"
         }
-
     });
 
     let body = await asyncRequest(url)
         .catch(error => {
             logger.error("error with cta bus request: " + error.message);
         });
-
 
     let alexaResponse = "";
     try {
