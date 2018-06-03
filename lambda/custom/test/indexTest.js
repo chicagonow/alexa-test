@@ -73,7 +73,7 @@ describe('Index.JS', function () {
         nock('http://ctabustracker.com')
             .get('/bustime/api/v2/getpredictions')
             .query(function (queryObject) {
-                return (queryObject.key == 'mY73pz65XVB4Yc7GYAgqFrHQY'
+                return (queryObject.key == CTABUS_API_KEY
                     && queryObject.rt == '1'
                     && queryObject.format == 'json');
             })

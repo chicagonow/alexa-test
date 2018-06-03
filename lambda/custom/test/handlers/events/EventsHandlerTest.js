@@ -13,6 +13,7 @@ const responseEvents = require('../../data/events/response.events');
 const responseEventsNearLocation = require('../../data/events/response.eventsNearLocation.json');
 const responseToday = require('../../data/events/response.eventsToday');
 const responseEventsAtVenue = require('../../data/events/responseEventsAtVenue');
+const EVENTBRITE_TOKEN = 'test';
 
 const DEFAULT_RADIUS = "5mi";
 
@@ -20,6 +21,7 @@ describe('EventsHandler Tests', function () {
     let sandbox;
 
     beforeEach(function () {
+        process.env.EVENTBRITE_TOKEN = EVENTBRITE_TOKEN;
         let deviceId = alexaJson.context.System.device.deviceId;
         nock('https://api.amazonalexa.com')
             .get('/v1/devices/' + deviceId + '/settings/address')
