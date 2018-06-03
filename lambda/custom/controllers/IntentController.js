@@ -168,7 +168,7 @@ exports.asyncGetTrain = async function asyncGetTrain(stationName, trainLine, dir
     }
 
     // No matching stations at all. You suck
-    if (stations.length === 0) {
+    if (stations.length < 1) {
         logger.log({level: "info", message: "No train stations found matching direction"});
         return "No train stations were found that match that direction. Please try again";
     } else {

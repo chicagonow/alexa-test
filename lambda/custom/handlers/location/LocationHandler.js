@@ -34,7 +34,9 @@ exports.getLocation = (apiEndpoint, token, deviceId, callback) => {
 
     // Call the Amazon API to get the device's location
     request(options, (error, response, body) => {
-        let location = (response && response.statusCode === 200) ? JSON.parse(body) : DEFAULT_LOCATION;
+        let location = (response && response.statusCode === 200)
+            ? JSON.parse(body)
+            : DEFAULT_LOCATION;
 
         // Make an array of the location properties we want to send to the geocoder
         let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
@@ -69,7 +71,9 @@ exports.asyncGetLocation = async (apiEndpoint, token, deviceId) => {
             logger.error("error with location request: " + error.message);
         });
 
-    let location = (response.statusCode === 200) ? JSON.parse(response.body) : DEFAULT_LOCATION;
+    let location = (response.statusCode === 200)
+        ? JSON.parse(response.body)
+        : DEFAULT_LOCATION;
 
     // Make an array of the location properties we want to send to the geocoder
     let locationProperties = [location.addressLine1, location.city, location.stateOrRegion, location.postalCode];
