@@ -81,7 +81,7 @@ describe('IntentController Tests', function() {
         const fakeVenueName = "A CHICAGO VENUE";
         const fakeLandmarkName = "A CHICAGO LANDMARK";
         it('calls asyncGetEventsAtVenue with venue name when there is a venue slot type', async function () {
-            let venueEventsStub = sandbox.stub(EventsHandler, "asyncGetEvents")
+            sandbox.stub(EventsHandler, "asyncGetEvents")
                 .withArgs("", fakeVenueName, "", "", "", "")
                 .returns("fake event response for venue: " + fakeVenueName);
 

@@ -24,15 +24,12 @@ exports.getEvents = async (event) => {
     let locationParameters;
     let locationObject = {
         latitude : "",
-        longitude : ""
+        longitude : "",
     };
+
     if (eventLocation.trim() === "") {
         locationParameters = ParameterHelper.getLocationParameters(event.context.System);
         locationObject = await LocationHandler.asyncGetLocation(locationParameters.apiEndpoint, locationParameters.token, locationParameters.deviceId);
-
-        alexaResponse = locationObject.isDefault
-            ? ENABLE_LOCATION_MESSAGE
-            : "";
 
         let requestId = event.request.requestId.split("amzn1.echo-api.request.")[1];
         locationRepository.insertLocation(requestId, locationParameters.deviceId, locationObject.latitude, locationObject.longitude);
@@ -53,6 +50,10 @@ exports.getEvents = async (event) => {
             logger.error(error);
         }
     }
+
+    alexaResponse = locationObject.isDefault
+        ? ENABLE_LOCATION_MESSAGE
+        : "";
 
     let eventGenre = eventLocationIntentSlots.eventGenre.value || "";
 

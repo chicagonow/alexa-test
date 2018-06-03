@@ -55,7 +55,7 @@ describe('LocationHandler tests', () => {
         let funcDeviceId = alexaJson.context.System.device.deviceId;
 
         let locationObj = await locationHandler.asyncGetLocation(apiEndpoint, apiAccessToken, funcDeviceId);
-        assert.deepEqual(locationObj,{ latitude: -10, longitude: -20});
+        assert.deepEqual(locationObj,{ latitude: -10, longitude: -20, isDefault:undefined});
     })
 });
 

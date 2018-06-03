@@ -11,7 +11,7 @@ const DEFAULT_LOCATION = {
     countryCode: "US",
     postalCode: "98109",
     addressLine1: "243 S Wabash Ave",
-    isDefault:true
+    isDefault: true
 };
 
 /**
