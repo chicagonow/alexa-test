@@ -293,7 +293,10 @@
                                 "value": "1",
                                 "synonyms": [
                                     "Bronzeville/Union Station",
-                                    "1"
+                                    "1",
+                                    "one",
+                                    "wun",
+                                    "won"
                                 ]
                             }
                         },
@@ -303,7 +306,12 @@
                                 "value": "2",
                                 "synonyms": [
                                     "Hyde Park Express",
-                                    "2"
+                                    "2",
+                                    "two",
+                                    "too",
+                                    "tu",
+                                    "to",
+                                    "tou"
                                 ]
                             }
                         },
@@ -313,7 +321,12 @@
                                 "value": "3",
                                 "synonyms": [
                                     "King Drive",
-                                    "3"
+                                    "contrive",
+                                    "3",
+                                    "three",
+                                    "thre",
+                                    "thri",
+                                    "through"
                                 ]
                             }
                         },
@@ -323,7 +336,13 @@
                                 "value": "4",
                                 "synonyms": [
                                     "Cottage Grove",
-                                    "4"
+                                    "4",
+                                    "cuttage grove",
+                                    "cuttage groove",
+                                    "for",
+                                    "fore",
+                                    "forr",
+                                    "phor"
                                 ]
                             }
                         },
@@ -363,7 +382,19 @@
                                 "value": "8",
                                 "synonyms": [
                                     "Halsted",
-                                    "8"
+                                    "8",
+                                    "halsted",
+                                    "halstead",
+                                    "halted",
+                                    "eight",
+                                    "ate",
+                                    "aight",
+                                    "ait",
+                                    "aite",
+                                    "ayt",
+                                    "eyght",
+                                    "aidt",
+                                    "ajt"
                                 ]
                             }
                         },
@@ -463,7 +494,20 @@
                                 "value": "20",
                                 "synonyms": [
                                     "Madison",
-                                    "20"
+                                    "20",
+                                    "madison",
+                                    "maddison",
+                                    "medicine",
+                                    "mattison",
+                                    "matteson",
+                                    "medecine",
+                                    "madsen",
+                                    "madson",
+                                    "madescent",
+                                    "twenty",
+                                    "twenties",
+                                    "twenty eight",
+                                    "tenty"
                                 ]
                             }
                         },
@@ -714,7 +758,12 @@
                                 "value": "53",
                                 "synonyms": [
                                     "Pulaski",
-                                    "53"
+                                    "53",
+                                    "pulaski",
+                                    "polaski",
+                                    "polanski",
+                                    "polski",
+                                    "fifty three"
                                 ]
                             }
                         },
@@ -884,7 +933,11 @@
                                 "value": "66",
                                 "synonyms": [
                                     "Chicago",
-                                    "66"
+                                    "66",
+                                    "shikoku",
+                                    "chicagos",
+                                    "sixtieth",
+                                    "sixty six"
                                 ]
                             }
                         },
@@ -987,7 +1040,12 @@
                                 "value": "77",
                                 "synonyms": [
                                     "Belmont",
-                                    "77"
+                                    "77",
+                                    "belmont",
+                                    "bellmont",
+                                    "belmonte",
+                                    "seventy seven",
+                                    "seventh heaven"
                                 ]
                             }
                         },
@@ -1007,7 +1065,12 @@
                                 "value": "79",
                                 "synonyms": [
                                     "79th",
-                                    "79"
+                                    "79",
+                                    "Seventy nine",
+                                    "seventy nine",
+                                    "seventy one",
+                                    "seventeen",
+                                    "seventeenth"
                                 ]
                             }
                         },
@@ -1047,7 +1110,19 @@
                                 "value": "82",
                                 "synonyms": [
                                     "Kimball-Homan",
-                                    "82"
+                                    "82",
+                                    "kimble homan",
+                                    "kimball homan",
+                                    "kimbel homan",
+                                    "kimble hohman",
+                                    "kimball hohman",
+                                    "kimbel hohman",
+                                    "kimble hohmann",
+                                    "kimball hohmann",
+                                    "kimbel hohmann",
+                                    "eighty two",
+                                    "atio",
+                                    "ateo"
                                 ]
                             }
                         },
@@ -101055,7 +101130,21 @@
                             "name": {
                                 "value": "Chicago",
                                 "synonyms": [
-                                    "Chicago station"
+                                    "Chicago station",
+                                    "Chicago and State",
+                                    "chicago and state",
+                                    "chicago an state",
+                                    "chicago un state",
+                                    "chicago end state",
+                                    "shikoku and state",
+                                    "shikoku an state",
+                                    "shikoku un state",
+                                    "shikoku end state",
+                                    "shikoku and state",
+                                    "shikoku an state",
+                                    "shikoku un state",
+                                    "shikoku end state"
+
                                 ]
                             }
                         },
@@ -101079,6 +101168,146 @@
                             "name": {
                                 "value": "Clark and Lake",
                                 "synonyms": [
+                                    "Clark and Lake station",
+                                    "clark and lake",
+                                    "clarke and lake",
+                                    "clock and lake",
+                                    "clerk and lake",
+                                    "clarks and lake",
+                                    "clark and laich",
+                                    "clarke and laich",
+                                    "clock and laich",
+                                    "clerk and laich",
+                                    "clarks and laich",
+                                    "clark and laik",
+                                    "clarke and laik",
+                                    "clock and laik",
+                                    "clerk and laik",
+                                    "clarks and laik",
+                                    "clark and like",
+                                    "clarke and like",
+                                    "clock and like",
+                                    "clerk and like",
+                                    "clarks and like",
+                                    "clark und lake",
+                                    "clarke und lake",
+                                    "clock und lake",
+                                    "clerk und lake",
+                                    "clarks und lake",
+                                    "clark und laich",
+                                    "clarke und laich",
+                                    "clock und laich",
+                                    "clerk und laich",
+                                    "clarks und laich",
+                                    "clark und laik",
+                                    "clarke und laik",
+                                    "clock und laik",
+                                    "clerk und laik",
+                                    "clarks und laik",
+                                    "clark und like",
+                                    "clarke und like",
+                                    "clock und like",
+                                    "clerk und like",
+                                    "clarks und like",
+                                    "clarke end lake",
+                                    "clock end lake",
+                                    "clerk end lake",
+                                    "clarks end lake",
+                                    "clark end laich",
+                                    "clarke end laich",
+                                    "clock end laich",
+                                    "clerk end laich",
+                                    "clarks end laich",
+                                    "clark end laik",
+                                    "clarke end laik",
+                                    "clock end laik",
+                                    "clerk end laik",
+                                    "clarks end laik",
+                                    "clark end like",
+                                    "clarke end like",
+                                    "clock end like",
+                                    "clerk end like",
+                                    "clarks end like",
+                                    "clark und lake stagione",
+                                    "clarke und lake stagione",
+                                    "clock und lake stagione",
+                                    "clerk und lake stagione",
+                                    "clarks und lake stagione",
+                                    "clark und laich stagione",
+                                    "clarke und laich stagione",
+                                    "clock und laich stagione",
+                                    "clerk und laich stagione",
+                                    "clarks und laich stagione",
+                                    "clark und laik stagione",
+                                    "clarke und laik stagione",
+                                    "clock und laik stagione",
+                                    "clerk und laik stagione",
+                                    "clarks und laik stagione",
+                                    "clark und like stagione",
+                                    "clarke und like stagione",
+                                    "clock und like stagione",
+                                    "clerk und like stagione",
+                                    "clarks und like stagione",
+                                    "clark und lake sation",
+                                    "clarke und lake sation",
+                                    "clock und lake sation",
+                                    "clerk und lake sation",
+                                    "clarks und lake sation",
+                                    "clark und laich sation",
+                                    "clarke und laich sation",
+                                    "clock und laich sation",
+                                    "clerk und laich sation",
+                                    "clarks und laich sation",
+                                    "clark und laik sation",
+                                    "clarke und laik sation",
+                                    "clock und laik sation",
+                                    "clerk und laik sation",
+                                    "clarks und laik sation",
+                                    "clark und like sation",
+                                    "clarke und like sation",
+                                    "clock und like sation",
+                                    "clerk und like sation",
+                                    "clarks and like sation",
+                                    "clark and lake stagione",
+                                    "clarke and lake stagione",
+                                    "clock and lake stagione",
+                                    "clerk and lake stagione",
+                                    "clarks and lake stagione",
+                                    "clark and laich stagione",
+                                    "clarke and laich stagione",
+                                    "clock and laich stagione",
+                                    "clerk and laich stagione",
+                                    "clarks and laich stagione",
+                                    "clark and laik stagione",
+                                    "clarke and laik stagione",
+                                    "clock and laik stagione",
+                                    "clerk and laik stagione",
+                                    "clarks and laik stagione",
+                                    "clark and like stagione",
+                                    "clarke and like stagione",
+                                    "clock and like stagione",
+                                    "clerk and like stagione",
+                                    "clarks and like stagione",
+                                    "clark and lake sation",
+                                    "clarke and lake sation",
+                                    "clock and lake sation",
+                                    "clerk and lake sation",
+                                    "clarks and lake sation",
+                                    "clark and laich sation",
+                                    "clarke and laich sation",
+                                    "clock and laich sation",
+                                    "clerk and laich sation",
+                                    "clarks and laich sation",
+                                    "clark and laik sation",
+                                    "clarke and laik sation",
+                                    "clock and laik sation",
+                                    "clerk and laik sation",
+                                    "clarks and laik sation",
+                                    "clark and like sation",
+                                    "clarke and like sation",
+                                    "clock and like sation",
+                                    "clerk and like sation",
+                                    "clarks and like sation",
                                     "Clark and Lake station"
                                 ]
                             }
@@ -101631,7 +101860,34 @@
                             "name": {
                                 "value": "State and Lake",
                                 "synonyms": [
-                                    "State and Lake station"
+                                    "State and Lake station",
+                                    "state and lake",
+                                    "stayed and lake",
+                                    "staid and lake",
+                                    "state and laich",
+                                    "stayed and laich",
+                                    "staid and laich",
+                                    "state and laik",
+                                    "stayed and laik",
+                                    "staid and laik",
+                                    "state und lake",
+                                    "stayed und lake",
+                                    "staid und lake",
+                                    "state und laich",
+                                    "stayed und laich",
+                                    "staid und laich",
+                                    "state und laik",
+                                    "stayed und laik",
+                                    "staid und laik",
+                                    "state end lake",
+                                    "stayed end lake",
+                                    "staid end lake",
+                                    "state end laich",
+                                    "stayed end laich",
+                                    "staid end laich",
+                                    "state end laik",
+                                    "stayed end laik",
+                                    "staid end laik"
                                 ]
                             }
                         },
