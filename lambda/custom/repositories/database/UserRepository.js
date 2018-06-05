@@ -11,10 +11,11 @@ exports.updateUser = async function(userID) {
         uri: process.env.USER_UPDATE_URL,
         body: {
             userID: userID
-        }
+        },
+        json: true
     };
 
-    let response = await asyncRequest(options).catch(error => {
+    asyncRequest(options).catch(error => {
         logger.error("error with user data upload: " + error.message);
     });
 };
